@@ -1,0 +1,82 @@
+--@name hall of the dimensions
+--@author Konstak
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local mat = render.createMaterial("models/gibs/metalgibs/metal_gibs")
+
+hook.add("render", "uniqueName", function()
+    --[[ COMMENTS:
+        info: the screen size is on default 512x512,
+        so the center of the screen would be obviously the half of it which is 256
+        
+        some methods: 
+        Txt   : render.drawText( Xpos, Ypos, Text, Alignment)
+        3D Box: render.draw3DBox( origin (Vector), angle (Angle), mins (Vector), maxs (Vector))
+    
+    
+    --]]
+    local triangle = {
+        { x = 100, y = 200 },
+        { x = 150, y = 100 },
+        { x = 200, y = 200 }
+    }
+    
+    --render.drawText(0  ,      0, "left-Up"   , 0)
+    --render.drawText(512,      0, "right-Up"  , 2)
+    --render.drawText(0  , 512-15, "left-Down" , 0)
+    --render.drawText(512, 512-15, "right-Down", 2)
+    
+     -- Left Wall
+    local WallWidth = 5
+    local WallDepth = 150
+    -- render.setColor( Color(0,0,255) )
+    -- render.draw3DBox(Vector(0,0,-200), Angle(), Vector(0,0,711), Vector( WallWidth, 512, WallDepth))
+    
+    -- Right Wall
+    -- render.setColor( Color(0,0,255) )
+    -- render.draw3DBox(Vector(512,0,-200), Angle(), Vector(0,0,711), Vector(WallWidth, 512, WallDepth))
+    -- sky
+    
+    render.setColor( Color(0,0,255) )
+    render.draw3DBox(Vector(-5000,-9450,10000), Angle(), Vector(10000,10000,50), Vector(1,1,1))
+    
+    
+    -- floor
+    render.setColor( Color(0,100,255) )
+    render.draw3DBox(Vector(-5000,512,0), Angle(), Vector(10000,10000,10000), Vector(1,1,1))
+    
+    
+    -- Ceilling
+    render.setColor( Color(0,0,255) )
+    render.draw3DBox(Vector(-5000,-9500,0), Angle(), Vector(10000,50,10000), Vector(1,1,1))
+    
+    -- Pillar 1
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(2000,-9500,9000), Angle(), Vector(512,10070,500), Vector(1,1,1))
+    
+    -- Pillar 2
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(-2000,-9500,9000), Angle(), Vector(512,10070,500), Vector(1,1,1))
+
+    -- Pillar 1
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(2000,-9500,6000), Angle(), Vector(512,10070,500), Vector(1,1,1))
+    
+    -- Pillar 2
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(-2000,-9500,6000), Angle(), Vector(512,10070,500), Vector(1,1,1))
+    
+    -- Pillar 1
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(2000,-9500,3000), Angle(), Vector(512,10070,500), Vector(1,1,1))
+    
+    -- Pillar 2
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(-2000,-9500,3000), Angle(), Vector(512,10070,500), Vector(1,1,1))
+
+    -- wall
+    render.setColor( Color(0,0,0) )
+    render.draw3DBox(Vector(0,-256,10000), Angle(), Vector(512,770,50), Vector(1,1,1))
+
+end)

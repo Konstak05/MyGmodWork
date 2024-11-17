@@ -1,0 +1,13 @@
+--@name 
+--@author
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+
+hook.add("drawhud", "uniqueName", function()
+    local x,y = render.getGameResolution()
+    
+    render.drawText(x/2,y/2, "HIIII", 1,1)
+    render.drawRect(x/2, y/2, 50,125)
+
+end)

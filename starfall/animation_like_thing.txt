@@ -1,0 +1,16 @@
+--@name animation like thing
+--@author konstak
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local movement1, movement2 = 250,250
+local speed = 251
+local move1 = 0.1
+local m = Matrix()
+local xPos,yPos,xSize,ySize = 0,0, 50,50
+
+
+hook.add("render", "Animationblock", function()
+render.setColor( Color(0,0,100) )
+render.drawRect( movement1,movement2, 50,50) 
+    end)

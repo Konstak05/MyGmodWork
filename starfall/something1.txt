@@ -1,0 +1,32 @@
+--@name something1
+--@author
+--@client
+
+
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local grass = render.createMaterial("phoenix_storms/ps_grass")
+local xPos3,yPos3,xSize3,ySize3 = 256,256, 200,200
+local fallRate3 = 0.1
+
+
+
+
+
+
+    
+hook.add("render", "Projectile three", function()
+    render.setColor( Color(0,0,200) )
+    yPos3 = yPos3 + fallRate3
+    render.drawRect(xPos3,yPos3, 30, 10)
+    
+    if yPos3 > 600 - ySize3 then
+        yPos3 = ySize3/2
+        xPos3 = math.random(xSize3,500 - xSize3)
+    end        
+
+end)
+
+
+
+

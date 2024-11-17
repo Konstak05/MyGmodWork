@@ -1,0 +1,43 @@
+--@name hp thingy 
+--@author Preach and Kon
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local font = render.createFont("Arial", 100)
+local hLerp = 0
+
+local function drawCrosshair(x,y)
+    local Length = 25
+    local Gap    = 5
+     -- Left Line
+    render.drawRect(x/2 - Length-Gap, y/2, Length,5)
+     -- Right Line
+    render.drawRect(x/2 + Gap, y/2, Length, 5)
+     -- Up line
+    render.drawRect(x/2 + -2, y/2 + 5, 5, 20)
+     -- Down line
+    render.drawRect(x/2 + -2, y/2 + -20, 5, 20)
+end
+
+local function drawHealthBar(x, y)
+    local health, maxHealth = player:getHealth(), player:getMaxHealth()
+    local hpCol, defCol = Color( 255 / maxHealth * ( maxHealth - health), 255 / maxHealth * health , 0), Color(30,30,30,220)
+    -- Draw Healthbar here
+    hLerp = math.clamp(math.lerp( timer.frametime(), hLerp, health/maxHealth), 0, 1)
+    render.setColor( defCol )
+    render.drawRect(x*.03, y*.8, x*.25,  y*.1)
+    render.setColor( hpCol )
+    render.drawRect(x*.03, y*.8, x*.25*hLerp,  y*.1)
+    render.setColor( Color(0,0,255) )
+    render.drawRectOutline(x*.03, y*.8, x*.25,y*.1)
+    
+    render.setFont(font)
+    render.drawSimpleText(x*.03 + x*.25/2, y*.8 + y*.1/2 , string.format("HP: %d", health),1,1) 
+
+end
+hook.add("drawhud", "uniqueName", function()
+    local x,y = render.getGameResolution()
+    drawCrosshair(x,y)
+    drawHealthBar(x,y)
+    
+end)

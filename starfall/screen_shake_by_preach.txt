@@ -1,0 +1,12 @@
+--@name 
+--@author Preach
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local sin, cos, rad = math.sin, math.cos, math.rad
+
+if CLIENT then
+
+    hook.add("hudconnected", "",function()
+        render.screenShake(5,15, 5)
+    end)
+end

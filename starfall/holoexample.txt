@@ -1,0 +1,13 @@
+--@name HoloExample
+--@author Preach
+
+
+if CLIENT then
+    local localPlayer = player()
+    local holoPosition = localPlayer:getPos() + Vector(0,0,100)
+    local holoAngle = Angle() -- is the same as Angle(0,0,0) or Angle(0)
+    local holoModel = localPlayer:getModel()
+    local holoScale = Vector(1,1,1) -- or Vector(1) for short
+    local myFirstHolo = holograms.create(holoPosition, holoAngle, holoModel, holoScale)
+    
+end

@@ -1,0 +1,44 @@
+--@name my own playermodel
+--@author Preach
+
+
+if CLIENT then -- clientside stuff like rendering, holograms, inputs, etc. (also known as client realm)
+
+    local localPlayer = player()
+    local holoPosition = localPlayer:getPos() + Vector(0,0,100)
+    local holoAngle = Angle() -- is the same as Angle(0,0,0) or Angle(0)
+    local holoModel = localPlayer:getModel()
+    local holoScale = Vector(1,1,1) -- or Vector(1) for short
+    local myFirstHolo = holograms.create(holoPosition, holoAngle, holoModel, holoScale)
+    
+    local randomNumber = 0
+    net.receive("myUnqiueNetworkName", function()
+        -- receive the number from the server
+        randomNumber = net.readUInt(8)
+    end)
+
+    -- ignore this part for now
+    -- it's to render the number on the screen
+    local f = render.createFont("arial", 50)
+    render.setFont(f)
+    hook.add("render", "", function()
+        render.setColor(Color(229,103,0))
+        render.drawText(256,256, tostring(randomNumber), 1, 1)
+    end)    
+    
+    -- only the owner of the ship sends the networking
+    if owner() == player() then
+        net.start("network")
+        net.send()
+    end
+else -- server realm
+
+    -- networking receives and gets processed
+    net.receive("network", function()
+        -- create random number and broadcast it
+        local randomNumber = math.random(1, 10)
+        net.start("myUnqiueNetworkName")
+        net.writeUInt(randomNumber, 8)
+        net.send()
+    end)
+end

@@ -1,0 +1,26 @@
+--@name Some location randomizer
+--@author Preach and Kon
+--@shared
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local time  = 0
+local delay = 0.5
+local myNumber = 0
+local myNumber2 = 0
+
+
+hook.add("render", "uniqueName", function()
+
+    render.setColor( Color(0,0,255) )
+    render.drawRect( myNumber,myNumber2, 50,50)
+    
+    
+end)
+
+hook.add("think", "blablaMrFreeman", function()
+    if timer.curtime() < time + delay then return end
+    time = timer.curtime()
+    
+    myNumber  = math.rand(1,512)
+    myNumber2 = math.rand(1,512)
+end)

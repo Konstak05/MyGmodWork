@@ -1,0 +1,98 @@
+--@name Undead Arena
+--@author GIGABABAIT
+--@shared
+
+GT = {}
+
+
+if SERVER then
+
+    local entMethods = getMethods("Entity")
+    function entMethods:navFromPlate()
+        local mins, maxs = self:worldSpaceAABB()
+        
+        navmesh.createNavArea( mins, maxs )
+    end    
+
+    GT.Floor = find.byName("ArenaFloor")[1]
+    --GT.Floor:navFromPlate()
+    GT.NPCS = {}
+    GT.ActiveNPCs = {}
+    GT.NPCS.MeleeSkel = {
+        ["mdl"] = "models/player/sniper.mdl",
+        ["iact"] = 1171,
+        ["ract"] = 1173,
+        ["hp"] = 50,
+        ["spawnfunc"] = function(bot) 
+            bot:playSequence("spawn01")
+        end,
+        ["attacks"] = {
+            basicmelee = function(bot)
+                bot:restartGesture(1734)
+                bot:emitSound("Halloween.HeadlessBossAttack")
+                bot.nextthink = timer.curtime() + 1
+                timer.create("basicmelee", 0.4, 1, function()
+                    local hulls = Vector(5)
+                    local tr = trace.traceHull(bot:getPos() + Vector(0, 0, 63), bot:getPos() + Vector(0, 0, 63) + bot:getForward() * 50, -hulls, hulls, bot)
+                    if tr.Hit and tr.Entity then
+                        tr.Entity:applyDamage(10, self, self)
+                        emitSoundWorld("d1_town.Slicer", tr.HitPos)
+                    end
+                end)
+            end
+        },
+        ["think"] = function(bot) 
+            bot:faceTowards(owner():getPos())
+            if bot:getPos():getDistance(owner():getPos()) > 100 then
+                bot:setGotoPos(owner():getPos())
+            else
+                bot.attacks.basicmelee(bot)
+            end
+        end,
+        ["attachments"] = {
+            "models/weapons/c_models/c_machete/c_machete.mdl"
+        }
+    }
+    
+    GT.CreateNPC = function(cls, pos)
+        local cur = GT.NPCS[cls]
+        local npc = test.create(pos, cur.mdl)
+        npc:setIdleAct(cur.iact)
+        npc:setRunAct(cur.ract)
+        npc:setMaxHealth(cur.hp)
+        npc:setHealth(cur.hp)
+        npc.attacks = cur.attacks
+        npc.think = cur.think
+        npc.nextthink = timer.curtime()
+        npc.spawnfunc = cur.spawnfunc
+        npc:spawnfunc(npc)
+        GT.ActiveNPCs[npc] = true
+        npc:addDeathCallback("removefromtable", function(nb) GT.ActiveNPCs[npc] = nil end)
+        return npc
+    end
+    
+    timer.simple(1, function()
+        local jimmy = GT.CreateNPC("MeleeSkel", chip():getPos())
+        jimmy:addDeathCallback("dead213123", function(dmg)
+            jimmy:emitSound("Player.FallGib")
+        end)
+        
+        jimmy:addInjuredCallback("owithurt", function(dmg)
+            jimmy:emitSound("Halloween.HeadlessBossPain")
+        end)
+        
+        jimmy:addLandCallback("sexy", function(ent)
+            print("asdgdas", ent)
+        end)
+    end)
+    
+    hook.add("tick", "UA_HANDLENPCS", function()
+        for v, _ in pairs(GT.ActiveNPCs) do
+            if timer.curtime() >= v.nextthink then
+                v:think(v)
+            end
+        end
+    end)
+else
+
+end

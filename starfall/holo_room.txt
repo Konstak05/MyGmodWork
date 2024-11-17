@@ -1,0 +1,50 @@
+--@name 
+--@author Preach
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local mat = render.createMaterial("models/gibs/metalgibs/metal_gibs")
+
+hook.add("render", "uniqueName", function()
+    --[[ COMMENTS:
+        info: the screen size is on default 512x512,
+        so the center of the screen would be obviously the half of it which is 256
+        
+        some methods: 
+        Txt   : render.drawText( Xpos, Ypos, Text, Alignment)
+        3D Box: render.draw3DBox( origin (Vector), angle (Angle), mins (Vector), maxs (Vector))
+    
+    
+    --]]
+    local triangle = {
+        { x = 100, y = 200 },
+        { x = 150, y = 100 },
+        { x = 200, y = 200 }
+    }
+    
+    render.drawText(0  ,      0, "left-Up"   , 0)
+    render.drawText(512,      0, "right-Up"  , 2)
+    render.drawText(0  , 512-15, "left-Down" , 0)
+    render.drawText(512, 512-15, "right-Down", 2)
+    
+     -- Left Wall
+    local WallWidth = 5
+    local WallDepth = 150
+    render.setColor( Color(0,0,255) )
+    render.draw3DBox(Vector(0,0,-200), Angle(), Vector(0,0,711), Vector( WallWidth, 512, WallDepth))
+    
+    -- Right Wall
+    render.setColor( Color(0,0,255) )
+    render.draw3DBox(Vector(512,0,-200), Angle(), Vector(0,0,711), Vector(WallWidth, 512, WallDepth))
+    
+    -- floor
+    render.draw3DBox(Vector(0,512,0), Angle(), Vector(512,50,512), Vector(1,1,1))
+    
+    -- Ceilling
+    render.draw3DBox(Vector(0,0,0), Angle(), Vector(512,50,512), Vector(1,1,1))
+    
+    -- wall
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(0,0,512), Angle(), Vector(512,512,50), Vector(1,1,1))
+    
+end)

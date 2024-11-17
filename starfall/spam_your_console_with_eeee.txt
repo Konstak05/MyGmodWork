@@ -1,0 +1,14 @@
+--@name Spam your console with EEEE
+--@author
+--@client
+
+
+function spamtext()
+
+print("E")
+
+
+end
+
+
+timer.create("Firstmessage", 0, 0, spamtext)

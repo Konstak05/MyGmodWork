@@ -1,0 +1,36 @@
+--@name A classic chatting
+--@author Konstak
+--@client
+
+-- Yeet4 = math.rand(0, 10)
+Yeet = math.rand(3, 30)
+Yeet2 = math.rand(6, 10)
+Yeet3 = math.rand(7, 50)
+
+--[[function functionname4()
+Color(255, 0, 055, 255)
+printMessage(4, "ahahahahahaha...")
+end
+]]
+
+function functionname()
+Red = Color(255, 0, 055, 255)
+print(Red, "Snow is my cutieeeee")
+end
+
+function functionname2()
+blue = Color(0, 0, 255, 255)
+print(blue , "hmmmm")
+
+end
+
+function functionname3()
+Hah = Color(0, 0, 30, 255)
+print(Hah , "hmmm")
+end
+--timer.create("horrormessage", Yeet, 0, functionname4)
+timer.create("Firstmessage", Yeet, 0, functionname)
+timer.create("secondmessage", Yeet2, 0, functionname2)
+timer.create("thirdmessage", Yeet3, 0, functionname3)
+
+

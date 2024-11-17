@@ -1,0 +1,122 @@
+--@name The bluenet
+--@author Konstak
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local mat = render.createMaterial("sprops/trans/lights/light_plastic")
+local grass = render.createMaterial("sprops/trans/lights/light_plastic") 
+local konid69 = render.createMaterial("phoenix_storms/wire/pcb_blue")
+local cartexture = render.createMaterial("models/props_c17/FurnitureFabric003a")
+local xPos,yPos,zPos,xSize,ySize = 0,0,0, 50,50
+local fallRate = 500
+local xPos2,yPos2,zPos2,xSize2,ySize2 = 0,0,0, 50,50
+local fallRate2 = 500
+
+
+
+hook.add("render", "uniqueName", function()
+    --[[ COMMENTS:
+        info: the screen size is on default 512x512,
+        so the center of the screen would be obviously the half of it which is 256
+        
+        some methods: 
+        Txt   : render.drawText( Xpos, Ypos, Text, Alignment)
+        3D Box: render.draw3DBox( origin (Vector), angle (Angle), mins (Vector), maxs (Vector))
+    
+
+    --]]
+    local triangle = {
+        { x = 100, y = 200 },
+        { x = 150, y = 100 },
+        { x = 200, y = 200 }
+    }
+
+    --render.drawText(0  ,      0, "left-Up"   , 0)
+    --render.drawText(512,      0, "right-Up"  , 2)
+    --render.drawText(0  , 512-15, "left-Down" , 0)
+    --render.drawText(512, 512-15, "right-Down", 2)
+    
+     -- Left Wall
+    local WallWidth = 5
+    local WallDepth = 150
+    -- render.setColor( Color(0,0,255) )
+    -- render.draw3DBox(Vector(0,0,-200), Angle(), Vector(0,0,711), Vector( WallWidth, 512, WallDepth))
+    
+    -- Right Wall
+    -- render.setColor( Color(0,0,255) )
+    -- render.draw3DBox(Vector(512,0,-200), Angle(), Vector(0,0,711), Vector(WallWidth, 512, WallDepth))
+    -- sky
+    render.setMaterial(mat)
+    render.setColor( Color(0,20,20) )
+    render.draw3DBox(Vector(-15000,-17350,0), Angle(), Vector(30000,30000,50), Vector(1,1,1))
+    -- terrain 
+    render.setMaterial(grass)
+    render.setColor( Color(0,100,255) )
+    render.draw3DSphere(Vector(10000,2000,30000),5000,5,0)
+    render.draw3DSphere(Vector(-10000,2000,30000),5000,2,0)
+    render.draw3DSphere(Vector(-10000,2000,40000),5000,20,0)
+    render.draw3DSphere(Vector(-30000,2000,25000),5000,100,100)
+    render.draw3DSphere(Vector(-15000,2000,1000),5000,100,100)
+    render.draw3DSphere(Vector(20000,2000,1000),5000,100,100)
+    render.draw3DSphere(Vector(30000,2000,30000),5000,10,100)
+    
+    -- wall
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(-256,-1500,34000), Angle(), Vector(2028,2000,500), Vector(1,1,1))
+    render.draw3DBox(Vector(-1200,-120,34000), Angle(), Vector(4028,650,500), Vector(1,1,1))
+    
+    -- Tower 1
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(2200,-3500,40000), Angle(), Vector(512,4070,500), Vector(1,1,1))
+    
+    -- Tower 2
+    render.setColor( Color(0,0,100) )
+    render.draw3DBox(Vector(-1000,-3500,40000), Angle(), Vector(512,4070,500), Vector(1,1,1))
+    
+    -- floor
+    render.setMaterial(grass)
+    render.setColor( Color(0,100,255) )
+    render.draw3DBox(Vector(-40000,512,0), Angle(), Vector(400000,1,40000), Vector(1,1,1))
+    
+    -- the ship
+    render.setMaterial(mat)
+    render.setColor( Color(0,0,100) )
+    render.draw3DSphere(Vector(2500,-10000,40000),5000,100,100)
+    render.draw3DSphere(Vector(10500,-10000,40000),2000,3,100)
+    render.draw3DSphere(Vector(-5500,-10000,40000),2000,3,100)
+    render.draw3DSphere(Vector(-2500,-15000,40000),2000,3,100)
+    render.setColor( Color(0,0,200) )
+    render.draw3DSphere(Vector(500,-10000,40000),1000,10,100)
+    render.draw3DSphere(Vector(4500,-10000,40000),1000,10,100)
+    render.draw3DSphere(Vector(2500,-13000,40000),1000,10,100)
+    
+    -- sphere1
+    render.setColor( Color(0,0,100) )
+    render.draw3DSphere(Vector(-740,-3900,40000),500,100,100)
+    
+
+
+    
+    render.setColor( Color(255,255,255) )
+    render.draw3DSphere(Vector(30000,-30000,50000),5000,200,100)
+end)
+
+hook.add("render", "", function()
+    yPos = yPos + fallRate
+    render.setMaterial(cartexture)
+    render.setColor( Color(0,0,255) )
+    render.draw3DSphere(Vector(yPos,xPos - 30000,zPos + 80000),2000,100,100)
+    render.draw3DSphere(Vector(yPos,xPos - 30000,zPos + 76000),2000,100,100)
+    render.draw3DSphere(Vector(yPos,xPos - 30000,zPos + 84000),2000,100,100)
+    render.draw3DSphere(Vector(yPos,xPos - 30000,zPos + 84000),2000,100,100)
+    render.draw3DSphere(Vector(yPos,xPos - 28000,zPos + 88000),2000,100,100)
+    render.draw3DSphere(Vector(yPos,xPos - 28000,zPos + 72000),2000,100,100)
+    render.draw3DSphere(Vector(yPos - 3000,xPos - 30000,zPos + 80000),2000,100,100)
+
+    if yPos > 200000 - ySize then
+        xPos = ySize/2
+        yPos = math.random(-200000,-200000 - xSize)
+        zPos = math.random(-60000,60000 - ySize)
+    end        
+
+end)

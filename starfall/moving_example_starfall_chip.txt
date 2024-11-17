@@ -1,0 +1,18 @@
+--@name example starfall chip
+--@author
+--@shared
+
+
+local xPos,yPos,xSize,ySize = 0,0, 50,50
+local fallRate = 5
+
+hook.add("render", "", function()
+    yPos = yPos + fallRate
+    render.drawRect(xPos,yPos, xSize, ySize)
+    
+    if yPos > 512 - ySize then
+        yPos = ySize/2
+        xPos = math.random(xSize,512 - xSize)
+    end        
+
+end)

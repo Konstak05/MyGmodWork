@@ -1,0 +1,60 @@
+--@name energy ball
+--@author Konstak
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local mat = render.createMaterial("sprops/trans/lights/light_plastic")
+hook.add("render", "uniqueName", function()
+    --[[ COMMENTS:
+        info: the screen size is on default 512x512,
+        so the center of the screen would be obviously the half of it which is 256
+        
+        some methods: 
+        Txt   : render.drawText( Xpos, Ypos, Text, Alignment)
+        3D Box: render.draw3DBox( origin (Vector), angle (Angle), mins (Vector), maxs (Vector))
+    
+    
+    --]]
+    local triangle = {
+        { x = 100, y = 200 },
+        { x = 150, y = 100 },
+        { x = 200, y = 200 }
+    }
+    
+    --render.drawText(0  ,      0, "left-Up"   , 0)
+    --render.drawText(512,      0, "right-Up"  , 2)
+    --render.drawText(0  , 512-15, "left-Down" , 0)
+    --render.drawText(512, 512-15, "right-Down", 2)
+    
+     -- Left Wall
+    local WallWidth = 5
+    local WallDepth = 150
+    -- render.setColor( Color(0,0,255) )
+    -- render.draw3DBox(Vector(0,0,-200), Angle(), Vector(0,0,711), Vector( WallWidth, 512, WallDepth))
+    
+    -- Right Wall
+    -- render.setColor( Color(0,0,255) )
+    -- render.draw3DBox(Vector(512,0,-200), Angle(), Vector(0,0,711), Vector(WallWidth, 512, WallDepth))
+    -- sky
+    
+    
+    
+    -- floor
+    render.setColor( Color(255,255,0) )
+    render.draw3DSphere(Vector(-5000,-4000,25000),10000,100,100)
+    render.setMaterial(mat)
+    render.setColor( Color(0,255,0) )
+    render.draw3DSphere(Vector(-17000,-6000,20000),900,100,100)
+    render.setColor( Color(255,255,255) )
+    render.draw3DSphere(Vector(3000,-6000,10000),400,100,100)
+    render.setColor( Color(0,100,255) )
+    render.draw3DSphere(Vector(256,-6000,10000),2000,100,100)
+    render.setColor( Color(255,0,0) )
+    render.draw3DSphere(Vector(-10000,-6000,25000),2000,100,100)
+    render.setColor( Color(255,255,255) )
+    render.draw3DSphere(Vector(-20000,5000,27000),100,100,100)
+    render.draw3DSphere(Vector(13000,23000,25000),100,100,100)
+    render.draw3DSphere(Vector(10000,-23000,23000),100,100,100)
+    render.draw3DSphere(Vector(-20000,-20000,27000),100,100,100)
+    render.draw3DSphere(Vector(-3000,10000,27000),100,100,100)
+end)

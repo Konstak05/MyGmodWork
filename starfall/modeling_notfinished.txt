@@ -1,0 +1,40 @@
+--@name modeling "NOTFINISHED"
+--@author konstak05
+--@client
+
+local origin = chip():getPos()
+local Spamgobrrr = 100
+if CLIENT then
+
+
+
+local hmmm = holograms.create(origin + Vector(0,0,100),Angle(),"models/props_phx/construct/metal_plate1.mdl")
+
+end
+
+
+hook.add("render", "Hook1", function()
+hmmm:draw()
+hmmm:setPos(origin2)
+
+function Tick1()
+
+hmmm:draw()
+origin = chip():getPos()
+end
+
+timer.create("Timer1",1,0,Tick1)
+
+                
+end)
+
+
+function move1()
+
+origin = 100 + 100
+end
+
+
+timer.create("timer2",0,0,move1)
+
+

@@ -1,0 +1,217 @@
+--@name 2021starfallbasicstuff
+--@author konstak
+--@client
+
+--Vars
+--[[
+hmmm = 100
+hmm2 = 342
+istheplayeralive = true
+Astring = "i see how it is...okie"
+
+
+print(istheplayeralive)
+print(hmmm + hmm2)
+print(Astring)
+]]
+
+--[[
+age = 19
+
+
+
+
+--if
+if age >= 18 then
+
+
+ print("heh")
+
+else
+
+ print("yo-yo")
+
+end
+]]
+
+
+
+--tables
+--[[
+hugetable = {}
+
+hugetable[1] = 3252
+hugetable[2] = 4363
+
+
+hugetable[1] = {}
+hugetable[1][1] = 329
+
+
+hugetable["string"] = 4363
+
+--or
+
+hugetable = {4324,324523,234234}
+
+print(hugetable[2])
+]]
+
+
+
+
+
+--loops
+
+--[[
+print("begin")
+for i = 1 , 100 do
+
+   print("hello world")
+
+end
+print("end")
+]]
+
+--[[
+kon = 0
+
+while kon < 100 do
+
+ kon = kon + 1
+
+print(kon)
+
+end
+]]
+
+--[[
+wtf = {}
+wtf[1] = "hi"
+wtf[2] = "hey"
+wtf[3] = "lol"
+
+for k , v in pairs(wtf) do
+
+print(k , v)
+
+end
+]]
+
+
+
+--functions
+--[[
+function Anyname()
+
+print("hello world")
+
+
+end
+
+Anyname()
+--]]
+
+--[[
+function Anyname(a, b)
+
+print(a , b)
+
+
+end
+
+Anyname(10 , 20)
+]]
+
+
+--[[
+function Anyname(a, b)
+
+sum = a + b
+
+return sum
+
+
+end
+
+test = Anyname(10 , 20)
+
+print(test)
+]]
+
+
+
+
+--local  "you can only use locals inside if and they only work inside"
+--[[
+if/for/function  1==1 then/do
+
+local test = 100
+
+print(test)
+
+end
+--]]
+
+
+
+--build-in librarby
+--[[changer from letter to id
+local test = string.byte("K")
+
+print(test)
+--changer from id to letter
+local test2 = string.char("75")
+
+print(test2)
+]]
+
+
+
+
+
+--lower or higher game
+--[[
+local lives = 10
+local randomnumber = math.random(1,50)
+
+print("welcome to higher or lower than!")
+
+while lives > 0 do
+
+print("you have " ..lives.. "left.guess the number")
+
+local number = io.read()
+number = tonumber(number)
+
+if number == randomnumber then
+
+print("you done it congrats")
+
+
+    break
+    
+    
+   elseif number < randomnumber then
+
+print("guess higher")
+
+
+elseif number < randomnumber then
+
+print("guess lower")
+
+end
+
+if lives <= 0 then
+
+print("you failed")
+
+break
+
+
+end
+
+end
+io.read()
+]]

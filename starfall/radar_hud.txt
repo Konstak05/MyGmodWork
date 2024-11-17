@@ -1,0 +1,66 @@
+--@name radar hud
+--@author code by Preach,Remake by Kon
+--@shared
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+local scrW, scrH
+local radar, fonts = {}, {}
+if CLIENT then
+    
+    radar["radius"] = 250
+    radar["scale"]  = 10
+
+    function circle( x, y, radius, seg )
+            local cir = {}
+        
+            table.insert( cir, { x = x, y = y, u = 0.5, v = 0.5 } )
+            for i = 0, seg do
+                local a = math.rad( ( i / seg ) * -360 )
+                table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
+            end
+        
+            local a = math.rad( 0 ) -- This is needed for non absolute segment counts
+            table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
+        
+            render.drawPoly( cir )
+    end
+    local function radarEGP()
+        local off          = off
+        -- x Position of the radar, y Position of the radar
+        local xPos , yPos  = scrW*.9 , scrH*.2
+        local col          = Color(30,30,30)
+        render.setFont( fonts["radar"] )
+        render.setColor( Color(col[1], col[2], col[3], 150 ) )
+        -- draw a circle with the color grey
+        circle( xPos, yPos, radar["radius"]/3840*scrW, 50 )
+        -- change color to blue again
+        render.setColor( Color(30,30,200) )
+        -- draw a small circle on the center of the radar
+        circle(xPos, yPos, 10/3840*scrW, 10)
+        -- Iterate through all players
+        for k, v in ipairs( find.allPlayers() ) do
+            -- Calculate the distance between the localplayer (which is you) and the all others players
+            -- if the distance is greater than the radar radius than continue with the iteration
+            if (player:getPos() - v:getPos()):getLengthSqr() > ( radar["radius"]*radar["scale"] - 40/5*radar["scale"] )^2 
+                or v == player then continue end
+            -- get the difference position and scale it for the radar
+            local difPos   = (player:getPos() - v:getPos())/radar["scale"]
+            local ang      = - player:getAngles() + Angle(0, 90, 0)
+            -- rotate the angle of the red circles so it fits with the radar
+            difPos:rotate( Angle(0, ang[2], 0) )
+            
+            render.setColor( Color(255,0,50) )
+            circle( xPos - difPos[1], yPos + difPos[2], 10/3840*scrW, 10)
+            render.drawSimpleText( xPos - difPos[1], yPos + difPos[2]+20, v:getName(),1,1)
+        end
+    end
+    local function hud()
+        radarEGP()
+    end
+    hook.add("postdrawhud", "init", function()
+        scrW, scrH     = render.getGameResolution()
+        fonts["radar"] = render.createFont("Arial", 60/3840*scrW, 500)
+        hook.remove("postdrawhud", "init")
+        hook.add("postdrawhud", "hud", hud)
+    end)
+end

@@ -1,0 +1,24 @@
+--@name 
+--@author Preach
+--@client
+
+local chip, owner, player, world = chip(), owner(), player(), entity(0)
+
+hook.add("render", "uniqueName", function()
+    --[[ COMMENTS:
+        info: the screen size is on default 512x512,
+        so the center of the screen would be obviously the half of it which is 256
+        
+        some methods: 
+        Txt   : render.drawText( Xpos, Ypos, Text, Alignment)
+        3D Box: render.draw3DBox( origin (Vector), angle (Angle), mins (Vector), maxs (Vector))
+    
+    
+    --]]
+
+    
+    render.drawText(256,256, "The advantage of Clientside rendering: ", 1)
+    render.drawText(256,256+20, "Hello Clientsided-Player:\""..player:getName().."\"",1)
+    
+    render.draw3DBox( Vector(256,256), Angle(), Vector(), Vector(50,50,50))
+end)
