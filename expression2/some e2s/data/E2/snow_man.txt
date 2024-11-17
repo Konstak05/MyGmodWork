@@ -1,0 +1,196 @@
+@name Snow man
+@persist Timer
+interval(10)
+Me=owner()
+Chip=entity()
+Timer=Timer+1*1
+T=Timer
+
+if(first()) {holoCreate(1)}
+
+holoModel(1,"hqicosphere")
+holoPos(1,Chip:pos()+vec(0,0,40))
+holoAng(1,ang(0,0,0))
+holoColor(1,vec(255,255,255))
+holoScale(1, vec(10,10,10))
+holoMaterial(1,"models/shiny")
+
+if(first()) {holoCreate(2)}
+
+holoModel(2,"hqicosphere")
+holoPos(2,Chip:pos()+vec(0,0,110))
+holoAng(2,ang(0,0,0))
+holoColor(2,vec(255,255,255))
+holoScale(2, vec(7,7,7))
+holoMaterial(2,"models/shiny")
+
+if(first()) {holoCreate(3)}
+
+holoModel(3,"hqicosphere")
+holoPos(3,Chip:pos()+vec(0,0,160))
+holoAng(3,ang(0,0,0))
+holoColor(3,vec(255,255,255))
+holoScale(3, vec(4,4,4))
+holoMaterial(3,"models/shiny")
+
+if(first()) {holoCreate(4)}
+
+holoModel(4,"hqicosphere")
+holoPos(4,Chip:pos()+vec(15,-8,170))
+holoAng(4,ang(0,0,0))
+holoColor(4,vec(0,0,0))
+holoScale(4, vec(1,1,1))
+holoMaterial(4,"models/shiny")
+
+if(first()) {holoCreate(5)}
+
+holoModel(5,"hqicosphere")
+holoPos(5,Chip:pos()+vec(15,8,170))
+holoAng(5,ang(0,0,0))
+holoColor(5,vec(0,0,0))
+holoScale(5, vec(1,1,1))
+holoMaterial(5,"models/shiny")
+
+if(first()) {holoCreate(6)}
+
+holoModel(6,"hqcone")
+holoPos(6,Chip:pos()+vec(25,0,165))
+holoAng(6,ang(80,0,0))
+holoColor(6,vec(255,50,0))
+holoScale(6, vec(1,1,2))
+holoMaterial(6,"models/shiny")
+
+if(first()) {holoCreate(7)}
+
+holoModel(7,"hqicosphere")
+holoPos(7,Chip:pos()+vec(22,0,155))
+holoAng(7,ang(0,0,0))
+holoColor(7,vec(0,0,0))
+holoScale(7, vec(0.5,0.5,0.5))
+holoMaterial(7,"models/shiny")
+
+if(first()) {holoCreate(8)}
+
+holoModel(8,"hqicosphere")
+holoPos(8,Chip:pos()+vec(20,-8,158))
+holoAng(8,ang(0,0,0))
+holoColor(8,vec(0,0,0))
+holoScale(8, vec(0.5,0.5,0.5))
+holoMaterial(8,"models/shiny")
+
+if(first()) {holoCreate(9)}
+
+holoModel(9,"hqicosphere")
+holoPos(9,Chip:pos()+vec(20,8,158))
+holoAng(9,ang(0,0,0))
+holoColor(9,vec(0,0,0))
+holoScale(9, vec(0.5,0.5,0.5))
+holoMaterial(9,"models/shiny")
+
+if(first()) {holoCreate(10)}
+
+holoModel(10,"hqicosphere")
+holoPos(10,Chip:pos()+vec(17,15,162))
+holoAng(10,ang(0,0,0))
+holoColor(10,vec(0,0,0))
+holoScale(10, vec(0.5,0.5,0.5))
+holoMaterial(10,"models/shiny")
+
+if(first()) {holoCreate(11)}
+
+holoModel(11,"hqicosphere")
+holoPos(11,Chip:pos()+vec(17,-15,162))
+holoAng(11,ang(0,0,0))
+holoColor(11,vec(0,0,0))
+holoScale(11, vec(0.5,0.5,0.5))
+holoMaterial(11,"models/shiny")
+
+if(first()) {holoCreate(12)}
+
+holoModel(12,"hqcylinder")
+holoPos(12,Chip:pos()+vec(0,0,190))
+holoAng(12,ang(0,0,0))
+holoColor(12,vec(0,0,0))
+holoScale(12, vec(2,2,2))
+holoMaterial(12,"models/shiny")
+
+if(first()) {holoCreate(13)}
+
+holoModel(13,"hqcylinder")
+holoPos(13,Chip:pos()+vec(0,0,180))
+holoAng(13,ang(0,0,0))
+holoColor(13,vec(0,0,0))
+holoScale(13, vec(3,3,0.2))
+holoMaterial(13,"models/shiny")
+
+if(first()) {holoCreate(14)}
+
+holoModel(14,"hqicosphere")
+holoPos(14,Chip:pos()+vec(38,0,105))
+holoAng(14,ang(0,0,0))
+holoColor(14,vec(0,0,0))
+holoScale(14, vec(1,1,1))
+holoMaterial(14,"models/shiny")
+
+if(first()) {holoCreate(15)}
+
+holoModel(15,"hqicosphere")
+holoPos(15,Chip:pos()+vec(38,0,120))
+holoAng(15,ang(0,0,0))
+holoColor(15,vec(0,0,0))
+holoScale(15, vec(1,1,1))
+holoMaterial(15,"models/shiny")
+
+if(first()) {holoCreate(16)}
+
+holoModel(16,"hqicosphere")
+holoPos(16,Chip:pos()+vec(30,0,135))
+holoAng(16,ang(0,0,0))
+holoColor(16,vec(0,0,0))
+holoScale(16, vec(1,1,1))
+holoMaterial(16,"models/shiny")
+
+if(first()) {holoCreate(17)}
+
+holoModel(17,"hqicosphere")
+holoPos(17,Chip:pos()+vec(10,35,118))
+holoAng(17,ang(0,0,0))
+holoColor(17,vec(250,255,255))
+holoScale(17, vec(3,4,2))
+holoMaterial(17,"models/shiny")
+
+if(first()) {holoCreate(18)}
+
+holoModel(18,"hqicosphere")
+holoPos(18,Chip:pos()+vec(-10,-35,118))
+holoAng(18,ang(0,0,0))
+holoColor(18,vec(250,255,255))
+holoScale(18, vec(3,4,2))
+holoMaterial(18,"models/shiny")
+
+if(first()) {holoCreate(19)}
+
+holoModel(19,"hqicosphere")
+holoPos(19,Chip:pos()+vec(55,0,50))
+holoAng(19,ang(0,0,0))
+holoColor(19,vec(0,0,0))
+holoScale(19, vec(1,1,1))
+holoMaterial(19,"models/shiny")
+
+if(first()) {holoCreate(20)}
+
+holoModel(20,"hqicosphere")
+holoPos(20,Chip:pos()+vec(46,0,72))
+holoAng(20,ang(0,0,0))
+holoColor(20,vec(0,0,0))
+holoScale(20, vec(1,1,1))
+holoMaterial(20,"models/shiny")
+
+if(first()) {holoCreate(21)}
+
+holoModel(21,"hqicosphere")
+holoPos(21,Chip:pos()+vec(55,0,30))
+holoAng(21,ang(0,0,0))
+holoColor(21,vec(0,0,0))
+holoScale(21, vec(1,1,1))
+holoMaterial(21,"models/shiny")

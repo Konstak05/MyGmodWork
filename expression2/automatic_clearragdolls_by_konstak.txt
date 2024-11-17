@@ -1,0 +1,27 @@
+@name Automatic clearragdolls by konstak
+@inputs 
+@outputs 
+@persist MinutesBetweenClear X X1 Y1 Z1
+@trigger 
+
+
+interval(1)
+
+if(first()){
+MinutesBetweenClear=10
+timer("Clearragdolls",MinutesBetweenClear*1000*60)
+}
+
+X++
+X1++
+Y1++
+Z1++
+holoCreate(1)
+holoPos(1, entity():pos()+vec(0,0,50+15*sin(X)))
+holoColor(1, vec(0,0,255))
+if(clk("Clearragdolls")) {
+concmd("ulx tsay automatic clearragdolls to reduce lag")
+print(_HUD_PRINTCENTER,"Cleaing decals now")
+concmd("ulx clearragdolls")
+timer("Clearragdolls",MinutesBetweenClear*1000*60)
+}

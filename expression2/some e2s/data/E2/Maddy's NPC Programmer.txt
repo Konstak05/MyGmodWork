@@ -1,0 +1,88 @@
+@name Maddy's Super Computer
+@inputs 
+@outputs 
+@persist Weapon:string Good:string Bad:string Players:string Owre:string Alpha Timer Lastsaid:string
+@trigger 
+@model models/props_spytech/computer_low.mdl
+entity():setMass(50000)
+
+runOnTick(1)
+runOnChat(1)
+
+
+if(owner():lastSaid()=="/rpg") {Weapon="rpg", hideChat(1)}
+elseif(owner():lastSaid()=="/crossbow") {Weapon="crossbow", hideChat(1)}
+elseif(owner():lastSaid()=="/crowbar") {Weapon="crowbar", hideChat(1)}
+elseif(owner():lastSaid()=="/ar2") {Weapon="ar2", hideChat(1)}
+elseif(owner():lastSaid()=="/shotgun") {Weapon="shotgun", hideChat(1)}
+elseif(owner():lastSaid()=="/revolver") {Weapon="357", hideChat(1)}
+elseif(owner():lastSaid()=="/pistol") {Weapon="pistol", hideChat(1)}
+elseif(owner():lastSaid()=="/annabelle") {Weapon="annabelle", hideChat(1)}
+elseif(owner():lastSaid()=="/smg") {Weapon="smg1", hideChat(1)}
+elseif(owner():lastSaid()=="/stunstick") {Weapon="stunstick", hideChat(1)}
+elseif(owner():lastSaid()=="/none") {Weapon="none", hideChat(1)}
+elseif(owner():lastSaid()=="/good") {Good="like", Bad="hate", Players="like", hideChat(1)}
+elseif(owner():lastSaid()=="/bad") {Good="hate", Bad="like", Players="hate", hideChat(1)}
+elseif(owner():lastSaid()=="/rampage") {Good="hate", Bad="hate", Players="hate", hideChat(1)}
+elseif(owner():lastSaid()=="/visible") {Alpha=255, hideChat(1)}
+elseif(owner():lastSaid()=="/invisible") {Alpha=0, hideChat(1)}
+elseif(owner():lastSaid()=="/ghost") {Alpha=127.5, hideChat(1)}
+elseif(owner():lastSaid()=="/hateeveryone") {Players="hate", hideChat(1)}
+elseif(owner():lastSaid()=="/likeeveryone") {Players="like", hideChat(1)}
+elseif(owner():lastSaid()=="/hateme") {Owre="hate", hideChat(1)}
+elseif(owner():lastSaid()=="/likeme") {Owre="like", hideChat(1)}
+elseif(owner():lastSaid()=="/fearme") {Owre="fear", hideChat(1)}
+
+else{Weapon=Weapon, Good=Good, Bad=Bad, Players=Players, Alpha=Alpha hideChat(0)}
+
+Owner = owner()
+OwnerPos = Owner:pos()
+
+if(Owner:keyUse()&Owner:isCrouch()) {Find=1}
+
+if(Find&Find) {
+    findByClass("npc_*")
+    NPC = findClosest(OwnerPos)
+    NPC:npcRelationship("player",Players,900)
+    NPC:npcRelationship(Owner,Owre,999)
+    NPC:npcRelationship("npc_zombie",Bad,900)
+    NPC:npcRelationship("npc_manhack",Bad,900)
+    NPC:npcRelationship("npc_metropolice",Bad,900)
+    NPC:npcRelationship("npc_combine_s",Bad,900)
+    NPC:npcRelationship("npc_alyx",Good,900)
+    NPC:npcRelationship("npc_antlion",Bad,900)
+    NPC:npcRelationship("npc_gman","fear",900)
+    NPC:npcRelationship("npc_citizen",Good,900)
+    NPC:npcRelationship("npc_mossman",Good,900)
+    NPC:npcGiveWeapon(Weapon)
+    NPC:setAlpha(Alpha)
+}
+
+if(owner():keyAttack2()){NPC:npcShoot()}
+
+Timer=Timer+1
+
+if(Timer==1){entity():soundPlay(1,0,"ambient/computer_working2.wav")
+    print(" ")
+    print("Weclome to Maddy's NPC Recruit System!")
+    print(" ")
+    print("To reprogram a NPC near you, Crouch down and press E at the same time, but you have to own the NPC, or the E2 will go bizzerk! Right click is supposedly an attack function, but it doesn't seem to work...")
+    print(" ")
+    print("Your weapon commands are /rpg, /crossbow, /crowbar, /ar2, /shotgun, /revolver, /pistol, /smg, /stunstick, /annabelle, and /none")
+    print(" ")
+    print("Your Alpha commands are /visible (alpha 255), /ghost (alpha 127.5), and /invisible (alpha 0)")
+    print(" ")
+    print("Your Relationship commands are /good (to like the good side, hate the bad), /bad (like the bad side, hate the good), and /rampage (hate everything)")
+    print(" ")
+    print("Your Player Relationship commands are /hateeveryone, and /likeeveryone")
+    print(" ")
+    print("Your Personal Relationship commands are /fearme, /hateme, and /likeme")
+    print(" ")
+    print("Oh, and a kinda funny note: Kleiner, Eli, Magguson, and Breen seem to commit suicide on random ocasions with the RPG, and GMan doesn't seem to do anything!")
+    hint("If you can't see these commands, open up your terminal and look for them in the output area there! !:D",7)
+    print(" ")
+    }
+if(Timer>=4){Timer=2} else {Timer=Timer}
+if(Timer==2){entity():setColor(vec(0,0,255))} elseif(Timer==3){entity():setColor(vec(255,255,255))}
+
+#this is the end of the pickle code!

@@ -1,0 +1,14 @@
+@name homing shenanigans destroyer
+@inputs 
+@outputs 
+@persist Boom:array
+@trigger 
+
+runOnTick(1)
+
+
+findByClass("rpg_missile")
+
+Boom = findToArray()
+print(Boom)
+Boom[1,entity]:propDelete()

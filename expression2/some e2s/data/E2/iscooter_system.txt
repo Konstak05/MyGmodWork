@@ -1,0 +1,225 @@
+@name iScooter_system
+@inputs P:wirelink Plate:entity
+@outputs EE:string TESTSPEED:vector Turn Effect RPM Gear_i GEAR_V:array Force
+@persist M1 M2 SoundSpin E_holo:entity R1_pos_cc:vector R2_pos_cc:vector I Gas Ang:angle Rot1_i Rot2_i Rot_speed E:entity R1_dist R2_dist RR:array
+@persist ACT
+@trigger none
+@model models/hunter/plates/plate05x075.mdl
+
+interval(1)
+if(first() | duped())
+    {
+    E=Plate
+    E=entity()
+    GEAR_V[1,number]=5
+    GEAR_V[2,number]=0
+    GEAR_V[3,number]=3.83
+    GEAR_V[4,number]=2.35
+    GEAR_V[5,number]=1.4
+    GEAR_V[6,number]=1.1
+    GEAR_V[7,number]=0.9
+    Gear_i=4
+    RPM=3
+    Col=vec(random(255),random(255),random(255))
+    Col=vec(0,100,255)
+    E:soundPlay(0,0,"vehicles/v8/v8_firstgear_rev_loop1.wav")
+    E:soundPlay(0,0,"vehicles/v8/v8_throttle_off_fast_loop1.wav")
+
+    Turn=10
+    Ang=ang(0,90,0)
+    
+    E:setMass(1000)
+    E:setMaterial("models/debug/debugwhite")
+    E:setColor(vec(40,40,40))
+    RR=E:getConstraints()
+holoCreate(0,E:pos(),vec(1.8,1.8,2.9),ang(),vec(255,255,255)*0.2,"torus")
+holoMaterial(0,"models/debug/debugwhite")
+
+holoCreate(1,E:pos(),vec(1.4,1.4,0.55),ang(),vec(255,255,255)*0.5,"cylinder")
+holoMaterial(1,"models/debug/debugwhite")
+holoParent(1,0)
+
+holoCreate(2,E:pos(),vec(1.8,1.8,2.9),ang(),vec(255,255,255)*0.2,"torus")
+holoMaterial(2,"models/debug/debugwhite")
+
+holoCreate(3,E:pos(),vec(1.4,1.4,0.55),ang(),vec(255,255,255)*0.5,"cylinder")
+holoMaterial(3,"models/debug/debugwhite")
+holoParent(3,2)
+
+holoCreate(4,E:pos()-E:right()*17+E:up(),vec(2.6,2.6,1.7),E:angles()+ang(90,0,0),vec(255,255,255),"cylinder")
+
+#holoClip(4,E:pos()-E:right()*17,E:up()+E:right()/4,1)
+holoClip(4,E:pos()*0-E:right()*17*0,vec(0,1,0):rotate(0,100,0),0)
+holoClipEnabled(4,1)
+
+holoCreate(5,E:pos()-E:right()*3+E:up()*3,vec(1,1,1),E:angles()+ang(0,0,-20),vec(255,255,255))
+holoCreate(6,E:pos()-E:right()*3+E:up()*13,vec(1,1,1.47),E:angles()+ang(0,0,20),vec(255,255,255))
+holoCreate(7,E:pos()-E:right()*15+E:up()*12,vec(1.5,2.5,1),E:angles()+ang(90,0,0),vec(255,255,255),"cylinder")
+
+holoCreate(8,E:pos()-E:right()*6+E:up()*21,vec(1.5,2.5,0.5),E:angles(),vec(255,255,255),"icosphere")
+
+holoCreate(9,E:pos()+E:right()*22+E:up()*4,vec(1.7,1,0.5),E:angles()+ang(0,0,-50),vec(255,255,255))
+holoCreate(10,E:pos()+E:right()*23+E:up()*11,vec(1,2,0.5),E:angles()+ang(0,0,-80),vec(255,255,255))
+holoCreate(11,E:pos()+E:right()*25+E:up()*15,vec(1.5,1.4,0.5),E:angles()+ang(0,0,-90),vec(255,255,255))
+holoCreate(12,E:pos()+E:right()*26+E:up()*19,vec(0.7,2,0.5),E:angles()+ang(0,0,-115),vec(255,255,255))
+holoCreate(13,E:pos()+E:right()*29+E:up()*10,vec(1,0.3,1),E:angles()+ang(0,0,-110),vec(255,255,255))
+holoCreate(14,E:pos()+E:right()*37.5+E:up()*11.9,vec(1,0.3,0.6),E:angles()+ang(0,0,-90),vec(255,255,255))
+
+holoCreate(20,E:pos(),vec(1.2,0.2,0.2),ang(),vec(255,255,255))
+E_holo=holoEntity(20)
+holoCreate(21,E:pos()+vec(4,3,7),vec(0.2,0.2,1.2),ang(0,0,-30),vec(255,255,255),"cylinder")
+holoParent(21,20)
+
+holoCreate(15,E:pos()+E:right()*21+E:up()*30,vec(0.2,0.2,2.2),E:angles()+ang(90,0,0),vec(255,255,255),"cylinder")
+
+I=12
+while(I)
+    {
+    holoMaterial(I+3,"models/shiny")
+    holoParent(I+3,E)
+    holoColor(I+3,Col)
+    I-=1
+    }
+   }
+holoColor(8,vec(30,30,30))
+holoColor(15,vec(30,30,30))
+W=P:number("W")
+S=P:number("S")
+D=P:number("D")
+A=P:number("A")
+ELE=P:number("Elevation")
+BEA=P:number("Bearing")
+
+AIMPOS=P:vector("AimPos")
+M1=P:number("Mouse1")
+M2=P:number("Mouse2")
+SPACE=P:number("Space")
+SHIFT=P:number("Shift")
+DRIVER=P:entity("Entity"):driver()
+Gas=(W*!S)
+
+if($M1)
+    {
+    if(M1)
+        {
+        E:soundPlay(3,0,"synth/saw.wav")
+        }
+    else
+        {
+        soundStop(3)
+        }
+    }
+if(M2 & $M2)
+    {
+    E:soundPlay(4,0,"vo/canals/gunboat_getin.wav")
+    }
+ 
+
+if($Gas)
+    {
+    if(Gas)
+        {
+         E:soundPlay(0,0,"vehicles/v8/v8_firstgear_rev_loop1.wav")
+        }
+    else
+        {
+        E:soundPlay(0,0,"vehicles/v8/v8_throttle_off_fast_loop1.wav")
+        }
+    }
+
+#Turn=-cos((E:angles()-(E:pos()-owner():pos()):toAngle()):yaw())*40
+rangerHitWater(1)
+rangerFilter(RR)
+R1=rangerOffset(24,E:pos()+E:right()*31+E:up()*6,-E:up()+E:right()/4)
+rangerHitWater(1)
+rangerFilter(RR)
+R2=rangerOffset(24,E:pos()-E:right()*20+E:up()*6,-E:up())
+R2_e=R2:entity()
+R1_e=R2:entity()
+Vel_l=E:velL()
+Rot_speed=Vel_l:y()/7
+R2_wheel_speed=E:toLocal(E:pos()+R2:position()-R2_pos_cc-R2_e:vel()/40)
+R1_wheel_speed=E_holo:toLocal(E_holo:pos()+R1:position()-R1_pos_cc-R1_e:vel()/40)
+
+Effect=((10*RPM^2)-(RPM^3))*(Gas + (RPM<2))
+
+RPM+=Effect/1000-RPM/100
+III=GEAR_V[Gear_i+3,number]
+Force=(RPM/III+R2_wheel_speed:y()*III/2)*max(min(-15000+RPM*4000,4000),0)*R2:hit()
+RPM-=Force/40000
+
+if(RPM>8)
+    {
+    Gear_i=min(Gear_i+1,4)
+    E:soundPlay(2,0.3,"vehicles/v8/second.wav")
+    soundPitch(2,RPM*30)
+    }
+if(RPM<4.5 & Gear_i!=1)
+    {
+    
+        E:soundPlay(2,0.3,"vehicles/v8/second.wav")
+    soundPitch(2,RPM*30)
+    Gear_i=max(Gear_i-1,1)
+    }
+#Gear_i=3
+Rot1_i+=R1_wheel_speed:y()*5
+Rot2_i+=R2_wheel_speed:y()*5
+Turn=(min(max(Turn+(-sign(Turn)+(A-D)*6)/(1+abs(R1_wheel_speed:y())/8),-70),70))/(1-Rot_speed/160)
+
+holoAng(20,E:angles()+ang(0,Turn,0))
+holoPos(20,R1:position()+E:up()*11)
+
+
+R1_dist=R1:distance()
+R2_dist=R2:distance()
+
+
+#holoAng(0,E:angles()*ang(0,1,0)+ang(Rot1_i,Turn+90,90))
+holoAng(0,E:toWorld(ang(Rot1_i,Turn+90,90)))
+holoPos(0,R1:position()+E:up()*11+E:vel()/70)
+
+#holoAng(2,E:angles()*ang(0,1,0)+ang(Rot2_i,90,90))
+holoAng(2,E:toWorld(ang(Rot1_i,90,90)))
+holoPos(2,R2:position()+E:up()*11+E:vel()/70)
+SoundSpin=abs(R2_wheel_speed:x()+R1_wheel_speed:x())>1
+if(SoundSpin & $SoundSpin)
+    {
+    
+    E:soundPlay(1,0,"vehicles/v8/skid_highfriction.wav")
+    }
+if(R1:hit())
+{
+IIII=E:forward():rotate(ang(0,Turn,0))*-R1_wheel_speed:x()*6000+R1:hitNormal()*(24-R1_dist-$R1_dist*2)*2000
+E:applyOffsetForce(IIII,R1:position())
+
+
+}
+if(R2:hit())
+{
+IIII=-E:forward()*R2_wheel_speed:x()*7000+E:right()*(Force*III*III)/3+R2:hitNormal()*(24-R2_dist-$R2_dist*2)*2000
+E:applyOffsetForce(IIII,R2:position())
+
+}
+if(R2:hit() | R1:hit())
+    {
+E:applyAngForce((-E:angles()*ang(1,0,0)*4000-E:angVel()*ang(1000,500,600) - ang(Turn*-abs(R2_wheel_speed:y()),0,0)*2200))
+#E:applyForce(-E:forward()*Vel_l:x()*500)
+if(S)
+    {
+    E:applyForce(-E:right()*4000+(-E:vel()/(1+E:vel():length()))*3000)
+    }
+if(SPACE)
+    {
+    E:applyAngForce(ang(0,0,-E:angVel():roll()/1000-sin(E:angles():roll()+46+Rot_speed/6))*500000)
+    }
+}
+else
+    {
+    E:applyAngForce((ang(0,A-D,W-S)*30000 - E:angVel()*100)*SHIFT )
+    }
+    
+#E:applyAngForce(ang(0,0,SPACE-SHIFT)*10000)
+
+soundPitch(0,RPM*30)
+R1_pos_cc=R1:position()
+R2_pos_cc=R2:position()

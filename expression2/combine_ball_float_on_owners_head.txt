@@ -1,0 +1,11 @@
+@name Combine ball float on owners head
+@outputs 
+@persist Vec:vector Ent:entity X
+
+if(first()|duped()){
+    findByModel("cube025x025x025.mdl")
+    Ent = find()
+}
+interval(3)
+Vec = (owner():pos()-Ent:pos()+vec(0,0,120))*15
+Ent:applyForce(Vec+$Vec*5)

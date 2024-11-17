@@ -1,0 +1,101 @@
+@name FISTS
+@inputs 
+@outputs Code:string M1 Throwing M2 Thrown TPos:vector Eye:vector
+@persist Bar:entity Grip:entity Head:entity Arg1:string Arg2:string Spike1:entity Spike2:entity LC:string
+@trigger 
+
+interval(10)
+runOnChat(1)
+E = owner()
+Material = "models/props_pipes/pipeset_metal"
+Material2 = "models/effects/vol_light001"
+Material3 = "models/props_canal/metalwall005b"
+Material4 = "models/props_combine/metal_combinebridge001"
+Model1 = "hqcone"
+Model2 = "hqcylinder"
+RH = "anim_attachment_RH"
+
+Command = owner():lastSaid()
+if((Command:explode(" "):string(1) == "-mode")&(LC!=Command)){
+    Code = owner():lastSaid():explode(" "):string(2)
+    Arg1 = owner():lastSaid():explode(" "):string(3)
+    Arg2 = owner():lastSaid():explode(" "):string(4)
+
+if(Arg1 == ""){
+    hint("Mode set to: "+Code+" With no arguments",5)
+}else{
+    hint("Mode set to: "+Code+" With arguments:"+Arg1+", "+Arg2,5)
+}
+}
+LC = owner():lastSaid()
+if (first() | duped())
+{
+    print("thank you for using the fist by SPEED HUNTER.")
+    print("You must aqquire a crowbar to use the fist.")
+    print("If you wish to use another weapon, edit line 78 with a new weapon name.")
+    
+   
+    #HOLO FOR SOUND
+    holoCreate(6)
+    holoAlpha(6,0)
+
+
+
+}
+
+# Color the crowbar if its out
+if ((E:weapon():type() == "weapon_crowbar")&!Thrown)
+{
+    E:weapon():setMaterial(Material2)
+    Bar:setAlpha(255)
+    Grip:setAlpha(255)
+    Head:setAlpha(255)
+    Spike1:setAlpha(255)
+    Spike2:setAlpha(255)
+
+M1 = E:keyAttack1()
+M2 = E:keyAttack2()
+
+if(M1&$M1&!Throwing)
+{
+    owner():soundPlay(1,0,"")
+    OP = E:aimEntity()
+    if($M1 & OP:isPlayer() & E:pos():distance(OP:pos()) <= 300)
+    {
+        concmd("ulx "+Code+" \""+OP:name()+"\" "+Arg1+" "+Arg2)
+    }
+}
+
+
+if(M2&$M2){
+Throwing=!Throwing
+hint("Throwing: "+Throwing,5)
+}
+
+
+if(M1&$M1&Throwing)
+{
+    holoEntity(1):soundPlay(2,0,"weapons/tripwire/ropeshoot.wav")
+    soundPitch(2,25)
+    Thrown=1
+    TPos=owner():shootPos()
+    Eye=owner():eye()
+    holoAng(1,Eye:toAngle())
+    holoUnparent(1)
+    JT=1
+}
+
+
+
+
+
+}
+
+elseif(!Thrown)
+{
+    Bar:setAlpha(0)
+    Grip:setAlpha(0)
+    Head:setAlpha(0)
+    Spike1:setAlpha(0)
+    Spike2:setAlpha(0)
+}

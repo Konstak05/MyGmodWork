@@ -1,0 +1,55 @@
+@name Holorocket
+@inputs 
+@outputs C E Te:array A:array
+@persist T AP:vector Vel:vector F 
+@trigger 
+runOnTick(1)
+C=holoEntity(1):pos():isInWorld()
+if(holoEntity(2)){
+    findIncludeClass("player")
+    findInSphere(holoEntity(2):pos(),E)
+    A=findToArray()
+}
+
+if(owner():keyAttack1() & !holoEntity(1)){
+    Vel=owner():eye()*10
+    holoCreate(1)
+    holoEntity(1):setTrails(10,10,10,"trails/smoke",vec(100,100,100),255)
+    holoModel(1,"cone")
+    holoScale(1,vec(0.5,0.5,2))
+    holoAng(1,owner():eyeAngles()+ang(90,0,0))
+    holoPos(1,owner():shootPos())
+ 
+}
+if(A[1,entity] & A[1,entity]:isAlive()){
+    holoCreate(2,holoEntity(1):pos())
+    holoModel(2,"sphere")
+    
+   holoDelete(1)
+
+}
+if(holoEntity(2) ){
+    E=E+0.2
+    
+}
+
+if(E>25.5 & !holoEntity(1)){holoDelete(2), E=0}
+
+holoScale(2,vec(E/2,E/2,E/2))
+holoColor(2,vec(255,140,0))
+holoAlpha(2,-E*10-255*2)
+
+if(!C & !owner():keyAttack1() & holoEntity(1)){
+    
+    holoCreate(2,holoEntity(1):pos())
+    holoModel(2,"sphere")
+    
+   holoDelete(1)
+
+}
+    else{0}
+    
+    
+holoPos(1,(holoEntity(1):pos()+Vel))
+
+

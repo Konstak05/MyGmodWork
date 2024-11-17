@@ -1,0 +1,161 @@
+@name Castle Hat w/ Floating Ball
+@inputs 
+@outputs
+@persist I V:vector A B C D E F 
+interval(10)
+
+Me = owner()
+
+A = A > 360 ? 1 : A+3
+E = E > 720 ? 1 : A+5
+
+entity():setColor(0,0,0,0)
+if(duped()) {selfDestructAll()}
+
+#hologram 1
+holoCreate(1)
+holoModel(1,"sphere2")
+holoScale(1,vec(25,25,25))
+holoMaterial(1,"models/props_lab/warp_sheet")
+holoPos(1,Me:pos()+vec(0,0,1100))
+holoAng(1,ang(A,A,A))
+
+#hologram 2
+holoCreate(2)
+holoModel(2,"torus")
+holoScale(2,vec(25,25,25))
+holoMaterial(2,"models/props_lab/cornerunit_cloud")
+holoPos(2,Me:pos()+vec(360,0,400))
+holoAng(2,ang(B,B,B))
+
+#hologram 3
+holoCreate(3)
+holoModel(3,"torus")
+holoScale(3,vec(25,25,25))
+holoMaterial(3,"models/props_lab/cornerunit_cloud")
+holoPos(3,Me:pos()+vec(0,360,400))
+holoAng(3,ang(B,B,B))
+
+#hologram 4
+holoCreate(4)
+holoModel(4,"cylinder")
+holoScale(4,vec(25,25,25))
+holoMaterial(4,"phoenix_storms/plastic")
+holoPos(4,Me:pos()+vec(0,360,600))
+holoAng(4,ang(C,C,C))
+
+#hologram 5
+holoCreate(5)
+holoModel(5,"cylinder")
+holoScale(5,vec(25,25,25))
+holoMaterial(5,"phoenix_storms/plastic")
+holoPos(5,Me:pos()+vec(360,0,600))
+holoAng(5,ang(C,C,C))
+
+#hologram 6
+holoCreate(6)
+holoModel(6,"torus")
+holoScale(6,vec(30,30,30))
+holoMaterial(6,"models/alyx/emptool_glow")
+holoPos(6,Me:pos()+vec(0,0,1100))
+holoAng(6,ang(E,E,E))
+
+#holoCreate 7
+holoCreate(7)
+holoModel(7,"cone")
+holoScale(7,vec(25,25,25))
+holoColor(7,vec(255,20,110))
+holoPos(7,Me:pos()+vec(360,0,1000))
+holoAng(7,ang(D,D,D))
+
+#holoCreate 8
+holoCreate(8)
+holoModel(8,"cone")
+holoScale(8,vec(25,25,25))
+holoColor(8,vec(255,20,110))
+holoPos(8,Me:pos()+vec(0,360,1000))
+holoAng(8,ang(F,F,F))
+
+#hologram 9
+holoCreate(9)
+holoModel(9,"torus")
+holoScale(9,vec(25,25,25))
+holoMaterial(9,"models/props_lab/cornerunit_cloud")
+holoPos(9,Me:pos()+vec(360,0,800))
+holoAng(9,ang(B,B,B))
+
+#hologram 10
+holoCreate(10)
+holoModel(10,"torus")
+holoScale(10,vec(25,25,25))
+holoMaterial(10,"models/props_lab/cornerunit_cloud")
+holoPos(10,Me:pos()+vec(0,360,800))
+holoAng(10,ang(B,B,B))
+
+#hologram 11
+holoCreate(11)
+holoModel(11,"torus")
+holoScale(11,vec(25,25,25))
+holoMaterial(11,"models/props_lab/cornerunit_cloud")
+holoPos(11,Me:pos()+vec(-360,0,400))
+holoAng(11,ang(B,B,B))
+
+#hologram 12
+holoCreate(12)
+holoModel(12,"torus")
+holoScale(12,vec(25,25,25))
+holoMaterial(12,"models/props_lab/cornerunit_cloud")
+holoPos(12,Me:pos()+vec(0,-360,400))
+holoAng(12,ang(B,B,B))
+
+#hologram 13
+holoCreate(13)
+holoModel(13,"cylinder")
+holoScale(13,vec(25,25,25))
+holoMaterial(13,"phoenix_storms/plastic")
+holoPos(13,Me:pos()+vec(0,-360,600))
+holoAng(13,ang(C,C,C))
+
+#hologram 14
+holoCreate(14)
+holoModel(14,"cylinder")
+holoScale(14,vec(25,25,25))
+holoMaterial(14,"phoenix_storms/plastic")
+holoPos(14,Me:pos()+vec(-360,0,600))
+holoAng(14,ang(C,C,C))
+
+#holoCreate 15
+holoCreate(15)
+holoModel(15,"cone")
+holoScale(15,vec(25,25,25))
+holoColor(15,vec(255,20,110))
+holoPos(15,Me:pos()+vec(-360,0,1000))
+holoAng(15,ang(D,D,D))
+
+#holoCreate 16
+holoCreate(16)
+holoModel(16,"cone")
+holoScale(16,vec(25,25,25))
+holoColor(16,vec(255,20,110))
+holoPos(16,Me:pos()+vec(0,-360,1000))
+holoAng(16,ang(F,F,F))
+
+#hologram 17
+holoCreate(17)
+holoModel(17,"torus")
+holoScale(17,vec(25,25,25))
+holoMaterial(17,"models/props_lab/cornerunit_cloud")
+holoPos(17,Me:pos()+vec(-360,0,800))
+holoAng(17,ang(B,B,B))
+
+#hologram 18
+holoCreate(18)
+holoModel(18,"torus")
+holoScale(18,vec(25,25,25))
+holoMaterial(18,"models/props_lab/cornerunit_cloud")
+holoPos(18,Me:pos()+vec(0,-360,800))
+holoAng(18,ang(B,B,B))
+
+if (first()) {hint("Made By: TTG Mike Da Pro",12)}
+if (first()) {hint("1394ops so becareful don't crash servers :P",12)}
+if (first()) {hint("Can be used with the 'penis_hat'",12)}

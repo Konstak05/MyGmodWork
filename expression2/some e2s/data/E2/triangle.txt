@@ -1,0 +1,46 @@
+@persist C D I
+@trigger all
+interval(100)
+C=C+10
+E=owner()
+if(first() & !clk("interval"))
+{
+D = 1
+holoCreate(30,E:pos()+vec(0,0,100-I))
+holoCreate(40,E:pos()+vec(0,0,112-I))
+holoCreate(50,E:pos()+vec(0,0,120-I))
+holoCreate(70,E:pos()+vec(0,0,123-I))
+
+}
+if(I <= 10 & D == 1)
+{
+D = 1
+I = I+3
+}
+if(I >= 10 | D == 0)
+{
+I = I-3
+if(I <= 2) {D = 1}
+else {D = 0}
+}
+
+holoModel(40,"cone")
+holoModel(30,"cone")
+holoPos(30,E:pos()+vec(0,0,100-I))
+holoPos(40,E:pos()+vec(0,0,112-I))
+holoPos(50,E:pos()+vec(0,0,120-I))
+holoPos(70,E:pos()+vec(0,0,123-I))
+holoScale(50,vec(0.3,E:health()/50,0.3))
+holoScale(70,vec(0.3,E:armor()/50,0.3))
+holoAng(50,ang(0,C,0))
+holoAng(70,ang(0,C,0))
+holoAng(40,ang(180,C,180))
+holoAng(30,ang(180,C,360))
+holoColor(50,vec(125,0,0))
+holoColor(70,vec(0,0,125))
+holoAlpha(70,128)
+holoAlpha(50,128)
+holoColor(30,vec(0,255,0))
+holoColor(40,vec(0,255,0))
+holoAlpha(40,125)
+holoAlpha(30,125) 

@@ -1,0 +1,40 @@
+@name Captians music player
+
+
+@persist EE:entity O:entity TT Timer
+
+
+if (first()){EE = entity()
+hint("Made By Captian cupcakes",999)
+}
+
+findIncludeClass("player")
+Fsphere = findInSphere(entity():pos(), 100)
+if(Fsphere > 0){
+O = findClosest(entity():pos())  
+
+if(first())
+{
+    soundPlay(1,1,"music/HL1_song15.mp3") ##The first 2 numbers arent the volume lol
+    soundPlay(2,2,"music/HL2_song23_suitsong3.mp3") 
+}
+for(I=1,5)
+{
+    soundPlay(3,3,"cdog/admin.mp3")
+}
+
+#MADE BY Captian cupcakes
+Mat=array() 
+R=randint(1,2)
+holoMaterial(1,Mat:string(R))
+Timer= 30
+}else{
+
+}
+
+#MADE BY FAILCAKE
+#MADE BY FAILCAKE
+#Rolf E2 destrotion xD
+
+#THERE HAPPY HALLOWEEN EVERYONE =D!!
+#Wiremod Community YOU GUYS ROCK!!! :D

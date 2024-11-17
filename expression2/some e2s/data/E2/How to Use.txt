@@ -1,0 +1,11 @@
+Type this commands in chat!
+
+to start: /start
+to stop: /stop
+to orbit around owner: /orbit 
+to follow crosshair: /cross
+to follow target: /target (name)
+to orbit around crosshaird: /crossorbit
+
+
+

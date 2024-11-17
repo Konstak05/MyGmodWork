@@ -1,0 +1,335 @@
+@name Konstak's Oppresser MK2
+@inputs Chair:entity
+@outputs 
+@persist CurPos:vector CurAng:angle Sprinting Speed VertSpeed TurnSpeed AngAdd:angle MissileColBlock:entity PossibleTarget:entity Target:entity
+@trigger 
+
+interval(85)
+
+if(duped()){selfDestructAll()}
+
+
+if(Chair:isValid()) {
+    if(!Target:isAlive()) {
+        Target=noentity()
+    }
+    Chair:propFreeze(1)
+    if(!Target:isValid()&Chair:driver()==owner()) {
+    findInSphere(Chair:pos(),3000)
+    findSortByDistance(Chair:pos())
+    findIncludeClass("player")
+    findExcludeEntity(owner())
+    if(findClosest(Chair:pos())) {
+    PossibleTarget=findClosest(Chair:pos())
+    hint("Targeting "+PossibleTarget:name()+"!",0.25)
+    }
+    }
+    if(entity():getAlpha()!=0) {
+        Chair:propFreeze(1)
+        Chair:setAlpha(0)
+        entity():propFreeze(0)
+        entity():setAlpha(0)
+        CurPos=Chair:pos()
+        AngAdd=ang()
+        hint("Controls have been posted in chat!",5)
+        print("Controls for Oppressor MK.2")
+        print("WASD - Movement Controls")
+        print("R - Speed Mode")
+        print("T - Cancel Target")
+        print("Mouse1 - Attack Target")
+        print("When you are near a player, they are highlighted for targeting!")
+    }
+    Chair:setPos(CurPos)
+    Chair:setAng(CurAng)
+    if(Chair:driver()==owner()) {
+    if(owner():keyForward()) {
+        CurPos=CurPos+Chair:forward()*Speed
+    }
+    if(owner():keyBack()) {
+        CurPos=CurPos-Chair:forward()*Speed
+    }
+    if(owner():keyReload()) {
+        timer("ToggleSprint",500)
+    }
+    if(Sprinting) {
+        Speed=450
+        TurnSpeed=20
+        VertSpeed=100
+    } else {
+        Speed=125
+        TurnSpeed=15
+        VertSpeed=85
+    }
+    if(owner():keyJump()) {
+        CurPos=CurPos+vec(0,0,1)*VertSpeed
+    }
+    if(owner():keySprint()) {
+        CurPos=CurPos-vec(0,0,1)*VertSpeed
+    }
+    if(owner():keyLeft()) {
+        CurAng=CurAng+ang(0,TurnSpeed,0)
+    }
+    if(owner():keyRight()) {
+        CurAng=CurAng+ang(0,-TurnSpeed,0)
+    }
+    if(owner():keyAttack1()&!Target:isValid()) {
+        Target=PossibleTarget
+        timer("MissileColSpawn",800)
+        hint("Firing at "+Target:name()+"!",4)
+    }
+    if(owner():keyPressed("T")&Target:isValid()) {
+        Target=noentity()
+        propDeleteAll()
+        hint("Stopped Firing",4)
+    }
+    } else {
+    Chair:ejectPod()
+    }
+    if(clk("ToggleSprint")) {        
+        Sprinting=!Sprinting
+        if(Sprinting) {
+        hint("Speed mode is now on!",3)
+        } else {
+        hint("Speed mode is now off!",3)
+        }
+        stoptimer("ToggleSprint")
+    }
+    if(Target:isValid()) {
+    holoCreate(50)
+    holoPos(50,MissileColBlock:pos())
+    holoScale(50,vec(0.8,0.5,0.5))
+    MissileColBlock:applyForce(((toWorld(vec(0,0,0),ang(),Target:pos(),Target:angles())-MissileColBlock:pos())*35-MissileColBlock:vel())*MissileColBlock:mass()) 
+    noCollideAll(MissileColBlock,0)
+    } else {
+    holoDelete(50)
+    MissileColBlock:propDelete()
+    }
+    if(clk("MissileColSpawn")) {
+        MissileColBlock=propSpawn("models/hunter/plates/plate.mdl",Chair:pos(),ang(),0)
+        MissileColBlock:setMass(50000)
+        noCollideAll(MissileColBlock,0)
+        stoptimer("MissileColSpawn")
+    }
+    holoCreate(1)
+    holoPos(1,toWorld(vec(0,0,-2),ang(),Chair:pos(),Chair:angles()))
+    holoScale(1,vec(1.3,3,0.2))
+    holoAng(1,Chair:angles())
+    holoParent(1,Chair)
+    holoColor(1,vec(96,96,96))
+    
+    holoCreate(2)
+    holoPos(2,toWorld(vec(0,-22.5,0),ang(),Chair:pos(),Chair:angles()))
+    holoScale(2,vec(1.3,1,0.2))
+    holoAng(2,Chair:angles()+ang(0,0,-25))
+    holoParent(2,Chair)
+    holoColor(2,vec(96,96,96))
+    
+    holoCreate(3)
+    holoPos(3,toWorld(vec(0,-33.1,0.85),ang(),Chair:pos(),Chair:angles()))
+    holoScale(3,vec(1.3,1,0.5))
+    holoAng(3,Chair:angles()+ang(0,0,15))
+    holoParent(3,Chair)
+    holoColor(3,vec(35,35,255))
+    
+    holoCreate(4)
+    holoPos(4,toWorld(vec(0,-44,-2.86),ang(),Chair:pos(),Chair:angles()))
+    holoScale(4,vec(1.3,1,0.5))
+    holoAng(4,Chair:angles()+ang(0,0,25))
+    holoParent(4,Chair)
+    holoColor(4,vec(35,35,255))
+    
+    holoCreate(5)
+    holoPos(5,toWorld(vec(0,-30,-10),ang(),Chair:pos(),Chair:angles()))
+    holoScale(5,vec(1.3,3,0.2))
+    holoAng(5,Chair:angles()+ang(0,0,0))
+    holoParent(5,Chair)
+    holoColor(5,vec(35,35,255))
+    
+    holoCreate(6)
+    holoPos(6,toWorld(vec(0,-24,-11),ang(),Chair:pos(),Chair:angles()))
+    holoScale(6,vec(1.3,2,0.4))
+    holoAng(6,Chair:angles()+ang(0,0,-10))
+    holoParent(6,Chair)
+    holoColor(6,vec(35,35,255))
+    
+    holoCreate(7)
+    holoPos(7,toWorld(vec(0,-18,-7),ang(),Chair:pos(),Chair:angles()))
+    holoScale(7,vec(1.3,5,0.4))
+    holoAng(7,Chair:angles()+ang(0,0,0))
+    holoParent(7,Chair)
+    holoColor(7,vec(35,35,255))
+    
+    holoCreate(8)
+    holoPos(8,toWorld(vec(0,-10,-4),ang(),Chair:pos(),Chair:angles()))
+    holoScale(8,vec(1.3,3,0.2))
+    holoAng(8,Chair:angles()+ang(0,0,0))
+    holoParent(8,Chair)
+    holoColor(8,vec(0,0,0))
+    
+    holoCreate(9)
+    holoPos(9,toWorld(vec(0,-10,-4),ang(),Chair:pos(),Chair:angles()))
+    holoScale(9,vec(1.4,3,0.1))
+    holoAng(9,Chair:angles()+ang(0,0,0))
+    holoParent(9,Chair)
+    holoColor(9,vec(35,35,35))
+    ## rocket main part
+    holoCreate(10)
+    holoPos(10,toWorld(vec(0,-37,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(10,vec(1,1,2.5))
+    holoModel(10,"hqcylinder")
+    holoAng(10,Chair:angles()+ang(0,0,90))
+    holoParent(10,Chair)
+    holoColor(10,vec(35,35,35))
+    
+    holoCreate(11)
+    holoPos(11,toWorld(vec(0,5,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(11,vec(1.4,1.4,5))
+    holoModel(11,"hqcylinder")
+    holoAng(11,Chair:angles()+ang(0,0,90))
+    holoParent(11,Chair)
+    holoColor(11,vec(35,35,35))
+    
+    holoCreate(12)
+    holoPos(12,toWorld(vec(-3,0,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(12,vec(1.5,1,1.5))
+    holoAng(12,Chair:angles()+ang(0,0,90))
+    holoParent(12,Chair)
+    holoColor(12,vec(102,90,66))
+    
+    holoCreate(13)
+    holoPos(13,toWorld(vec(-3,-13,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(13,vec(1.5,1,0.2))
+    holoAng(13,Chair:angles()+ang(0,0,90))
+    holoParent(13,Chair)
+    holoColor(13,vec(102,90,66))
+    
+    holoCreate(14)
+    holoPos(14,toWorld(vec(-1.25,0,-14),ang(),Chair:pos(),Chair:angles()))
+    holoScale(14,vec(1.5,1,1.5))
+    holoAng(14,Chair:angles()+ang(-35,0,90))
+    holoParent(14,Chair)
+    holoColor(14,vec(102,90,66))
+    
+    holoCreate(15)
+    holoPos(15,toWorld(vec(-7,10,-14),ang(),Chair:pos(),Chair:angles()))
+    holoScale(15,vec(0.25 ,1,1.5))
+    holoAng(15,Chair:angles()+ang(15,0,3))
+    holoParent(15,Chair)
+    holoColor(15,vec(35,35,255))
+    
+    holoCreate(16)
+    holoPos(16,toWorld(vec(7,10,-14),ang(),Chair:pos(),Chair:angles()))
+    holoScale(16,vec(0.25 ,1,1.5))
+    holoAng(16,Chair:angles()+ang(-15,0,3))
+    holoParent(16,Chair)
+    holoColor(16,vec(35,35,255))
+    
+    holoCreate(17)
+    holoPos(17,toWorld(vec(0,10,-8),ang(),Chair:pos(),Chair:angles()))
+    holoScale(17,vec(1,1,1))
+    holoAng(17,Chair:angles()+ang(0,0,0))
+    holoParent(17,Chair)
+    holoColor(17,vec(35,35,255))
+    
+    holoCreate(18)
+    holoPos(18,toWorld(vec(0,-33,-6),ang(),Chair:pos(),Chair:angles()))
+    holoScale(18,vec(1,2,1))
+    holoAng(18,Chair:angles()+ang(0,0,0))
+    holoParent(18,Chair)
+    holoColor(18,vec(35,35,255))
+    
+    holoCreate(19)
+    holoPos(19,toWorld(vec(0,-51,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(19,vec(1,1,1))
+    holoModel(19,"hqtorus")
+    holoAng(19,Chair:angles()+ang(0,0,90))
+    holoParent(19,Chair)
+    holoColor(19,vec(35,35,35))
+    
+    holoCreate(20)
+    holoPos(20,toWorld(vec(0,-46,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(20,vec(1,1,1))
+    holoModel(20,"hqtorus")
+    holoAng(20,Chair:angles()+ang(0,0,90))
+    holoParent(20,Chair)
+    holoColor(20,vec(35,35,35))
+    
+    holoCreate(21)
+    holoPos(21,toWorld(vec(0,-41,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(21,vec(1,1,1))
+    holoModel(21,"hqtorus")
+    holoAng(21,Chair:angles()+ang(0,0,90))
+    holoParent(21,Chair)
+    holoColor(21,vec(35,35,35))
+    
+    holoCreate(22)
+    holoPos(22,toWorld(vec(0,20,-6),ang(),Chair:pos(),Chair:angles()))
+    holoScale(22,vec(1,2,1.25))
+    holoAng(22,Chair:angles()+ang(0,0,15))
+    holoParent(22,Chair)
+    holoColor(22,vec(35,35,255))
+    
+    holoCreate(23)
+    holoPos(23,toWorld(vec(0,31.5,-5.1),ang(),Chair:pos(),Chair:angles()))
+    holoScale(23,vec(1,1,1.3))
+    holoAng(23,Chair:angles()+ang(0,0,-25))
+    holoParent(23,Chair)
+    holoColor(23,vec(35,35,255))
+    
+    holoCreate(24)
+    holoPos(24,toWorld(vec(0,42,-1),ang(),Chair:pos(),Chair:angles()))
+    holoScale(24,vec(1,1,0.3))
+    holoAng(24,Chair:angles()+ang(0,0,0))
+    holoParent(24,Chair)
+    holoColor(24,vec(35,35,255))
+    
+    holoCreate(25)
+    holoPos(25,toWorld(vec(0,37,-4.5),ang(),Chair:pos(),Chair:angles()))
+    holoScale(25,vec(1,1,0.5))
+    holoAng(25,Chair:angles()+ang(0,0,25))
+    holoParent(25,Chair)
+    holoColor(25,vec(35,35,255))
+    
+    holoCreate(26)
+    holoPos(26,toWorld(vec(0,43,-2),ang(),Chair:pos(),Chair:angles()))
+    holoScale(26,vec(1,0.3,0.4))
+    holoAng(26,Chair:angles()+ang(0,0,5))
+    holoParent(26,Chair)
+    holoColor(26,vec(35,35,255))
+    
+    holoCreate(27)
+    holoPos(27,toWorld(vec(0,30,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(27,vec(1.2,1.2,1.3))
+    holoModel(27,"hqcylinder")
+    holoAng(27,Chair:angles()+ang(0,0,90))
+    holoParent(27,Chair)
+    holoColor(27,vec(35,35,35))
+    
+    holoCreate(28)
+    holoPos(28,toWorld(vec(8,15,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(28,vec(0.6,0.2,2))
+    holoAng(28,Chair:angles()+ang(25,-45,45))
+    holoParent(28,Chair)
+    holoColor(28,vec(35,35,255))
+    
+    holoCreate(29)
+    holoPos(29,toWorld(vec(-8,15,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(29,vec(0.6,0.2,2))
+    holoAng(29,Chair:angles()+ang(-25,45,45))
+    holoParent(29,Chair)
+    holoColor(29,vec(35,35,255))
+    
+    holoCreate(30)
+    holoPos(30,toWorld(vec(8,-25,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(30,vec(0.6,0.2,2))
+    holoAng(30,Chair:angles()+ang(25,45,-45))
+    holoParent(30,Chair)
+    holoColor(30,vec(35,35,255))
+    
+    holoCreate(31)
+    holoPos(31,toWorld(vec(-8,-25,-20),ang(),Chair:pos(),Chair:angles()))
+    holoScale(31,vec(0.6,0.2,2))
+    holoAng(31,Chair:angles()+ang(-25,-45,-45))
+    holoParent(31,Chair)
+    holoColor(31,vec(35,35,255))
+}

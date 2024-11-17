@@ -1,0 +1,96 @@
+@name Bouncy Cube
+@inputs Button
+@outputs 
+@persist Radius FoundPos Moving HeightToJump X JumpSpeed WaitInAir TimeToWaitInAir AfterWaitInAir
+@persist PosInRadius:vector
+@persist PosSafeRanger:ranger
+@trigger Button
+@model models/hunter/plates/plate.mdl
+
+runOnTick( 1 )
+
+if( first() ) {
+    
+    Radius = 3000
+    
+    HeightToJump = 600
+    
+    JumpSpeed = 0.15
+    
+    TimeToWaitInAir = 0 #[ Seconds ]#
+    
+}
+
+if( !FoundPos & !Moving ) {
+
+
+    PosInRadius = vec( random( entity():pos():x() - Radius / 2, entity():pos():x() + Radius / 2 ), random( entity():pos():y() - Radius / 2, entity():pos():y() + Radius / 2 ), entity():pos():z() )
+    
+    PosSafeRanger = rangerOffset( entity():height() + 1, PosInRadius, vec( 0, 0, -1 ) )
+    
+}
+
+if( Moving ) {
+    
+    if( sin( X ) < 0.5 ) {
+        
+        if( !AfterWaitInAir ) {
+        
+            X += JumpSpeed
+        
+        }
+        
+    } else {
+        if( !AfterWaitInAir ) {
+            
+            WaitInAir = 1
+            
+            timer( "WaitInAir", TimeToWaitInAir * 1000 )
+        
+        }
+        
+    }
+    
+    if( sin( X ) < 1 ) {
+        
+        if( AfterWaitInAir ) {
+            
+        X += JumpSpeed
+        
+        }
+        
+    } else {
+        
+        AfterWaitInAir = 0
+        
+        X = 0
+        Moving = 0
+        
+    }
+    
+    if( !WaitInAir ) {
+    
+        entity():setPos( bezier( entity():pos(), entity():pos() + vec( 0, 0, HeightToJump ), PosInRadius, sin( X ) ) )
+    
+    }
+    
+}
+
+if( clk( "WaitInAir" ) ) {
+    
+    AfterWaitInAir = 1
+    WaitInAir = 0
+    
+    stoptimer( "WaitInAir" )
+    
+}
+
+if( Button & !tickClk() ) {
+    
+    holoCreate( 1, PosInRadius, vec(10000,10000,1), ang(), vec( 35 ), "hq_torus_thick" )
+    holoPos( 1, PosInRadius )
+    
+    Moving = 1
+    
+}
+

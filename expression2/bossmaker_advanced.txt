@@ -1,0 +1,133 @@
+@name BOSSMAKER Advanced
+@inputs SCREEN:entity Damage PropMaxHealth Body:entity Hurtbox TARGET1:entity
+@outputs Music Reset PropHealth Life Teleport 
+@persist 
+@trigger 
+
+#This chip is to make myself's life easier. it provides all of the basic and advanced resources from ground. 
+#this one will be the main AI for the tier 3 bosses.
+#-Konstak 2022. keep it to yourself my Future self.remember to use it
+
+
+interval(1)
+PHASE = randint(1,3)
+
+holoCreate(3)
+holoPos(3,Body:toWorld(vec(0,0,50)))
+holoAng(3,Body:toWorld(ang(90,0,90)))
+holoColor(3,vec(0,255,0))
+holoScale(3,vec(0.5,0.5,PropHealth/500))
+holoModel(3,"cube")
+
+if(first()|dupefinished()){
+    PropMaxHealth = 1500
+    PropHealth = PropMaxHealth   
+    Music = 0
+    Life = 0
+    holoAlpha(3,0)
+    SCREEN:propDraw(0)
+    timer("StartBoss",3000)
+    Teleport = 0
+  holoCreate(5)
+  holoAlpha(5,0)   
+}
+
+
+
+if(Damage) {
+    PropHealth -= Damage
+    Reset = 1
+} else {
+    Reset = 0
+}
+
+
+if(clk("StartBoss")){
+    timer("BOSSTELEPORTFIXER",100)
+    SCREEN:propDraw(255)
+    holoAlpha(3,255)
+    Music = 1
+    Life = 1
+if(PHASE == 1){
+stoptimer("BOSSTELEPORTFIXER")
+holoScale(5,vec(15,15,15))
+holoColor(5,vec(0,0,0))
+holoPos(5,TARGET1:toWorld(vec(randint(-500,500),randint(-500,500),100))) 
+holoAlpha(5,0)
+holoModel(5,"hq_sphere")
+holoMaterial(5,"phoenix_storms/wire/pcb_blue")
+
+   timer("StartTeleportPhase",1000)
+}
+elseif(PHASE == 2){
+    print("2")
+   timer("StartBoss",randint(1000,5000)) 
+}
+else{
+    print("3")
+    timer("StartBoss",randint(1000,5000))
+}
+    
+    
+}
+
+
+
+
+if(PropHealth <= 0) {
+    timer("Delete",100)   
+}
+
+if(clk("Delete")){
+    Body:propDelete()
+    
+}
+
+if(clk("BOSSTELEPORTFIXER")){
+  holoCreate(5)
+  holoAlpha(5,0)    
+    
+    timer("BOSSTELEPORTFIXER",1)    
+}
+
+
+
+###TELEPORTPHASE 
+if(clk("StartTeleportPhase")){
+holoAlpha(5,233)
+
+  timer("StartTeleportPhase2",1500)  
+}
+if(clk("StartTeleportPhase2")){
+  Teleport = 1
+  holoAlpha(5,0)
+  timer("StartTeleportPhase3",500)  
+}
+if(clk("StartTeleportPhase3")){
+    Teleport = 0
+    timer("StartBoss",500)
+}
+
+
+
+
+
+if(Hurtbox >= 1){
+    
+    local Ranger = rangerOffset( 2147000000, Body:pos(), vec( 0, 0, -1 ) )
+    
+    local GroundPosition = Ranger:position()
+    
+    local TargetPosition = TARGET1:pos()
+    
+    if( TargetPosition:z() < GroundPosition:z() ) {
+        
+        TARGET1:plySetPos( vec( TargetPosition:x(), TargetPosition:y(), GroundPosition:z() ) )
+        
+    }
+    TARGET1:plyNoclip(0)
+    TARGET1:plyGod(0)
+    TARGET1:plyExitVehicle()
+    TARGET1:plyApplyForce( ( TARGET1:pos() + vec( 0, 0, 45 ) - GroundPosition ):normalized() * 700 - TARGET1:vel() )
+}
+

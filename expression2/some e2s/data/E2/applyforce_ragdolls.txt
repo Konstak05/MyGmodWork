@@ -1,0 +1,16 @@
+@name ApplyForce ragdolls
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+
+
+E = entity():isConstrainedTo()
+
+E:setPos(owner():pos() + vec(0,0,150))
+
+if (owner():isCrouch())
+{
+    E:setPos(owner():aimPos())
+}

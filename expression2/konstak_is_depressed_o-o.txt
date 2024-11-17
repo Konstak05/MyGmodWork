@@ -1,0 +1,33 @@
+@name Konstak is depressed o-O
+@inputs 
+@outputs 
+@persist CurPos:vector On Owner:entity
+@trigger 
+
+interval(220)
+
+Owner=findPlayerBySteamID("STEAM_0:1:445623953")
+#Owner=owner()
+CurPos=Owner:attachmentPos("anim_attachment_head")+vec(0,0,6)
+#CurPos=entity():pos()+vec(0,0,50)
+
+holoCreate(1)
+holoPos(1, toWorld(vec(-2,0,20),ang(),CurPos,ang()))
+holoModel(1, "hqsphere")
+holoScale(1, vec(3,3,1.15))
+holoColor(1, vec(210,210,255))
+holoAng(1,ang())
+
+holoCreate(2)
+holoPos(2,toWorld(vec(5,5,-3),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+holoScale(2, vec(2,2,1))
+holoColor(2, vec(210,210,255))
+holoModel(2, "hqsphere")
+holoAng(2,holoEntity(1):angles()+ang(0,0,0))
+
+holoCreate(3)
+holoPos(3,toWorld(vec(-5,-5,3),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+holoScale(3, vec(2,2,1.5))
+holoColor(3, vec(210,210,255))
+holoModel(3, "hqsphere")
+holoAng(3,holoEntity(1):angles()+ang(0,0,0))

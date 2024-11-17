@@ -1,0 +1,48 @@
+@name Moving/coloring test
+@inputs 
+@outputs 
+@persist R Count I
+@trigger 
+
+if(first()){
+    runOnTick(1)
+}
+
+timer("move1",3000)
+timer("move2",4000)
+timer("move3",5000)
+
+if(clk("spawn"))
+{
+    for(I=Count,3)
+    {   
+        holoCreate(I)
+        holoColor(I, hsv2rgb((curtime()*50)%360,1,1))
+        break
+    }
+    timer("spawn",2000),Count++,Spawn=0
+}
+
+if(first())
+{
+    timer("spawn",1500)
+    Count = 1
+}
+
+if(clk("move1"))
+{
+    holoAng(1, holoEntity(1):angles() + ang(0,random(360),0))
+}
+
+if(clk("move2"))
+{
+    holoAng(2, holoEntity(2):angles() + ang(0,random(90),0))
+}
+
+if(clk("move3"))
+{
+    holoAng(3, holoEntity(3):angles() + ang(0,random(450),0))
+}
+holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*0.1)
+holoPos(2, holoEntity(2):pos() + holoEntity(2):forward()*0.1)
+holoPos(3, holoEntity(3):pos() + holoEntity(3):forward()*0.1)

@@ -1,0 +1,73 @@
+@name Konstak's mini pet e2
+@inputs Front Back Left Right Rotate Rotate2
+@outputs 
+@persist X Y X2 Y2
+interval(1)
+
+    if(Front){X+=10}
+    if(Back){X-=10}
+    if(Left){Y+=10}
+    if(Right){Y-=10}
+    if(Rotate){Y2+=10}
+    if(Rotate2){Y2-=10}
+    holoCreate(1)
+    holoPos(1,entity():toWorld(vec(X,Y,12)))
+    holoModel(1,"models/hunter/misc/sphere025x025.mdl")
+    holoAng(1,ang(0,Y2,0))
+    holoMaterial(1,"sprops/trans/lights/light_plastic") 
+    holoColor(1, vec(0,0,0))
+    holoScale(1, vec(1.5,1.5,1.5))
+
+    holoCreate(2)
+    holoPos(2,toWorld(vec(9,9,-7),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+    holoModel(2,"pyramid")
+    holoAng(2,ang(180,-45,-20))
+    holoMaterial(2,"") 
+    holoColor(2, vec(40,40,40))
+    holoScale(2, vec(1,1,1))
+    holoParent(2, 1)
+    
+    holoCreate(3)
+    holoPos(3,toWorld(vec(-9,-9,-7),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+    holoModel(3,"pyramid")
+    holoAng(3,ang(180,-45,20))
+    holoMaterial(3,"") 
+    holoColor(3, vec(40,40,40))
+    holoScale(3, vec(1,1,1))
+    holoParent(3, 1)
+    
+    holoCreate(4)
+    holoPos(4,toWorld(vec(9,-9,-7),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+    holoModel(4,"pyramid")
+    holoAng(4,ang(180,45,20))
+    holoMaterial(4,"") 
+    holoColor(4, vec(40,40,40))
+    holoScale(4, vec(1,1,1))
+    holoParent(4, 1)
+    
+    holoCreate(5)
+    holoPos(5,toWorld(vec(-9,9,-7),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+    holoModel(5,"pyramid")
+    holoAng(5,ang(180,45,-20))
+    holoMaterial(5,"") 
+    holoColor(5, vec(40,40,40))
+    holoScale(5, vec(1,1,1))
+    holoParent(5, 1)
+    
+    holoCreate(6)
+    holoPos(6,toWorld(vec(6,2,5),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+    holoModel(6,"models/hunter/triangles/025x025.mdl")
+    holoAng(6,ang(0,90,45))
+    holoMaterial(6,"sprops/trans/lights/light_plastic") 
+    holoColor(6, vec(255,0,0))
+    holoScale(6, vec(0.2,0.2,0.2))
+    holoParent(6, 1)
+    
+    holoCreate(7)
+    holoPos(7,toWorld(vec(6,-2,5),ang(),holoEntity(1):pos(),holoEntity(1):angles()))
+    holoModel(7,"models/hunter/triangles/025x025.mdl")
+    holoAng(7,ang(180,90,-45))
+    holoMaterial(7,"sprops/trans/lights/light_plastic") 
+    holoColor(7, vec(255,0,0))
+    holoScale(7, vec(0.2,0.2,0.2))
+    holoParent(7, 1)

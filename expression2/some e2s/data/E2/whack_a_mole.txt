@@ -1,0 +1,42 @@
+@name Whack a Mole
+@inputs A:wirelink B:wirelink C:wirelink D:wirelink E:wirelink 
+@inputs F:wirelink G:wirelink H:wirelink I:wirelink Reset
+@outputs Score
+@persist T Rand Dam BeginFix
+interval(10)
+if (duped()) {reset()}
+if (first()) {Score -= 9}
+if (Score < 0) {BeginFix = 1} else {BeginFix = 30}
+A:setNumber("On",1)
+B:setNumber("On",1)
+C:setNumber("On",1)
+E:setNumber("On",1)
+F:setNumber("On",1)
+G:setNumber("On",1)
+H:setNumber("On",1)
+I:setNumber("On",1)
+
+if (Reset) {reset()}
+T+=1
+if (T > BeginFix | Dam) {
+    Rand -= Rand,Rand += round(random(0.5,9.449)),T = 0,Dam = 0
+    }
+
+if (Rand == 1 & changed(A:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==1) {A:entity():setColor(255,0,0)} else {A:entity():setColor(0,0,0)}
+if (Rand == 2 & changed(B:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==2) {B:entity():setColor(255,0,0)} else {B:entity():setColor(0,0,0)}
+if (Rand == 3 & changed(C:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==3) {C:entity():setColor(255,0,0)} else {C:entity():setColor(0,0,0)}
+if (Rand == 4 & changed(D:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==4) {D:entity():setColor(255,0,0)} else {D:entity():setColor(0,0,0)}
+if (Rand == 5 & changed(E:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==5) {E:entity():setColor(255,0,0)} else {E:entity():setColor(0,0,0)}
+if (Rand == 6 & changed(F:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==6) {F:entity():setColor(255,0,0)} else {F:entity():setColor(0,0,0)}
+if (Rand == 7 & changed(G:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==7) {G:entity():setColor(255,0,0)} else {G:entity():setColor(0,0,0)}
+if (Rand == 8 & changed(H:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==8) {H:entity():setColor(255,0,0)} else {H:entity():setColor(0,0,0)}
+if (Rand == 9 & changed(I:vector("Force"))) {Dam = 1,Score += 1}
+if (Rand==9) {I:entity():setColor(255,0,0)} else {I:entity():setColor(0,0,0)}

@@ -1,0 +1,7 @@
+@name E2HoloTest
+interval(125)
+holoCreate(1)
+holoPos(1,owner():pos()+vec(0,0,95))
+holoAng(1,(owner():aimPos()-holoEntity(1):pos()):toAngle())
+holoModel(1,"")
+

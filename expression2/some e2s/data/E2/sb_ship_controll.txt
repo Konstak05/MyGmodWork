@@ -1,0 +1,20 @@
+@name SB_Ship_Controll
+@inputs Pod:wirelink E:entity
+@outputs 
+@persist 
+@trigger 
+interval(1)
+
+A = Pod:number("A")
+D = Pod:number("D")
+
+if (A)
+{
+    E:applyAngForce(ang(9999,0,0))
+}
+
+if (D)
+{
+    E:applyAngForce(ang(9999,0,0))
+}
+

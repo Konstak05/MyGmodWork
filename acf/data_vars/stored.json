@@ -1,0 +1,30 @@
+{
+	"CrateSizeX": {
+		"Default": 24.0,
+		"Value": 24.0
+	},
+	"PlateSizeY": {
+		"Default": 24.0,
+		"Value": 24.0
+	},
+	"PlateSizeX": {
+		"Default": 24.0,
+		"Value": 24.0
+	},
+	"Volume": {
+		"Default": 0.5,
+		"Value": 0.5
+	},
+	"CrateSizeZ": {
+		"Default": 24.0,
+		"Value": 24.0
+	},
+	"CrateSizeY": {
+		"Default": 24.0,
+		"Value": 24.0
+	},
+	"PlateSizeZ": {
+		"Default": 5.0,
+		"Value": 5.0
+	}
+}

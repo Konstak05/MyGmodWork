@@ -1,0 +1,46 @@
+@name HPProp
+@inputs Prop:entity Prop2:entity PropMaxHealth Damage
+@outputs PropHealth Reset
+@persist 
+@trigger 
+
+#First you need to place down a Damage Detector and a Constant Value, The constant
+#value has to have the max health of the prop you want to be able to be destroyed
+
+#Second link the damage detector to the prop you want to be destroyed
+
+#Third link the Damage input on this chip to the Damage Output on the Damage Detector
+
+#Fourth Set the On input on the Damage Detector to the constant value
+
+#Fith Set the PropMaxHealth input on this e2 chip to the Constant Value
+
+#Sixth set the Reset on the damage detector to the reset output on the e2 chip
+
+#Seventh reload the chip (Just click Upload & Exit when you rightclick the chip
+#on the ground/prop)
+
+#Eighth Set the Prop input entity to the Prop you want destroyed
+
+#That should be everything you need!
+
+if(first()|duped()) {
+    PropHealth = PropMaxHealth   
+}
+
+runOnTick(1)
+
+if(Damage) {
+    PropHealth -= Damage
+    Reset = 1
+} else {
+    Reset = 0
+}
+
+if(PropHealth <= 0) {
+    Prop:propDelete()   
+}
+
+if(PropHealth <= 0) {
+    Prop2:propDelete()   
+}

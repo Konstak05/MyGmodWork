@@ -1,0 +1,394 @@
+@name Power cell factory1 MK2
+@inputs 
+@outputs Enemybots
+@persist X Y Z ALPHA COLOUR RESOURCERANDOMIZER ANIMATION4 Enemybotstart START
+@trigger 
+
+E = entity()
+
+holoCreate(22)
+holoParent(22,1)
+holoAng(22,(E:angles()))
+
+    if(RESOURCERANDOMIZER == 1){
+    holoScale(22,vec(0.2,1,0.2))
+    holoModel(22,"cube")
+    ANIMANION4B = 2.6
+    ANIMANION4C = 0.08
+    }
+    if(RESOURCERANDOMIZER == 2){
+    holoScale(22,vec(1,1,1))
+    holoModel(22,"cube")
+    ANIMANION4B = 5
+    ANIMANION4C = 0.15
+    }   
+    if(RESOURCERANDOMIZER == 3){
+    holoScale(22,vec(1,1,1))
+    holoModel(22,"hq_sphere")
+    ANIMANION4B = 5
+    ANIMANION4C = 0.15
+    } 
+
+if(first()|dupefinished()){
+ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+ANIMATION1 = 0
+SCANNERZ = 24
+SCANNERX = 5
+ANIMATION4 = -9
+ANIMATION3 = 2
+holoAlpha(15,0)
+RESOURCERANDOMIZER = randint(1,3)
+timer("Startanimation",1000)
+}
+
+
+if(clk("Startanimation")){
+    START = 1
+    Enemybots = 0
+    holoColor(22,vec(0,0,0))
+    holoAlpha(22,ALPHA)
+    holoAlpha(21,100)
+    stoptimer("Startsecondanimation4")
+    ALPHA = ALPHA + 7
+     Z = Z + ANIMANION4C
+    ANIMATION4 = -1 + Z
+    
+
+    
+    ANIMATION3 = 2
+    SCANNERX = 0
+    X = X - 0.5
+    ANIMATION1 = +10 + X
+    SCANNERZ = 17
+    
+    Enemybotstart = 1
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    timer("Startanimation",50)
+    timer("Startanimation2",2400)
+    stoptimer("Startanimation4")
+}
+
+if(clk("Startanimation2")){
+    Z = 0
+    ANIMATION4 = ANIMANION4B
+    holoAlpha(21,0)
+    ANIMATION3 = 2
+    stoptimer("Startanimation")
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    SCANNERZ = 17
+    ANIMATION1 = -10
+    X = 1
+    timer("Startanimation3",1500)
+    timer("Startanimation2",100)
+}
+
+if(clk("Startanimation3")){
+    ANIMATION4 = ANIMANION4B
+COLOUR = COLOUR + 2
+    holoColor(22,vec(0,0,COLOUR))
+    holoAlpha(21,100)
+ANIMATION3 = 2
+X = X - 0.5
+ANIMATION1 = +10 + X
+SCANNERZ = 28
+ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    stoptimer("Startanimation2")
+    timer("Startanimation3",50)
+    timer("Startanimation4",2600)
+}
+
+if(clk("Startanimation4")){
+    ANIMATION4 = ANIMANION4B
+    ALPHA = 0
+    COLOUR = 0
+    holoAlpha(21,0)
+    stoptimer("Startanimation3")
+    SCANNERZ = 24
+    SCANNERX = 5
+    ANIMATION1 = 0
+    ANIMATION3 = 2
+    X = 1
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    timer("Startanimation4",100)
+    timer("Startsecondanimation",100)
+    
+}
+
+if(clk("Startsecondanimation")){
+    ANIMATION4 = ANIMANION4B
+Y = Y + 1.8
+ANIMATION3 = 2 - Y
+    SCANNERZ = 24
+    SCANNERX = 5
+    ANIMATION1 = 0
+    X = 1
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    stoptimer("Startanimation4")
+    timer("Startsecondanimation",100)   
+    timer("Startsecondanimation2",700)   
+}
+
+if(clk("Startsecondanimation2")){
+    ANIMATION4 = ANIMANION4B
+    holoAlpha(22,0)
+    Y = -3
+    holoAlpha(19,0)
+    SCANNERZ = 24
+    SCANNERX = 5
+    ANIMATION1 = 0
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    stoptimer("Startsecondanimation")   
+    timer("Startsecondanimation2",10) 
+    timer("Startsecondanimation3",1500)   
+}
+if(clk("Startsecondanimation3")){
+    ANIMATION4 = ANIMANION4B
+    holoAlpha(19,255)
+Y = Y + 1
+ANIMATION3 = 2 + Y
+    SCANNERZ = 24
+    SCANNERX = 5
+    ANIMATION1 = 0
+    X = 1
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    stoptimer("Startsecondanimation2") 
+    stoptimer("Startsecondanimation")
+    timer("Startsecondanimation3",100)
+    timer("Startsecondanimation4",300)   
+}
+
+if(clk("Startsecondanimation4")){
+    Z = 0
+    ANIMATION4 = -9
+    ANIMATION3 = 2
+    SCANNERZ = 24
+    SCANNERX = 5
+    ANIMATION1 = 0    
+    ALPHA = 0
+    COLOUR = 0
+    X = 1
+    holoAlpha(22,0)
+    ANIMATION2 = ((holoEntity(13):pos() - holoEntity(15):pos()) /2 +holoEntity(15):pos())
+    timer("Startsecondanimation4",50)  
+    Enemybotstart = 0
+    stoptimer("Startsecondanimation3")
+    timer("Startanimation",1700)
+}
+holoCreate(1)
+holoPos(1,(E:toWorld(vec(0,0,10))))
+holoAng(1,(E:angles()))
+holoColor(1,vec(100,100,100))
+holoScale(1,vec(3,5,2))
+holoModel(1,"cylinder")
+
+holoCreate(2)
+holoParent(2,1)
+holoPos(2,(holoEntity(1):toWorld(vec(0,0,13))))
+holoAng(2,(E:angles()))
+holoColor(2,vec(130,130,130))
+holoScale(2,vec(3.2,5.2,0.2))
+holoModel(2,"cylinder")
+
+
+
+####GODOWN
+holoCreate(19)
+holoParent(19,1)
+holoPos(19,(holoEntity(2):toWorld(vec(0,0,ANIMATION3))))
+holoAng(19,(E:angles()))
+holoColor(19,vec(130,130,130))
+holoScale(19,vec(1.5,1.8,0.2))
+holoModel(19,"cylinder")
+
+holoCreate(23)
+holoParent(23,1)
+holoPos(23,(holoEntity(2):toWorld(vec(0,0,0.1))))
+holoAng(23,(E:angles()))
+holoColor(23,vec(0,0,0))
+holoScale(23,vec(1.45,1.75,0.2))
+holoModel(23,"cylinder")
+
+holoCreate(20)
+holoParent(20,1)
+holoPos(20,(holoEntity(15):toWorld(vec(0,0,0))))
+holoAng(20,(E:angles()))
+holoColor(20,vec(130,130,130))
+holoScale(20,vec(1,0.6,0.2))
+holoModel(20,"cube")
+
+holoCreate(21)
+holoParent(21,1)
+holoPos(21,(holoEntity(20):toWorld(vec(0,0,-19))))
+holoAng(21,(E:angles()))
+holoColor(21,vec(0,0,200))
+holoScale(21,vec(1,0.1,3))
+holoModel(21,"cube")
+
+
+holoPos(22,(holoEntity(19):toWorld(vec(0,0,ANIMATION4))))
+
+holoCreate(8)
+holoParent(8,1)
+holoPos(8,(holoEntity(1):toWorld(vec(0,23,0))))
+holoAng(8,(E:angles()))
+holoColor(8,vec(130,130,130))
+holoScale(8,vec(1,3,2))
+holoModel(8,"cone")
+
+holoCreate(9)
+holoParent(9,1)
+holoPos(9,(holoEntity(1):toWorld(vec(0,-23,0))))
+holoAng(9,(E:angles()))
+holoColor(9,vec(130,130,130))
+holoScale(9,vec(1,3,2))
+holoModel(9,"cone")
+
+holoCreate(7)
+holoParent(7,1)
+holoPos(7,(holoEntity(1):toWorld(vec(0,0,-6))))
+holoAng(7,(E:angles() + ang(90,0,0)))
+holoColor(7,vec(0,255,0))
+holoScale(7,vec(0.2,0.2,3.1))
+holoModel(7,"cylinder")
+
+
+holoCreate(3)
+holoParent(3,1)
+holoPos(3,(holoEntity(2):toWorld(vec(0,20,5))))
+holoAng(3,(E:angles()))
+holoColor(3,vec(100,100,100))
+holoScale(3,vec(1.3,1.5,0.8))
+holoModel(3,"cylinder")
+
+holoCreate(11)
+holoParent(11,1)
+holoPos(11,(holoEntity(3):toWorld(vec(0,0,-1))))
+holoAng(11,(E:angles() + ang(90,0,0)))
+holoColor(11,vec(0,255,0))
+holoScale(11,vec(0.2,0.2,1.31))
+holoModel(11,"cylinder")
+
+
+
+holoCreate(4)
+holoParent(4,1)
+holoPos(4,(holoEntity(3):toWorld(vec(0,0,10))))
+holoAng(4,(E:angles()))
+holoColor(4,vec(100,100,100))
+holoScale(4,vec(1.3,1.5,0.8))
+holoModel(4,"cylinder")
+
+
+holoCreate(12)
+holoParent(12,1)
+holoPos(12,(holoEntity(4):toWorld(vec(0,0,-1))))
+holoAng(12,(E:angles() + ang(90,0,0)))
+holoColor(12,vec(255,0,0))
+holoScale(12,vec(0.2,0.2,1.31))
+holoModel(12,"cylinder")
+
+holoCreate(5)
+holoParent(5,1)
+holoPos(5,(holoEntity(4):toWorld(vec(0,0,5))))
+holoAng(5,(E:angles()))
+holoColor(5,vec(130,130,130))
+holoScale(5,vec(1.4,1.6,0.1))
+holoModel(5,"cylinder")
+
+holoCreate(16)
+holoParent(16,1)
+holoPos(16,(holoEntity(5):toWorld(vec(0,0,5))))
+holoAng(16,(E:angles()))
+holoColor(16,vec(130,130,130))
+holoScale(16,vec(1,1,1))
+holoModel(16,"hq_sphere")
+
+holoCreate(17)
+holoParent(17,1)
+holoPos(17,(holoEntity(16):toWorld(vec(-3.7,1.9,2.5))))
+holoAng(17,(E:angles()))
+holoColor(17,vec(130,130,130))
+holoScale(17,vec(0.25,0.25,0.25))
+holoModel(17,"cube")
+
+holoCreate(18)
+holoParent(18,1)
+holoPos(18,(holoEntity(16):toWorld(vec(-3.7,-1.9,2.5))))
+holoAng(18,(E:angles()))
+holoColor(18,vec(130,130,130))
+holoScale(18,vec(0.25,0.25,0.25))
+holoModel(18,"cube")
+
+holoCreate(6)
+holoParent(6,1)
+holoPos(6,(holoEntity(3):toWorld(vec(0,0,5))))
+holoAng(6,(E:angles()))
+holoColor(6,vec(130,130,130))
+holoScale(6,vec(1.4,1.6,0.1))
+holoModel(6,"cylinder")
+
+holoCreate(10)
+holoParent(10,1)
+holoPos(10,(holoEntity(2):toWorld(vec(0,-20,5))))
+holoAng(10,(E:angles()))
+holoColor(10,vec(100,100,100))
+holoScale(10,vec(1,1.2,0.6))
+holoModel(10,"cylinder")
+
+
+
+
+###MOVEABLE HOLOS
+holoCreate(13)
+holoParent(13,1)
+holoPos(13,(holoEntity(10):toWorld(vec(4,0,0))))
+holoAng(13,(E:angles() + ang(0,0,0)))
+holoColor(13,vec(255,255,255))
+holoScale(13,vec(0.1,0.1,0.1))
+holoModel(13,"cube")
+
+holoCreate(14)
+holoParent(14,1)
+holoPos(14,ANIMATION2 + vec(0,0,0))
+holoAng(14,(holoEntity(13):pos() - holoEntity(15):pos()):toAngle())
+holoColor(14,vec(80,80,80))
+holoScale(14,vec(((holoEntity(13):pos() - holoEntity(15):pos()):length() /11.5),0.1,0.1))
+holoModel(14,"cube")
+
+holoCreate(15)
+holoParent(15,1)
+holoPos(15,(holoEntity(2):toWorld(vec(SCANNERX,ANIMATION1,SCANNERZ))))
+holoAng(15,(E:angles() + ang(0,0,0)))
+holoColor(15,vec(255,255,255))
+holoScale(15,vec(0.1,0.1,0.1))
+holoModel(15,"cube")
+holoAlpha(15,0)
+
+
+if(START == 1){
+
+local I6 = Enemybotstart < 1
+
+
+if ( changed( I6 ) & I6 ){
+    
+if(RESOURCERANDOMIZER == 2){   
+  PROP = propSpawn("models/hunter/blocks/cube025x025x025.mdl",0) 
+}
+if(RESOURCERANDOMIZER == 1){   
+  PROP = propSpawn("models/hunter/plates/plate025.mdl",0) 
+}
+if(RESOURCERANDOMIZER == 3){   
+  PROP = propSpawn("models/hunter/misc/sphere025x025.mdl",0) 
+}
+ PROP:setMaterial("sprops/trans/lights/light_plastic")
+ PROP:setColor(0,0,0)
+ PROP:setAlpha(255)
+ PROP:setPos(entity():pos() + vec(0,0,10))
+    
+    
+  RESOURCERANDOMIZER = randint(1,3)
+  
+
+}
+}

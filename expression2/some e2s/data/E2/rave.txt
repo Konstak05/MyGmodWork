@@ -1,0 +1,9 @@
+@name 
+@inputs 
+@outputs Rave 
+@persist 
+@trigger 
+runOnTick(1)
+
+
+Rave = random(255)

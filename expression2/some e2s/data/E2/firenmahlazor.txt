@@ -1,0 +1,7 @@
+@name FirenMahLAZOR
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+print(owner():aimEntity():model())

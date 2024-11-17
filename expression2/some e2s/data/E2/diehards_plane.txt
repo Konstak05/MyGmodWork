@@ -1,0 +1,49 @@
+@name Diehards Plane
+@inputs 
+@outputs 
+@persist I X
+@trigger 
+interval(1)
+
+I += 1
+
+timer("move",1000)
+
+X = curtime()*5
+
+if(first())
+{
+    ##Body of plane##
+    holoCreate(1)
+    holoPos(1, entity():pos())
+    holoParent(1, entity())
+    holoAng(1, entity():angles())
+    holoScale(1, vec(4,1,0.8))
+    holoMaterial(1, "phoenix_storms/metalfloor_2-3")
+    holoEntity(1):setTrails(3,3,5,"trails/laser",vec(255,255,255),255)
+    
+    ##Wings##
+    holoCreate(2)
+    holoPos(2, entity():pos())
+    holoAng(2, entity():angles())
+    holoParent(2, holoEntity(1))
+    holoScale(2, vec(1,4,0.4))
+    holoMaterial(2, "phoenix_storms/dome")
+    
+    ##Cockpit##
+    holoCreate(3)
+    holoPos(3, entity():pos() + entity():up()*3 + entity():forward()*18)
+    holoAng(3, entity():angles())
+    holoParent(3, holoEntity(1))
+    holoColor(3, vec(0,0,0))
+    holoScale(3, vec(0.8,0.5,0.5))
+    
+    
+}
+
+if(clk("move"))
+{
+    holoAng(1, holoEntity(1):toWorld(ang(0,random(50),random(15))))
+}
+
+holoPos(1, holoEntity(1):toWorld(vec(10,0,0)))

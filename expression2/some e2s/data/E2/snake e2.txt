@@ -1,0 +1,172 @@
+@name kevv2's EGP Snake
+@inputs EGP:wirelink Key
+@outputs Score
+@persist Direction:string Mult Food FoodX FoodY MaxX MaxY X Y
+@persist LX:array LY:array Array Loop Pause
+@trigger 
+
+### Personal Notes i put in anything using Keybaord XD
+## UP = 17 W = 119
+## DN = 18 A = 115
+## RG = 19 S = 97
+## LT = 20 D = 100
+
+
+if(first()) {
+    for(Loop = 1,100) {
+        EGP:egpRemove(Loop)
+    }
+    MaxX = 32
+    MaxY = 26
+    Mult = 512/32
+    X = 3
+    Y = 3
+    LX[1,number] = 32
+    LY[1,number] = 32
+    EGP:egpBox(4,vec2(X*Mult,Y*Mult),vec2(Mult-2,Mult-2),vec4(255,0,0,255))
+    
+    ### Layout
+    EGP:egpBox(2,vec2(0*Mult,26*Mult),vec2(32*Mult,0.5*Mult),vec4(255,255,255,255))
+    EGP:egpText(3,"Score: "+toString(Score),vec2(2*Mult,28*Mult),vec4(255,255,255,255))
+}
+
+EGP:egpDraw()
+
+### Direction Detection
+
+if(inputClk()) {
+    
+    if(Key == 17 | Key == 119) {
+        Direction = "up"
+    }
+    
+    elseif(Key == 18 | Key == 115) {
+        Direction = "down"
+    }
+    
+    elseif(Key == 19 | Key == 97) {
+        Direction = "right"
+    }
+    
+    elseif(Key == 20 | Key == 100) {
+        Direction = "left"
+    }
+}
+
+### Pause
+if(Pause == 1) {
+    stoptimer("move")
+}
+
+elseif(Pause == 0) {
+    timer("move",250)
+}
+
+if(inputClk()) {
+    if(Pause == 1) {
+        if(Key == 153) {
+            Pause = 0
+        }
+    }
+
+    elseif(Pause == 0) {
+        if(Key == 153) {
+            Pause = 1
+        }
+    }
+}
+
+### Movement
+if(clk("move")) {
+    
+    if(Array != 0) {
+        LX:insertNumber(1,X)
+        LY:insertNumber(1,Y)
+        if(LX:count() > Array) {
+            LX:pop()
+            LY:pop()
+        }
+    }
+    
+    if(Direction == "up") {
+        Y--
+    }
+    elseif(Direction == "down") {
+        Y++
+    }
+    elseif(Direction == "right") {
+        X--
+    }
+    elseif(Direction == "left") {
+        X++
+    }
+}
+
+### Food
+if(Food == 0) {
+    FoodX = randint(1,Mult-1)
+    FoodY = randint(1,Mult-1)
+    if((FoodX == X & FoodY == Y)) {
+        FoodX = randint(1,Mult-1)
+        FoodY = randint(1,Mult-1)
+    }
+    elseif(Array > 0) {
+        for(Loop = 1, Array) {
+            if((FoodX == LX[Loop,number] & FoodY == LY[Loop,number])) {
+                FoodX = randint(1,Mult-1)
+                FoodY = randint(1,Mult-1)
+                break
+            }
+            elseif(Loop == Array & (FoodX != LX[Loop,number] & FoodY != LY[Loop,number])) {
+                Food = 1
+            }
+        }
+    }
+    else {
+        Food = 1
+    }
+    EGP:egpBox(1,vec2(FoodX*Mult,FoodY*Mult),vec2(Mult-2,Mult-2),vec4(0,0,255,255))
+}
+
+if(Food == 1 & FoodX == X & FoodY == Y) {
+        Score++
+        EGP:egpSetText(3,"Score: "+toString(Score))
+        Array++
+        for(Loop = 1, Array) {
+            EGP:egpBox(4+Loop,vec2(LX[Loop,number]*Mult,LY[Loop,number]*Mult),vec2(Mult-2,Mult-2),vec4(255,0,0,255))
+        }
+        Food = 0
+}
+
+### Death Detection
+
+if(clk("move")) {
+    if(X == MaxX | X == -1 | Y == MaxY | Y == -1) {
+        for(Loop = 1,100) {
+            EGP:egpRemove(Loop)
+        }
+        reset()
+    }
+    elseif(Array != 0) {
+        for(Loop = 1, Array) {
+            if(X == LX[Loop,number] & Y == LY[Loop,number]) {
+                for(Loop = 1,100) {
+                    EGP:egpRemove(Loop)
+                }
+                reset()
+            }
+        }
+    }
+}
+
+
+### Draw
+if(clk("move")) {
+    EGP:egpPos(4,vec2(X*Mult,Y*Mult))
+
+    if(Array != 0) {
+        for(Loop = 1, Array) {
+            EGP:egpPos(4+Loop,vec2(LX[Loop,number]*Mult,LY[Loop,number]*Mult))
+        }
+    }
+}

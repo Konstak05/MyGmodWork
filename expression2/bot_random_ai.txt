@@ -1,0 +1,107 @@
+@name bot's random AI
+@inputs Prop1:entity 
+@outputs Thruster1 Thruster2 Thruster3 Thruster4 Nexttarget Walk Throughwalls
+@persist Props:array 
+
+interval(500)
+
+Props = Prop1:getConstraints()
+    
+Randomizer1 = (randint(1,15))
+Randomizer2 = (randint(1,15))
+Randomizer3 = (randint(1,15))
+Randomizer4 = (randint(1,15))
+Walk1 = (randint(1,5))
+Nexttarget1 = (randint(1,20))
+Throughwalls1 = (randint(1,10))
+
+if(Randomizer1 == 5){
+   
+   Thruster1 = 1
+}
+else{
+
+  Thruster1 = 0
+    
+}
+
+if(Randomizer2 == 5){
+   
+   Thruster2 = 1
+}
+else{
+
+  Thruster2 = 0
+    
+}
+if(Randomizer3 == 1){
+   
+   Thruster3 = 1
+}
+else{
+
+  Thruster3 = 0
+    
+}
+if(Randomizer4 == 1){
+   
+   Thruster4 = 1
+}
+else{
+
+  Thruster4 = 0
+    
+}
+
+if(Randomizer4 == 1){
+   
+   Thruster4 = 1
+}
+else{
+
+  Thruster4 = 0
+    
+}
+
+if(Walk1 == 1){
+   
+  Walk = 1
+}
+else{
+
+  Walk = 0
+    
+}
+
+if(Nexttarget1 == 1){
+   
+   Nexttarget = 1
+}
+else{
+
+  Nexttarget = 0
+    
+}
+
+#Random walk
+
+if (Walk1 == 5){
+    
+   Walk = (randint(1,30))
+}
+
+#throughwallsifstuck
+
+if (Throughwalls1 == 1){
+    
+  Throughwalls = 1
+
+}
+else{
+    
+  Throughwalls = 0
+    
+}
+
+
+

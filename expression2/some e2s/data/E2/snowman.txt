@@ -1,0 +1,84 @@
+@name Snowman
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+timer("turn",1500)
+
+runOnTick(1)
+
+if(first())
+{
+    ##Head##
+    holoCreate(1)
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*40)
+    holoScale(1, vec(1,1,1))
+    holoModel(1, "hqsphere")
+    
+    ##Body Part 1##
+    holoCreate(2)
+    holoPos(2, holoEntity(2):pos() + holoEntity(2):up()*28)
+    holoScale(2, vec(1.5,1.5,1.5))
+    holoModel(2, "hqsphere")
+    holoParent(2, holoEntity(1))
+    
+    ##Body Part 2##
+    holoCreate(3)
+    holoPos(3, holoEntity(3):pos() + holoEntity(3):up()*14)
+    holoScale(3, vec(2,2,2))
+    holoModel(3, "hqsphere")
+    holoParent(3, holoEntity(1))
+    
+    ##Carrot Nose##
+    holoCreate(4)
+    holoPos(4, holoEntity(4):pos() + holoEntity(4):up()*39.8 + holoEntity(3):forward()*-5)
+    holoAng(4, holoEntity(4):angles() + ang(0,90,0))
+    holoScale(4, vec(0.2,1,0.2))
+    holoModel(4, "hqsphere")
+    holoParent(4, holoEntity(1))
+    holoColor(4, vec(255,150,0))
+    
+    ##REye##
+    holoCreate(5)
+    holoPos(5, holoEntity(5):pos() + holoEntity(5):up()*42 + holoEntity(5):right()*-2 + holoEntity(5):forward()*-5)
+    holoScale(5, vec(0.1,0.1,0.1))
+    holoModel(5, "hqsphere")
+    holoParent(5, holoEntity(1))
+    holoColor(5, vec(0,0,0))
+    
+    ##LEye##
+    holoCreate(6)
+    holoPos(6, holoEntity(6):pos() + holoEntity(6):up()*42 + holoEntity(6):right()*2 + holoEntity(6):forward()*-5)
+    holoScale(6, vec(0.1,0.1,0.1))
+    holoModel(6, "hqsphere")
+    holoParent(6, holoEntity(1))
+    holoColor(6, vec(0,0,0))
+    
+    ##Mouth##
+    holoCreate(7)
+    holoPos(7, holoEntity(7):pos() + holoEntity(7):up()*37 + holoEntity(7):forward()*-5)
+    holoScale(7, vec(0.1,0.1,0.1))
+    holoModel(7, "hqsphere")
+    holoParent(7, holoEntity(1))
+    holoColor(7, vec(0,0,0))
+    #----#
+    holoCreate(8)
+    holoPos(8, holoEntity(8):pos() + holoEntity(8):up()*37.5 + holoEntity(8):forward()*-5 + holoEntity(8):right()*2)
+    holoScale(8, vec(0.1,0.1,0.1))
+    holoModel(8, "hqsphere")
+    holoParent(8, holoEntity(1))
+    holoColor(8, vec(0,0,0))
+    #----#
+    holoCreate(9)
+    holoPos(9, holoEntity(9):pos() + holoEntity(9):up()*37.5 + holoEntity(9):forward()*-5 + holoEntity(9):right()*-2)
+    holoScale(9, vec(0.1,0.1,0.1))
+    holoModel(9, "hqsphere")
+    holoParent(9, holoEntity(1))
+    holoColor(9, vec(0,0,0))
+    
+}
+holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-1)
+
+
+holoAng(1, holoEntity(1):owner():angles())

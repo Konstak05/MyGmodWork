@@ -1,0 +1,17 @@
+@name Stabalization Chip
+@inputs 
+@outputs Thruster
+@persist 
+@trigger 
+
+runOnTick(1)
+
+X = entity():pos():z()
+
+if(X <= 100) {
+    Thruster = 50
+}
+
+if(X >= 100) {
+    Thruster = -50
+}

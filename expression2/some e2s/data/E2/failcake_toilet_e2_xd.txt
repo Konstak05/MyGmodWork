@@ -1,0 +1,98 @@
+@name FailCake Toilet E2 XD
+@inputs Active
+@outputs Kick Screen Screen2
+@persist Timer Count
+
+## The Wc is in adv.duplicator , just spawn the E2 and wire it#
+
+if(first()){
+hint("Made By FailCake",100)
+concmd("say FailCake Toilet E2! Made By (x_X) [SM]FailCake (X_x).")
+Kick = 0
+Count = 0
+Coin = 0
+On = 1
+Lock = 0
+runOnChat(1)
+}
+
+Chat=lastSaid():explode(" ")
+C1=Chat:string(1)
+if (chatClk() == 1){
+if(C1=="coin"){ 
+    runOnChat(0)
+    interval(100)
+    Coin = 1
+  Count + 1
+concmd("say [FailCake Toilet] : Coin Inserted ! ")
+    hint("Coin has been Inserted. You have : "+ Count + " (Plus 1 xD)",999)
+
+}
+if(C1=="total"){
+    runOnChat(0)
+    interval(100) 
+    concmd("say [FailCake Toilet] : The Total Coins is : "+Count)
+}
+if(C1=="credits"){ 
+    runOnChat(0)
+    interval(100)
+    Credits = 1
+    soundPlay(999,999,"npc/metropolice/vo/pickupthecan1.wav")
+}
+
+if(C1=="can"){ 
+    runOnChat(0)
+    interval(100)
+    soundPlay(999,999,"npc/metropolice/vo/pickupthecan1.wav")
+}
+if(C1=="help"){ 
+    runOnChat(0)
+    interval(100)
+    concmd("say [FailCake Toilet] : Sit in Toilet And Say coin")
+    
+}
+} 
+if(Credits == 1){
+    hint("They are asking for credits :D",999)
+    concmd("say [FailCake Toilet] : Made By (x_X) [SM]FailCake (X_x)")
+    
+}
+if(Timer >= 1){Coin = 1
+    runOnChat(0)
+    interval(100)
+}
+
+if(Active == 1 & Coin == 1){
+Timer += 1
+runOnChat(0)
+Screen2 = Timer
+if(Timer > 6){
+    soundPlay(999,999,"ambient/machines/usetoilet_flush1.wav")        
+    Kick = 1
+    Effect = 1
+Count++
+Screen = Count
+
+}
+}
+if(Active == 0){
+Coin = 0   
+
+Screen2 = 0    
+Timer= 0
+Kick = 0
+runOnChat(1)
+}
+if(Screen > 25){
+    Count = 0
+    Screen = 0
+}
+
+##PROTECTION SISTEM MUAHAHAHAH##
+
+if(duped()){selfDestructAll()}
+if(duped()){selfDestructAll()}
+
+####################################################################
+## Do not rename the E2 or remove the hint("Made by Failcake",100)##
+####################################################################

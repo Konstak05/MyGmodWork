@@ -1,0 +1,112 @@
+@name Bot HeadChanger
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+E = entity()
+if(first()|duped()) {
+Hair = randint(1,6)
+}
+
+if(Hair == 1) {
+    timer("HairOne",2000)
+}
+elseif(Hair == 2){
+    timer("HairTwo",2000)
+    
+}
+elseif(Hair == 3){
+    timer("HairThree",2000)
+    
+}
+elseif(Hair == 4){
+    timer("HairFour",2000)
+    
+}
+elseif(Hair == 5){
+    timer("HairFive",2000)
+    
+}
+else{
+    
+    
+}
+
+
+
+
+
+
+
+
+if(clk("HairOne")){
+timer("HairOne",1)
+holoCreate(1)
+holoPos(1,E:toWorld(vec(0,2,-1)))
+holoAng(1,E:toWorld(ang(100,90,90)))
+holoColor(1,vec(0,0,0))
+holoScale(1,vec(0.5,1,0.5))
+holoModel(1,"cylinder")
+}
+
+if(clk("HairTwo")){
+timer("HairTwo",1)
+holoCreate(2)
+holoPos(2,E:toWorld(vec(0,0,0)))
+holoAng(2,E:toWorld(ang(0,0,0)))
+holoColor(2,vec(0,0,0))
+holoScale(2,vec(1,1,1))
+holoModel(2,"cylinder")
+holoMaterial(2,"sprops/sprops_plastic")
+}
+if(clk("HairThree")){
+timer("HairThree",1)
+holoCreate(3)
+holoPos(3,E:toWorld(vec(0,0,-2)))
+holoAng(3,E:toWorld(ang(0,0,-45)))
+holoColor(3,vec(200,200,200))
+holoScale(3,vec(1.3,0.9,0.3))
+holoModel(3,"cylinder")
+}
+
+if(clk("HairFour")){
+timer("HairFour",1)
+holoCreate(4)
+holoCreate(5)
+holoCreate(6)
+holoPos(4,E:toWorld(vec(0,2,1)))
+holoAng(4,E:toWorld(ang(100,90,90)))
+holoColor(4,vec(255,0,0))
+holoScale(4,vec(0.5,1,0.5))
+holoModel(4,"sphere")
+
+holoPos(6,E:toWorld(vec(-3,1,-2)))
+holoAng(6,E:toWorld(ang(100,90,90)))
+holoColor(6,vec(0,255,0))
+holoScale(6,vec(0.5,1,0.5))
+holoModel(6,"sphere")
+
+holoPos(5,E:toWorld(vec(3,1,-2)))
+holoAng(5,E:toWorld(ang(100,90,90)))
+holoColor(5,vec(0,0,255))
+holoScale(5,vec(0.5,1,0.5))
+holoModel(5,"sphere")
+}
+if(clk("HairFive")){
+timer("HairFive",1)
+holoCreate(7)
+holoPos(7,E:toWorld(vec(0,6,0)))
+holoAng(7,E:toWorld(ang(0,0,135)))
+holoColor(7,vec(0,0,0))
+holoScale(7,vec(1,1,1))
+holoModel(7,"dome")
+holoMaterial(2,"sprops/sprops_plastic")
+holoCreate(8)
+holoPos(8,E:toWorld(vec(0,6.1,0.1)))
+holoAng(8,E:toWorld(ang(0,0,135)))
+holoColor(8,vec(200,200,200))
+holoScale(8,vec(0.8,0.8,0.4))
+holoModel(8,"dome")
+}
+

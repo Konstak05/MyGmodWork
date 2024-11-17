@@ -1,0 +1,34 @@
+@name For Fags
+@inputs E:entity
+@outputs 
+@persist Player:entity X Y Z H:entity
+interval(1)
+
+H = holoEntity(1)
+Y = Y+1
+X = sin(Y)
+Z = cos(Y) 
+
+if(first()){
+    holoCreate(1)
+    holoColor(1, vec(255,0,0))
+    holoMaterial(1, "models/debug/debugwhite")
+    holoModel(1, "hqsphere")
+}
+
+S = owner():lastSaid():explode(" ")
+
+if(S:string(1)=="/f"){
+      
+    TempPlayer = findPlayerByName(S:string(2))
+    if(TempPlayer:isPlayer()){
+        Player = TempPlayer
+    } 
+      
+}              
+
+E:applyForce(Player:pos() - entity():pos())
+
+##########################################################
+##DO NOT REMOVE ANYTHING OR EDIT ANYTHING PLEASE THANKS!##
+##########################################################

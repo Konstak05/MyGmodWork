@@ -1,0 +1,113 @@
+@name Laser Cannon
+@inputs E:entity Core:entity Angle:angle Fire
+@outputs 
+@persist MaxSize:vector HoloCount:number Thickness Color:vector In
+@trigger 
+
+function vector getMaxHoloSize() {
+
+    holoCreate( 1, vec(), vec() )
+    holoAlpha( 1, 0 )
+    holoScale( 1, vec( inf() ) )
+    
+    local Size = holoScaleUnits( 1 )
+    
+    holoDelete( 1 )
+    
+    return Size
+    
+}
+
+function number hologramsRequiredToDistance( Distance:number ) {
+    
+    return clamp( Distance / MaxSize:x(), 1, 2500 )
+    
+}
+
+if( first() | dupefinished() ) {
+    
+    runOnTick( 1 )
+    
+    holoDeleteAll( 1 )
+    
+    Color = vec( 65, 65, 255 )
+    Thickness = 15
+    
+    MaxSize = getMaxHoloSize()#vec( 1500, 0, 0 )#
+    
+}
+
+if( tickClk() ) {
+    
+    In++
+    
+    Color = hsv2rgb( In, 1, 1 )
+    
+    E:setPos( toWorld( vec( 25, 0, 0 ), ang(), Core:pos(), Angle ) )
+    E:setAng( Angle )
+    
+    if( Fire ) {
+        
+        local Pos = E:massCenter()
+        local Dir = E:forward()
+        
+        rangerFilter( array( E, Core ) )
+        local R = rangerOffset( 150000, Pos, Dir )
+        
+        local Dist = R:position():distance( Pos )
+        
+        local C = ceil( hologramsRequiredToDistance( Dist ) )
+        
+        if( HoloCount > C ) {
+            
+            holoDelete( HoloCount )
+            HoloCount--
+            
+        }
+        
+        blastDamage( owner(), owner(), R:position(), 200, 15 )
+        
+        local T = 0
+        
+        local I = 1
+        
+        for( I = 1, C, 1 ) {
+
+            local Added = clamp( MaxSize:x(), 0, Dist - T )
+            T += Added
+            
+            
+            local Position = toWorld( vec( T, 0, 0 ) - vec( Added, 0, 0 ) / 2, ang(), Pos, Dir:toAngle() )
+            
+            
+            if( holoEntity( I ):isValid() ) {
+                
+                holoPos( I, Position )
+                holoScaleUnits( I, vec( Thickness, Thickness, Added ) )
+                holoAng( I, Dir:toAngle() + ang( 90, 0, 0 ) )
+                holoColor( I, Color )
+                                
+            } else {
+            
+                holoCreate( I, Position, vec(), Dir:toAngle() + ang( 90, 0, 0 ), Color, "hq_cylinder" )
+                holoScaleUnits( I, vec( Thickness, Thickness, T ) )
+                holoParent( I, E )
+                
+                HoloCount++
+            
+            }
+            
+        }
+        
+    } else {
+        
+        if( HoloCount > 0 ) {
+            
+            holoDelete( HoloCount )
+            HoloCount--
+            
+        }
+        
+    }
+    
+}

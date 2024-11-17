@@ -1,0 +1,27 @@
+@name Pos test
+@inputs 
+@outputs 
+@persist I
+@trigger 
+runOnTick(1)
+
+I += 1
+X=(curtime()*50*I)
+
+if(first()){
+    holoCreate(1)
+    holoCreate(2)
+    holoCreate(3)
+    holoPos(3, holoEntity(3):pos() + holoEntity(3):up()*295 + holoEntity(3):forward()*285)
+    runOnTick(1)
+    holoEntity(1):setTrails(5,5,5,"trails/laser",vec(255,255,255),255)
+    holoEntity(2):setTrails(5,5,5,"trails/laser",vec(255,255,255),255)
+    holoEntity(3):setTrails(5,5,5,"trails/laser",vec(255,0,0),255)
+}
+holoPos(1,holoEntity(1):toWorld(vec(0,5,0)))
+holoAng(1,holoEntity(1):toWorld(ang(0,0,1)))
+holoPos(2, holoEntity(2):toWorld(vec(-5,0,0)))
+holoAng(2, holoEntity(2):toWorld(ang(1,0,0)))
+holoPos(3, holoEntity(3):toWorld(vec(0,5,0)))
+holoAng(3, holoEntity(3):toWorld(ang(0,1,0)))
+

@@ -1,0 +1,25 @@
+@name 15 Minute Decal Cleanup v3
+@inputs 
+@outputs 
+@persist MinutesBetweenClear X
+@trigger
+
+interval(215)
+
+if(first()){
+MinutesBetweenClear=15
+timer("ClearDecals",MinutesBetweenClear*1000*60)
+}
+
+X++
+holoCreate(1)
+holoPos(1, entity():pos()+vec(0,0,50+45*sin(X)))
+holoColor(1, vec(255,35,35))
+
+if(clk("ClearDecals")) {
+concmd("ulx tsay automatic clear decals")
+print(_HUD_PRINTCENTER,"Cleaing decals now")
+concmd("ulx cleardecals")
+stoptimer("ClearDecals")
+timer("ClearDecals",MinutesBetweenClear*1000*60)
+}

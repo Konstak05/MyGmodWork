@@ -1,0 +1,8 @@
+@name a remake of testing 2
+if (first()|duped()){
+    holoCreate(1,entity():pos()+vec(0,0,50),vec(1,1,1),ang(0,0,0),vec(255,255,255))
+    holoMaterial(1,"")
+    holoModel(1,"cylinder")
+    
+    
+}

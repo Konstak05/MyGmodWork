@@ -1,0 +1,46 @@
+@name Social Distancer
+@inputs 
+@outputs FoundPlr:entity
+@persist Plrs:array Col:vector X
+@trigger 
+
+interval(125)
+
+Plrs=players()
+
+foreach(K,V:entity=Plrs) {
+    if(V!=owner()) {
+    if(V:pos():distance(owner():pos())<=800) {
+    FoundPlr=V
+    if(!X) {
+    timer("HintName",50)
+    }
+    }
+    }
+}
+
+if(clk("HintName")) {
+    printColor(vec(50,50,255),FoundPlr:name()+" has been found near you!")
+    stoptimer("HintName")
+    X=1
+}
+
+if(FoundPlr:pos():distance(owner():pos())>800) {
+    FoundPlr=noentity()
+    X=0
+}
+
+if(FoundPlr:isValid()) {
+    Col=vec(FoundPlr:pos():distance(owner():pos())/3,FoundPlr:pos():distance(owner():pos())/3,FoundPlr:pos():distance(owner():pos())/3)
+    holoCreate(1)
+    holoPos(1, toWorld(vec(35,0,35),ang(),owner():pos(),((FoundPlr:pos()-holoEntity(1):pos())*360):toAngle()))
+    holoAng(1, (FoundPlr:pos()-holoEntity(1):pos()):toAngle()+ang(90,0,0))
+    holoModel(1, "hqcone")
+    holoScale(1, vec(0.8,0.8,0.9))
+    holoColor(1, Col)
+    holoEntity(1):soundPlay("Beep",2,"buttons/blip1.wav")
+    soundVolume("Beep",0)
+    soundPitch("Beep",150,0)
+} else {
+    holoDelete(1)
+}

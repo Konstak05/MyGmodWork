@@ -1,0 +1,15 @@
+@name Bloody VEGINA
+@inputs 
+@outputs 
+@persist I
+@trigger 
+
+if(first())
+{
+    holoCreate(1)
+    holoMaterial(1, "models/flesh")
+    holoModel(1, "models/XQM/podremake.mdl")
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*70)
+    runOnTick(1)
+    I += 5
+}

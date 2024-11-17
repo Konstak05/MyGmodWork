@@ -1,0 +1,37 @@
+@name Time Bomb
+@inputs Activate
+@outputs Screen Bomb 
+@persist 
+@trigger 
+interval(1)
+
+if(first())
+{
+    Screen = 30
+}
+
+if (Activate == 1)
+{
+    if(clk("time"))
+    {
+        Screen--
+    }
+}
+
+
+timer("time",1000)
+
+
+if(Screen == 0)
+{
+    Bomb = 1
+}
+
+if(Screen == -1)
+{
+    Bomb = 0
+    Screen = 30
+}else
+{
+    Bomb = Bomb, Screen = Screen
+}

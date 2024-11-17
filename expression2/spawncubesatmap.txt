@@ -1,0 +1,35 @@
+@name SPAWNCUBESATMAP
+@inputs Prop:entity
+@outputs MATERIAL:string
+@persist Timer ANIMATION I1 I2 X2 Y2 Z1 I3 I4 I5 I6 I7
+@trigger 
+
+
+
+
+
+
+if(first()|dupefinished()){
+    local I = 1
+    local CubeCount = 20
+    local I2 = 1
+    local CubeCount2 = 1
+    local I3 = 1
+    local CubeCount3 = 1
+    
+    for( I = 1, CubeCount, 1 ) {
+        
+        X = randint(-10356,10356)
+        Y = randint(-10356,10356)
+
+               
+        holoCreate(I)
+        holoPos(I,vec(X,Y,-12500.19))
+        holoScale(I,vec(50,50,50))
+        holoMaterial(I,"models/cs_italy/light_orange")
+        holoColor(I,vec(0,0,255))
+        
+    }
+}
+
+

@@ -1,0 +1,19 @@
+@name VTol Control
+@inputs [Pod Cam]:wirelink LHy RHy 
+@outputs TH1 TH2 TH3 TH4
+@persist 
+@trigger 
+
+runOnTick(1)
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+
+if (W)
+{
+    LHy = 300
+    RHy = 150
+    TH4 = 150
+}else{LHy == 0 | RHy == 0 | TH4 == 0}

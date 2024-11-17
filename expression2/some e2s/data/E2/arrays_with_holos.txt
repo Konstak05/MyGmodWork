@@ -1,0 +1,22 @@
+@name Arrays with holos
+@inputs 
+@outputs 
+@persist I 
+@trigger 
+
+runOnTick(1)
+
+
+I += 0.1
+E = entity()
+T = holoEntity(1)
+
+Array2 = array("bot/a_bunch_of_them.wav")
+Array = array(E:toWorld(vec(0,0,I)))
+Array3 = array(E:toWorld(vec(0,0,2)))
+
+if(owner():keyUse())
+{
+    
+    soundPlay(0,0,Array[1,string])
+}

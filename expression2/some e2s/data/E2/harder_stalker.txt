@@ -1,0 +1,6 @@
+@name Harder Stalker
+@inputs 
+@outputs Screen
+@persist 
+@trigger 
+chatClk

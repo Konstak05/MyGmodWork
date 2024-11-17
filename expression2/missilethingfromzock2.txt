@@ -1,0 +1,65 @@
+
+
+@name Missilethingfromzock2
+@inputs Body:entity 
+@outputs BOOM
+@persist DistanceV:vector Target:entity  Player:array  Go String:string Misile1:entity Angle:angle T
+@trigger 
+
+runOnTick(1)
+runOnChat(1)
+if (first() | duped()){
+   Delay = 0
+    G = 0
+    BOOM = 0
+    Body:createWire( entity(), "Detonate" #[Input on Dynamite entity]#, "BOOM" #[ Output on E2 ]# )
+    
+}
+if (BOOM == 1){
+    timer("D", 1000)
+    if (clk("D")){
+    
+    BOOM = 0
+    Go = 0
+    
+}
+    }
+
+if (Go == 1){
+
+
+# here what I used before
+#Prote = findPlayerByName("YoshinoPro")
+#ProtesPos = Prote:attachmentPos("eyes")
+if (Target:pos() != vec(0,0,0)){
+Angle = (Target:pos() - Body:pos()):toAngle()
+
+if ((Target:pos() - Body:pos()):length() < 200){
+    Body:setPos(Target:pos())
+    BOOM = 1
+    
+    }
+    else {
+         Body:applyAngForce((Body:toLocal(Angle)*200 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+Body:setVelocity(Body:forward()* 1200)
+        }
+}
+}
+
+if (chatClk(owner())){
+Player = players()
+Said = owner():lastSaid():explode(" ")
+
+if (Said[1,string] == "X" ){
+    
+    print(Player)
+    }
+if (Said[1,string] == "Y"){
+    Target = Player[Said[2,string]:toNumber(),entity]
+    Go = 1
+    }
+
+
+}
+
+

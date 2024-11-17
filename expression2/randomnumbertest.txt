@@ -1,0 +1,22 @@
+@name randomnumber
+@inputs Button 
+@outputs Screens Weee
+
+
+runOnTick(10)
+
+if(duped())
+{
+Screens = (random(89,91))
+}
+
+
+if(Screens == 90){
+   
+   Weee = 1
+}
+else{
+
+
+    
+}

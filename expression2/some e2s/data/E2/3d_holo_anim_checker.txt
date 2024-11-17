@@ -1,0 +1,37 @@
+@name 3d holo anim checker
+@inputs 
+@outputs I Idx Index L R:array 
+@persist [F O E]:entity Max Count
+@model 
+interval(10)
+if(first() | duped()){
+if(entity():isWeldedTo()){ E = entity():isWeldedTo() }else{ E = entity() }
+O = owner()
+holoCreate(1)
+holoParent(1,E)
+holoModel(1,"models/Police.mdl")
+Max = 600
+holoScale(1,vec()+1)
+}
+
+if(I<Max & perf()){
+    I++
+    holoAnim(1,I)
+    L = holoAnimLength(1)
+    if(L>0.1){
+        R:pushNumber(I)
+    }
+}
+
+if(changed(I==Max)){
+    printTable(R)
+    Count = R:count()
+}
+
+Use = O:keyAttack1() - O:keyAttack2()
+
+if(changed(Use) & Use){
+    Idx = Idx%Count+Use
+    Index = R[Idx,number]
+    holoAnim(1,Index)
+}

@@ -1,0 +1,13 @@
+@name Weapon
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+if(first())
+{
+    holoCreate(1)
+    holoPos(1, owner():attachmentPos("weapon_crowbar"))
+    holoAng(1, owner():attachmentAng("weapon_crowbar"))
+    holoParentAttachment(1, owner(), "weapon_crowbar")
+}

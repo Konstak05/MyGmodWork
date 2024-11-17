@@ -1,0 +1,12 @@
+@name Egp Test Chip
+@inputs EGP:wirelink
+@outputs 
+@persist B:array C
+@trigger 
+runOnTick(1)
+
+C = B[5,number] = 1
+
+EGP:egpBox(1,vec2(50,50),vec2(50,50))
+EGP:egpFont(2,"YOUR MOM")
+EGP:egpPoly(3,C)

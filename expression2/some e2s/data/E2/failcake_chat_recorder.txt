@@ -1,0 +1,41 @@
+@name FailCake Chat Recorder
+@inputs XWL:wirelink 
+@outputs 
+@persist T T2
+@trigger 
+interval(1000)
+if(first()){
+T = 0 
+T2 = 5
+hint("Made By FailCake",100)
+}
+XWL:egpDraw()
+
+# Requires wiremod EGP 
+
+runOnChat(1)
+runOnTick(1)
+
+Chat=lastSaid():explode(" ")
+C1=lastSaid()
+Peo = lastSpoke():name()
+
+
+
+R = randint(0,255)
+R2 = randint(0,255)
+R3= randint(0,255)
+
+if (chatClk() == 1){
+XWL:egpText(T,Peo+": "+C1,0,T2,R,R2,R3,255)
+XWL:egpSetText(T,Peo+": "+C1)
+XWL:egpSetFont(T,"lucida console",19)
+T++
+T2 = T2 + 40
+if(T == 13){T = 0 T2 = 0}
+
+}
+
+####################################################################
+## Do not rename the E2 or remove the hint("Made by Failcake",100)##
+####################################################################

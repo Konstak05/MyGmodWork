@@ -1,0 +1,52 @@
+@name Holo Character
+@inputs [Pod Cam]:wirelink
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+E = holoEntity(1)
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Space = Pod:number("Space")
+Shift = Pod:number("Shift")
+
+if(first())
+{
+    holoCreate(1)
+    holoColor(1, vec(0,0,255))
+
+}
+
+if (W)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-2)
+}
+
+if (A)
+{
+    holoAng(1, holoEntity(1):angles() + ang(0,2,0))
+}
+
+if (S)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*2)
+}
+
+if (D)
+{
+    holoAng(1, holoEntity(1):angles() + ang(0,-2,0))
+}
+
+if (Shift)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-6)
+}
+
+Cam:setVector("Direction",E:forward()*-20)
+Cam:setVector("Position",E:toWorld(vec(30,0,17)))
+

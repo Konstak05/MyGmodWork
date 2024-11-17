@@ -1,0 +1,14 @@
+@name Tracker
+@inputs 
+@outputs 
+@persist 
+@trigger 
+interval(1)
+
+if(first())
+{
+    holoCreate(1)
+    
+}
+holoAng(1, holoEntity(1):toWorld(ang(0,0,2)))
+holoPos(1, holoEntity(1):toWorld(vec(0,0,5)))

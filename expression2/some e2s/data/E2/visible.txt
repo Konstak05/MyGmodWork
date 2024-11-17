@@ -1,0 +1,8 @@
+@name Visiblator :P
+@inputs 
+@persist Target:entity
+@trigger all
+if(first()){
+    owner():setColor(255,255,255,255)
+    owner():setMaterial("BlaH")
+}

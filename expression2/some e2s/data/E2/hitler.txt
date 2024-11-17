@@ -1,0 +1,161 @@
+@name Hitler
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+entity():setColor(0,0,0,0)
+if(first()) {
+    Attack=0
+    First=1
+    hint("Made by Fallen",10)
+}
+
+
+interval(10)
+if(first()) {
+    
+    ## Head ##
+    holoCreate(1)
+    holoScale(1, vec(1,1,1))
+    holoModel(1,"icosphere3")
+    holoMaterial(1,"models/debug/debugwhite") 
+    holoColor(1, vec(238,203,173))
+    ## Moustache ##
+    holoCreate(2)
+    holoScale(2, vec(0.1,0.15,0.1))
+    holoMaterial(2,"models/debug/debugwhite")
+    holoColor(2, vec(1,1,1))
+    ## Eye1 ##
+    holoCreate(3)
+    holoScale(3, vec(0.2,0.2,0.2))
+    holoModel(3,"icosphere3")
+    holoMaterial(3,"models/debug/debugwhite")
+    holoColor(3, vec(1,1,1))
+    ## Eye2 ##
+    holoCreate(4)
+    holoScale(4, vec(0.2,0.2,0.2))
+    holoModel(4,"icosphere3")
+    holoMaterial(4,"models/debug/debugwhite")
+    holoColor(4, vec(1,1,1))
+    ## Mouth ##
+    holoCreate(5)
+    holoScale(5, vec(0.05,0.1,0.05))
+    holoMaterial(5,"models/debug/debugwhite")
+    holoColor(5, vec(1,1,1))
+    ## Body ##
+    holoCreate(6)
+    holoScale(6, vec(1,1.5,2))
+    holoModel(6,"cylinder")
+    holoMaterial(6,"models/debug/debugwhite")
+    holoColor(6, vec(85,107,47))
+    ## Left Arm ##
+    holoCreate(7)
+    holoScale(7, vec(0.5,0.5,1.6))
+    holoModel(7,"cylinder")
+    holoMaterial(7,"models/debug/debugwhite")
+    holoColor(7, vec(85,107,46))
+    ## Left Hand ##
+    holoCreate(8)
+    holoScale(8, vec(0.50,0.50,0.50))
+    holoModel(8,"icosphere3")
+    holoMaterial(8,"models/debug/debugwhite")
+    holoColor(8, vec(238,203,173))
+    ## Right Arm ##
+    holoCreate(9) 
+    holoScale(9, vec(0.5,0.5,1.6))
+    holoModel(9,"cylinder")
+    holoMaterial(9,"models/debug/debugwhite")
+    holoColor(9, vec(85,107,46))
+    holoAng(9,ang(110,0,0))
+    ## Right Hand ##
+    holoCreate(10)
+    holoScale(10, vec(0.5,0.5,0.5))
+    holoModel(10,"icosphere3")
+    holoMaterial(10,"models/debug/debugwhite")
+    holoColor(10, vec(238,203,173))
+    ## Right Fingers ##
+    holoCreate(11)
+    holoScale(11, vec(0.1,0.5,0.5))
+    holoModel(11,"icosphere3")
+    holoMaterial(11,"models/debug/debugwhite")
+    holoColor(11, vec(238,203,173))
+    holoAng(11,ang(110,0,0))
+    ## Left Leg ##
+    holoCreate(12)
+    holoScale(12, vec(0.6,0.6,2))
+    holoModel(12,"cylinder")
+    holoMaterial(12,"models/debug/debugwhite")
+    holoColor(12, vec(85,107,46))
+    ## Right Leg ##
+    holoCreate(13)
+    holoScale(13, vec(0.6,0.6,2))
+    holoModel(13,"cylinder")
+    holoMaterial(13,"models/debug/debugwhite")
+    holoColor(13, vec(85,107,46))
+    ## Hair ##
+    holoCreate(14)
+    holoScale(14, vec(1,1,1))
+    holoModel(14,"icosphere3")
+    holoMaterial(14,"models/debug/debugwhite")
+    holoColor(14, vec(1,1,1))
+    ## ArmBand ##
+    holoCreate(15)
+    holoScale(15, vec(0.6,0.6,0.4))
+    holoModel(15,"cylinder")
+    holoMaterial(15,"models/debug/debugwhite")
+    holoColor(15, vec(255,0,0))
+    ## Swastika1 ##
+    holoCreate(16)
+    holoScale(16, vec(0.05,0.05,0.3))
+    holoMaterial(16,"models/debug/debugwhite")
+    holoColor(16, vec(1,1,1))
+    ## Swastika2 ##
+    holoCreate(17)
+    holoScale(17, vec(0.3,0.05,0.05))
+    holoMaterial(17,"models/debug/debugwhite")
+    holoColor(17, vec(1,1,1))
+    ## Swastika3 ##
+    holoCreate(18)
+    holoScale(18, vec(0.05,0.05,0.15))
+    holoMaterial(18,"models/debug/debugwhite")
+    holoColor(18, vec(1,1,1))
+    ## Swastika4 ##
+    holoCreate(19)
+    holoScale(19, vec(0.05,0.05,0.15))
+    holoMaterial(19,"models/debug/debugwhite")
+    holoColor(19, vec(1,1,1))
+    ## Swastika5 ##
+    holoCreate(20)
+    holoScale(20, vec(0.15,0.05,0.05))
+    holoMaterial(20,"models/debug/debugwhite")
+    holoColor(20, vec(1,1,1))
+    ## Swastika6 ##
+    holoCreate(21)
+    holoScale(21, vec(0.15,0.05,0.05))
+    holoMaterial(21,"models/debug/debugwhite")
+    holoColor(21, vec(1,1,1))
+    
+    holoPos(1,entity():pos()+vec(0,0,64)) #Head
+    holoPos(2,entity():pos()+vec(-6,0,63)) #Moustache
+    holoPos(3,entity():pos()+vec(-5,2,65)) #Eye1
+    holoPos(4,entity():pos()+vec(-5,-2,65)) #Eye2
+    holoPos(5,entity():pos()+vec(-6,0,62)) #Mouth
+    holoPos(6,entity():pos()+vec(0,0,46)) #Body
+    holoPos(7,entity():pos()+vec(0,-12,48)) #Left Arm
+    holoPos(8,entity():pos()+vec(0,-12,38)) #Left Hand
+    holoPos(9,entity():pos()+vec(-8,12,60)) #Right Arm
+    holoPos(10,entity():pos()+vec(-17,12,63)) #Right Hand
+    holoPos(11,entity():pos()+vec(-19,12,64.5)) #Right Fingers
+    holoPos(12,entity():pos()+vec(0,-5,23)) #Left Leg
+    holoPos(13,entity():pos()+vec(0,5,23)) #Right Leg
+    holoPos(14,entity():pos()+vec(0.5,0,65)) #Hair
+    holoPos(15,entity():pos()+vec(0,-12,52)) #ArmBand
+    holoPos(16,entity():pos()+vec(0,-16,52)) #Swastika1
+    holoPos(17,entity():pos()+vec(0,-16,52)) #Swastika2
+    holoPos(18,entity():pos()+vec(1.5,-16,51)) #Swastika3
+    holoPos(19,entity():pos()+vec(-1.5,-16,53)) #Swastika4
+    holoPos(20,entity():pos()+vec(-0.80,-16,50.5)) #Swastika5
+    holoPos(21,entity():pos()+vec(0.80,-16,53.5)) #Swastika 6
+    
+}

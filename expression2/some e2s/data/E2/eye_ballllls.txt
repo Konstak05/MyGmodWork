@@ -1,0 +1,12 @@
+@name Eye Ballllls
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+
+if(owner():keyAttack1())
+{
+    E = propSpawn("models/Combine_Helicopter/helicopter_bomb01.mdl",owner():aimPos(),owner():eyeAngles(),0)
+    E:applyForce(owner():aimPos())
+}

@@ -1,0 +1,16 @@
+[1] = {
+	["children"] = {
+	},
+	["self"] = {
+		["DrawOrder"] = 0,
+		["UniqueID"] = "2434803386",
+		["AimPartUID"] = "",
+		["Hide"] = false,
+		["Duplicate"] = false,
+		["ClassName"] = "group",
+		["OwnerName"] = "self",
+		["IsDisturbing"] = false,
+		["Name"] = "my outfit",
+		["EditorExpand"] = false,
+	},
+},

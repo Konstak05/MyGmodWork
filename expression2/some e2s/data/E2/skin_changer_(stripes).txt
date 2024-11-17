@@ -1,0 +1,11 @@
+@name Skin Changer (stripes)
+
+
+It = owner()
+
+interval(1)
+runOnChat(1)
+
+if (It:lastSaid() == "/stripes") {
+    It:setMaterial("phoenix_storms/stripes")
+}

@@ -1,0 +1,11 @@
+@name Gun for anything
+@inputs E:entity 
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+E = entity():isWeldedTo()
+
+E:applyAngForce(owner():eyeAngles())

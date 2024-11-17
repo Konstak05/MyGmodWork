@@ -1,0 +1,13 @@
+@name Prop test
+@inputs E:entity
+@outputs 
+@persist I
+@trigger 
+runOnTick(1)
+
+I += 1
+
+
+E:applyForce(E:toWorld(vec(0,1,0)))
+E:applyForce(E:toWorld(vec(0,0,1)))
+

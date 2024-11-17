@@ -1,0 +1,173 @@
+@name JetPack (Made By [JG] Someone920)
+@outputs MPH
+@persist Alpha Y S:string Q P Safe
+@trigger all
+entity():setColor(255,255,255,0)
+
+P=randint(1,2.5)
+
+if (first()|duped()){
+holoCreate(1,owner():pos()+vec(20,-5,45),vec(0.1,0.1,3),ang(45,0,0),vec(255,255,255))
+holoParent(1,owner())
+
+holoCreate(2,owner():pos()+vec(-20,-5,45),vec(0.1,0.1,3),ang(-30,0,0),vec(255,255,255))
+holoParent(2,owner())
+
+holoCreate(3,owner():pos()+vec(-30,-5,50),vec(1,0.7,2),ang(0,0,0),vec(255,255,255))
+holoModel(3,"sphere3")
+holoMaterial(3,"lights/white")
+holoParent(3,owner())
+
+holoCreate(4,owner():pos()+vec(30,-5,50),vec(1,0.7,2),ang(0,0,0),vec(255,255,255))
+holoModel(4,"sphere3")
+holoMaterial(4,"lights/white")
+holoParent(4,owner())
+
+holoCreate(5,owner():pos()+vec(25,-5,46),vec(1,0.7,2),ang(0,0,0),vec(255,255,255))
+holoModel(5,"sphere3")
+holoMaterial(5,"lights/white")
+holoParent(5,owner())
+
+holoCreate(6,owner():pos()+vec(-25,-5,46),vec(1,0.7,2),ang(0,0,0),vec(255,255,255))
+holoModel(6,"sphere3")
+holoMaterial(6,"lights/white")
+holoParent(6,owner())
+
+holoCreate(7,owner():pos()+vec(-20,-5,42),vec(1,0.7,2),ang(0,0,0),vec(255,255,255))
+holoModel(7,"sphere3")
+holoMaterial(7,"lights/white")
+holoParent(7,owner())
+
+holoCreate(8,owner():pos()+vec(20,-5,42),vec(1,0.7,2),ang(0,0,0),vec(255,255,255))
+holoModel(8,"sphere3")
+holoMaterial(8,"lights/white")
+holoParent(8,owner())
+
+holoCreate(9,owner():pos()+vec(0,-5,46),vec(2,1,2),ang(0,0,0),vec(0,0,0))
+holoModel(9,"sphere3")
+holoMaterial(9,"phoenix_storms/black_chrome")
+holoParent(9,owner())
+
+holoCreate(10,owner():pos()+vec(20,-5,30),vec(0.5,0.5,1),ang(0,0,180),vec(255,255,255))
+holoModel(10,"cone")
+holoMaterial(10,"models/weapons/v_crossbow/rebar_glow")
+holoParent(10,owner())
+
+holoCreate(11,owner():pos()+vec(-20,-5,30),vec(0.5,0.5,1),ang(0,0,180),vec(255,255,255))
+holoModel(11,"cone")
+holoMaterial(11,"models/weapons/v_crossbow/rebar_glow")
+holoParent(11,owner())
+
+holoCreate(12,owner():pos()+vec(-25,-5,34),vec(0.5,0.5,1),ang(0,0,180),vec(255,255,255))
+holoModel(12,"cone")
+holoMaterial(12,"models/weapons/v_crossbow/rebar_glow")
+holoParent(12,owner())
+
+holoCreate(13,owner():pos()+vec(25,-5,34),vec(0.5,0.5,1),ang(0,0,180),vec(255,255,255))
+holoModel(13,"cone")
+holoMaterial(13,"models/weapons/v_crossbow/rebar_glow")
+holoParent(13,owner())
+
+holoCreate(14,owner():pos()+vec(30,-5,38),vec(0.5,0.5,1),ang(0,0,180),vec(255,255,255))
+holoModel(14,"cone")
+holoMaterial(14,"models/weapons/v_crossbow/rebar_glow")
+holoParent(14,owner())
+
+holoCreate(15,owner():pos()+vec(-30,-5,38),vec(0.5,0.5,1),ang(0,0,180),vec(255,255,255))
+holoModel(15,"cone")
+holoMaterial(15,"models/weapons/v_crossbow/rebar_glow")
+holoParent(15,owner())
+
+holoCreate(16,owner():pos()+vec(5,-5,36),vec(2,1,2),ang(0,0,0),vec(0,0,0))
+holoModel(16,"sphere3")
+holoMaterial(16,"phoenix_storms/black_chrome")
+holoParent(16,owner())
+
+holoCreate(17,owner():pos()+vec(-5,-5,36),vec(2,1,2),ang(0,0,0),vec(0,0,0))
+holoModel(17,"sphere3")
+holoMaterial(17,"phoenix_storms/black_chrome")
+holoParent(17,owner())
+
+holoCreate(18,owner():pos()+vec(0,-5,23),vec(2,1,2),ang(0,0,0),vec(0,0,0))
+holoModel(18,"sphere3")
+holoMaterial(18,"phoenix_storms/black_chrome")
+holoParent(18,owner())
+
+holoCreate(19,owner():pos()+vec(0,0,45),vec(1.5,1.5,2),ang(0,0,0),vec(255,255,255))
+holoModel(19,"sphere3")
+holoMaterial(19,"lights/white")
+holoParent(19,owner())
+
+holoCreate(22,owner():pos()+vec(0,0,25),vec(1.5,1.5,2),ang(0,0,0),vec(255,255,255))
+holoModel(22,"sphere3")
+holoMaterial(22,"lights/white")
+holoParent(22,owner())
+
+holoCreate(20,owner():pos()+vec(0,0,45),vec(1.5,1.5,1.5),ang(0,0,0),vec(0,0,0))
+holoModel(20,"torus3")
+holoMaterial(20,"phoenix_storms/black_chrome")
+holoParent(20,owner())
+
+holoCreate(21,owner():pos()+vec(0,0,20),vec(1.5,1.5,1.5),ang(0,0,0),vec(0,0,0))
+holoModel(21,"torus3")
+holoMaterial(21,"phoenix_storms/black_chrome")
+holoParent(21,owner())
+}
+
+if (first()|duped()) {hint("JetPack made by [JG] Someone920",10),
+    hint("With the best help from BenBob and TayGo >:3",10),
+    hint("Please don't take credit you don't deserve",10),
+    hint("You can Always find me at the JG server if there's any bugs",10)
+}
+
+interval(10)
+Y = owner():inNoclip()
+Q = owner():isCrouch()
+Z = owner():inVehicle()
+S = "ambient/energy/force_field_loop1.wav"
+MPH= toUnit("mph", owner():vel():length())
+if (Y) {owner():soundPlay(1,0,S),soundVolume(1,0.3),soundPitch(1,(MPH*2)+100),
+    holoColor(10,vec(255,0,0),255),holoColor(11,vec(255,0,0),255),
+    holoColor(12,vec(255,0,0),255),holoColor(13,vec(255,0,0),255),
+    holoColor(14,vec(255,0,0),255),holoColor(15,vec(255,0,0),255),
+    holoScale(10, vec(0.5,0.5,P)),holoScale(11, vec(0.5,0.5,P)),
+    holoScale(12, vec(0.5,0.5,P)),holoScale(13, vec(0.5,0.5,P)),
+    holoScale(14, vec(0.5,0.5,P)),holoScale(15, vec(0.5,0.5,P))}
+else {soundStop(1),holoColor(11,vec(255,0,0),0),
+    holoColor(10,vec(255,0,0),0),holoColor(12,vec(255,0,0),0),
+    holoColor(13,vec(255,0,0),0),holoColor(14,vec(255,0,0),0),
+    holoColor(15,vec(255,0,0),0)}
+    
+if (Q) {
+    holoColor(2,vec(255,0,0),0),holoColor(3,vec(255,0,0),0),
+    holoColor(4,vec(255,0,0),0),holoColor(5,vec(255,0,0),0),
+    holoColor(6,vec(255,0,0),0),holoColor(7,vec(255,0,0),0),
+    holoColor(8,vec(255,0,0),0),holoColor(9,vec(255,0,0),0),
+    holoColor(10,vec(255,0,0),0),holoColor(11,vec(255,0,0),0),
+    holoColor(12,vec(255,0,0),0),holoColor(13,vec(255,0,0),0),
+    holoColor(14,vec(255,0,0),0),holoColor(15,vec(255,0,0),0),
+    holoColor(1,vec(255,0,0),0),holoColor(18,vec(0,0,0),255),
+    holoColor(19,vec(255,255,255),0),holoColor(20,vec(0,0,0),0)
+    holoColor(22,vec(255,255,255),255),holoColor(21,vec(0,0,0),255)}
+else {
+    holoColor(2,vec(255,255,255),255),holoColor(3,vec(255,255,255),255),
+    holoColor(4,vec(255,255,255),255),holoColor(5,vec(255,255,255),255),
+    holoColor(6,vec(255,255,255),255),holoColor(7,vec(255,255,255),255),
+    holoColor(8,vec(255,255,255),255),holoColor(9,vec(0,0,0),255),
+    holoColor(1,vec(255,255,255),255),holoColor(18,vec(0,0,0),0),
+    holoColor(22,vec(255,255,255),0),holoColor(21,vec(0,0,0),0),
+    holoColor(19,vec(255,255,255),255),holoColor(20,vec(0,0,0),255)}
+    
+    if (Z) {soundStop(1),
+    holoColor(2,vec(255,0,0),0),holoColor(3,vec(255,0,0),0),
+    holoColor(4,vec(255,0,0),0),holoColor(5,vec(255,0,0),0),
+    holoColor(6,vec(255,0,0),0),holoColor(7,vec(255,0,0),0),
+    holoColor(8,vec(255,0,0),0),holoColor(9,vec(255,0,0),0),
+    holoColor(10,vec(255,0,0),0),holoColor(11,vec(255,0,0),0),
+    holoColor(12,vec(255,0,0),0),holoColor(13,vec(255,0,0),0),
+    holoColor(14,vec(255,0,0),0),holoColor(15,vec(255,0,0),0),
+    holoColor(1,vec(255,0,0),0),holoColor(18,vec(0,0,0),255),
+    holoColor(19,vec(255,255,255),0),holoColor(20,vec(0,0,0),0),
+    holoColor(17,vec(0,0,0),0),holoColor(16,vec(0,0,0),0)
+    
+    }

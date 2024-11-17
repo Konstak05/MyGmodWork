@@ -1,0 +1,11 @@
+@name Console Screen test
+@inputs Screen:wirelink
+interval(100)
+
+if(first())
+{
+    Screen[2042] = 1
+    Screen[2041] = 1
+}
+Screen:writeString(owner():lastSaid(),random(10),random(15),902)
+

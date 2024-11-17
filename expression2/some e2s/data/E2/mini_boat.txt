@@ -1,0 +1,54 @@
+@name Mini boat
+@inputs [Pod Cam]:wirelink E:entity
+@outputs 
+@model models/hunter/blocks/cube025x05x025.mdl
+
+runOnTick(1)
+
+E = entity()
+
+W = Pod["W",number]
+
+timer("remove",6000)
+timer("smoke",1000)
+
+if (first())
+{
+    holoCreate(1)
+    holoParent(1, E)
+    holoScale(1, vec(1.2,2,1.2))
+    holoColor(1, vec(150,150,150))
+    holoPos(1, E:pos() + E:up()*7 + E:forward()*-6)
+    
+    holoCreate(2)
+    holoParent(2, E)
+    holoScale(2, vec(0.4,0.4,0.7))
+    holoColor(2, vec(140,140,140))
+    holoModel(2, "hqcylinder")
+    holoPos(2, E:pos() + E:up()*18 + E:forward()*-4 + E:right()*5)
+}
+
+if (W)
+{
+    E:applyForce(E:forward()*10)
+    
+}
+
+if(clk("remove"))
+{
+    holoDelete(10)
+}
+
+if(clk("smoke"))
+{
+    runOnTick(1)
+    holoCreate(10)
+    holoPos(10, holoEntity(2):pos() + holoEntity(10):up()*0.1)
+    holoModel(10, "hqicosphere2")
+    holoScale(10, vec(0.3,0.3,0.3))
+}
+
+
+Cam:setVector("Direction",E:right()*-1)
+Cam:setVector("Position",E:toWorld(vec(-6,-45,30)))
+Cam:setAngle("Angles",E:angles())

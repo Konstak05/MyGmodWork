@@ -1,0 +1,173 @@
+@name kenny
+
+Scale=1
+#head
+holoCreate(1)
+    holoPos(1, entity():pos() + vec(0,0,38)*Scale)
+    holoModel(1, "hqsphere2")
+    holoColor(1,vec(255,100,0))
+    holoScale(1,vec(3,3,3)*Scale)
+
+#broun part
+holoCreate(2)
+    holoPos(2, entity():pos() + vec(-2,-14.19,38)*Scale)
+    holoModel(2, "hqtorus2")
+    holoColor(2,vec(100,50,0))
+    holoScale(2,vec(1.3,1.5,1.2)*Scale)
+    holoAng(2,ang(0,15,90))
+    
+    holoCreate(3)
+    holoPos(3, entity():pos() + vec(2,-14.19,38)*Scale)
+    holoModel(3, "hqtorus2")
+    holoColor(3,vec(100,50,0))
+    holoScale(3,vec(1.3,1.5,1.2)*Scale)
+    holoAng(3,ang(0,-15,90))
+
+holoCreate(4)
+    holoPos(4, entity():pos() + vec(0,-11,38)*Scale)
+    holoModel(4, "hqsphere2")
+    holoColor(4,vec(200,150,100))
+    holoScale(4,vec(1.9,1.2,2)*Scale)
+
+#body
+holoCreate(5)
+    holoPos(5, entity():pos() + vec(0,0,7)*Scale)
+    holoModel(5, "dome2")
+    holoColor(5,vec(255,100,0))
+    holoScale(5,vec(2,1.5,4)*Scale)
+    
+#legs
+holoCreate(6)
+    holoPos(6, entity():pos() + vec(0,0,7)*Scale)
+    holoModel(6, "hqcylinder2")
+    holoColor(6,vec(255,100,0))
+    holoScale(6,vec(1.7,1,1)*Scale)
+    
+    
+holoCreate(7)
+    holoPos(7, entity():pos() + vec(0,0,1)*Scale)
+    holoModel(7, "hqcylinder2")
+    holoColor(7,vec(0,0,0))
+    holoScale(7,vec(2,1.3,0.1)*Scale)
+    
+#arms
+holoCreate(8)
+    holoPos(8, entity():pos() + vec(-11,0,17)*Scale)
+    holoModel(8, "hqcylinder2")
+    holoColor(8,vec(255,100,0))
+    holoScale(8,vec(0.5,0.5,1)*Scale)
+    holoAng(8,ang(20,0,0))
+
+holoCreate(9)
+    holoPos(9, entity():pos() + vec(11,0,17)*Scale)
+    holoModel(9, "hqcylinder2")
+    holoColor(9,vec(255,100,0))
+    holoScale(9,vec(0.5,0.5,1)*Scale)
+    holoAng(9,ang(-20,0,0))
+
+holoCreate(10)
+    holoPos(10, entity():pos() + vec(-14,0,10)*Scale)
+    holoModel(10, "hqsphere2")
+    holoColor(10,vec(100,50,0))
+    holoScale(10,vec(0.6,0.6,0.6)*Scale)
+
+holoCreate(11)
+    holoPos(11, entity():pos() + vec(14,0,10)*Scale)
+    holoModel(11, "hqsphere2")
+    holoColor(11,vec(100,50,0))
+    holoScale(11,vec(0.6,0.6,0.6)*Scale)
+    
+    holoCreate(12)
+    holoPos(12, entity():pos() + vec(9,0,22.5)*Scale)
+    holoModel(12, "dome2")
+    holoColor(12,vec(255,100,0))
+    holoScale(12,vec(0.5,0.5,0.5)*Scale)
+    holoAng(12,ang(-20,0,0))
+    
+    holoCreate(13)
+    holoPos(13, entity():pos() + vec(-9,0,22.5)*Scale)
+    holoModel(13, "dome2")
+    holoColor(13,vec(255,100,0))
+    holoScale(13,vec(0.5,0.5,0.5)*Scale)
+    holoAng(13,ang(20,0,0))
+
+holoCreate(14)
+    holoPos(14, entity():pos() + vec(12,-3,10)*Scale)
+    holoModel(14, "hqsphere2")
+    holoColor(14,vec(100,50,0))
+    holoScale(14,vec(0.2,0.2,0.2)*Scale)
+    
+    holoCreate(15)
+    holoPos(15, entity():pos() + vec(-12,-3,10)*Scale)
+    holoModel(15, "hqsphere2")
+    holoColor(15,vec(100,50,0))
+    holoScale(15,vec(0.2,0.2,0.2)*Scale)
+    
+#black head
+holoCreate(16)
+    holoPos(16, entity():pos() + vec(0,0,38)*Scale)
+    holoModel(16, "hqsphere2")
+    holoColor(16,vec(0,0,0))
+    holoScale(16,vec(-3.1,-3.1,-3.1)*Scale)
+    
+#black stripe on coat
+holoCreate(17)
+    holoPos(17, entity():pos() + vec(0,-1,7)*Scale)
+    holoModel(17, "dome2")
+    holoColor(17,vec(0,0,0))
+    holoScale(17,vec(0.1,1.4,4)*Scale)
+    holoAng(17,ang(0,0,0))
+    
+#eyes 
+holoCreate(18)
+    holoPos(18, entity():pos() + vec(-4,-17,39)*Scale)
+    holoModel(18, "dome2")
+    holoColor(18,vec(255,255,255))
+    holoScale(18,vec(0.7,0.9,0.2)*Scale)
+    holoAng(18,ang(15,-15,85))
+    
+    holoCreate(19)
+    holoPos(19, entity():pos() + vec(4,-17,39)*Scale)
+    holoModel(19, "dome2")
+    holoColor(19,vec(255,255,255))
+    holoScale(19,vec(0.7,0.9,0.2)*Scale)
+    holoAng(19,ang(-15,15,85))
+    
+    holoCreate(20)
+    holoPos(20, entity():pos() + vec(4,-18.5,39)*Scale)
+    holoModel(20, "dome2")
+    holoColor(20,vec(0,0,0))
+    holoScale(20,vec(0.15,0.15,0.05)*Scale)
+    holoAng(20,ang(-15,15,85))
+    
+    holoCreate(21)
+    holoPos(21, entity():pos() + vec(-4,-18.5,39)*Scale)
+    holoModel(21, "dome2")
+    holoColor(21,vec(0,0,0))
+    holoScale(21,vec(0.15,0.15,0.05)*Scale)
+    holoAng(21,ang(15,-15,85))
+    
+    holoCreate(22)
+    holoPos(22, entity():pos() + vec(0,0,7)*Scale)
+    holoModel(22, "dome2")
+    holoColor(22,vec(255,100,0))
+    holoScale(22,vec(2,1.5,0.05)*Scale)
+    
+    holoCreate(23)
+    holoPos(23, entity():pos() + vec(-0.5,-15,25)*Scale)
+    holoModel(23, "hqcylinder2")
+    holoColor(23,vec(0,0,0))
+    holoScale(23,vec(0.05,0.05,0.5)*Scale)
+    holoAng(23,ang(10,0,0))
+    
+    holoCreate(24)
+    holoPos(24, entity():pos() + vec(0.5,-15,25)*Scale)
+    holoModel(24, "hqcylinder2")
+    holoColor(24,vec(0,0,0))
+    holoScale(24,vec(0.05,0.05,0.5)*Scale)
+    holoAng(24,ang(-10,0,0))
+    
+
+for(I=0,25) {holoParent(I,entity())}
+
+entity():setAlpha(0)

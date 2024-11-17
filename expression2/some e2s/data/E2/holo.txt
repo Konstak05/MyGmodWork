@@ -1,0 +1,27 @@
+@name Holo 
+@inputs 
+@outputs
+@persist 
+@trigger 
+interval(100)
+if(first()){
+    holoCreate(1)
+    holoModel(1,("hqtorus2"))
+    holoCreate(2)
+    holoModel(2,("hqtorus2"))
+    holoCreate(3)
+    holoModel(3,("hqtorus2"))
+    holoAng(1,ang(90,0,0))
+    holoAng(2,ang(0,0,90))
+    holoAng(3,ang(0,0,0))
+}
+holoPos(1,owner():shootPos()+vec(0,0,20))
+holoPos(2,owner():shootPos()+vec(0,0,20))
+holoPos(3,owner():shootPos()+vec(0,0,20))
+holoParent(1,owner())
+holoParent(2,owner())
+holoParent(3,owner())
+holoColor(1,vec(randint(255),randint(255),randint(255)))
+holoColor(2,vec(randint(255),randint(255),randint(255)))
+holoColor(3,vec(randint(255),randint(255),randint(255)))
+

@@ -1,0 +1,23 @@
+@name HiSpeed ranger video camera v2
+@inputs Ranger:wirelink Screen:wirelink
+@outputs
+@persist Count
+@trigger 
+#Created by "PotatoKingTheVII" -http://steamcommunity.com/id/ThyPotatoKing/
+#Unfortunately, to increase speed, values are hard-coded
+#Default Resolution is 26x26 and range is 1500]
+
+local Resolution = 12
+
+runOnTick(1)
+Screen[1048575]=1 #Initialises screen
+Ranger[2]=1500 #Sets range
+Ranger[3]=1 #Default to 0 = true
+while(perf())
+{   
+Count++
+Ranger[4]=(-0.5+((Count%Resolution)/Resolution)) #Sets ranger's x cord
+Ranger[5]=(-0.5+((floor((Count/Resolution))%Resolution)/Resolution))  #Sets ranger's y cord
+Ranger[0]=1 #Traces range
+Screen[Count%Resolution^2]=(Ranger[1]*0.17) #Draws range to screen pixel. Count%(Resolution)^2
+}

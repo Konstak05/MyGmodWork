@@ -1,0 +1,7 @@
+@name concmd
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+if(first()|duped()) { concmd("type pphrase here")  }

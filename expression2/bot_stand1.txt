@@ -1,0 +1,10 @@
+@name god mode adder 1
+@inputs 
+@outputs 
+@persist
+@trigger 
+
+interval(100)
+
+    owner():plyGod(1)
+

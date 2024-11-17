@@ -1,0 +1,59 @@
+@name Sims Plumbob Health Indicator
+#(by Rvdm88 aka. JoJo Miss Stabby)
+@outputs D H F I T Z
+@persist I H D F T Z Safe 
+ 
+if(first() | owner():isAlive()){
+    entity():setColor(0,0,0,255)
+    entity():setMaterial("Lights/White")
+}
+
+interval(10)
+if(first()) {
+holoCreate(1)
+holoScale(1,vec(1,1,2))
+holoModel(1,"cone")
+holoMaterial(1,"models/shiny/shinywhite")
+}
+ 
+holoPos(1,owner():shootPos()+vec(0,0,40+F))
+if(I < 180) {I++}
+if(I == 180) {I = -180}
+holoAng(1,ang(180,I,0))
+ 
+if(first()) {
+holoCreate(2)
+holoScale(2,vec(1,1,2))
+holoModel(2,"cone")
+holoMaterial(2,"models/shiny/shinywhite")
+}
+ 
+holoPos(2,owner():shootPos()+vec(0,0,64+F))
+if(I < 180) {I++}
+if(I == 180) {I = -180}
+holoAng(2,ang(0,I,0))
+
+"color for health"
+H=2.55*(owner():health())
+D=255-(2.55*((owner():health())))
+if (D < 0) {D=0}
+if (H > 255) {H=255}
+holoParent(1,owner())
+holoParent(2,owner())
+holoParent(3,owner())
+holoParent(4,owner())
+
+holoColor(1,vec(D,H,Z),255)
+holoColor(2,vec(D,H,Z),255)
+holoColor(3,vec(D,H,Z),255)
+holoColor(4,vec(D,H,Z),255)
+Z = 0
+if(!owner():isAlive()){
+    D = 0
+    H = 0
+}
+
+T = T+3.6
+if (T > 360) {T = 0}
+
+F = 10*(sin(T))

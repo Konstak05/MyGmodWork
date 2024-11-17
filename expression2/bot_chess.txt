@@ -1,0 +1,214 @@
+@name Bot chess
+@inputs Body:entity BUTTON 
+@inputs BUTTON1 BUTTON2 BUTTON3 BUTTON4 CLICK MOVE AIMPOS:vector
+@inputs BUTTON5 BUTTON6 BUTTON7 BUTTON8 CLICK2 MOVE2
+@inputs CARD1:entity CARD2:entity CARD3:entity CARD4:entity
+@outputs SELECTOR CARDSELECTED 
+@outputs SELECTOR2 CARDSELECTED2 
+@outputs MODESIGN:string
+@persist CARDS:array CARDS2:array SANDBOXMODE A A2 A3 A4 A5 A6
+@trigger  
+
+interval(500)
+
+
+
+
+
+
+
+
+
+
+
+###PLAYERONE
+
+SELECTOR = CARDS[CARDSELECTED,number]
+
+local C1 = BUTTON1 < 1
+local C2 = BUTTON2 < 1
+local C3 = BUTTON3 < 1
+local C4 = BUTTON4 < 1
+
+if ( changed( C1 ) & C1 ){CARDSELECTED = CARDSELECTED + 1}
+if ( changed( C2 ) & C2 ){CARDSELECTED = CARDSELECTED - 1}
+if ( changed( C3 ) & C3 ){CARDS[CARDSELECTED,number] = CARDS[CARDSELECTED,number] + 1}
+if ( changed( C4 ) & C4 ){CARDS[CARDSELECTED,number] = CARDS[CARDSELECTED,number] - 1}
+
+if(CARDSELECTED < 1 & SANDBOXMODE == 1){CARDSELECTED = 10}
+elseif( CARDSELECTED > 10 & SANDBOXMODE == 1){CARDSELECTED = 1}
+elseif(CARDSELECTED < 1 & SANDBOXMODE == 0){CARDSELECTED = 5}
+elseif(CARDSELECTED > 5 & SANDBOXMODE == 0){CARDSELECTED = 1}
+
+
+
+
+###PLAYERTWO
+
+SELECTOR2 = CARDS2[CARDSELECTED2,number]
+
+local C5 = BUTTON5 < 1
+local C6 = BUTTON6 < 1
+local C7 = BUTTON7 < 1
+local C8 = BUTTON8 < 1
+
+if ( changed( C5 ) & C5 ){CARDSELECTED2 = CARDSELECTED2 + 1}
+if ( changed( C6 ) & C6 ){CARDSELECTED2 = CARDSELECTED2 - 1}
+if ( changed( C7 ) & C7 ){CARDS2[CARDSELECTED2,number] = CARDS2[CARDSELECTED2,number] + 1}
+if ( changed( C8 ) & C8 ){CARDS2[CARDSELECTED2,number] = CARDS2[CARDSELECTED2,number] - 1}
+
+if(CARDSELECTED2 < 1 & SANDBOXMODE == 1){CARDSELECTED2 = 10}
+elseif( CARDSELECTED2 > 10 & SANDBOXMODE == 1){CARDSELECTED2 = 1}
+elseif(CARDSELECTED2 < 1 & SANDBOXMODE == 0){CARDSELECTED2 = 5}
+elseif( CARDSELECTED2 > 5 & SANDBOXMODE == 0){CARDSELECTED2 = 1}
+
+
+
+
+if(first()|dupefinished()){
+    A = 1
+    A4 = 1
+    holoCreate(2)
+    holoCreate(1)    
+   holoAlpha(1,255)
+   holoAlpha(2,255)    
+   CARDSELECTED = 1
+   CARDS = array(1,1,1,1,1,1,1,1,1,1)
+   CARDSELECTED2 = 1
+   CARDS2 = array(1,1,1,1,1,1,1,1,1,1)   
+  
+}
+
+
+if(SELECTOR == 1){
+    if(MOVE == 0 & A == 1 ){
+    CARD1:setPos(Body:toWorld(vec(40,15,25)))
+    CARD1:setAng(Body:angles() + ang(90,0,0))
+    A2 = 0
+    }
+    if(MOVE == 1 & A == 1){
+    CARD1:setPos(AIMPOS + vec(0,0,10))
+    CARD1:setAng(Body:angles() + ang(90,180,0))       
+    A2 = 1        
+    }
+    if(CLICK == 1 & A2 == 1){
+    A3 = 1 
+    A = 0
+    }
+    elseif(CLICK == 0 & A2 == 1){
+    A3 = 0
+    A = 1
+}
+}
+elseif(A3 == 1){
+    CARD1:setPos(CARD1:pos())
+    A3 = 1
+}
+if(SELECTOR != 1 & A2 == 0){
+    CARD1:setPos(Body:toWorld(vec(40,15,0)))
+    CARD1:setAng(Body:angles())     
+    
+}
+
+
+
+
+if(SELECTOR == 2){
+    if(MOVE == 0 & A4 == 1 ){
+    CARD2:setPos(Body:toWorld(vec(40,15,25)))
+    CARD2:setAng(Body:angles() + ang(90,0,0))
+    A5 = 0
+    }
+    if(MOVE == 1 & A4 == 1){
+    CARD2:setPos(AIMPOS + vec(0,0,10))
+    CARD2:setAng(Body:angles() + ang(90,180,0))       
+    A5 = 1        
+    }
+    if(CLICK == 1 & A5 == 1){
+    A6 = 1 
+    A4 = 0
+    }
+    elseif(CLICK == 0 & A5 == 1){
+    A6 = 0
+    A4 = 1
+}
+}
+elseif(A6 == 1){
+    CARD2:setPos(CARD2:pos())
+    A6 = 1
+}
+if(SELECTOR != 2 & A5 == 0){
+    CARD2:setPos(Body:toWorld(vec(40,15,0)))
+    CARD2:setAng(Body:angles())     
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####CURRENT SYSTEM FOR CHANGING FROM MAP TO 
+
+
+if(BUTTON == 1){
+   CARDS = array(1,2,3,4,5)
+   MODESIGN = "Versus mode"
+   SANDBOXMODE = 0
+   holoCreate(1) 
+   holoPos(1,Body:toWorld(vec(0,0,13)))
+   holoPos(2,Body:toWorld(vec(0,0,-13)))
+   holoAng(1,Body:angles()) 
+   holoMaterial(1,"sprops/textures/sprops_metal6")
+   holoScale(1,vec(6,6,0.2))
+   holoAlpha(1,255)
+   holoAlpha(2,255)
+} 
+elseif(BUTTON == 0){
+   MODESIGN = "Sandbox mode"
+   SANDBOXMODE = 1
+   holoCreate(2) 
+   holoAng(2,Body:angles())
+   holoPos(1,Body:toWorld(vec(0,0,-13)))
+   holoPos(2,Body:toWorld(vec(0,0,13)))
+   holoMaterial(2,"sprops/textures/sprops_metal6")
+   holoScale(2,vec(6,6,0.2))
+   holoColor(2,vec(0,0,255))    
+
+} 
+
+
+

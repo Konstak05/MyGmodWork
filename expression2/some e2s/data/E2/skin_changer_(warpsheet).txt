@@ -1,0 +1,11 @@
+@name Skin Changer (warpsheet)
+
+
+It = owner()
+
+interval(1)
+runOnChat(1)
+
+if (It:lastSaid() == "/lab") {
+    It:setMaterial("pheonix_storms/stripes")
+}

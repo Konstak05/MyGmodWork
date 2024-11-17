@@ -1,0 +1,11 @@
+@name Simple Stalker
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+TargetPos=players()
+CurrentPos=entity():pos()
+Vector =TargetPos-CurrentPos
+applyForce(Vector)
+

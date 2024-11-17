@@ -1,0 +1,35 @@
+@name Plane System
+@inputs Pod:wirelink E:entity
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+
+if (W)
+{
+    E:applyForce(E:right()*-50)
+}
+
+if (A)
+{
+    E:applyForce(E:forward()*-50)
+}
+
+if (S)
+{
+    E:applyForce(E:right()*50)
+}
+
+if (D)
+{
+    E:applyForce(E:forward()*50)
+}
+
+E:applyForce(E:pos() - E:pos() + E:toWorld(vec(50,50,50)))
+

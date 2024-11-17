@@ -1,0 +1,110 @@
+@name Turret control
+@inputs Turret:entity [Cam Pod]:wirelink
+@outputs Fire
+
+runOnTick(1)
+
+##Ect##
+Seat = entity():isConstrainedTo()
+Chair = Seat:driver()
+Mouse1 = Pod["Mouse1",number]
+Active = Pod["Active",number]
+Shift = Pod["Shift",number]
+
+
+##Controls##
+W = Pod["W",number]
+A = Pod["A",number]
+S = Pod["S",number]
+D = Pod["D",number]
+
+if (first())
+{
+    holoCreate(1)
+    holoCreate(2)
+    
+    holoPos(1, Turret:pos() + Turret:forward()*3 + Turret:right()*-0.3 + Turret:up()*10)
+    holoPos(2, Turret:pos() + Turret:forward()*3 + Turret:right()*-0.3 + Turret:up()*10)
+    
+    
+    holoParent(1, Turret)
+    holoParent(2, Turret)
+    
+    holoScale(1, vec(0.3,0.3,0.3))
+    holoScale(2, vec(0.2,0.2,0.2))
+    
+    holoModel(1, "hqicosphere2")
+    holoModel(2, "hqicosphere2")
+    
+    holoMaterial(1, "models/wireframe")
+    
+    holoColor(2, vec(255,0,0))
+    
+    Turret:setTrails(10,0,1,"trails/laser",vec(0,0,255),255)
+}
+
+if (W)
+{
+    Turret:setPos(Turret:pos() + Turret:forward()*3)
+}
+
+if (A)
+{
+    Turret:setPos(Turret:pos() + Turret:right()*-3)
+}
+
+
+if (S)
+{
+    Turret:setPos(Turret:pos() + Turret:forward()*-3)
+}
+
+if (D)
+{
+    Turret:setPos(Turret:pos() + Turret:right()*3)
+}
+
+if (Shift & W)
+{
+    Turret:setPos(Turret:pos() + Turret:forward()*10)
+}
+
+if (Shift & A)
+{
+    Turret:setPos(Turret:pos() + Turret:right()*-10)
+}
+
+
+if (Shift & S)
+{
+    Turret:setPos(Turret:pos() + Turret:forward()*-10)
+}
+
+if (Shift & D)
+{
+    Turret:setPos(Turret:pos() + Turret:right()*10)
+}
+
+
+
+if (Mouse1)
+{
+    Fire = 1
+}else
+{
+    Fire = 0
+}
+
+if (Active)
+{
+    
+    Turret:setAng(Seat:toLocal(Chair:eyeAngles()) + ang(10,0,0))
+}else
+{
+    Turret:setPos(Seat:pos() + Seat:up()*200)
+    Turret:applyAngForce(findClosest(Turret:pos()):angles() - Turret:angles())
+}
+
+Cam:setVector("Direction",Turret:forward()*10)
+Cam:setVector("Position",Turret:toWorld(vec(-17,0,15)))
+Cam:setAngle("Angles",Turret:angles())

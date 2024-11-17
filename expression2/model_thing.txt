@@ -1,0 +1,11 @@
+@name Model thing
+@inputs 
+@outputs 
+@persist Spin:number
+
+interval(1)
+holoCreate(1)
+holoPos(1,owner():shootPos()+vec(0,0,20))
+holoAng(1,ang(0,0,Spin))
+
+Spin = Spin + 1 

@@ -1,0 +1,15 @@
+@name TurretShootWhenCan
+@inputs Turret:entity
+@outputs Fire
+@persist Ranger:ranger
+@trigger 
+
+interval(1)
+
+Ranger = rangerOffset(25000,Turret:pos(),Turret:forward())
+
+if(Ranger:entity():isPlayer()) {
+    Fire=1   
+} else {
+    Fire=0
+}

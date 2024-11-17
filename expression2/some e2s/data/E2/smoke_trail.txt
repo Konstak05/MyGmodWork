@@ -1,0 +1,10 @@
+@name PINKNESS
+@persist E:entity C:entity
+E = owner()
+C = entity()
+E:setTrails(1, 80, 1, "trails/smoke", E:getColor(), 255)
+E:setMaterial("models/shiny")
+E:setColor((255),(255),(255))
+C:setTrails(16, 0, 2.5, "trails/love", C:getColor(), 255)
+C:setMaterial("models/shiny")
+C:setColor(random(255),(0),(255))

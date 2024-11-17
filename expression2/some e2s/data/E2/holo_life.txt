@@ -1,0 +1,84 @@
+@name Holo Life
+@inputs 
+@outputs 
+@persist R1 R HP G AR ARM
+@trigger 
+#holo 1 is black-red, holo2 is HP, 3 is armor
+#\/ down there! color mod ajdust
+
+interval(1)
+if(first()){
+    holoCreate(1)
+    holoMaterial(1,("Lights/White"))
+    holoScale(1,vec(0.45,2.4,0.45))
+    
+    holoCreate(2)
+    holoMaterial(2,("Lights/White"))
+    
+    holoCreate(3)
+    holoMaterial(3,("Lights/White"))
+    holoColor(3,vec(0,130,225))
+    
+    R1 = 0
+    G = 0
+}
+#HP 
+holoScale(2,vec(0.5,HP,0.5))
+HP = owner():health() / 40
+if(HP >= 2.5){HP = 2.5}
+
+#Armor
+holoScale(3,vec(0.55,AR,0.55))
+AR = (owner():health() -100) / 39
+if(AR >= 2.56){AR = 2.56}
+if(AR < 0.05){
+    AR = 0
+    ARM = 1
+} else {ARM = 0}
+
+#red-black glow
+if(owner():health() < 50){
+    if(R1 < 255) {R1 += 5}
+    if(R1 >= 255) {R1 = -255}
+    R = abs(R1)
+}
+if(owner():health() >= 50){
+    R1 = 0
+    R = 0
+}
+
+
+#crouch-stand
+if(owner():isCrouch()){
+    holoPos(1,owner():shootPos()+vec(0,0,30))
+    holoPos(2,owner():shootPos()+vec(0,0,30))
+    holoPos(3,owner():shootPos()+vec(0,0,30))
+} 
+else {
+    holoPos(1,owner():shootPos()+vec(0,0,25))
+    holoPos(2,owner():shootPos()+vec(0,0,25))
+    holoPos(3,owner():shootPos()+vec(0,0,25))
+}
+
+#holoparents
+holoParent(1,owner())
+holoParent(2,1)
+holoParent(3,1)
+
+#holoColor ajdust (if 1 is on, 2nd must be off!)
+
+#number 1
+
+#if(!owner():isAlive()){
+#    holoColor(2,vec4(0,0,0,0))
+#    holoColor(1,vec4(0,0,0,0))
+#} 
+# else {
+#    holoColor(2,vec4(0,255,0,255))
+#    holoColor(1,vec4(R,0,0,255))
+#}
+#if(ARM){holoColor(3,vec4(0,0,0,0))}
+#if(!ARM){holoColor(3,vec4(0,130,255,255))}
+#number 2
+holoColor(2,vec(G,255,G))
+holoColor(1,vec(R,0,0))

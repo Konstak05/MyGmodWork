@@ -1,0 +1,70 @@
+@name 3d Holo Multi Clipping Demo
+@outputs [E F]:entity
+@persist [Holos Clips]:array
+
+if(first() | duped()){
+    concmd("gm_spawn models/hunter/blocks/cube2x8x1.mdl")
+    timer("next",1000)
+}
+if(clk("next")){
+E = entity()
+findIncludePlayerProps(owner())
+findByModel("models/hunter/blocks/cube2x8x1.mdl")
+F = find()
+Scale = 4
+Size = vec(40,120,120)*Scale
+Holos[1,string] = glonEncode(array(
+                E:toWorld(vec(0,0,Size:x()/2)),
+                Size:setZ(0),
+                E:toWorld(ang(90,0,0)),
+                vec(255,255,0),
+                "cube",E))
+Holos[2,string] = glonEncode(array(
+                E:toWorld(vec(0,0,Size:x()/2)),
+                -Size,
+                E:toWorld(ang(90,0,0)),
+                vec(0,255,0),
+                "cube",E))
+Holos[3,string] = glonEncode(array(
+                F:toWorld(vec(0,0,0)),
+                F:boxSize(),
+                F:toWorld(ang()),
+                vec(255,0,0),
+                "cube",F))
+Holos[4,string] = glonEncode(array(
+                F:toWorld(vec(0,0,0)),
+                F:boxSize(),
+                F:toWorld(ang()),
+                vec(0,0,255),
+                "cube",F))
+for(I=1,Holos:count()){
+    Decode = glonDecode(Holos[I,string])
+    holoCreate(I,Decode:vector(1),Decode:vector(2)/12,Decode:angle(3),Decode:vector(4),Decode:string(5))
+    holoMaterial(I,"debug/debugdrawflat")
+    holoParent(I,Decode:entity(6))
+}
+Clips[1,string] = glonEncode(array(
+                vec(), E:forward() ))
+Clips[2,string] = glonEncode(array(
+                vec(0,Size:y()/2,0), E:right() ))
+Clips[3,string] = glonEncode(array(
+                vec(0,-Size:y()/2,0), -E:right() ))
+Clips[4,string] = glonEncode(array(
+                vec(Size:z()/2,0,0), -E:forward() ))
+Clips[5,string] = glonEncode(array(
+                vec(0,0,Size:x()), -E:up() ))
+    for(C=1,5){
+    Decode2 = glonDecode(Clips:string(C))
+    holoClipEnabled(3,C,1)
+    holoClip(3,C,E:toWorld(Decode2:vector(1)),Decode2:vector(2),1)
+        holoClipEnabled(4,C,1)
+        if(C!=5){
+            Dir = -Decode2:vector(2)
+            Pos = -Decode2:vector(1)
+        }else{
+            Dir = Decode2:vector(2)
+            Pos = Decode2:vector(1)
+        }
+    holoClip(4,C,E:toWorld(Pos),Dir,1)
+    }
+}

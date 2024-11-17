@@ -1,0 +1,37 @@
+@name Xmas hat
+@persist Vector:vector Timer
+interval(10)
+Eye = owner():eye()
+Chip=entity()
+Timer=Timer+1*1
+T=Timer
+
+Vector=owner():pos()-(entity():pos()-vec(0,0,120))
+applyForce($Vector*30+Vector)
+
+if(first()) {holoCreate(1)}
+
+holoModel(1,"hqcone")
+holoPos(1,owner():shootPos()+vec(5,-2.5,8):rotate(Eye:toAngle()))
+holoAng(1,Eye:toAngle())
+holoColor(1,vec(255,0,0))
+holoScale(1, vec(1,1,1))
+holoMaterial(1,"models/shiny")
+
+if(first()) {holoCreate(2)}
+
+holoModel(2,"hqicosphere")
+holoPos(2,owner():shootPos()+vec(5,-2.5,12):rotate(Eye:toAngle()))
+holoAng(2,Eye:toAngle())
+holoColor(2,vec(255,255,255))
+holoScale(2, vec(0.5,0.5,0.5))
+holoMaterial(2,"models/shiny")
+
+if(first()) {holoCreate(3)}
+
+holoModel(3,"hqtorus")
+holoPos(3,owner():shootPos()+vec(5,-2.5,3):rotate(Eye:toAngle()))
+holoAng(3,Eye:toAngle())
+holoColor(3,vec(255,255,255))
+holoScale(3, vec(1,1,1))
+holoMaterial(3,"models/shiny")

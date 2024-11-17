@@ -1,0 +1,28 @@
+@name Jet
+@inputs [Pod Cam]:wirelink 
+@outputs Forward:vector
+@model models/props_phx/construct/metal_plate1.mdl
+
+runOnTick(1)
+
+E = entity()
+W = Pod["W",number]
+A = Pod["A",number]
+S = Pod["S",number]
+D = Pod["D",number]
+M2 = Pod["Mouse2",number]
+
+E:applyAngForce(-E:angVel()*E:mass())
+E:applyAngForce(ang(W-S,0,D-A)*E:mass()*100)
+E:applyForce(E:forward()*0 - E:vel()*E:mass())
+Forward = E:forward()*E:mass()*1000# + -E:up()*E:mass()*3
+
+if(M2){
+#E:applyOffsetForce(E:pos(), Forward)
+E:applyForce(Forward + $Forward*5)
+}
+
+Cam["Position",vector] = E:massCenter() - E:forward()*100 + E:up()*0
+Cam["Angle",angle] = E:angles()
+Cam["Activated",number] = Pod["Active",number]
+Cam["Parent",entity] = E

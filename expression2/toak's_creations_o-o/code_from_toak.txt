@@ -1,0 +1,14 @@
+@name 
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+interval(125)
+
+
+holoCreate(1)(toWorld(vec(10,10,10),ang(),owner():attachmentPos("aim_attachment"),owner()
+
+
+
+}

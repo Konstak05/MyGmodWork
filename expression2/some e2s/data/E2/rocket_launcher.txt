@@ -1,0 +1,33 @@
+@name Rocket Launcher
+@inputs Button
+@outputs Thruster1 Thruster2 Thruster3 Thruster4 Thruster5 Thruster6
+@persist 
+@trigger 
+
+runOnTick(1)
+
+if(first())
+{
+    timer("off",1000)
+}
+
+if (Button == 1)
+{
+    Thruster1 = 10000
+    Thruster2 = 10000
+    Thruster3 = 10000
+    Thruster4 = 10000
+    Thruster5 = 10000
+    Thruster6 = 10000
+}
+
+if(clk("off"))
+{
+        
+    Thruster1 = 0
+    Thruster2 = 0
+    Thruster3 = 0
+    Thruster4 = 0
+    Thruster5 = 0 
+    Thruster6 = 0
+}

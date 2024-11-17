@@ -1,0 +1,43 @@
+@name Air Plane
+@inputs [Pod Cam]:wirelink 
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+if(first())
+{
+    holoCreate(1)
+}
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Space = Pod:number("Space")
+
+if (Space)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*10)
+}
+
+if (W)
+{
+    holoAng(1, holoEntity(1):angles() + holoEntity(1):toWorld(ang(2,0,0)))
+}
+
+if (S)
+{
+    holoAng(1, holoEntity(1):angles() + holoEntity(1):toWorld(ang(-2,0,0)))
+}
+
+if (A)
+{
+    holoAng(1, holoEntity(1):angles() + holoEntity(1):toWorld(ang(0,0.5,0)))
+}
+
+if (D)
+{
+    holoAng(1, holoEntity(1):angles() + holoEntity(1):toWorld(ang(0,-0.5,0)))
+}

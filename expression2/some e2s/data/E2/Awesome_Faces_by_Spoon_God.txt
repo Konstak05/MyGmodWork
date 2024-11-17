@@ -1,0 +1,76 @@
+@name Awesome Faces by Spoon God
+@persist O:entity Chat:string Name:array Mat:array Print:array PrintCmd
+#by Spoon God
+if(first()){
+    PrintCmd=1
+    runOnTick(1)
+    runOnChat(1)
+    entity():setAlpha(0)
+    O = owner()
+    holoCreate(1)
+    holoModel(1,"hqicosphere")
+    holoScale(1,vec(1.2,1.2,1.2))
+    holoPos(1,O:attachmentPos("eyes")+vec(-2,1,0):rotate(O:attachmentAng("eyes")))
+    holoAng(1,ang(0,O:attachmentAng("eyes"):yaw()+90,0))
+    holoParentAttachment(1,O,"eyes")
+    holoAlpha(1,0)
+    Name[1,string]="gman"
+    Mat[1,string]="models/gman/gman_facehirez"
+    Name[2,string]="breen"
+    Mat[2,string]="models/breen/breen_face"
+    Name[3,string]="barney"
+    Mat[3,string]="models/police/barneyface"
+    Name[4,string]="kleiner"
+    Mat[4,string]="models/kleiner/walter_face"
+    Name[5,string]="john"
+    Mat[5,string]="models/humans/male/group03/mike_facemap"
+    Name[6,string]="henry"
+    Mat[6,string]="models/humans/male/group01/erdim_cylmap"
+    Name[7,string]="eli"
+    Mat[7,string]="models/eli/eli_tex4z"
+    Name[8,string]="monk"
+    Mat[8,string]="models/monk/grigori_head"
+    Name[9,string]="alyx"
+    Mat[9,string]="models/alyx/alyx_faceandhair"
+    Name[10,string]="mossman"
+    Mat[10,string]="models/mossman/mossman_face"
+    Name[11,string]="joe"
+    Mat[11,string]="models/humans/male/group01/joe_facemap"
+    Print[1,vector]=vec(255,255,255)
+    Print[2,string]="Heads: "
+    for(X=1,Name:count()){
+        Print:pushVector(vec(255,255,0))
+        Print:pushString("!"+Name[X,string][1]:upper()+Name[X,string]:right(Name[X,string]:length()-1):lower())
+        Print:pushVector(vec(255,255,255))
+        Print:pushString(", ")
+    }
+    Print[Print:count(),string]="."
+}elseif(chatClk(O)){
+    Chat = O:lastSaid()
+    if(Chat[1]=="!"){
+        if(Chat:length()>1){
+            hideChat(1)
+            Chat=Chat:right(Chat:length()-1):lower()
+            if(Chat:left(4)=="hide"){
+                holoAlpha(1,0)
+            }else{
+                for(X=1,Name:count()){
+                    if(Chat==Name[X,string]){
+                        holoMaterial(1,Mat[X,string])
+                        holoAlpha(1,255)
+                        break
+                    }elseif(X==Name:count()){
+                    printColor(vec(255,0,0),"Error! ",vec(255,255,255),Chat,vec(255,0,0)," is not a valid head.")
+                        PrintCmd = 1
+                    }
+                }
+            }
+        }
+    }
+}elseif(tickClk()){
+    if(PrintCmd){
+        PrintCmd=0
+        printColor(Print)
+    }
+    
+}

@@ -1,0 +1,24 @@
+@name Destroyer bot AI
+@inputs Prop1:entity 
+@outputs Throughwalls
+@persist Props:array 
+
+interval(700)
+
+    
+Throughwalls1 = (randint(1,4))
+
+
+if (Throughwalls1 == 1){
+    
+  Throughwalls = 1
+
+}
+else{
+    
+  Throughwalls = 0
+    
+}
+
+
+

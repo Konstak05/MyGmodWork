@@ -1,0 +1,22 @@
+@name SoundPlay Test
+@inputs W:wirelink 
+@outputs 
+@persist S:array A:string X:string
+@trigger 
+
+runOnTick(1)
+
+timer("write",1)
+
+A = "A"
+X = "X"
+S[1,string] = "xxxxxxaxxxbxxx"
+
+W:writeString("Test",5,5)
+
+if(clk("write"))
+{
+    W:writeString(X,randint(0,80),randint(0,100))
+    W:writeString(A,randint(0,90),randint(0,100))
+    W:writeArray(random(0,255),S)
+}

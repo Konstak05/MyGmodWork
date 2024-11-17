@@ -1,0 +1,112 @@
+@name Power cell conveyor1
+@inputs 
+@outputs 
+@persist X RESOURCERANDOMIZER ANIMATION1 ANIMATION1Z
+@trigger 
+
+E = entity()
+
+holoCreate(5)
+holoPos(5,(holoEntity(3):toWorld(vec(0,ANIMATION1,ANIMATION1Z))))
+holoAng(5,(E:angles()))
+holoColor(5,vec(0,0,105))
+
+
+    if(RESOURCERANDOMIZER == 1){
+    holoScale(5,vec(0.2,1,0.2))
+    holoModel(5,"cube")
+    ANIMATION1Zb = -4.5
+        }
+    if(RESOURCERANDOMIZER == 2){
+    holoScale(5,vec(1,1,1))
+    holoModel(5,"cube")
+    ANIMATION1Zb = 0
+        }   
+    if(RESOURCERANDOMIZER == 3){
+    holoScale(5,vec(1,1,1))
+    holoModel(5,"hq_sphere")
+    ANIMATION1Zb = 0
+}
+    
+if(first()|dupefinished()){
+RESOURCERANDOMIZER = randint(1,3)
+timer("Startanimation",100)
+}
+
+
+if(clk("Startanimation")){
+    holoAlpha(5,255)
+X = X - 4
+ANIMATION1 = 0 + X
+ANIMATION1Z = ANIMATION1Zb
+timer("Startanimation",100)
+timer("Startanimation2",6000)
+}
+
+if(clk("Startanimation2")){
+    holoAlpha(5,0)
+    X = 0
+    ANIMATION1Z = -20
+    ANIMATION1 = -100
+    stoptimer("Startanimation")
+    timer("Startanimation3",1000)
+}
+
+if(clk("Startanimation3")){
+    holoAlpha(5,0)
+    ANIMATION1Z = -40
+    X = 0
+    ANIMATION1 = -200
+timer("Startanimation",100)
+}
+
+holoCreate(1)
+holoPos(1,(E:toWorld(vec(0,0,10))))
+holoAng(1,(E:angles()))
+holoColor(1,vec(100,100,100))
+holoScale(1,vec(3,15,2))
+holoModel(1,"cube")
+
+holoCreate(2)
+holoParent(2,1)
+holoPos(2,(holoEntity(1):toWorld(vec(0,0,12.5))))
+holoAng(2,(E:angles()))
+holoColor(2,vec(70,70,70))
+holoScale(2,vec(3,15,0.1))
+holoModel(2,"cube")
+
+holoCreate(6)
+holoParent(6,1)
+holoPos(6,(holoEntity(1):toWorld(vec(-19,0,0))))
+holoAng(6,(E:angles()))
+holoColor(6,vec(70,70,70))
+holoScale(6,vec(0.2,15,2.5))
+holoModel(6,"cube")
+
+
+holoCreate(7)
+holoParent(7,1)
+holoPos(7,(holoEntity(1):toWorld(vec(19,0,0))))
+holoAng(7,(E:angles()))
+holoColor(7,vec(70,70,70))
+holoScale(7,vec(0.2,15,2.5))
+holoModel(7,"cube")
+
+
+holoCreate(3)
+holoParent(3,1)
+holoPos(3,(holoEntity(1):toWorld(vec(0,110,19))))
+holoAng(3,(E:angles()))
+holoScale(3,vec(0.1,0.1,0.1))
+holoModel(3,"cube")
+holoAlpha(3,0)
+
+holoCreate(4)
+holoParent(4,1)
+holoPos(4,(holoEntity(1):toWorld(vec(0,-110,19))))
+holoAng(4,(E:angles()))
+holoScale(4,vec(0.1,0.1,0.1))
+holoModel(4,"cube")
+holoAlpha(4,0)
+
+

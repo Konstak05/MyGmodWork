@@ -1,0 +1,71 @@
+@name Explosive turret
+@inputs [Pod Cam]:wirelink  Body:entity Spawned:entity 
+@outputs  Explosive Remove
+@persist 
+@trigger 
+
+runOnTick(1)
+
+Mouse1 = Pod["Mouse1",number]
+Mouse2 = Pod["Mouse2",number]
+Active = Pod["Active",number]
+
+Chair = entity():isWeldedTo()
+Seat = Chair:driver()
+
+R = findByClass("player")
+
+if (first())
+{
+    holoCreate(1)
+    holoCreate(2)
+    
+    holoPos(1, Body:pos() + Body:forward()*3 + Body:right()*-0.3 + Body:up()*10)
+    holoPos(2, Body:pos() + Body:forward()*3 + Body:right()*-0.3 + Body:up()*10)
+    
+    
+    holoParent(1, Body)
+    holoParent(2, Body)
+    
+    holoScale(1, vec(0.3,0.3,0.3))
+    holoScale(2, vec(0.2,0.2,0.2))
+    
+    holoModel(1, "hqicosphere2")
+    holoModel(2, "hqicosphere2")
+    
+    holoMaterial(1, "models/wireframe")
+    
+    holoColor(2, vec(255,0,0))
+    
+    Body:setPos(entity():pos() + Body:up()*150)
+    Body:setMass(100)
+}
+
+if (Active)
+{
+    Body:setAng(Chair:toLocal(Seat:eyeAngles()))
+}
+
+if (Mouse1)
+{
+    Explosive = 1
+    Spawned:setMass(500)
+}else
+{
+    Explosive = 0
+}
+
+if (Mouse2)
+{
+    Remove = 1
+}else
+{
+    Remove = 0
+}
+
+Spawned:setTrails(10,0,2,"trails/smoke",vec(255,0,0),255)
+Spawned:applyForce(Spawned:forward()*9999999)
+
+Cam:setVector("Direction",Body:forward()*10)
+Cam:setVector("Position",Body:toWorld(vec(-17,0,15)))
+Cam:setAngle("Angles",Body:angles())

@@ -1,0 +1,115 @@
+@name Micro City Gen
+@inputs 
+@outputs 
+@persist Nuking CCe CCE CityRad CloudCount CloudMax CloudAlt CloudC HouseMax HouseNum CenterPoint:vector HouseSizeX HouseSizeY HouseSizeZ HouseColNum PopulationMax PopulationCount PeopleSizeX PeopleSizeY PeopleSizeZ PeopleCol:vector C E D:vector Ce X
+@trigger 
+
+interval(125)
+
+if(first()) {
+    CenterPoint=entity():pos()
+    HouseMax=randint(10,350)
+    CloudMax=randint(10,15)
+    CityRad=125
+    print("There are currently "+HouseMax:toString()+" houses in the city!")
+    PopulationMax=randint(HouseMax+35,HouseMax+50) 
+    print("There are currently "+PopulationMax:toString()+" people in the city!")
+    timer("PeopleMove",random(5,10))
+    holoCreate(HouseMax+CloudMax+PopulationMax+5)
+    holoPos(HouseMax+CloudMax+PopulationMax+5,CenterPoint+vec(0,0,-0.1))
+    holoScale(HouseMax+CloudMax+PopulationMax+5,vec(22.5,22.5,0.2))
+    holoColor(HouseMax+CloudMax+PopulationMax+5,vec(85,85,85))
+}
+
+if(owner():keyPressed("N")&!Nuking) {
+    Ce=HouseMax+PopulationMax+5
+    Nuking=1
+    hint("Nuking in 5 seconds!",5)
+    holoCreate(Ce)
+    holoPos(Ce,vec(CenterPoint:x()+random(-CityRad,CityRad),CenterPoint:y()+random(-CityRad,CityRad),CenterPoint:z()+random(-1,3)))
+    holoScale(Ce,vec(0.9,0.9,0.9))
+    holoColor(Ce,vec(255,65,65))
+    timer("BlowUpFuse",5000)
+}
+
+if(CloudCount<=CloudMax) {
+    CloudC=HouseMax+PopulationMax+CloudCount+1
+    CloudAlt=random(55,65)
+    holoCreate(CloudC)
+    holoPos(CloudC,vec(CenterPoint:x()+random(-CityRad,CityRad),CenterPoint:y()+random(-CityRad,CityRad),CenterPoint:z()+CloudAlt))
+    holoScale(CloudC,vec(0.9,0.5,0.7))
+    timer("CloudMove",random(5,10))
+    CloudCount++
+}
+
+if(HouseNum<=HouseMax) {
+    HouseColNum=random(55,200)
+    HouseSizeX=random(0.4,0.7)
+    HouseSizeY=random(0.5,0.8)
+    HouseSizeZ=random(1.5,7)
+    holoCreate(HouseNum)
+    holoPos(HouseNum,vec(CenterPoint:x()+random(-CityRad,CityRad),CenterPoint:y()+random(-CityRad,CityRad),CenterPoint:z()))
+    holoColor(HouseNum,vec(random(50,125),random(50,125),random(50,125)))
+    holoScale(HouseNum,vec(HouseSizeX,HouseSizeY,HouseSizeZ))
+    HouseNum++
+} else {
+    if(PopulationCount<=PopulationMax) {
+    PeopleSizeX=random(0.1,0.2)
+    PeopleSizeY=random(0.1,0.2)
+    PeopleSizeZ=random(0.3,0.6)
+    C=random(125,225)
+    if(randint(0,1)) {
+    PeopleCol=vec(97,78,28)
+    } else {
+    PeopleCol=vec(C,C,C)
+    }
+    holoCreate(HouseNum+PopulationCount+1)
+    holoPos(HouseNum+PopulationCount+1,vec(CenterPoint:x()+random(-CityRad,CityRad),CenterPoint:y()+random(-CityRad,CityRad),CenterPoint:z()))
+    holoColor(HouseNum+PopulationCount+1,PeopleCol)
+    holoScale(HouseNum+PopulationCount+1,vec(PeopleSizeX,PeopleSizeY,PeopleSizeZ))
+    PopulationCount++
+    }
+}
+
+if(clk("PeopleMove")) {
+    E=random(HouseNum+1,HouseNum+1+PopulationCount)
+    if(holoEntity(E):pos():x()>entity():pos():x()+CityRad|holoEntity(E):pos():x()<entity():pos():x()-CityRad|holoEntity(E):pos():y()>entity():pos():y()+CityRad|holoEntity(E):pos():y()<entity():pos():y()-CityRad) {
+    holoPos(E,vec(CenterPoint:x()+random(-CityRad,CityRad),CenterPoint:y()+random(-CityRad,CityRad),CenterPoint:z()))
+    } else {
+    holoAng(E,vec(holoEntity(E):angles():yaw()+random(-5,5),holoEntity(E):angles():pitch()+random(-5,5),holoEntity(E):angles():roll()):toAngle())
+    holoPos(E,holoEntity(E):pos()+holoEntity(E):forward()*2)
+    }
+    stoptimer("PeopleMove")
+    timer("PeopleMove",random(5,10))
+}
+
+if(clk("CloudMove")) {
+    CCE++
+    CCe=random(HouseNum+PopulationCount+1,HouseNum+PopulationCount+CloudCount+1)
+    holoPos(CCe,holoEntity(CCe):pos()+vec(2*sin(CCE/15),0,0))
+    stoptimer("CloudMove")
+    timer("CloudMove",random(5,10))
+}
+
+if(clk("BlowUpFuse")) {
+    hint("BOOM",0.050)
+    holoCreate(Ce+1)
+    holoPos(Ce+1,holoEntity(Ce):pos())
+    holoScale(Ce+1,vec(X/1.5,X/1.5,X/1.5))
+    holoModel(Ce+1,"hqsphere")
+    holoColor(Ce+1,vec(255,65,65))
+    timer("BlowUpFuse",50)
+    timer("ExplodeInc",50)
+    timer("RemoveHolos",5500)
+}
+
+if(clk("ExplodeInc")) {
+    X++
+    stoptimer("ExplodeInc")
+    timer("ExplodeInc",50)
+}
+
+if(clk("RemoveHolos")) {
+    holoDeleteAll(1)
+    selfDestruct()
+}

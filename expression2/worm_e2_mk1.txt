@@ -1,0 +1,139 @@
+@name Worm e2 mk1
+@inputs  Body:entity P1:entity P2:entity P3:entity P4:entity P5:entity P6:entity P7:entity P8:entity P9:entity P10:entity P11:entity P12:entity P13:entity P14:entity P15:entity P16:entity P17:entity P18:entity P19:entity 
+
+@outputs 
+@persist Angle:angle  SpawnValidation DisBa  Sp SpR Target:entity OldP:vector
+@persist 
+@trigger 
+runOnTick(1)
+function freezeStartWorm(){
+P1:setPos((Body:pos() + (Body:forward() * DisBa )))
+P2:setPos(Body:pos() + Body:forward() * DisBa * 2)
+P3:setPos((Body:pos() + Body:forward() * DisBa * 3 ))
+P4:setPos((Body:pos() + Body:forward() * DisBa * 4 ))
+P5:setPos((Body:pos() + Body:forward() * DisBa * 5 ))
+P6:setPos((Body:pos() + Body:forward() * DisBa * 6 ))
+P7:setPos((Body:pos() + Body:forward() * DisBa * 7 ))
+P8:setPos((Body:pos() + Body:forward() * DisBa * 8 ))
+P9:setPos((Body:pos() + Body:forward() * DisBa * 9 ))
+P10:setPos((Body:pos() + Body:forward() * DisBa * 10 ))
+P11:setPos((Body:pos() + Body:forward() * DisBa * 11 ))
+P12:setPos((Body:pos() + Body:forward() * DisBa *12))
+P13:setPos((Body:pos() + Body:forward() * DisBa *13))
+P14:setPos((Body:pos() + Body:forward() * DisBa *14))
+P15:setPos((Body:pos() + Body:forward() * DisBa *15))
+P16:setPos((Body:pos() + Body:forward() * DisBa *16))
+P17:setPos((Body:pos() + Body:forward() * DisBa *17))
+P18:setPos((Body:pos() + Body:forward() * DisBa *18))
+P19:setPos((Body:pos() + Body:forward() * DisBa *19))
+
+
+
+}
+
+function  moveBody(){
+P19:setPos(P18:pos())
+P18:setPos(P17:pos()) 
+P17:setPos(P16:pos()) 
+P16:setPos(P15:pos()) 
+P15:setPos(P14:pos()) 
+P14:setPos(P13:pos())
+P13:setPos(P12:pos()) 
+P12:setPos(P11:pos()) 
+P11:setPos(P10:pos()) 
+P10:setPos(P9:pos()) 
+P9:setPos(P18:pos()) 
+P8:setPos(P7:pos()) 
+P7:setPos(P6:pos()) 
+P6:setPos(P5:pos()) 
+P5:setPos(P4:pos()) 
+P4:setPos(P3:pos()) 
+P3:setPos(P2:pos()) 
+P2:setPos(P1:pos()) 
+P1:setPos(Body:pos()) }
+
+if (first()||duped()){
+    
+    SpawnValidation = 0
+    DisBa = -50
+   
+    SpR = 200
+    OldP = Body:pos()
+    
+    
+    }
+#Body:applyForce((Body:forward()* 1600 ) - Body:vel() - propGravity()* tickInterval()*Body:mass())
+
+ #Body:applyAngForce((Body:toLocal(Angle)*200 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+##"models/hunter/misc/sphere025x025.mdl"
+
+if (SpawnValidation == 0){
+    if (Body:isValid()){
+  
+    
+    freezeStartWorm()
+    SpawnValidation = 1
+  
+    }
+}
+Target = owner()
+   #//////////////////////////////HERE///////////////////////////////////////////////////////////////////////////////////// 
+
+#Body:applyForce((Body:forward()* 100 * Body:mass() ) - Body:vel() - propGravity()* tickInterval()*Body:mass())
+
+ #Body:applyAngForce((Body:toLocal((Target:pos() + vec(0,0,100) - Body:pos()):toAngle())*SpR - Body:angVel()*(SpR / 10))*shiftL(ang(Body:inertia())))
+if( (Body:pos() - OldP):length() > 2){
+moveBody()
+}
+
+else {
+    
+    P1:propFreeze(1)
+P2:propFreeze(1)
+P3:propFreeze(1)
+P4:propFreeze(1)
+P5:propFreeze(1)
+P6:propFreeze(1)
+P7:propFreeze(1)
+P8:propFreeze(1)
+P9:propFreeze(1)
+P10:propFreeze(1)
+P11:propFreeze(1)
+P12:propFreeze(1)
+P13:propFreeze(1)
+P14:propFreeze(1)
+P15:propFreeze(1)
+P16:propFreeze(1)
+P17:propFreeze(1)
+P18:propFreeze(1)
+P19:propFreeze(1)
+    }
+OldP = Body:pos()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

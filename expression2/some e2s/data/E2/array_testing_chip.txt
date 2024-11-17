@@ -1,0 +1,17 @@
+@name Array Testing Chip
+@inputs C:wirelink
+@outputs 
+@persist Array:array I
+@trigger 
+interval(1)
+
+I = random(10)
+
+Array:setString(0,"Hello Test")
+C:writeString(Array[0,string],I,I)
+
+if(I == 10)
+{
+    Array:setString(0, "Suck it")
+    C:writeString(Array[0,string],I,I)
+}

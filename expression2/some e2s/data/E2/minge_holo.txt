@@ -1,0 +1,122 @@
+@name Minge Holo
+@persist Target:entity Color:vector RandomColor:vector
+entity():setColor(255,255,255,0)
+
+
+
+if (Color:x() != RandomColor:x())
+{
+    Color = Color:setX(Color:x() + (Color:x() < RandomColor:x() ? 1 : -1))
+}
+elseif (Color:y() != RandomColor:y())
+{
+    Color = Color:setY(Color:y() + (Color:y() < RandomColor:y() ? 1 : -1))
+}
+elseif (Color:z() != RandomColor:z())
+{
+    Color = Color:setZ(Color:z() + (Color:z() < RandomColor:z() ? 1 : -1))
+}
+else
+{
+    RandomColor = vec(randint(0, 255), randint(0, 255), randint(0, 255))
+}
+
+holoColor( 0, Color)   holoColor( 1, Color)   holoColor( 2, Color)   holoColor( 3, Color)   holoColor( 4, Color)
+holoColor( 5, Color)   holoColor( 6, Color)   holoColor( 7, Color)   holoColor( 8, Color)   holoColor( 9, Color)
+holoColor(10, Color)   holoColor(11, Color)   holoColor(12, Color)   holoColor(13, Color)   holoColor(14, Color)
+holoColor(15, Color)   holoColor(16, Color)   holoColor(17, Color)
+
+if (first() | duped())
+{
+    Target = owner()
+    
+    holoCreate( 0)   holoMaterial( 0, "models/shiny")   holoShadow( 0, 0)
+    holoCreate( 1)   holoMaterial( 1, "models/shiny")   holoShadow( 1, 0)
+    holoCreate( 2)   holoMaterial( 2, "models/shiny")   holoShadow( 2, 0)
+    holoCreate( 3)   holoMaterial( 3, "models/shiny")   holoShadow( 3, 0)
+    holoCreate( 4)   holoMaterial( 4, "models/shiny")   holoShadow( 4, 0)
+    holoCreate( 5)   holoMaterial( 5, "models/shiny")   holoShadow( 5, 0)
+    holoCreate( 6)   holoMaterial( 6, "models/shiny")   holoShadow( 6, 0)
+    holoCreate( 7)   holoMaterial( 7, "models/shiny")   holoShadow( 7, 0)
+    holoCreate( 8)   holoMaterial( 8, "models/shiny")   holoShadow( 8, 0)
+    holoCreate( 9)   holoMaterial( 9, "models/shiny")   holoShadow( 9, 0)
+    holoCreate(10)   holoMaterial(10, "models/shiny")   holoShadow(10, 0)
+    holoCreate(11)   holoMaterial(11, "models/shiny")   holoShadow(11, 0)
+    holoCreate(12)   holoMaterial(12, "models/shiny")   holoShadow(12, 0)
+    holoCreate(13)   holoMaterial(13, "models/shiny")   holoShadow(13, 0)
+    holoCreate(14)   holoMaterial(14, "models/shiny")   holoShadow(14, 0)
+    holoCreate(15)   holoMaterial(15, "models/shiny")   holoShadow(15, 0)
+    holoCreate(16)   holoMaterial(16, "models/shiny")   holoShadow(16, 0)
+    holoCreate(17)   holoMaterial(17, "models/shiny")   holoShadow(17, 0)
+    
+    runOnTick(1)
+    runOnChat(1)
+    timer("New Target", 10)
+}
+
+
+if (clk("New Target"))
+{
+    Origin = Target:pos() + vec(0, 0, 75)
+    
+    #M
+    holoPos( 0, Origin + vec(0, -40, 30))      holoScale( 0, vec(0.5, 3, 0.51))     holoAng( 0, ang(0, 0, 90))    holoParent( 0, Target)
+    holoPos( 1, Origin + vec(0, -40, 30))      holoScale( 1, vec(0.5, 3, 0.51))     holoAng( 1, ang(0, 0, 90))    holoParent( 1, Target)
+    holoPos( 2, Origin + vec(0, -48.05, 30))   holoScale( 2, vec(0.5, 3.09, 0.5))   holoAng( 2, ang(0, 0, 65))    holoParent( 2, Target)
+    holoPos( 3, Origin + vec(0, -63, 30))      holoScale( 3, vec(0.5, 3.09, 0.5))   holoAng( 3, ang(0, 0, -65))   holoParent( 3, Target)
+    holoPos( 4, Origin + vec(0, -71, 30))      holoScale( 4, vec(0.5, 3, 0.51))     holoAng( 4, ang(0, 0, 90))    holoParent( 4, Target)
+    #I
+    holoPos( 5, Origin + vec(0, -27, 30))      holoScale( 5, vec(0.5, 3, 0.51))     holoAng( 5, ang(0, 0, 90))    holoParent( 5, Target)
+    #N
+    holoPos( 6, Origin + vec(0, -13.2, 30))    holoScale( 6, vec(0.5, 3, 0.51))     holoAng( 6, ang(0, 0, 90))    holoParent( 6, Target)
+    holoPos( 7, Origin + vec(0, 0, 30))        holoScale( 7, vec(0.5, 3.42, 0.5))   holoAng( 7, ang(0, 0, -52))   holoParent( 7, Target)
+    holoPos( 8, Origin + vec(0, 13.2, 30))     holoScale( 8, vec(0.5, 3, 0.5))      holoAng( 8, ang(0, 0, 90))    holoParent( 8, Target)
+    #G
+    holoPos( 9, Origin + vec(0, 27, 30))       holoScale( 9, vec(0.5, 3, 0.51))     holoAng( 9, ang(0, 0, 90))    holoParent( 9, Target)
+    holoPos(10, Origin + vec(0, 40, 45))       holoScale(10, vec(0.5, 2.4, 0.51))   holoAng(10, ang(0, 0, 0))     holoParent(10, Target)
+    holoPos(11, Origin + vec(0, 40, 15))       holoScale(11, vec(0.5, 2.4, 0.51))   holoAng(11, ang(0, 0, 0))     holoParent(11, Target)
+    holoPos(12, Origin + vec(0, 51.25, 25))    holoScale(12, vec(0.5, 1.3, 0.51))   holoAng(12, ang(0, 0, 90))    holoParent(12, Target)
+    holoPos(13, Origin + vec(0, 44, 29.7))     holoScale(13, vec(0.5, 1, 0.51))     holoAng(13, ang(0, 0, 0))     holoParent(13, Target)
+    #E
+    holoPos(14, Origin + vec(0, 65, 30))       holoScale(14, vec(0.5, 3, 0.51))     holoAng(14, ang(0, 0, 90))    holoParent(14, Target)
+    holoPos(15, Origin + vec(0, 76, 30))       holoScale(15, vec(0.5, 2, 0.51))     holoAng(15, ang(0, 0, 0))     holoParent(15, Target)
+    holoPos(16, Origin + vec(0, 76, 45))       holoScale(16, vec(0.5, 2.2, 0.51))   holoAng(16, ang(0, 0, 0))     holoParent(16, Target)
+    holoPos(17, Origin + vec(0, 76, 15))       holoScale(17, vec(0.5, 2.2, 0.51))   holoAng(17, ang(0, 0, 0))     holoParent(17, Target)
+}
+
+
+if (chatClk(owner()))
+{
+    Command = owner():lastSaid():explode(" "):string(1)
+    Argument = owner():lastSaid():explode(" "):string(2)
+    
+    if (Command == "-minge")
+    {
+        if (Argument)
+        {
+            Target = findPlayerByName(Argument)
+        
+            if (Target)
+            {
+                timer("New Target", 10)
+            }
+            else
+            {
+                hint("Couldn't find player.", 7)
+            }
+        }
+        else
+        {
+            Target = owner():aimEntity()
+            
+            if (Target)
+            {
+                timer("New Target", 10)
+            }
+            else
+            {
+                hint("You're not aiming at an entity.", 7)
+            }
+        }
+    }
+}

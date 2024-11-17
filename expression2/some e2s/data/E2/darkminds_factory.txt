@@ -1,0 +1,42 @@
+@name Darkminds Factory
+@inputs Button
+@outputs Grab Spawn Hy
+@persist 
+@trigger 
+
+runOnTick(1)
+
+timer("grab",8000)
+timer("spawn",7500)
+timer("drop",9000)
+timer("HY",5000)
+timer("HY2",5500)
+timer("Up",6000)
+
+if (Button == 1)
+{
+    if (clk("grab"))
+    {
+        Grab = 1
+    }
+
+    if (clk("spawn"))
+    {
+    Spawn = 1
+    }
+
+    if (clk("drop"))
+    {
+        Grab = 0
+    }
+
+    if (clk("HY"))
+    {
+       Hy = 50
+    }
+
+    if (clk("Up"))
+    {
+        Hy = 0
+    }
+}

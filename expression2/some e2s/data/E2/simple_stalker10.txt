@@ -1,0 +1,11 @@
+@name Simple Stalker
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+TargetPos=owner():pos()
+CurrentPos=entity():isWeldedTo():pos()
+Vector =TargetPos-CurrentPos
+entity():isWeldedTo():applyForce(Vector)
+

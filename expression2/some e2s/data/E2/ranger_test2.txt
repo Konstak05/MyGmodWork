@@ -1,0 +1,72 @@
+@name Ranger_Test2
+@persist E:entity R:array
+
+if (first() | duped()) {
+    runOnTick(1)
+    E = entity()
+    
+    for(I=1,6){
+        holoCreate(I)
+        holoModel(I, "hqicosphere2")
+    }
+    R = array(vec(0,0,1),vec(1,0,0),vec(0,1,0),
+            vec(0,0,-1),vec(-1,0,0),vec(0,-1,0))
+#    holoCreate(2)
+#    holoCreate(3)
+#    holoCreate(4)
+#    holoCreate(5)
+#    holoCreate(6)
+#    holoModel(2, "hqicosphere2")
+#    holoModel(3, "hqicosphere2")
+#    holoModel(4, "hqicosphere2")
+#    holoModel(5, "hqicosphere2")
+#    holoModel(6, "hqicosphere2")
+}
+
+for(I=1,6){
+    D = R[I,vector]
+    Ro = rangerOffset(30, E:pos(), D)
+    holoPos(I, Ro:position())
+    if(Ro:hit()){
+        Dir = (E:pos()-Ro:position())
+        E:applyForce(Dir*E:mass())
+    }
+}
+
+#R = rangerOffset(30, E:pos(), E:up())
+#R2 = rangerOffset(30, E:pos(), E:right())
+#R3 = rangerOffset(30, E:pos(), E:forward())
+#R4 = rangerOffset(30, E:pos(), E:up()*-1)
+#R5 = rangerOffset(30, E:pos(), E:right()*-1)
+#R6 = rangerOffset(30, E:pos(), E:forward()*-1)
+
+#holoPos(1, R:position())
+#holoPos(2, R2:position())
+#holoPos(3, R3:position())
+#holoPos(4, R4:position())
+#holoPos(5, R5:position())
+#holoPos(6, R6:position())
+
+#if (R:hit()) {
+#    E:applyForce(-R:position() + E:pos() + vec(0,0,1))
+#}
+
+#if (R2:hit()) {
+#    E:applyForce(-R:position() + E:pos() + vec(1,0,0))
+#}
+
+#if (R3:hit()) {
+#    E:applyForce(-R:position() + E:pos() + vec(0,0,-1))
+#}
+
+#if (R4:hit()) {
+#    E:applyForce(-R:pos() + E:pos())
+#}
+
+#if (R5:hit()) {
+#    E:applyForce(-R:pos() + E:pos())
+#}
+
+#if (R6:hit()) {
+#    E:applyForce(-R:pos() + E:pos())
+#}

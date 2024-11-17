@@ -1,0 +1,73 @@
+@name Holo Character remake
+@inputs [Pod Cam]:wirelink Seat:entity
+
+runOnTick(1)
+
+if (first())
+{
+    holoCreate(1)
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-50)
+}
+
+E = holoEntity(1)
+Chair = entity():isConstrainedTo()
+Seat = Chair:driver()
+
+W = Pod["W",number]
+S = Pod["S",number]
+A = Pod["A",number]
+D = Pod["D",number]
+Shift = Pod["Shift",number]
+Active = Pod["Active",number]
+
+if (Active)
+{
+    holoAng(1, Chair:toLocal(Seat:eyeAngles())) 
+}
+
+if (W)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*3)
+}
+
+if (S)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-3)
+}
+
+if (A)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*-3)
+}
+
+if (D)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*3)
+}
+
+if (Shift & W)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*6)
+}
+
+if (Shift & S)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-6)
+}
+
+if (Shift & A)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*-6)
+}
+
+if (Shift & D)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*6)
+}
+
+
+Cam:setVector("Direction",E:forward()*10)
+Cam:setVector("Position",E:toWorld(vec(-20,0,10)))
+Cam:setAngle("Angle",E:angles())
+
+

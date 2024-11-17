@@ -1,0 +1,47 @@
+@name Elevator e2
+@inputs Lv0 Lv1 Lv2 Lv3 Lv4 Lv5 BREAK
+@outputs Light:vector HY Weld
+@persist I
+@trigger 
+
+runOnTick(1)
+
+I += 5
+
+if (Lv0) {
+    Hy = 0
+}
+
+if (Lv1) {
+    HY = 100
+}
+
+if (Lv2) {
+    Hy = 150
+}
+
+if (Lv3) {
+    Hy = 200
+}
+
+if (Lv4) {
+    Hy = 250
+}
+
+if (Lv5) {
+    Hy = 300
+}
+
+if (BREAK) {
+    Weld = 1
+    Light = vec(I,0,0)
+}else
+{
+    Light = vec(0,0,0)
+    Weld = 0
+}
+
+if (Light == vec(255,0,0))
+{
+    Light = vec(0,0,0)
+}

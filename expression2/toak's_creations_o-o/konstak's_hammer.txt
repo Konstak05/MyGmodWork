@@ -1,0 +1,133 @@
+@name Konstak's Hammer
+@inputs 
+@outputs 
+@persist PickedUp Plrs:array RandoWorthy:entity Owner:entity ColBlock:entity Worthy:array
+@trigger 
+
+interval(50)
+
+Plrs=players()
+
+if(first()) {
+Worthy:insertEntity(4,findPlayerBySteamID("STEAM_0:1:445623953"))
+
+#Hammer Pickup Place
+holoCreate(1)
+holoScale(1,vec(4,3,2))
+holoPos(1, entity():pos()+vec(0,0,10))
+holoColor(1, vec(75,75,75))
+
+holoCreate(2)
+holoScale(2,vec(3,2,1))
+holoPos(2, entity():pos()+vec(0,0,25))
+holoColor(2, vec(100,100,100))
+
+holoCreate(3)
+holoScale(3,vec(4.2,3.2,0.5))
+holoPos(3, entity():pos()+vec(0,0,15))
+holoColor(3, vec(255,255,255))
+#Hammer
+holoCreate(4)
+holoScale(4,vec(1.9,1.3,1))
+holoPos(4, entity():pos()+vec(0,0,35))
+holoColor(4, vec(75,75,255))
+holoAng(4,ang(15,25,25))
+
+holoCreate(5)
+holoScale(5,vec(0.4,0.4,2))
+holoPos(5, toWorld(vec(0,0,15),ang(),holoEntity(4):pos(),holoEntity(4):angles()))
+holoColor(5, vec(75,75,255))
+holoAng(5,ang(15,25,25))
+
+holoCreate(6)
+holoScale(6,vec(0.7,0.7,0.3))
+holoPos(6, toWorld(vec(0,0,6),ang(),holoEntity(4):pos(),holoEntity(4):angles()))
+holoColor(6, vec(0,0,0))
+holoModel(6,"cylinder")
+holoAng(6,ang(15,25,25))
+
+holoCreate(7)
+holoScale(7,vec(0.7,0.7,0.3))
+holoPos(7, toWorld(vec(0,0,27),ang(),holoEntity(4):pos(),holoEntity(4):angles()))
+holoColor(7, vec(0,0,0))
+holoModel(7,"cylinder")
+holoAng(7,ang(15,25,25))
+
+holoCreate(8)
+holoScale(8,vec(0.7,0.7,0.3))
+holoPos(8, toWorld(vec(0,0,-5),ang(),holoEntity(4):pos(),holoEntity(4):angles()))
+holoColor(8, vec(0,0,0))
+holoModel(8,"cylinder")
+holoAng(8,ang(15,25,25))
+}
+
+foreach(K,V:entity=Worthy) {
+if(V:pos():distance(holoEntity(3):pos())<=50) {
+    if(!Owner:isValid()) {
+    PickedUp=1
+    Owner=V
+    hint(Owner:name()+" Is now the owner!",1)
+    holoDelete(4)
+    holoDelete(5)
+    holoDelete(6)
+    holoDelete(7)
+    holoDelete(8)
+    }
+}
+}
+
+if(PickedUp) {
+holoCreate(10)
+holoScale(10,vec(0.4,0.4,2))
+holoPos(10, toWorld(vec(0,0,6),ang(),Owner:attachmentPos("anim_attachment_RH"),Owner:attachmentAng("righthand")))
+holoColor(10, vec(75,75,255))
+holoAng(10,Owner:attachmentAng("anim_attachment_RH"))    
+
+holoCreate(11)
+holoScale(11,vec(1.9,1.3,1))
+holoPos(11, toWorld(vec(0,0,13),ang(),holoEntity(10):pos(),holoEntity(10):angles()))
+holoColor(11, vec(75,75,255))
+holoAng(11,Owner:attachmentAng("anim_attachment_RH"))
+
+
+holoCreate(12)
+holoScale(12,vec(0.7,0.7,0.3))
+holoPos(12, toWorld(vec(0,0,7),ang(),holoEntity(10):pos(),holoEntity(10):angles()))
+holoColor(12, vec(0,0,0))
+holoModel(12,"cylinder")
+holoAng(12,Owner:attachmentAng("anim_attachment_RH"))
+
+holoCreate(13)
+holoScale(13,vec(0.7,0.7,0.3))
+holoPos(13, toWorld(vec(0,0,18),ang(),holoEntity(10):pos(),holoEntity(10):angles()))
+holoColor(13, vec(0,0,0))
+holoModel(13,"cylinder")
+holoAng(13,Owner:attachmentAng("anim_attachment_RH"))
+
+holoCreate(14)
+holoScale(14,vec(0.7,0.7,0.3))
+holoPos(14, toWorld(vec(0,0,-10),ang(),holoEntity(10):pos(),holoEntity(10):angles()))
+holoColor(14, vec(0,0,0))
+holoModel(14,"cylinder")
+holoAng(14,Owner:attachmentAng("anim_attachment_RH"))
+if(!ColBlock:isValid()) {
+    timer("SpawnBlock",800)
+}
+}
+if(clk("SpawnBlock")) {
+    ColBlock=propSpawn("models/hunter/blocks/cube075x075x075.mdl",ang(),0)
+    ColBlock:setMass(50000)
+    noCollide(Owner,ColBlock)
+    ColBlock:setAlpha(0)
+    stoptimer("SpawnBlock")
+}
+
+if(ColBlock:isValid()) {
+    ColBlock:applyForce(((toWorld(vec(0,0,5),ang(),holoEntity(13):pos(),holoEntity(11):angles())-ColBlock:pos())*15-ColBlock:vel())*ColBlock:mass()) 
+    ColBlock:applyAngForce((((holoEntity(13):angles())-ColBlock:angles())*25-ColBlock:angVel())*ColBlock:mass()) 
+}
+if(Owner:keyAttack1()) {
+    noCollideAll(ColBlock,0)
+} else {
+    noCollideAll(ColBlock,1)
+}

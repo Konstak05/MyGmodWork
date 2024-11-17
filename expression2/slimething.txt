@@ -1,0 +1,13 @@
+@name slimething
+@inputs Prop1:entity
+@outputs 
+@persist 
+@trigger 
+
+interval(1)
+holoCreate(1)
+holoPos(1,Prop1:pos())
+holoScale(1,vec(5) + clamp( Prop1:vel() / 24, vec( 0.2 ), vec( 5 ) ) )
+holoModel(1,"hq_sphere")
+
+

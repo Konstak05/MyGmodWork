@@ -1,0 +1,166 @@
+@name PodController
+@inputs 
+@outputs A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Space Shift Alt Driver:entity
+@persist Chair:entity
+@trigger 
+@model models/jaanus/wiretool/wiretool_range.mdl
+
+interval(125)
+
+if(!Chair:isValid()) {
+    findIncludePlayerProps(owner())
+    findIncludeClass("vehicle")
+    Chair=findClosest(entity():pos())
+    entity():setColor(255,75,75)
+} 
+if(Chair:isValid()) {
+    entity():setColor(75,255,75)
+}
+
+if(owner():keyPressed("A")) {
+    A=1
+} else {
+    A=0
+}
+if(owner():keyPressed("B")) {
+    B=1
+} else {
+    B=0
+}
+if(owner():keyPressed("C")) {
+    C=1
+} else {
+    C=0
+}
+if(owner():keyPressed("D")) {
+    D=1
+} else {
+    D=0
+}
+if(owner():keyPressed("E")) {
+    E=1
+} else {
+    E=0
+}
+if(owner():keyPressed("F")) {
+    F=1
+} else {
+    F=0
+}
+if(owner():keyPressed("G")) {
+    G=1
+} else {
+    G=0
+}
+if(owner():keyPressed("H")) {
+    H=1
+} else {
+    H=0
+}
+if(owner():keyPressed("I")) {
+    I=1
+} else {
+    I=0
+}
+if(owner():keyPressed("J")) {
+    J=1
+} else {
+    J=0
+}
+if(owner():keyPressed("K")) {
+    K=1
+} else {
+    K=0
+}
+if(owner():keyPressed("L")) {
+    L=1
+} else {
+    L=0
+}
+if(owner():keyPressed("M")) {
+    M=1
+} else {
+    M=0
+}
+if(owner():keyPressed("N")) {
+    N=1
+} else {
+    N=0
+}
+if(owner():keyPressed("O")) {
+    O=1
+} else {
+    O=0
+}
+if(owner():keyPressed("P")) {
+    P=1
+} else {
+    P=0
+}
+if(owner():keyPressed("Q")) {
+    Q=1
+} else {
+    Q=0
+}
+if(owner():keyPressed("R")) {
+    R=1
+} else {
+    R=0
+}
+if(owner():keyPressed("S")) {
+    S=1
+} else {
+    S=0
+}
+if(owner():keyPressed("T")) {
+    T=1
+} else {
+    T=0
+}
+if(owner():keyPressed("U")) {
+    U=1
+} else {
+    U=0
+}
+if(owner():keyPressed("V")) {
+    V=1
+} else {
+    V=0
+}
+if(owner():keyPressed("W")) {
+    W=1
+} else {
+    W=0
+}
+if(owner():keyPressed("X")) {
+    X=1
+} else {
+    X=0
+}
+if(owner():keyPressed("Y")) {
+    Y=1
+} else {
+    Y=0
+}
+if(owner():keyPressed("Z")) {
+    Z=1
+} else {
+    Z=0
+}
+if(owner():keyJump()) {
+    Space=1
+} else {
+    Space=0
+}
+if(owner():keyWalk()) {
+    Alt=1
+} else {
+    Alt=0
+}
+if(owner():keySprint()) {
+    Shift=1
+} else {
+    Shift=0
+}
+
+Driver=Chair:driver()

@@ -1,0 +1,19 @@
+@name Edit me!
+@outputs ForwardSpeed BackwardSpeed TurningSpeed
+################
+#Car Properties#
+#              #
+#By PostPwned  #
+################
+######
+#################
+#####################
+#  User Variables   #
+#####################
+ForwardSpeed=90     #
+BackwardSpeed=15  #
+TurningSpeed=7      #
+#####################
+#Have fun##
+##########
+#Thanks for clicking the picture :3

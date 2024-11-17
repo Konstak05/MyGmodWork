@@ -1,0 +1,11 @@
+@name Targeting system
+@inputs  Beacon Target:entity
+@outputs VecThrust:vector Mul
+@persist 
+@trigger 
+
+runOnTick(1)
+
+VecThruster = Target:pos()
+
+Mul = 1000

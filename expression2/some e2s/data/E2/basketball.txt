@@ -1,0 +1,31 @@
+@name Basketball
+@persist Bounce
+
+runOnTick(1)
+
+Bounce += 1
+
+if (first()) {
+    holoCreate(1)
+    holoModel(1, "hqicosphere2")
+    holoPos(1, entity():pos())
+    holoParent(1, entity())
+    holoScale(1, vec(2,2,2))
+}
+
+Ra = rangerOffset(10, entity():pos(), entity():up()*-1)
+Ra2 = rangerOffset(10, entity():pos(), entity():up())
+Ra3 = rangerOffset(10, entity():pos(), entity():up()*-1)
+Ra4 = rangerOffset(10, entity():pos(), entity():up()*-1)
+
+if (Ra:hit()) {
+    entity():applyForce(-Ra:position() + entity():pos() + vec(0,0,Bounce))
+}
+
+if (Ra2:hit()) {
+    entity():applyForce(-Ra2:position() + entity():pos() + vec(0,0,Bounce))
+}
+
+if (Bounce == 100) {
+    Bounce = 0
+}

@@ -1,0 +1,9 @@
+@name EGP Draw
+@inputs Screen:wirelink
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+    
+Screen:egpBox(1,vec2(randint(150),randint(155)),randvec2(10,15))

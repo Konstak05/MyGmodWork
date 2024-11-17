@@ -1,0 +1,149 @@
+@name FailCake Sentry Portal
+@persist Time Pos:vector Auto Push
+@outputs Ready Screen
+@trigger all
+interval(100)
+
+if(first()){hint("Made By FailCake",100)}
+
+E = owner()
+EE = entity()
+EE:setAlpha(0)
+Time += 0.1
+
+Songs=array()
+Songs:setString(1,"npc/turret_floor/turret_active_1.wav")
+Songs:setString(2,"npc/turret_floor/turret_active_2.wav")
+Songs:setString(3,"npc/turret_floor/turret_active_3.wav")
+Songs:setString(4,"npc/turret_floor/turret_active_4.wav")
+Songs:setString(5,"npc/turret_floor/turret_active_5.wav")
+Songs:setString(6,"npc/turret_floor/turret_active_6.wav")
+Songs:setString(7,"npc/turret_floor/turret_active_7.wav")
+Songs:setString(8,"npc/turret_floor/turret_active_8.wav")
+Songs:setString(9,"vo/aperture_ai/13_part1_endnag-1.wav")
+Songs:setString(10,"vo/aperture_ai/13_part1_endnag-2.wav")
+Songs:setString(11,"vo/aperture_ai/13_part1_endnag-3.wav")
+Songs:setString(12,"vo/aperture_ai/13_part1_endnag-4.wav")
+Songs:setString(13,"vo/aperture_ai/13_part1_endnag-5.wav")
+Songs:setString(14,"vo/aperture_ai/13_part1_endnag-6.wav")
+Songs:setString(15,"vo/aperture_ai/13_part1_endnag-7.wav")
+Songs:setString(16,"vo/aperture_ai/13_part1_endnag-8.wav")
+
+Songs:setString(17,"vo/aperture_ai/00_part1_entry-1.wav")
+Songs:setString(18,"vo/aperture_ai/00_part1_entry-2.wav")
+Songs:setString(19,"vo/aperture_ai/00_part1_entry-3.wav")
+
+
+Songs:setString(20,"vo/aperture_ai/13_part1_end-1.wav")
+Songs:setString(21,"vo/aperture_ai/13_part1_end-2.wav")
+Songs:setString(22,"vo/aperture_ai/13_part1_end-3.wav")
+
+
+Songs:setString(23,"vo/aperture_ai/13_part1_endnag-1.wav")
+Songs:setString(24,"vo/aperture_ai/13_part1_endnag-2.wav")
+Songs:setString(25,"vo/aperture_ai/13_part1_endnag-3.wav")
+Songs:setString(26,"vo/aperture_ai/13_part1_endnag-4.wav")
+
+Songs:setString(27,"vo/aperture_ai/14_part1_end-1.wav")
+Songs:setString(28,"vo/aperture_ai/14_part1_end-2.wav")
+Songs:setString(29,"vo/aperture_ai/14_part1_end-3.wav")
+Songs:setString(30,"vo/aperture_ai/14_part1_end-4.wav")
+
+Songs:setString(31,"vo/aperture_ai/file_deleted.wav")
+Songs:setString(33,"vo/aperture_ai/15_part1_into_the_fire-5.wav")
+Songs:setString(34,"vo/aperture_ai/escape_02_ballhitpain-02.wav")
+
+Songs:setString(35,"vo/aperture_ai/escape_02_spheredestroy1-01.wav")
+Songs:setString(36,"vo/aperture_ai/00_part1_entry-6.wav")
+Songs:setString(37,"vo/aperture_ai/07_part2_success-1.wav")
+Songs:setString(38,"vo/aperture_ai/07_part2_success-2.wav")
+
+Songs:setString(39,"vo/aperture_ai/10_part1_entry-2.wav")
+Songs:setString(40,"vo/aperture_ai/13_part1_endnag-8.wa")
+Songs:setString(41,"vo/aperture_ai/13_part1_endnag-7.wa")
+
+
+Songs:setString(42,"vo/aperture_ai/escape_02_sphere_curiosity-01.wav")
+Songs:setString(43,"vo/aperture_ai/escape_02_sphere_curiosity-02.wav")
+Songs:setString(44,"vo/aperture_ai/escape_02_sphere_curiosity-03.wav")
+Songs:setString(45,"vo/aperture_ai/escape_02_sphere_curiosity-04.wav")
+Songs:setString(46,"vo/aperture_ai/escape_02_sphere_curiosity-05.wav")
+Songs:setString(47,"vo/aperture_ai/escape_02_sphere_curiosity-06.wav")
+Songs:setString(48,"vo/aperture_ai/escape_02_sphere_curiosity-07.wav")
+Songs:setString(49,"vo/aperture_ai/escape_02_sphere_curiosity-08.wav")
+Songs:setString(50,"vo/aperture_ai/escape_02_sphere_curiosity-09.wav")
+Songs:setString(51,"vo/aperture_ai/escape_02_sphere_curiosity-10.wav")
+Songs:setString(52,"vo/aperture_ai/escape_02_sphere_curiosity-11.wav")
+Songs:setString(53,"vo/aperture_ai/escape_02_sphere_curiosity-12.wav")
+
+Songs:setString(54,"vo/aperture_ai/escape_02_sphere_curiosity-13.wav")
+Songs:setString(55,"vo/aperture_ai/escape_02_sphere_curiosity-14.wav")
+Songs:setString(56,"vo/aperture_ai/escape_02_sphere_curiosity-15.wav")
+Songs:setString(57,"vo/aperture_ai/escape_02_sphere_curiosity-16.wav")
+Songs:setString(58,"vo/aperture_ai/escape_02_sphere_curiosity-17.wav")
+
+
+Songs:setString(59,"vo/aperture_ai/escape_02_ballhitpain-02.wav")
+Songs:setString(60,"vo/aperture_ai/escape_02_entry-00.wav")
+Songs:setString(61,"vo/aperture_ai/escape_02_entry-01.wav")
+Songs:setString(62,"vo/aperture_ai/escape_02_entry-02.wav")
+Songs:setString(63,"vo/aperture_ai/escape_02_entry-03.wav")
+Songs:setString(64,"vo/aperture_ai/escape_02_entry-04.wav")
+Songs:setString(65,"vo/aperture_ai/escape_02_entry-05.wav")
+
+
+Songs:setString(66,"npc/turret_floor/turret_fizzler_1.wav")
+Songs:setString(67,"npc/turret_floor/turret_disabled_2.wav")
+
+Songs:setString(32,"vo/aperture_ai/escape_02_sphere_cakemix-01.wav")
+Songs:setString(68,"vo/aperture_ai/escape_02_sphere_cakemix-02.wav")
+Songs:setString(69,"vo/aperture_ai/escape_02_sphere_cakemix-03.wav")
+Songs:setString(70,"vo/aperture_ai/escape_02_sphere_cakemix-04.wav")
+Songs:setString(71,"vo/aperture_ai/escape_02_sphere_cakemix-05.wav")
+Songs:setString(72,"vo/aperture_ai/escape_02_sphere_cakemix-06.wav")
+Songs:setString(73,"vo/aperture_ai/escape_02_sphere_cakemix-07.wav")
+
+
+Auto += 0.1
+if(Auto == 20){
+R=randint(1,73)
+E:soundPlay(7331,0,Songs:string(R))
+soundVolume(7331,999999)
+soundPitch(7331,100)
+}
+if(Auto >= 50){Auto = 0}
+
+
+if(E:keyAttack2() & Ready == 0){
+Ready = 1
+Auto = 0
+R=randint(1,73)
+Screen = R
+E:soundPlay(7331,0,Songs:string(R))
+soundVolume(7331,999999)
+soundPitch(7331,100)
+}
+
+if(Time <= soundDuration(Songs:string(R))){
+soundStop(7331)
+Time = 0
+}
+
+if(Ready){
+if(Push <= 1){
+Push+=0.1
+}else{
+Push+=0
+Push = 0
+Ready = 0
+}
+}
+
+
+if(duped()){selfDestructAll()}
+if(duped()){selfDestructAll()}
+if(duped()){selfDestructAll()}
+
+####################################################################
+## Do not rename the E2 or remove the hint("Made by Failcake",100)##
+####################################################################

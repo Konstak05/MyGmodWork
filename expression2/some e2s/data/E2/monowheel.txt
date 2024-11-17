@@ -1,0 +1,53 @@
+@name MonoWheel
+@inputs Pod:wirelink
+@outputs 
+@persist I
+@trigger 
+
+I += 1
+
+W = Pod["W",number]
+
+
+
+if (first()) {
+    E = entity():isConstrainedTo()
+    Color = random(255)
+    
+    holoCreate(1)
+    holoModel(1, "hqtorus")
+    holoPos(1, E:pos() + E:up()*25 + E:forward()*1)
+    holoScale(1, vec(8,8,8))
+    holoAng(1, E:angles() + ang(90,0,0))
+    holoParent(1, E)
+    #holoColor(1, vec(0,0,0))
+    holoMaterial(1, "phoenix_storms/iron_rails")
+    
+    
+    holoCreate(2)
+    holoPos(2, E:pos() + E:up()*23 + E:forward()*1)
+    holoScale(2, vec(7,7,7))
+    holoAng(2, E:angles() + ang(90,0,0))
+    holoParent(2, E)
+    holoMaterial(2, "models/debug/debugwhite")
+    runOnTick(1)
+    holoColor(2, hsv2rgb(Color,150,50))
+    holoModel(2, "hqtorus2")
+    
+    holoCreate(3)
+    
+    holoParent(3, E)
+}
+
+Ra = rangerOffset(50, holoEntity(2):pos(), vec(0,0,-1))
+
+holoPos(3, Ra:position())
+
+if (Ra:hit()) {
+    E:applyForce(-Ra:position() + E:pos() + vec(0,0,1000))
+}
+
+if (W) {
+    E:applyForce(E:forward()*5)
+}
+

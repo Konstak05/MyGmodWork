@@ -1,0 +1,38 @@
+@name Master Control Program
+@inputs Seat:wirelink
+@outputs 
+@persist Ent:entity
+@trigger 
+@model models/hunter/blocks/cube025x025x025.mdl
+if(first()){
+    Ent = entity():isWeldedTo()
+   #Ent:setMass(250)
+}
+runOnTick(1)
+
+W = Seat["W",normal]
+A = Seat["A",normal]
+S = Seat["S",normal]
+D = Seat["D",normal]
+Shift = Seat["Shift",normal]
+Space = Seat["Space",normal]
+
+if(W){
+    Ent:applyForce(Ent:right()*-(1500+(800*Shift)))
+}
+if(S){
+    Ent:applyForce(Ent:right()*(1500+(800*Shift)))
+}
+if(A){
+    Ent:applyTorque(vec(0,0,-10000*(Shift*7+5)))
+}
+if(D){
+    Ent:applyTorque(vec(0,0,10000*(Shift*7+5)))
+}
+if(Space){
+    gSetNum("stopme",1)
+}
+else{
+    gSetNum("stopme",0)
+}
+Ent:applyAngForce(-Ent:angVel()*150)

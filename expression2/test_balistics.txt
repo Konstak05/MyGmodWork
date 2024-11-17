@@ -1,0 +1,41 @@
+@name Test Balistics
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+function vector calculateLaunchVector( Start:vector, Target:vector, AddHeight ) {
+    
+    local TargetHeight = Target:z() - Start:z()
+    
+    local PeakHeight = AddHeight + max( TargetHeight, 0 )
+    local VerticalSpeed = sqrt( 2 * gravity() * PeakHeight )
+    
+    local AirTime = ( VerticalSpeed + sqrt( VerticalSpeed ^ 2 - 2 * gravity() * TargetHeight ) ) / gravity()
+    
+    local HorizontalDifference = vec2( Target - Start )
+    local HorizontalVelocity = HorizontalDifference / AirTime
+    
+    return vec( HorizontalVelocity, VerticalSpeed )
+    
+}
+
+if( first() ) {
+    
+    runOnTick( 1 )
+    
+}
+
+if( tickClk() ) {
+    
+    local Key = owner():keyPressed( "K" )
+    
+    if( changed( Key ) & Key ) {
+    
+        local LaunchVector = calculateLaunchVector( owner():pos(), owner():aimPos(), 300 )
+        
+        owner():plyApplyForce( ( LaunchVector - owner():vel() ) )
+        
+    }
+    
+}

@@ -1,0 +1,61 @@
+@name Snow man
+@persist Timer
+interval(10)
+Me=owner()
+Chip=entity()
+Timer=Timer+1*1
+T=Timer
+
+if(first()) {holoCreate(1)}
+
+holoModel(1,"hqcube")
+holoPos(1,Chip:pos()+vec(0,0,40))
+holoAng(1,ang(0,0,0))
+holoColor(1,vec(255,150,0))
+holoScale(1, vec(1,1,25))
+holoMaterial(1,"models/shiny")
+
+if(first()) {holoCreate(2)}
+
+holoModel(2,"hqcone")
+holoPos(2,Chip:pos()+vec(0,0,180))
+holoAng(2,ang(0,0,0))
+holoColor(2,vec(0,255,0))
+holoScale(2, vec(7,7,7))
+holoMaterial(2,"models/shiny")
+
+if(first()) {holoCreate(3)}
+
+holoModel(3,"hqcone")
+holoPos(3,Chip:pos()+vec(0,0,160))
+holoAng(3,ang(0,0,0))
+holoColor(3,vec(0,255,0))
+holoScale(3, vec(9,9,9))
+holoMaterial(2,"models/shiny")
+
+if(first()) {holoCreate(4)}
+
+holoModel(4,"hqcone")
+holoPos(4,Chip:pos()+vec(0,0,135))
+holoAng(4,ang(0,0,0))
+holoColor(4,vec(0,255,0))
+holoScale(4, vec(12,12,12))
+holoMaterial(4,"models/shiny")
+
+if(first()) {holoCreate(5)}
+
+holoModel(5,"hqcone")
+holoPos(5,Chip:pos()+vec(0,0,100))
+holoAng(5,ang(0,0,0))
+holoColor(5,vec(0,255,0))
+holoScale(5, vec(15,15,10))
+holoMaterial(5,"models/shiny")
+
+if(first()) {holoCreate(6)}
+
+holoModel(6,"hqicosphere")
+holoPos(6,Chip:pos()+vec(0,0,220))
+holoAng(6,ang(0,0,0))
+holoColor(6,vec(255,255,0))
+holoScale(6, vec(2,2,2))
+holoMaterial(6,"models/shiny")

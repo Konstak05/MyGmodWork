@@ -1,0 +1,37 @@
+@name Memory
+@inputs Screen:wirelink Button
+@outputs Memory
+@persist 
+@trigger 
+ 
+
+if (first())
+{
+    Memory = 2000
+    GB = 520
+    InUse = 0
+    
+    runOnTick(1)
+}
+
+timer("write",5000)
+
+
+
+if (Button == 1)
+{
+    if (clk("write"))
+    {
+        Screen:writeString("Welcome Player",0,5)
+    }
+    
+    Screen:writeString("Memory:" + Memory,5,0)
+    Screen:writeString("GB in use " + InUse + " out of " + GB,5,2)
+    
+    I = 20
+}
+
+
+
+
+

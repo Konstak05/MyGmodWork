@@ -1,0 +1,20 @@
+@name Turret controller by Diehard
+@inputs Pod:wirelink E:entity
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+Mouse1 = Pod["Mouse1",number]
+Active = Pod["Active",number]
+
+
+
+Chair = entity():isConstrainedTo()
+Seat = Chair:driver()
+
+if (Active)
+{
+    E:setAng(Chair:toLocal(Seat:eyeAngles()))
+}   

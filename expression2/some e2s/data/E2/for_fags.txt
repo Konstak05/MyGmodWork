@@ -1,0 +1,46 @@
+@name For Fags
+@inputs 
+@outputs 
+@persist Player:entity X Y Z H:entity
+runOnTick(1)
+
+H = holoEntity(1)
+Y = Y+1
+X = sin(Y)
+Z = cos(Y) 
+
+if(first()){
+    holoCreate(1)
+    holoCreate(2)
+    holoMaterial(1, "models/debug/debugwhite")
+    
+    
+}
+
+holoColor(1, randvec())
+
+hideChat(1)
+S = owner():lastSaid():explode(" ")
+
+if(S:string(1)=="/f"){
+      
+    TempPlayer = findPlayerByName(S:string(2))
+    if(TempPlayer:isPlayer()){
+        Player = TempPlayer
+    } 
+      
+}
+
+                  
+
+
+holoScale(1, vec(-7,-7,-7))
+holoPos(1, Player:pos() + vec(0,0,50))
+holoParent(1, Player)
+holoAng(1, Player:angles())
+ 
+holoEntity(1):soundPlay(0,0," synth/12_5_pwm_440.wav")
+
+##########################################################
+##DO NOT REMOVE ANYTHING OR EDIT ANYTHING PLEASE THANKS!##
+##########################################################

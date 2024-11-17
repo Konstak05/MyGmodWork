@@ -1,0 +1,19 @@
+@name Holo Test Chip
+@inputs 
+@outputs 
+@persist 
+@trigger 
+interval(1)
+
+timer("light",2000)
+if(first())
+{
+    holoCreate(1)
+    holoPos(1, entity():pos())
+    holoParent(1, entity())
+}
+
+if(clk("light"))
+{
+    holoColor(1, vec(255,0,0))
+}else{holoColor(1, vec(0,0,0))}

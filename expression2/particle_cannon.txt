@@ -1,0 +1,225 @@
+@name Particle Cannon
+@inputs 
+@outputs 
+@persist CannonPos:vector Sound:string SoundCdTimer I X F TurnRelSpeed TurnSpeed TurnSpeedMax KillProp:entity EntityRangerFinder:ranger
+@trigger 
+
+if(first()) {
+    TurnSpeedMax=55
+    TurnSpeed=1
+    timer("SpawnKillProp",800)
+    Sound="ambient/energy/electric_loop.wav"
+    SoundCdTimer=soundDuration(Sound)
+}
+
+SoundCdTimer-=soundDuration(Sound)/125
+
+interval(240)
+
+rangerFilter(KillProp)
+rangerIgnoreWorld(1)
+EntityRangerFinder=rangerOffset(1500000000, holoEntity(8):pos(), -holoEntity(8):up())
+
+X++
+
+if(clk("SpawnKillProp")) {
+    KillProp=propSpawn("models/hunter/blocks/cube05x05x05.mdl",ang(),0)
+    noCollide(KillProp,owner())
+    KillProp:setMass(50000)
+    KillProp:setAlpha(0)
+}
+
+if(owner():keyPressed("T")) {
+    if(TurnSpeed<=TurnSpeedMax) {
+    TurnSpeed+=TurnSpeedMax/15
+    }
+    TurnRelSpeed+=TurnSpeed
+} else {
+    if(TurnSpeed<=1 ) {
+    TurnSpeed=1
+    } else {
+    TurnSpeed-=TurnSpeedMax/35
+    }
+}
+
+CannonPos=toWorld(vec(-25,0,100),ang(),owner():pos(),owner():angles())
+#CannonPos=toWorld(vec(-65,0,55),ang(),entity():pos(),entity():angles())
+
+holoCreate(1)
+holoPos(1, CannonPos)
+holoModel(1, "cylinder")
+holoColor(1, vec(175,175,175))
+holoScale(1, vec(1.15,1.15,0.75))
+holoAng(1, (owner():aimPos()-CannonPos):toAngle()+ang(90,0,0))
+
+holoCreate(2)
+holoPos(2, toWorld(vec(0,0,5), ang(), holoEntity(1):pos(), holoEntity(1):angles()))
+holoModel(2, "rcylinder")
+holoColor(2, vec(175,175,175))
+holoScale(2, vec(1.25,1.25,0.1))
+holoAng(2, holoEntity(1):angles()+ang(-90,0,0))
+
+holoCreate(3)
+holoPos(3, toWorld(vec(0,0,-5), ang(), holoEntity(1):pos(), holoEntity(1):angles()))
+holoModel(3, "rcylinder")
+holoColor(3, vec(175,175,175))
+holoScale(3, vec(1.25,1.25,0.1))
+holoAng(3, holoEntity(1):angles()+ang(-90,0,0))
+
+holoCreate(4)
+holoPos(4, toWorld(vec(-4.5,0,0), ang(), holoEntity(1):pos(), holoEntity(1):angles()))
+holoModel(4, "rcube")
+holoColor(4, vec(125,125,125))
+holoScale(4, vec(0.45,1,0.1))
+holoAng(4, holoEntity(1):angles()+ang(-90,0,0))
+
+holoCreate(5)
+holoPos(5, toWorld(vec(0,0,-7.5), ang(), holoEntity(1):pos(), holoEntity(1):angles()))
+holoModel(5, "rcube")
+holoColor(5, vec(175,175,175))
+holoScale(5, vec(1.35,1.35,0.35))
+holoAng(5, holoEntity(1):angles()+ang(-90,0,0))
+
+holoCreate(6)
+holoPos(6, toWorld(vec(0,0,-12), ang(), holoEntity(1):pos(), holoEntity(1):angles()))
+holoModel(6, "rcube")
+holoColor(6, vec(65,65,65))
+holoScale(6, vec(0.65,1.15,1.15))
+holoAng(6, holoEntity(1):angles()+ang(-90,0,0))
+
+holoCreate(7)
+holoPos(7, toWorld(vec(-1,0,-11.75), ang(), holoEntity(1):pos(), holoEntity(1):angles()))
+holoModel(7, "rcube")
+holoColor(7, vec(255,255,255))
+holoScale(7, vec(0.65,0.3,0.45))
+holoAng(7, holoEntity(1):angles()+ang(-90,0,0))
+
+holoCreate(8)
+holoPos(8, toWorld(vec(0,0,7), ang(), holoEntity(1):pos(), holoEntity(1):angles()+ang(0,0,0)))
+holoModel(8, "cylinder")
+holoColor(8, vec(255,255,255))
+holoScale(8, vec(0.5,0.5,0.1))
+holoAng(8, holoEntity(1):angles()+ang(-180,0,0))
+
+holoCreate(9)
+holoPos(9, toWorld(vec(15,9,0), ang(), holoEntity(8):pos(), holoEntity(8):angles()+ang(90,0,(X+TurnRelSpeed*1.5-90))))
+holoModel(9, "cube")
+holoColor(9, vec(125,125,125))
+holoScale(9, vec(0.25,0.25,2.5))
+holoAng(9, holoEntity(8):angles()+ang(-180,0,0))
+
+holoCreate(10)
+holoPos(10, toWorld(vec(15,9,0), ang(), holoEntity(8):pos(), holoEntity(8):angles()+ang(90,0,(X+TurnRelSpeed*1.5+90))))
+holoModel(10, "cube")
+holoColor(10, vec(125,125,125))
+holoScale(10, vec(0.25,0.25,2.5))
+holoAng(10, holoEntity(8):angles()+ang(180,0,0))
+
+holoCreate(11)
+holoPos(11, toWorld(vec(15,9,0), ang(), holoEntity(8):pos(), holoEntity(8):angles()+ang(90,0,(X+TurnRelSpeed*1.5))))
+holoModel(11, "cube")
+holoColor(11, vec(125,125,125))
+holoScale(11, vec(0.25,0.25,2.5))
+holoAng(11, holoEntity(8):angles()+ang(180,0,0))
+
+holoCreate(12)
+holoPos(12, toWorld(vec(15,9,0), ang(), holoEntity(8):pos(), holoEntity(8):angles()+ang(90,0,(X+TurnRelSpeed*1.5)+180)))
+holoModel(12, "cube")
+holoColor(12, vec(125,125,125))
+holoScale(12, vec(0.25,0.25,2.5))
+holoAng(12, holoEntity(8):angles()+ang(180,0,0))
+
+holoCreate(13)
+holoPos(13, toWorld(vec(0,0,10), ang(), holoEntity(12):pos(), holoEntity(12):angles()))
+holoModel(13, "cube")
+holoColor(13, vec(45,45,45))
+holoScale(13, vec(0.35,0.35,0.55))
+holoAng(13, holoEntity(12):angles()+ang(0,0,0))
+
+holoCreate(14)
+holoPos(14, toWorld(vec(0,0,10), ang(), holoEntity(11):pos(), holoEntity(11):angles()))
+holoModel(14, "cube")
+holoColor(14, vec(45,45,45))
+holoScale(14, vec(0.35,0.35,0.55))
+holoAng(14, holoEntity(11):angles()+ang(0,0,0))
+
+holoCreate(15)
+holoPos(15, toWorld(vec(0,0,10), ang(), holoEntity(10):pos(), holoEntity(10):angles()))
+holoModel(15, "cube")
+holoColor(15, vec(45,45,45))
+holoScale(15, vec(0.35,0.35,0.55))
+holoAng(15, holoEntity(10):angles()+ang(0,0,0))
+
+holoCreate(16)
+holoPos(16, toWorld(vec(0,0,10), ang(), holoEntity(9):pos(), holoEntity(9):angles()))
+holoModel(16, "cube")
+holoColor(16, vec(45,45,45))
+holoScale(16, vec(0.35,0.35,0.55))
+holoAng(16, holoEntity(9):angles()+ang(0,0,0))
+
+holoCreate(17)
+holoPos(17, toWorld(vec(0,0,-12), ang(), holoEntity(12):pos(), holoEntity(12):angles()))
+holoModel(17, "cube")
+holoColor(17, vec(45,45,45))
+holoScale(17, vec(0.45,0.45,0.55))
+holoAng(17, holoEntity(12):angles()+ang(0,0,0))
+
+holoCreate(18)
+holoPos(18, toWorld(vec(0,0,-12), ang(), holoEntity(11):pos(), holoEntity(11):angles()))
+holoModel(18, "cube")
+holoColor(18, vec(45,45,45))
+holoScale(18, vec(0.45,0.45,0.55))
+holoAng(18, holoEntity(11):angles()+ang(0,0,0))
+
+holoCreate(19)
+holoPos(19, toWorld(vec(0,0,-12), ang(), holoEntity(10):pos(), holoEntity(10):angles()))
+holoModel(19, "cube")
+holoColor(19, vec(45,45,45))
+holoScale(19, vec(0.45,0.45,0.55))
+holoAng(19, holoEntity(10):angles()+ang(0,0,0))
+
+holoCreate(20)
+holoPos(20, toWorld(vec(0,0,-12), ang(), holoEntity(9):pos(), holoEntity(9):angles()))
+holoModel(20, "cube")
+holoColor(20, vec(45,45,45))
+holoScale(20, vec(0.45,0.45,0.55))
+holoAng(20, holoEntity(9):angles()+ang(0,0,0))
+
+for(I=-1, -50,-1) {
+    holoCreate(I)
+    holoPos(I, toWorld(vec(0,0,-(6*holoScale(I):z()*I)),ang(),holoEntity(8):pos(),holoEntity(8):angles()))
+    holoScale(I, vec(0.3,0.3,(holoEntity(8):pos():distance(owner():aimPos())/12)/I))
+    holoModel(I, "hqcylinder")
+    holoColor(I, vec(65,65,255))
+    holoAng(I, holoEntity(8):angles())
+    holoDisableShading(I,1)
+} 
+
+if(TurnSpeed>=TurnSpeedMax) {
+if(EntityRangerFinder:entity():isPlayer()|EntityRangerFinder:entity():isNPC()) {
+KillProp:applyForce(((toWorld(vec(0,0,0),ang(),EntityRangerFinder:entity():pos(),ang())-KillProp:pos())*5-KillProp:vel())*KillProp:mass()) 
+noCollideAll(KillProp,0)
+} else {
+KillProp:applyForce(((toWorld(vec(0,0,0),ang(), holoEntity(8):pos(),ang())-KillProp:pos())*5-KillProp:vel())*KillProp:mass()) 
+noCollideAll(KillProp,1)
+}
+for(F=-1, -50,-1) {
+    if(SoundCdTimer<=0) {
+    holoEntity(F):soundPlay(F,soundDuration(Sound),Sound,1)
+    SoundCdTimer=soundDuration(Sound)
+    }
+    if(holoEntity(F):getAlpha()!=255) {
+    holoAlpha(F,125)
+    }
+}
+} else {
+KillProp:applyForce(((toWorld(vec(0,0,0),ang(), holoEntity(8):pos(),ang())-KillProp:pos())*5-KillProp:vel())*KillProp:mass()) 
+noCollideAll(KillProp,1)
+for(F=-1, -50,-1) {
+    if(holoEntity(F):getAlpha()!=0) {
+    holoAlpha(F,0)
+    }
+}
+}
+
+print(_HUD_PRINTCENTER, EntityRangerFinder:entity():name())

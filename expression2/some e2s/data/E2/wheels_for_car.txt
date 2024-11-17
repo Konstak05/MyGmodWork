@@ -1,0 +1,13 @@
+@name Wheels for car
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+if(first())
+{
+    ##Wheel 1##
+    holoCreate(1)
+    holoPos(1, entity():pos() + entity():forward()*15 + entity():right()*5)
+    holoModel(1, "models/props_phx/smallwheel.mdl")
+}

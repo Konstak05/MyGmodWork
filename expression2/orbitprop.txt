@@ -1,0 +1,13 @@
+@name OrbitProp
+@inputs Orbiting:entity OrbitProp:entity
+@outputs 
+@persist Vec:vector X
+@trigger 
+
+interval(10)
+
+Vec = (Orbiting:pos()-OrbitProp:pos()+vec(90*cos(X),90*sin(X),0))*80
+
+OrbitProp:applyForce(Vec+$Vec*5)
+X++
+OrbitProp:setAng(ang())

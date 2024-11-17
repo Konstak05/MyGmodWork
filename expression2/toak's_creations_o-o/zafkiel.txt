@@ -1,0 +1,1508 @@
+@name ZAFKIEL
+@inputs 
+@outputs 
+@persist ClockVisible ClockVisibleCD ClockVisibleUCD RandI KillClonePlr
+@persist GearTurnX CurBullet HolosCreated NBCD PBCD SBCD UseAbility PropSpawnDelay BlockSpawnI BulletOnCooldown BulletInEffect SPlayed
+@persist Target:entity
+@persist Bullet1Block:entity Bullet1Duration Bullet1Cooldown Bullet1CooldownDuration AlephOn
+@persist Bullet2Block:entity Bullet2Targ:entity Bullet2Duration Bullet2Cooldown Bullet2CooldownDuration BetOn
+@persist Bullet3Block:entity Bullet3Targ:entity Bullet3Duration Bullet3Cooldown Bullet3CooldownDuration GI GimmelOn
+@persist Bullet4Block:entity Bullet4Targ:entity Bullet4Duration Bullet4Cooldown Bullet4CooldownDuration DaletOn
+@persist Bullet5Block:entity Bullet5Targ:entity Bullet5Duration Bullet5Cooldown Bullet5CooldownDuration HeiOn
+@persist Bullet6Block:entity Bullet6Targ:entity Bullet6Duration Bullet6Cooldown Bullet6CooldownDuration VavOn
+@persist Bullet7Block:entity Bullet7Targ:entity Bullet7Duration Bullet7Cooldown Bullet7CooldownDuration ZayinOn
+@persist Bullet8Block:entity Bullet8Targ:entity Bullet8Duration Bullet8Cooldown Bullet8CooldownDuration HetOn
+@persist Bullet9Block:entity Bullet9Targ:entity Bullet9Duration Bullet9Cooldown Bullet9CooldownDuration TetOn
+@persist Bullet10Block:entity Bullet10Targ:entity Bullet10Duration Bullet10Cooldown Bullet10CooldownDuration YudOn
+@persist Bullet11Block:entity Bullet11Targ:entity Bullet11Duration Bullet11Cooldown Bullet11CooldownDuration YudAlephOn
+@persist Bullet12Block:entity Bullet12Targ:entity Bullet12Duration Bullet12Cooldown Bullet12CooldownDuration YudBetOn
+@persist NextBulletButton:string PreviousBulletButton:string ShootBulletButton:string RetractClockButton:string
+@persist Bullet8KillBlock:entity
+@persist Bullet11Pos:vector Bullet11MineDist
+@persist TetOwnerKilled TetTargetDied
+@persist ZafkielPos:vector
+@persist Bullet8Pos:vector Bullet8Ang:angle
+@persist ZafkielAng:angle
+@persist Abilities:table AbilityDescription:table PlrsDurationPos:table
+@persist [ P1 P2 P3 P4 P5 ]:table [ A1 A2 A3 A4 A5 ]:table
+@persist Plrs:array PlrsNoOwner:array
+@trigger 
+
+if( first() ) {
+    
+    ClockVisible = 1
+    
+    print( "Zafkiel requires 1 Chair" )
+    
+    timer( "GetPlrsNoOwner", 250 )
+    
+    CurBullet = 1
+    
+    PropSpawnDelay = 800
+    
+    ClockVisibleUCD = 4
+    
+    ZafkielPos = entity():pos()
+    ZafKielAng = ang()
+    
+    Abilities[ 1, string ] = "First Bullet Aleph"
+    AbilityDescription[ 1, string ] = "Accelerates time to go behind the targeted player."
+    Abilities[ 2, string ] = "Second Bullet Bet"
+    AbilityDescription[ 2, string ] = "Slows down Target's time"
+    Abilities[ 3, string ] = "Third Bullet Gimmel"
+    AbilityDescription[ 3, string ] = "Speeds up Target's internal time, causing them to age and soon die."
+    Abilities[ 4, string ] = "Fourth Bullet Dalet"
+    AbilityDescription[ 4, string ] = "Rewinds owner to a position of the past target."
+    Abilities[ 5, string ] = "Fith Bullet Hei"
+    AbilityDescription[ 5, string ] = "Allows sight of where the target will be in the future."
+    Abilities[ 6, string ] = "Sixth Bullet Vav"
+    AbilityDescription[ 6, string ] = "Sends owner through time to a random person's position."
+    Abilities[ 7, string ] = "Seventh Bullet Zayin"
+    AbilityDescription[ 7, string ] = "Temporarily freezes the target's time."
+    Abilities[ 8, string ] = "Eighth Bullet Het"
+    AbilityDescription[ 8, string ] = "Creates a temporal clone of the target."
+    Abilities[ 9, string ] = "Ninth Bullet Tet"
+    AbilityDescription[ 9, string ] = "Makes it so if the owner dies, the Target will die under the effect."
+    Abilities[ 10, string ] = "Tenth Bullet Yud"
+    AbilityDescription[ 10, string ] = "Peeks into the past positions of the Target."
+    Abilities[ 11, string ] = "Eleventh Bullet Yud Aleph"
+    AbilityDescription[ 11, string ] = "Places a area mine where you shoot the bullet."
+    Abilities[ 12, string ] = "Twelfth Bullet Yud Bet"
+    AbilityDescription[ 12, string ] = "Sends its target to the past."
+    
+    NextBulletButton = "L"
+    PreviousBulletButton = "J"
+    ShootBulletButton = "E"
+    RetractClockButton = "T"
+    
+    Bullet1CooldownDuration = 7.5 # Seconds
+    Bullet1Duration = 10 #Seconds
+    
+    Bullet2CooldownDuration = 17.5 # Seconds
+    Bullet2Duration = 12.5 #Seconds
+    
+    Bullet3CooldownDuration = 12.5 # Seconds
+    Bullet3Duration = 10 #Seconds
+    
+    Bullet4CooldownDuration = 17.5 # Seconds
+    Bullet4Duration = 10 #Seconds
+    
+    Bullet5CooldownDuration = 12.5 # Seconds
+    Bullet5Duration = 10 #Seconds
+    
+    Bullet6CooldownDuration = 6.5 # Seconds
+    Bullet6Duration = 10 #Seconds
+    
+    Bullet7CooldownDuration = 12.5 # Seconds
+    Bullet7Duration = 10 #Seconds
+    
+    Bullet8CooldownDuration = 12.5 # Seconds
+    Bullet8Duration = 10 #Seconds
+    
+    Bullet9CooldownDuration = 8.5 # Seconds
+    Bullet9Duration = 45 #Seconds
+    
+    Bullet10CooldownDuration = 17.5 # Seconds
+    Bullet10Duration = 15 #Seconds
+    
+    Bullet11CooldownDuration = 10 # Seconds
+    Bullet11Duration = 25 #Seconds
+    
+    Bullet12CooldownDuration = 12.5 # Seconds
+    Bullet12Duration = 10 #Seconds
+    
+    Bullet11MineDist = 350 #Units
+    
+    timer( "SpawnProps", PropSpawnDelay )
+}
+
+runOnTick( 1 )
+interval( 125 )
+#runOnDmg( 1, Bullet8Block )
+
+#if( !dmgClk() ) {
+if( tickClk() ) {
+    
+    if( owner():keyPressed( RetractClockButton ) & !ClockVisibleCD ) {
+        
+        ClockVisible = !ClockVisible
+        
+        if( ClockVisible ) { 
+            
+            holoPos( 1, toWorld( vec( -125, 0, 90 ), ang(), owner():pos(), owner():angles() ) )
+            
+        } else {
+        
+            holoPos( 1, vec( 5000000 ) )
+        
+        }
+        
+        ClockVisibleCD = 1
+        
+        timer( "CVCD", 50 )
+        
+    }
+    
+}
+
+if( tickClk() & HolosCreated  & ClockVisible ) {
+    
+    if( !Bullet4Block:isValid() ) {
+        
+        findIncludePlayerProps( owner() )
+        findByClass( "prop_vehicle_prisoner_pod" )
+        Bullet4Block = findResult( 1 ) 
+        Bullet4Block:setAlpha( 255 )
+        Bullet4Block:setPos( entity():pos() )
+    }
+    
+    GearTurnX++
+    
+    if( Abilities:count() > 0 & !BulletInEffect ) {
+        
+        if( owner():keyPressed( NextBulletButton ) & CurBullet == Abilities:count() & !NBCD ) {
+            
+            NBCD = 1
+            
+            timer( "NBCD", 50 )
+            
+            CurBullet = 1
+            
+        }
+        
+        if( owner():keyPressed( NextBulletButton ) & CurBullet < Abilities:count() & !NBCD ) {
+            
+            NBCD = 1
+            
+            timer( "NBCD", 50 )
+            
+            CurBullet++
+            
+        }
+        
+        if( owner():keyPressed( PreviousBulletButton ) & CurBullet > 1 & !PBCD ) {
+            
+            PBCD = 1
+            
+            timer( "PBCD", 50 )
+            
+            CurBullet--
+            
+        }
+        
+        if( owner():keyPressed( PreviousBulletButton ) & CurBullet == 1 & !PBCD) {
+            
+            PBCD = 1
+            
+            timer( "PBCD", 50 )
+            
+            CurBullet = Abilities:count()
+            
+        }
+        
+        if( owner():keyPressed( ShootBulletButton ) & !SBCD & !BulletOnCooldown & owner():isAlive() ) {
+            
+            SBCD = 1
+            
+            timer( "SBCD", 50 )
+            
+            UseAbility = 1
+            
+            
+        }
+        
+    }
+        
+    
+    local GotoPos = toWorld( vec( -125, 0, 90 ), ang(), owner():pos(), owner():angles() )
+    
+    ZafkielAng = ang( 0, -90, 90 ) + ang( 0, owner():angles():yaw() + 180, 0 )
+    
+    holoPos( 1, bezier( holoEntity( 1 ):pos(), holoEntity( 1 ):pos(), GotoPos, 0.5 ) )
+    holoAng( 1, ZafkielAng )
+    
+    holoAng( 11, ang( GearTurnX, ZafkielAng:yaw(), 90 ) )
+    holoAng( 25, ang( GearTurnX / 2, ZafkielAng:yaw(), 90 ) )
+    holoAng( 38, ang( GearTurnX * 2, ZafkielAng:yaw(), 90 ) )
+    holoAng( 44, ang( -GearTurnX * 1.5, ZafkielAng:yaw(), 90 ) )
+    holoAng( 52, ang( -GearTurnX * 1.5, ZafkielAng:yaw(), 90 ) )
+    holoAng( 60, ang( -GearTurnX / 2, ZafkielAng:yaw(), 90 ) )
+    
+    local ArrowAng = 360 / Abilities:count() * CurBullet    
+
+    holoAng( 72, ang( ArrowAng, ZafkielAng:yaw(), 0 ) )
+    holoPos( 72, toWorld( vec( 0, 40, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( ArrowAng, 0, 0 ) ) )
+    
+    if( Bullet4Block ) {
+        
+        findInSphere( owner():aimPos(), 450 )
+        findIncludeClass( "player" )
+        findExcludeEntity( owner() )
+            
+        Target = findClosest( owner():aimPos() )
+        
+    }
+        
+    
+    if( UseAbility ) {
+        
+        if( BulletOnCooldown & !SPlayed ) {
+            
+            SPlayed = 1
+            
+            holoEntity( 1 ):soundPlay( 16, 1.5, "Weapon_Pistol.NPC_Single" )
+            soundPitch( 16, 75 )
+            soundVolume( 16, 35 )
+            
+        }
+        
+        if( CurBullet == 1 & !Bullet1Cooldown & Target:isPlayer() ) {
+            
+            Bullet1Cooldown = 1
+            BulletOnCooldown = 1
+            
+            AlephOn = 1
+            
+            Bullet4Block:setPos( Target:pos() )
+            Bullet4Block:use()
+            
+            timer( "ChairUse", 50 )
+            
+            timer( "BulletCooldown", Bullet1CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 2 & !Bullet2Cooldown & Target:isPlayer() ) {
+            
+            Bullet2Targ = Target
+        
+            Bullet2Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            BetOn = 1
+            
+            timer( "Bullet2Duration" , Bullet2Duration * 1000 )
+            timer( "BulletCooldown", Bullet2CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 3 & !Bullet3Cooldown & Target:isPlayer() ) {
+            
+            Bullet3Targ = Target
+        
+            Bullet3Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            GimmelOn = 1
+            
+            timer( "Bullet3Duration" , Bullet3Duration * 1000 )
+            timer( "BulletCooldown", Bullet3CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 4 & !Bullet4Cooldown & Target:isPlayer() ) {
+            
+            Bullet4Targ = Target
+        
+            Bullet4Cooldown = 1
+            BulletOnCooldown = 1
+            
+            DaletOn = 1
+            
+            Bullet4Block:setPos( P5[ Bullet4Targ:id(), vector ] )
+            Bullet4Block:use()
+            
+            timer( "ChairUse", 50 )
+
+            timer( "BulletCooldown", Bullet4CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 5 & !Bullet3Cooldown & Target:isPlayer() ) {
+            
+            Bullet5Targ = Target
+        
+            Bullet5Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            HeiOn = 1
+            
+            timer( "Bullet5Duration" , Bullet5Duration * 1000 )
+            timer( "BulletCooldown", Bullet5CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 6 & !Bullet6Cooldown ) {
+            
+            Bullet6Targ = Target
+        
+            Bullet6Cooldown = 1
+            BulletOnCooldown = 1
+            
+            VavOn = 1
+            
+            if( PlrsNoOwner:count() >= 1 ) {
+                
+                RandI = randint( 1, PlrsNoOwner:count() )
+                
+                Bullet4Block:setPos( PlrsNoOwner[ RandI, entity ]:pos()  )
+                Bullet4Block:use()
+                
+                timer( "ChairUse", 50 )
+                
+            } 
+            
+            timer( "BulletCooldown", Bullet6CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 7 & !Bullet7Cooldown & Target:isPlayer() ) {
+            
+            Bullet7Targ = Target
+        
+            Bullet7Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            ZayinOn = 1
+            
+            timer( "Bullet7Duration" , Bullet7Duration * 1000 )
+            timer( "BulletCooldown", Bullet7CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 8 & !Bullet8Cooldown & Target:isPlayer() ) {
+            
+            Bullet8Targ = Target
+        
+            Bullet8Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            Bullet8Pos = Bullet8Targ:pos()
+            Bullet8Ang = Bullet8Targ:angles()
+            
+            HetOn = 1
+            
+            timer( "Bullet8Duration" , Bullet8Duration * 1000 )
+            timer( "BulletCooldown", Bullet8CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 9 & !Bullet9Cooldown & Target:isPlayer() ) {
+            
+            Bullet9Targ = Target
+        
+            Bullet9Cooldown = 1
+            BulletOnCooldown = 1
+            
+            TetTargetDied = 0
+            TetOwnerKilled = 0
+            
+            TetOn = 1
+            
+            timer( "Bullet9Duration" , Bullet9Duration * 1000 )
+            timer( "BulletCooldown", Bullet9CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 10 & !Bullet10Cooldown & Target:isPlayer() ) {
+            
+            Bullet10Targ = Target
+        
+            Bullet10Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            YudOn = 1
+            
+            timer( "Bullet10Duration" , Bullet10Duration * 1000 )
+            timer( "BulletCooldown", Bullet10CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 11 & !Bullet11Cooldown ) {
+            
+            Bullet11Pos = owner():aimPos()
+        
+            Bullet11Cooldown = 1
+            BulletOnCooldown = 1
+            
+            YudAlephOn = 1
+            
+            timer( "Bullet11Duration" , Bullet11Duration * 1000 )
+            timer( "BulletCooldown", Bullet11CooldownDuration * 1000)
+            
+        }
+        
+        if( CurBullet == 12 & !Bullet12Cooldown & Target:isPlayer() ) {
+            
+            Bullet12Targ = Target
+        
+            Bullet12Cooldown = 1
+            BulletOnCooldown = 1
+            BulletInEffect = 1
+            
+            YudBetOn = 1
+            
+            timer( "Bullet12Duration" , Bullet12Duration * 1000 )
+            timer( "BulletCooldown", Bullet12CooldownDuration * 1000)
+            
+        }
+        
+    }
+    
+    if( BetOn ) {
+        
+        Bullet2Block:setPos( toWorld( vec( 0, 0, 45 ), ang(), Bullet2Targ:pos(), Bullet2Targ:angles() ) )
+        Bullet2Block:setAng( ang() )
+        
+    }
+    
+    if( GimmelOn ) {
+
+        Bullet3Block:setPos( toWorld( vec( -40, 0, 0 ), ang(), Bullet3Targ:attachmentPos( "hips" ), Bullet3Targ:angles() ) )
+        Bullet3Block:setAng( Bullet3Targ:angles() )
+        
+        timer( "BlockHit", 1000 )
+    
+    }
+    
+    if( HeiOn ) {
+    
+        local FuturePos = Bullet5Targ:pos() + Bullet5Targ:vel() / 5
+        
+        holoPos( 200, FuturePos )
+        holoModel( 200, "models/gman_high.mdl" )
+        holoAng( 200, Bullet5Targ:angles() )
+        holoAlpha( 200, 125 )
+        holoVisible( 200, PlrsNoOwner, 0 )
+        
+        holoPos( 201, FuturePos + Bullet5Targ:vel() / 12 )
+        holoModel( 201, "models/gman_high.mdl" )
+        holoAng( 201, Bullet5Targ:angles() )
+        holoAlpha( 201, 62.5 )
+        holoVisible( 201, PlrsNoOwner, 0 )
+        
+    }
+    
+    if( ZayinOn ) {
+    
+        Bullet7Block:setPos( Bullet7Targ:attachmentPos( "hips" ) )
+        
+    }
+    
+    if( HetOn ) {
+        
+        holoPos( 202, Bullet8Pos )
+        holoAng( 202, Bullet8Ang )
+        holoModel( 202, Bullet8Targ:model() )
+        holoPlayerColor( 202, Bullet8Targ:getPlayerColor() )
+        holoAlpha( 202, 255 )
+        
+        Bullet8Block:setPos( Bullet8Pos + vec( 0, 0, 55 ) )
+        
+        if( KillClonePlr ) {
+            
+            Bullet8KillBlock:setPos( toWorld( vec( -65, 0, 35 ), ang(), Bullet8Targ:pos(), Bullet8Targ:angles() ) )
+            Bullet8KillBlock:setAng( Bullet8Targ:angles() )
+    
+            Bullet8KillBlock:applyForce( ( ( toWorld( vec( 240, 0, 35 ), ang(), Bullet8Targ:pos(), Bullet8Targ:angles() ) - Bullet8KillBlock:pos() ) * 45 - Bullet8KillBlock:vel() ) * Bullet8KillBlock:mass() ) 
+            
+            if( !Bullet8Targ:isAlive() & Bullet8Targ:isValid() ) {    
+                
+                HetOn = 0
+                
+                timer( "Bullet8Duration", 50 )
+                
+                KillClonePlr = 0
+                Bullet8Targ = noentity()
+                
+                holoAlpha( 202, 0 )
+                
+                BulletInEffect = 0
+                
+                Bullet8Block:setPos( entity():pos() )
+                
+            }
+            
+        }
+        
+    }
+    
+    if( TetOn ) {
+        
+        if( !owner():isAlive() ) {
+            
+            TetOwnerKilled = 1
+            
+        }
+        
+        if( !Bullet9Targ:isAlive() ) {
+            
+            timer( "Bullet9Duration" , 50 )
+            
+            TetOn = 0 
+            TetTargetDied = 1
+            
+        }
+        
+        if( TetOwnerKilled ) {
+            
+            Bullet9Block:setPos( toWorld( vec( -65, 0, 35 ), ang(), Bullet9Targ:pos(), Bullet9Targ:angles() ) )
+            Bullet9Block:setAng( Bullet9Targ:angles() )
+    
+            Bullet9Block:applyForce( ( ( toWorld( vec( 260, 0, 35 ), ang(), Bullet9Targ:pos(), Bullet9Targ:angles() ) - Bullet9Block:pos() ) * 45 - Bullet9Block:vel() ) * Bullet9Block:mass() ) 
+        
+        }
+        
+    }
+    
+    if( YudOn ) {
+    
+        local PastPos1 = P5[ Bullet10Targ:id(), vector ]
+        local PastPos2 = P4[ Bullet10Targ:id(), vector ]
+        
+        local PastAng1 = A5[ Bullet10Targ:id(), angle ]
+        local PastAng2 = A4[ Bullet10Targ:id(), angle ]
+        
+        holoPos( 203, PastPos1 )
+        holoModel( 203, "models/gman_high.mdl" )
+        holoAng( 203, PastAng1 )
+        holoAlpha( 203, 255 )
+        holoVisible( 203, PlrsNoOwner, 0 )
+        
+        holoPos( 204, PastPos2 )
+        holoModel( 204, "models/gman_high.mdl" )
+        holoAng( 204, PastAng2 )
+        holoAlpha( 204, 255 )
+        holoVisible( 204, PlrsNoOwner, 0 )
+        
+    }
+    
+    if( YudAlephOn ) {
+    
+        local PlrsI = 1
+        
+        for( PlrsI = 1, PlrsNoOwner:count(), 1 ) {
+            
+            local Dist = PlrsNoOwner[ PlrsI, entity ]:pos():distance( Bullet11Pos )
+            
+            if( Dist <= Bullet11MineDist ) {
+                                
+                Bullet11Targ = PlrsNoOwner[ PlrsI, entity ]
+                
+                Bullet11Block:setPos( toWorld( vec( -65, 0, 35 ), ang(), Bullet11Targ:pos(), Bullet11Targ:angles() ) )
+                Bullet11Block:setAng( Bullet11Targ:angles() )
+        
+                Bullet11Block:applyForce( ( ( toWorld( vec( 240, 0, 35 ), ang(), Bullet11Targ:pos(), Bullet11Targ:angles() ) - Bullet11Block:pos() ) * 45 - Bullet11Block:vel() ) * Bullet11Block:mass() ) 
+                
+                if( !Bullet11Targ:isAlive() & Bullet11Targ:isValid() ) {
+                    
+                    Bullet11Targ = noentity()
+                                
+                    Bullet11Block:setPos( entity():pos() )
+    
+                    timer( "Bullet11Duration", 50 )
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    if( YudBetOn ) {
+    
+
+        
+    }
+	
+} elseif ( ClockVisible ) {
+
+    Plrs = players()
+    
+    timer( "PlrPosCheck", Bullet4Duration * 1000 / 5 )
+    
+    if( !BulletInEffect ) {
+        
+        if( Target:isPlayer() ) {
+            
+            print( _HUD_PRINTCENTER, Abilities[ CurBullet, string ] + " - [" + CurBullet:toString() + "]" + " - " + Target:name() + " - " + AbilityDescription[ CurBullet, string ] )
+            
+        } else {
+        
+            print( _HUD_PRINTCENTER, Abilities[ CurBullet, string ] + " - [" + CurBullet:toString() + "]" + " - " + AbilityDescription[ CurBullet, string ] )
+            
+        }
+        
+    } else {
+    
+        print( _HUD_PRINTCENTER, Abilities[ CurBullet, string ] + " - [" + " In Effect " + "]" )
+    
+    }
+    
+    if( !BulletOnCooldown ) {
+        
+        local Vec = vec( 0, 0, 25 )
+        
+        #Bullet1Block:setPos( entity():pos() + Vec * 1 )
+        Bullet2Block:setAng( ang() )
+        Bullet2Block:setPos( entity():pos() )
+        Bullet3Block:setAng( ang() )
+        Bullet3Block:setPos( entity():pos() + Vec * 1.5 )
+        Bullet4Block:setAng( ang() )
+        Bullet4Block:setPos( entity():pos() + Vec * 7.5 )
+        #Bullet5Block:setPos( entity():pos() + Vec * 5 )
+        #Bullet6Block:setPos( entity():pos() + Vec * 6 )
+        Bullet7Block:setAng( ang() )
+        Bullet7Block:setPos( entity():pos() + Vec * 2.5 )
+        Bullet8Block:setAng( ang() )
+        Bullet8Block:setPos( entity():pos() + Vec * 3.5 )
+        Bullet9Block:setAng( ang() )
+        Bullet9Block:setPos( entity():pos() + Vec * 4.5 )
+        #Bullet10Block:setPos( entity():pos() + Vec * 10 )
+        Bullet11Block:setAng( ang() )
+        Bullet11Block:setPos( entity():pos() + Vec * 5.55 )
+        #Bullet12Block:setPos( entity():pos() + Vec * 12 )
+        Bullet8Block:setAng( ang() )
+        Bullet8KillBlock:setPos( entity():pos() + Vec * 6.35 )     
+        
+    }
+    
+}
+#[} else {
+    
+    if( HetOn ) {
+            
+        KillClonePlr = 1
+        
+    } else {
+    
+        KillClonePlr = 0
+        
+    }
+
+}]#
+
+if( clk( "BulletCooldown" ) ) {
+    
+    GI = 0
+    BulletOnCooldown = 0
+    SPlayed = 0
+    
+    Bullet1Cooldown = 0
+    Bullet2Cooldown = 0
+    Bullet3Cooldown = 0
+    Bullet4Cooldown = 0
+    Bullet5Cooldown = 0
+    Bullet6Cooldown = 0
+    Bullet7Cooldown = 0
+    Bullet8Cooldown = 0
+    Bullet9Cooldown = 0
+    Bullet10Cooldown = 0
+    Bullet11Cooldown = 0
+    Bullet12Cooldown = 0
+    
+}
+
+if( clk( "Bullet1Duration" ) ) {
+    
+    AlephOn = 0
+    BulletInEffect = 0
+    
+    Bullet1Block:setPos( entity():pos() )
+    
+}
+
+if( clk( "Bullet2Duration" ) ) {
+    
+    BetOn = 0
+    BulletInEffect = 0
+    
+    Bullet2Targ = noentity()
+    Bullet2Block:setPos( entity():pos() )
+    
+}
+
+if( clk( "Bullet3Duration" ) ) {
+    
+    GimmelOn = 0
+    BulletInEffect = 0
+    
+    Bullet3Block:setPos( entity():pos() )
+    
+}
+
+if( clk( "Bullet5Duration" ) ) {
+    
+    HeiOn = 0
+    BulletInEffect = 0
+    
+    holoAlpha( 200, 0 )
+    holoAlpha( 201, 0 )
+    
+}
+
+if( clk( "Bullet6Duration" ) ) {
+    
+    VavOn = 0
+    BulletInEffect = 0
+    
+}
+
+if( clk( "Bullet7Duration" ) ) {
+    
+    ZayinOn = 0
+    BulletInEffect = 0
+    
+    Bullet7Block:setPos( entity():pos() )
+
+}
+
+if( clk( "Bullet8Duration" ) ) {
+    
+    HetOn = 0
+    BulletInEffect = 0
+    
+    Bullet8Pos = vec()
+    Bullet8Ang = ang()
+    
+    KillClonePlr = 0
+    Bullet8Targ = noentity()
+    
+    Bullet8Block:setPos( entity():pos() )
+    
+    holoAlpha( 202, 0 )
+
+}
+
+if( clk( "Bullet9Duration" ) ) {
+    
+    TetOn = 0
+    BulletInEffect = 0
+    
+    TetTargetDied = 0
+    TetOwnerKilled = 0
+    
+    Bullet9Targ = noentity()
+    Bullet9Block:setPos( entity():pos() )
+
+}
+
+if( clk( "Bullet10Duration" ) ) {
+    
+    YudOn = 0
+    BulletInEffect = 0
+    
+    holoAlpha( 203, 0 )
+    holoAlpha( 204, 0 )
+
+}
+
+if( clk( "Bullet11Duration" ) ) {
+    
+    YudAlephOn = 0
+    BulletInEffect = 0
+    
+    Bullet11Targ = noentity()
+    Bullet11Pos = vec()
+    
+    Bullet11Block:setPos( entity():pos() )
+
+}
+
+if( clk( "Bullet12Duration" ) ) {
+    
+    YudBetOn = 0
+    BulletInEffect = 0
+    
+    Bullet12Block:setPos( entity():pos() )
+
+}
+
+if( clk( "BlockHit" ) ) {
+    
+    GI++
+    Bullet3Block:applyForce( ( (toWorld( vec( 40, 0, 0 ), ang(), Bullet3Targ:pos(), Bullet3Targ:angles() ) - Bullet3Block:pos() ) * 15 - Bullet3Block:vel() ) * Bullet3Block:mass() ) 
+    
+    if( !Bullet3Targ:isAlive() ) {
+        
+        Bullet3Targ = noentity()
+        timer( "Bullet3Duration" , 35 )
+        timer( "BulletCooldown", ( Bullet3Cooldown - GI ) * 1000 )
+        
+    }
+    
+    stoptimer( "BlockHit" )
+    
+}
+
+if( clk( "NBCD" ) ) {
+    
+    if( !owner():keyPressed( NextBulletButton ) ) {
+        
+        NBCD = 0
+        stoptimer( "NBCD" )
+        
+    } else {
+        
+        stoptimer( "NBCD" )
+        timer( "NBCD", 50 )
+    
+    }
+    
+}
+
+if( clk( "PBCD" ) ) {
+    
+    if( !owner():keyPressed( PreviousBulletButton ) ) {
+        
+        PBCD = 0
+        stoptimer( "PBCD" )
+        
+    } else {
+        
+        stoptimer( "PBCD" )
+        timer( "PBCD", 50 )
+    
+    }
+    
+}
+
+if( clk( "SBCD" ) ) {
+    
+    if( !owner():keyPressed( ShootBulletButton ) ) {
+        
+        SBCD = 0
+        UseAbility = 0
+        stoptimer( "SBCD" )
+        
+    } else {
+        
+        stoptimer( "SBCD" )
+        timer( "SBCD", 50 )
+    
+    }
+    
+}
+
+if( clk( "CVCD" ) ) {
+    
+    if( !owner():keyPressed( RetractClockButton ) ) {
+        
+        timer( "CVC", ClockVisibleUCD * 1000 )
+        stoptimer( "CVCD" )
+        
+    } else {
+        
+        stoptimer( "CVCD" )
+        timer( "CVCD", 50 )
+    
+    }
+    
+}
+
+if( clk( "CVC" ) ) {
+    
+    ClockVisibleCD = 0
+    
+    stoptimer( "CVC" )
+    
+}
+
+if( clk( "GetPlrsNoOwner" ) ) {
+    
+    local PlrSI = 1
+
+    for( PlrSI = 1, Plrs:count() ) {
+        
+        if( Plrs[ PlrSI, entity ] != owner() ) {
+            
+            PlrsNoOwner[ PlrsNoOwner:count() + 1, entity ] = Plrs[ PlrSI, entity ]
+            
+        }
+        
+    }    
+    
+}
+
+if( clk( "SpawnProps" ) ) {
+    
+    local BlocksToSpawn = 7
+    
+    if( BlockSpawnI < BlocksToSpawn ) {
+        
+        BlockSpawnI++
+        
+        if( BlockSpawnI == 1 ) {
+            
+            Bullet2Block = propSpawn( "models/hunter/misc/platehole1x1a.mdl", entity():pos(), ang(), 0 )
+            Bullet2Block:setAlpha( 0 )
+            
+        }
+        
+        if( BlockSpawnI == 2 ) {
+            
+            Bullet3Block = propSpawn( "models/hunter/blocks/cube05x05x05.mdl", entity():pos(), ang(), 0 )
+            Bullet3Block:setAlpha( 0 )
+            
+        }
+        
+        if( BlockSpawnI == 3 ) {
+            
+            Bullet7Block = propSpawn( "models/hunter/blocks/cube05x05x05.mdl", entity():pos(), ang(), 0 )
+            Bullet7Block:setAlpha( 0 )
+            
+        }
+        
+        if( BlockSpawnI == 4 ) {
+            
+            Bullet9Block = propSpawn( "models/hunter/blocks/cube05x05x05.mdl", entity():pos(), ang(), 0 )
+            Bullet9Block:setAlpha( 0 )
+            Bullet9Block:setMass( 50000 )
+            
+        }
+        
+        if( BlockSpawnI == 5 ) {
+            
+            Bullet8Block = propSpawn( "models/hunter/blocks/cube05x05x05.mdl", entity():pos(), ang(), 0 )
+            Bullet8Block:setAlpha( 0 )
+            noCollideAll( Bullet8Block, 1 )
+            
+        }
+        
+        if( BlockSpawnI == 6 ) {
+            
+            Bullet8KillBlock = propSpawn( "models/hunter/blocks/cube025x025x025.mdl", entity():pos(), ang(), 0 )
+            Bullet8KillBlock:setAlpha( 0 )
+            Bullet8KillBlock:setMass( 50000 )
+            noCollideAll( Bullet8KillBlock, 0 )
+            
+        }
+        
+        if( BlockSpawnI == 7 ) {
+            
+            Bullet11Block = propSpawn( "models/hunter/blocks/cube025x025x025.mdl", entity():pos(), ang(), 0 )
+            Bullet11Block:setAlpha( 0 )
+            Bullet11Block:setMass( 50000 )
+            noCollideAll( Bullet11Block, 0 )
+            
+        }
+        
+        timer( "SpawnProps", PropSpawnDelay )
+        
+    } else {
+    
+        stoptimer( "SpawnProps" )
+    
+    }
+    
+}
+
+if( clk( "PlrPosCheck" ) ) {
+    
+    for( PlrI = 1, Plrs:count(), 1 ) {
+        
+        local PlrID = Plrs[ PlrI, entity ]:id()
+        
+        A5[ PlrID, angle ] = A4[ PlrID, angle ]
+        A4[ PlrID, angle ] = A3[ PlrID, angle ]
+        A3[ PlrID, angle ] = A2[ PlrID, angle ]
+        A2[ PlrID, angle ] = A1[ PlrID, angle ]
+        A1[ PlrID, angle ] = Plrs[ PlrI, entity ]:angles()
+        
+        P5[ PlrID, vector ] = P4[ PlrID, vector ]
+        P4[ PlrID, vector ] = P3[ PlrID, vector ]
+        P3[ PlrID, vector ] = P2[ PlrID, vector ]
+        P2[ PlrID, vector ] = P1[ PlrID, vector ]
+        P1[ PlrID, vector ] = Plrs[ PlrI, entity ]:pos()
+        
+    }
+    
+    stoptimer( "PlrPosCheck" )
+    timer( "PlrPosCheck", Bullet4Duration * 1000 / 5 )
+    
+}
+
+if( clk( "ChairUse" ) ) {
+    
+    Bullet4Block:ejectPod()
+    
+    RandI = 0
+
+    timer( "ChairReset", 50 )
+    stoptimer( "ChairUse" )
+    
+}
+
+if( clk( "ChairReset" ) ) {
+    
+    Bullet4Block:setPos( entity():pos() )
+    
+    stoptimer( "ChairReset" )
+    
+}
+
+if( first() ) {
+    
+    timer( "HologramCreate", 1 )
+    
+}
+
+if( clk( "HologramCreate" ) ) {
+    
+    holoCreate( 1, toWorld( vec( 0, 0, 90), ang(), ZafkielPos, ZafkielAng ), vec( 12, 12, 2 ), ZafkielAng + ang( 0, -90, 90 ), vec( 247, 240, 201 ), "hq_tube_thick" )
+    
+    holoCreate( 2, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 6, 6, 0.01 ), ZafkielAng + ang( 0, -90, 90 ), vec( 92, 55, 56 ), "hqcylinder" )
+    holoParent( 2, 1 )
+    
+    holoCreate( 3, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 5.3, 5.3, 0.04 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 3, 1 )
+    
+    holoCreate( 4, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 6.5, 6.5, 0.023 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 4, 1 )
+    
+    holoCreate( 5, toWorld( vec( 0, 0, 12.2), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 6.5, 6.5, 0.027 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 5, 1 )
+    
+    holoCreate( 6, toWorld( vec( 0, 0, -12.2), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 6.5, 6.5, 0.027 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 6, 1 )
+    
+    holoCreate( 7, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 5.15, 5.15, 0.025 ), ZafkielAng + ang( 0, -90, 90 ), vec( 63, 47, 23 ), "hqcylinder" )
+    holoParent( 7, 1 )
+    
+    holoCreate( 8, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 0.8, 0.8, 1.15 ), ZafkielAng + ang( 0, -90, 90 ), vec( 139, 127, 87 ), "hqcylinder" )
+    holoParent( 8, 1 )
+    
+    holoCreate( 9, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 0.83, 0.83, 1.2 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 9, 1 )
+    
+    holoCreate( 10, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 1.6, 1.6, 1.2 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 10, 1 )
+    
+    holoCreate( 11, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 1.58, 1.58, 1.15 ), ZafkielAng + ang( 0, -90, 90 ), vec( 220, 196, 131 ), "hq_tube_thick" )
+    holoParent( 11, 1 )
+    
+    holoCreate( 12, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 0.25, 0.25, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 12, 11 )
+    
+    holoCreate( 13, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.25, 0.25, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 13, 11 )
+    
+    holoCreate( 14, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.25, 0.25, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 14, 11 )
+    
+    holoCreate( 15, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.25, 0.25, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 15, 11 )
+    
+    holoCreate( 16, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 240, 0, 0 ) ), vec( 0.25, 0.25, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 16, 11 )
+    
+    holoCreate( 17, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.25, 0.25, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 17, 11 )
+    
+    holoCreate( 18, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 0.27, 0.27, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 18, 12 )
+    
+    holoCreate( 19, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.27, 0.27, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 19, 13 )
+    
+    holoCreate( 20, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.27, 0.27, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 20, 14 )
+    
+    holoCreate( 21, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.27, 0.27, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 21, 15 )
+    
+    holoCreate( 22, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 240, 0, 0 ) ), vec( 0.27, 0.27, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 22, 16 )
+    
+    holoCreate( 23, toWorld( vec( 0, 6.9, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.27, 0.27, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 23, 17 )
+    
+    holoCreate( 24, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 3, 3, 1.175 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 24, 1 )
+    
+    holoCreate( 25, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 2.95, 2.95, 1.15 ), ZafkielAng + ang( 0, -90, 90 ), vec( 204, 166, 81 ), "hq_tube_thick" )
+    holoParent( 25, 1 )
+    
+    holoCreate( 26, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 0.5, 0.5, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 26, 25 )
+    
+    holoCreate( 27, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.5, 0.5, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 27, 25 )
+    
+    holoCreate( 28, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.5, 0.5, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 28, 25 )
+    
+    holoCreate( 29, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.5, 0.5, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 29, 25 )
+    
+    holoCreate( 30, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 240, 0, 0 ) ), vec( 0.5, 0.5, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 30, 25 )
+    
+    holoCreate( 31, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.5, 0.5, 1.17 ), ZafkielAng + ang( 0, -90, 90 ), vec( 197, 162, 99 ), "hqcylinder" )
+    holoParent( 31, 25 )
+    
+    holoCreate( 32, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() ), vec( 0.53, 0.53, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 32, 26 )
+    
+    holoCreate( 33, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.53, 0.53, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 33, 27 )
+    
+    holoCreate( 34, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.53, 0.53, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 34, 28 )
+    
+    holoCreate( 35, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.53, 0.53, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 35, 29 )
+    
+    holoCreate( 36, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 240, 0, 0 ) ), vec( 0.53, 0.53, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 36, 30 )
+    
+    holoCreate( 37, toWorld( vec( 0, 13, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.53, 0.53, 1.18 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 37, 31 )
+    
+    holoCreate( 38, toWorld( vec( 13, 30, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.9, 0.9, 0.75 ), ZafkielAng + ang( 0, -90, 90 ), vec( 193, 176, 127 ), "hqcylinder" )
+    holoParent( 38, 1 )
+    
+    holoCreate( 39, toWorld( vec( 13, 30, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.91, 0.91, 0.83 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 39, 38 )
+    
+    holoCreate( 40, toWorld( vec( 0, 0, 0), ang(), holoEntity( 38 ):pos(), holoEntity( 38 ):angles() + ang( 45, 0, 0 ) ), vec( 2, 0.4, 0.4 ), ZafkielAng + ang( 45, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 40, 38 )
+    
+    holoCreate( 41, toWorld( vec( 0, 0, 0), ang(), holoEntity( 38 ):pos(), holoEntity( 38 ):angles() + ang( 135, 0, 0 ) ), vec( 2, 0.4, 0.4 ), ZafkielAng + ang( 135, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 41, 38 )
+    
+    holoCreate( 42, toWorld( vec( 0, 0, 0), ang(), holoEntity( 38 ):pos(), holoEntity( 38 ):angles() + ang( 300, 0, 0 ) ), vec( 2.25, 2.25, 0.78 ), ZafkielAng + ang( 0, -90, 90 ), vec( 164, 138, 83 ), "hq_tube" )
+    holoParent( 42, 38 )
+    
+    holoCreate( 43, toWorld( vec( 0, 0, 0), ang(), holoEntity( 42 ):pos(), holoEntity( 42 ):angles() + ang( 300, 0, 0 ) ), vec( 2.35, 2.35, 0.8 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 43, 38 )
+    
+    holoCreate( 44, toWorld( vec( 15, -15, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 1.9, 1.9, 0.75 ), ZafkielAng + ang( 0, -90, 90 ), vec( 193, 176, 127 ), "hqcylinder" )
+    holoParent( 44, 1 )
+
+    holoCreate( 45, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 0, 0, 0 ) ), vec( 1.91, 1.91, 0.83 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 45, 44 )
+    
+    holoCreate( 46, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 45, 0, 0 ) ), vec( 3, 0.4, 0.4 ), ZafkielAng + ang( 45, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 46, 44 )
+    
+    holoCreate( 47, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 135, 0, 0 ) ), vec( 3, 0.4, 0.4 ), ZafkielAng + ang( 135, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 47, 44 )
+    
+    holoCreate( 48, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 45, 0, 0 ) ), vec( 3, 0.4, 0.4 ), ZafkielAng + ang( 180, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 48, 44 )
+    
+    holoCreate( 49, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 135, 0, 0 ) ), vec( 3, 0.4, 0.4 ), ZafkielAng + ang( 90, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 49, 44 )
+    
+    holoCreate( 50, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 300, 0, 0 ) ), vec( 3.25, 3.25, 0.78 ), ZafkielAng + ang( 0, -90, 90 ), vec( 164, 138, 83 ), "hq_tube" )
+    holoParent( 50, 44 )
+    
+    holoCreate( 51, toWorld( vec( 0, 0, 0), ang(), holoEntity( 44 ):pos(), holoEntity( 44 ):angles() + ang( 300, 0, 0 ) ), vec( 3.35, 3.35, 0.8 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 51, 44 )
+    
+    holoCreate( 52, toWorld( vec( 10, 17, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 1.6, 1.6, 0.75 ), ZafkielAng + ang( 0, -90, 90 ), vec( 193, 176, 127 ), "hqcylinder" )
+    holoParent( 52, 1 )
+
+    holoCreate( 53, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 0, 0, 0 ) ), vec( 1.61, 1.61, 0.78 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 53, 52 )
+    
+    holoCreate( 54, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 45, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 45, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 54, 52 )
+    
+    holoCreate( 55, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 135, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 135, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 55, 52 )
+    
+    holoCreate( 56, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 45, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 180, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 56, 52 )
+    
+    holoCreate( 57, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 135, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 90, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 57, 52 )
+    
+    holoCreate( 58, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 300, 0, 0 ) ), vec( 2.95, 2.95, 0.78 ), ZafkielAng + ang( 0, -90, 90 ), vec( 164, 138, 83 ), "hq_tube" )
+    holoParent( 58, 52 )
+    
+    holoCreate( 59, toWorld( vec( 0, 0, 0), ang(), holoEntity( 52 ):pos(), holoEntity( 52 ):angles() + ang( 300, 0, 0 ) ), vec( 2.3, 2.3, 0.83 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 59, 52 )
+    
+    holoCreate( 60, toWorld( vec( -20, -5, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 1.6, 1.6, 0.75 ), ZafkielAng + ang( 0, -90, 90 ), vec( 193, 176, 127 ), "hqcylinder" )
+    holoParent( 60, 1 )
+
+    holoCreate( 61, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 0, 0, 0 ) ), vec( 1.61, 1.61, 0.78 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 61, 60 )
+    
+    holoCreate( 62, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 45, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 45, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 62, 60 )
+    
+    holoCreate( 63, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 135, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 135, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 63, 60 )
+    
+    holoCreate( 64, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 45, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 180, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 64, 60 )
+    
+    holoCreate( 65, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 135, 0, 0 ) ), vec( 2.6, 0.4, 0.4 ), ZafkielAng + ang( 90, -90, 90 ), vec( 193, 176, 127 ), "cube" )
+    holoParent( 65, 60 )
+    
+    holoCreate( 66, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 300, 0, 0 ) ), vec( 2.95, 2.95, 0.85 ), ZafkielAng + ang( 0, -90, 90 ), vec( 164, 138, 83 ), "hq_tube" )
+    holoParent( 66, 60 )
+    
+    holoCreate( 67, toWorld( vec( 0, 0, 0), ang(), holoEntity( 60 ):pos(), holoEntity( 60 ):angles() + ang( 300, 0, 0 ) ), vec( 2.3, 2.3, 0.8 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 67, 60 )
+    
+    holoCreate( 68, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 12.1, 12.1, 2.05 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 68, 1 )
+    
+    holoCreate( 69, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 13, 13, 1.95 ), ZafkielAng + ang( 0, -90, 90 ), vec( 188, 168, 111 ), "hq_tube_thin" )
+    holoParent( 69, 1 )
+    
+    holoCreate( 70, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 14, 14, 2 ), ZafkielAng + ang( 0, -90, 90 ), vec( 218, 194, 136 ), "hq_tube_thin" )
+    holoParent( 70, 1 )
+    
+    holoCreate( 71, toWorld( vec( 0, 0, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 14.2, 14.2, 1.95 ), ZafkielAng + ang( 0, -90, 90 ), vec( ), "hq_tube_thin" )
+    holoParent( 71, 1 )
+    
+    holoCreate( 72, toWorld( vec( 0, 40, 0), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 1, 2.1, 0.5 ), ZafkielAng + ang( 0, -90, 0 ), vec( ), "prism" )
+    holoParent( 72, 1 )
+    
+    holoCreate( 73, toWorld( vec( 0, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 35, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 35, -90, 0 ), vec( ), "rcube" )
+    holoParent( 73, 1 )
+    
+    holoCreate( 74, toWorld( vec( 0, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 35, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 35, -90, 0 ), vec( ), "rcube" )
+    holoParent( 74, 1 )
+    
+    holoCreate( 75, toWorld( vec( 0, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 35, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 35, -90, 0 ), vec( ), "rcube" )
+    holoParent( 75, 1 )
+    
+    holoCreate( 76, toWorld( vec( 3, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 60, -90, 0 ), vec( ), "rcube" )
+    holoParent( 76, 1 )
+    
+    holoCreate( 77, toWorld( vec( 3, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 60, -90, 0 ), vec( ), "rcube" )
+    holoParent( 77, 1 )
+    
+    holoCreate( 78, toWorld( vec( 3, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 60, -90, 0 ), vec( ), "rcube" )
+    holoParent( 78, 1 )
+    
+    holoCreate( 79, toWorld( vec( -3, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 60, -90, 0 ), vec( ), "rcube" )
+    holoParent( 79, 1 )
+    
+    holoCreate( 80, toWorld( vec( -3, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 60, -90, 0 ), vec( ), "rcube" )
+    holoParent( 80, 1 )
+    
+    holoCreate( 81, toWorld( vec( -3, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 60, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 60, -90, 0 ), vec( ), "rcube" )
+    holoParent( 81, 1 )
+    
+    holoCreate( 82, toWorld( vec( -4.5, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 82, 1 )
+    
+    holoCreate( 83, toWorld( vec( -4.5, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 83, 1 )
+    
+    holoCreate( 84, toWorld( vec( -4.5, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 84, 1 )
+    
+    holoCreate( 85, toWorld( vec( 0, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 85, 1 )
+    
+    holoCreate( 86, toWorld( vec( 0, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 86, 1 )
+    
+    holoCreate( 87, toWorld( vec( 0, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 87, 1 )
+    
+    holoCreate( 88, toWorld( vec( 4.5, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 88, 1 )
+    
+    holoCreate( 89, toWorld( vec( 4.5, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 89, 1 )
+    
+    holoCreate( 90, toWorld( vec( 4.5, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 90, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 90, -90, 0 ), vec( ), "rcube" )
+    holoParent( 90, 1 )
+    
+    holoCreate( 91, toWorld( vec( -6.5, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 120, -90, 0 ), vec( ), "rcube" )
+    holoParent( 91, 1 )
+       
+    holoCreate( 92, toWorld( vec( -6.5, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 120, -90, 0 ), vec( ), "rcube" )
+    holoParent( 92, 1 )
+    
+    holoCreate( 93, toWorld( vec( -6.5, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 120, -90, 0 ), vec( ), "rcube" )
+    holoParent( 93, 1 )
+    
+    holoCreate( 94, toWorld( vec( 7.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 15 + 120, -90, 0 ), vec( ), "rcube" )
+    holoParent( 94, 1 )
+    
+    holoCreate( 95, toWorld( vec( 2.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 120, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -15 + 120, -90, 0 ), vec( ), "rcube" )
+    holoParent( 95, 1 )
+    
+    holoCreate( 96, toWorld( vec( 2.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 150, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 15 + 150, -90, 0 ), vec( ), "rcube" )
+    holoParent( 96, 1 )
+    
+    holoCreate( 97, toWorld( vec( -2.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 150, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -15 + 150, -90, 0 ), vec( ), "rcube" )
+    holoParent( 97, 1 )
+    
+    holoCreate( 98, toWorld( vec( 6.5, 16 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 180, -90, 0 ), vec( ), "rcube" )
+    holoParent( 98, 1 )
+       
+    holoCreate( 99, toWorld( vec( 6.5, 22 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 180, -90, 0 ), vec( ), "rcube" )
+    holoParent( 99, 1 )
+    
+    holoCreate( 100, toWorld( vec( 6.5, 29 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 180, -90, 0 ), vec( ), "rcube" )
+    holoParent( 100, 1 )
+    
+    holoCreate( 101, toWorld( vec( -2.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 15 + 180, -90, 0 ), vec( ), "rcube" )
+    holoParent( 101, 1 )
+    
+    holoCreate( 102, toWorld( vec( -7.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 180, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -15 + 180, -90, 0 ), vec( ), "rcube" )
+    holoParent( 102, 1 )
+    
+    holoCreate( 103, toWorld( vec( 4, 16 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 103, 1 )
+       
+    holoCreate( 104, toWorld( vec( 4, 22 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 104, 1 )
+    
+    holoCreate( 105, toWorld( vec( 4, 29 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 105, 1 )
+    
+    holoCreate( 106, toWorld( vec( 9, 16 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 106, 1 )
+       
+    holoCreate( 107, toWorld( vec( 9, 22 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 107, 1 )
+    
+    holoCreate( 108, toWorld( vec( 9, 29 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 108, 1 )
+    
+    holoCreate( 109, toWorld( vec( -2, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 15 + 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 109, 1 )
+    
+    holoCreate( 110, toWorld( vec( -8, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 210, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -15 + 210, -90, 0 ), vec( ), "rcube" )
+    holoParent( 110, 1 )
+
+    holoCreate( 111, toWorld( vec( 6, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 111, 1 )
+       
+    holoCreate( 112, toWorld( vec( 6, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 112, 1 )
+    
+    holoCreate( 113, toWorld( vec( 6, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 113, 1 )
+    
+    holoCreate( 114, toWorld( vec( 10, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 114, 1 )
+    
+    holoCreate( 115, toWorld( vec( 10, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 115, 1 )
+    
+    holoCreate( 116, toWorld( vec( 10, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 116, 1 )
+    
+    holoCreate( 117, toWorld( vec( 14, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 117, 1 )
+    
+    holoCreate( 118, toWorld( vec( 14, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 118, 1 )
+    
+    holoCreate( 119, toWorld( vec( 14, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 119, 1 )
+    
+    holoCreate( 120, toWorld( vec( 0.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 15 + 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 120, 1 )
+    
+    holoCreate( 121, toWorld( vec( -5.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 235, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -15 + 235, -90, 0 ), vec( ), "rcube" )
+    holoParent( 121, 1 )
+    
+    holoCreate( 124, toWorld( vec( -5, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 270, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 270, -90, 0 ), vec( ), "rcube" )
+    holoParent( 124, 1 )
+    
+    holoCreate( 125, toWorld( vec( -5, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 270, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 270, -90, 0 ), vec( ), "rcube" )
+    holoParent( 125, 1 )
+    
+    holoCreate( 126, toWorld( vec( -5, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 270, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 270, -90, 0 ), vec( ), "rcube" )
+    holoParent( 126, 1 )
+    
+    holoCreate( 127, toWorld( vec( 5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 270, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 45 + 270, -90, 0 ), vec( ), "rcube" )
+    holoParent( 127, 1 )
+    
+    holoCreate( 128, toWorld( vec( 5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 270, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -45 + 270, -90, 0 ), vec( ), "rcube" )
+    holoParent( 128, 1 )
+    
+    holoCreate( 129, toWorld( vec( 0, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 45 + 300, -90, 0 ), vec( ), "rcube" )
+    holoParent( 129, 1 )
+    
+    holoCreate( 130, toWorld( vec( 0, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 300, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -45 + 300, -90, 0 ), vec( ), "rcube" )
+    holoParent( 130, 1 )
+    
+    holoCreate( 131, toWorld( vec( -6.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 330, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 45 + 330, -90, 0 ), vec( ), "rcube" )
+    holoParent( 131, 1 )
+    
+    holoCreate( 132, toWorld( vec( -6.5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 330, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -45 + 330, -90, 0 ), vec( ), "rcube" )
+    holoParent( 132, 1 )
+    
+    holoCreate( 133, toWorld( vec( 5, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 330, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 330, -90, 0 ), vec( ), "rcube" )
+    holoParent( 133, 1 )
+    
+    holoCreate( 134, toWorld( vec( 5, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 330, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 330, -90, 0 ), vec( ), "rcube" )
+    holoParent( 134, 1 )
+    
+    holoCreate( 135, toWorld( vec( 5, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 330, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 330, -90, 0 ), vec( ), "rcube" )
+    holoParent( 135, 1 )
+    
+    holoCreate( 136, toWorld( vec( -5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( 45 + 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 136, 1 )
+    
+    holoCreate( 137, toWorld( vec( -5, 22.5 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.3, 2.2, 1.6 ), ang() + ang( -45 + 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 137, 1 )
+    
+    holoCreate( 138, toWorld( vec( 6, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 138, 1 )
+    
+    holoCreate( 139, toWorld( vec( 6, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 139, 1 )
+    
+    holoCreate( 140, toWorld( vec( 6, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 140, 1 )
+    
+    holoCreate( 141, toWorld( vec( 11, 17 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 141, 1 )
+    
+    holoCreate( 142, toWorld( vec( 11, 23 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.3, 2.2, 1.2 ), ang() + ang( 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 142, 1 )
+    
+    holoCreate( 143, toWorld( vec( 11, 30 + 30, 0 ), ang(), holoEntity( 1 ):pos(), holoEntity( 1 ):angles() + ang( 0, 0, 0 ) ), vec( 0.6, 2.2, 0.2 ), ang() + ang( 0, -90, 0 ), vec( ), "rcube" )
+    holoParent( 143, 1 )
+    
+    holoCreate( 200 )
+    holoAlpha( 200, 0 )
+        
+    holoCreate( 201 )
+    holoAlpha( 201, 0 )
+        
+    holoCreate( 202 )
+    holoAlpha( 202, 0 )
+    
+    holoCreate( 203 )
+    holoAlpha( 203, 0 )
+    
+    holoCreate( 204 )
+    holoAlpha( 204, 0 )
+        
+    if( !holoEntity( 143 ):isValid() ) {
+        
+        timer( "HologramCreate", 10000 )
+        
+    } else {
+        
+        HolosCreated = 1
+        
+        stoptimer( "HologramCreate" )
+    
+    }
+    
+}

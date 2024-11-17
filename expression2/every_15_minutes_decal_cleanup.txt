@@ -1,0 +1,13 @@
+@name every 15 minutes decal cleanup
+@inputs 
+@outputs 
+@persist 
+@trigger
+
+
+if(first()){
+}
+
+interval(400000)
+concmd("ulx tsay automatic clear decals")
+concmd("ulx cleardecals")

@@ -1,0 +1,88 @@
+@name Human
+@inputs 
+@outputs 
+@persist Count I
+@trigger 
+interval(15)#20 is lowest interval or runOnTick :P
+
+entity():setAlpha(0)
+
+if(first())
+{
+    timer("rotate",1000),timer("spawn",500)
+    timer("2",1000) 
+    Count=1
+    
+    ##Pos holos##
+}
+if(clk("spawn")){
+    for(I=Count,24){#24 is max but you can change no matter
+        holoCreate(I)
+        holoScale(I, vec(0.2,0.2,1))
+        holoColor(I, vec(random(255),random(255),random(255)))
+        break
+    }
+    timer("spawn",2000),Count++,Spawn=0
+}
+holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*0.1)
+holoPos(2, holoEntity(2):pos() + holoEntity(2):forward()*0.1)
+holoPos(3, holoEntity(3):pos() + holoEntity(3):forward()*0.1)
+holoPos(4, holoEntity(4):pos() + holoEntity(4):forward()*0.1)
+holoPos(5, holoEntity(5):pos() + holoEntity(5):forward()*0.1)
+holoPos(6, holoEntity(6):pos() + holoEntity(6):forward()*0.1)
+holoPos(7, holoEntity(7):pos() + holoEntity(1):forward()*0.1)
+holoPos(8, holoEntity(8):pos() + holoEntity(2):forward()*0.1)
+holoPos(9, holoEntity(9):pos() + holoEntity(3):forward()*0.1)
+holoPos(10, holoEntity(10):pos() + holoEntity(4):forward()*0.1)
+holoPos(11, holoEntity(11):pos() + holoEntity(5):forward()*0.1)
+holoPos(12, holoEntity(12):pos() + holoEntity(6):forward()*0.1)
+holoPos(13, holoEntity(13):pos() + holoEntity(1):forward()*0.1)
+holoPos(14, holoEntity(14):pos() + holoEntity(2):forward()*0.1)
+holoPos(15, holoEntity(15):pos() + holoEntity(3):forward()*0.1)
+holoPos(16, holoEntity(16):pos() + holoEntity(4):forward()*0.1)
+holoPos(17, holoEntity(17):pos() + holoEntity(5):forward()*0.1)
+holoPos(18, holoEntity(18):pos() + holoEntity(6):forward()*0.1)
+holoPos(19, holoEntity(19):pos() + holoEntity(1):forward()*0.1)
+holoPos(20, holoEntity(20):pos() + holoEntity(2):forward()*0.1)
+holoPos(21, holoEntity(21):pos() + holoEntity(3):forward()*0.1)
+holoPos(22, holoEntity(22):pos() + holoEntity(4):forward()*0.1)
+holoPos(23, holoEntity(23):pos() + holoEntity(5):forward()*0.1)
+holoPos(24, holoEntity(24):pos() + holoEntity(6):forward()*0.1)
+
+
+#didnt found a better way to make this fast , maybe its better with another loop
+#A = (entity():pos()-holoEntity(1):pos()):toAngle()
+#B = (entity():pos()+holoEntity(1):pos()):toAngle()
+
+if(clk("rotate"))
+{
+    holoAng(1,holoEntity(1):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    
+    holoAng(3,holoEntity(3):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    holoAng(4,holoEntity(4):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    holoAng(5,holoEntity(5):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    holoAng(6,holoEntity(6):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    holoAng(7,holoEntity(7):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    holoAng(8,holoEntity(8):angles()+ang(0,random(90),0)),timer("rotate",randint(500,3000))
+    holoAng(9,holoEntity(9):angles()+ang(0,random(90),0)),timer("rotate",randint(600,3000))
+    holoAng(10,holoEntity(10):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(11,holoEntity(11):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(12,holoEntity(12):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(13,holoEntity(13):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(14,holoEntity(14):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(15,holoEntity(15):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(16,holoEntity(16):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(17,holoEntity(17):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(18,holoEntity(18):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(19,holoEntity(19):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(20,holoEntity(20):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(21,holoEntity(21):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(22,holoEntity(22):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(23,holoEntity(23):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+    holoAng(24,holoEntity(24):angles()+ang(0,random(90),0)),timer("rotate",randint(500,2000))
+}
+
+if(clk("2"))
+{
+    holoAng(2,holoEntity(2):angles()+ang(0,random(90),0)),timer("2",randint(500,3000))
+}

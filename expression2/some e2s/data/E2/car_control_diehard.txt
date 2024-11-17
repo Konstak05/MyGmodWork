@@ -1,0 +1,49 @@
+@name Car control Diehard
+@inputs Pod:wirelink 
+@outputs Weld1 Weld2 Weld3 Weld4
+@persist E:entity
+@trigger 
+
+runOnTick(1)
+
+E = entity():isConstrainedTo()
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Space = Pod:number("Space")
+
+if (W)
+{
+    E:applyForce(E:right()*-500)
+}
+
+if (A)
+{
+    E:applyAngForce(ang(0,-1800,0))
+}
+
+if (S)
+{
+    E:applyForce(E:right()*500)
+}
+
+if (D)
+{
+    E:applyAngForce(ang(0,3900,0))
+}
+
+if (Space)
+{
+    Weld1 = 1
+    Weld2 = 1
+    Weld3 = 1
+    Weld4 = 1
+}else
+{
+    Weld1 = 0
+    Weld2 = 0
+    Weld3 = 0
+    Weld4 = 0
+}

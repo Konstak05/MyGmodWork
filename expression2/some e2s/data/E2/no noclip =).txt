@@ -1,0 +1,22 @@
+@name AntiNoclipWorld
+@persist [Ply PlyPos]:array
+
+# by NikoKun & MMavipc
+interval(10)
+
+if((clk("find") & findCanQuery()) | first()){
+    findByClass("player")
+    Ply = findToArray()
+    timer("find",1000)
+}
+
+for(C=1,Ply:count()){
+    P = Ply[C,entity]
+    if(P:isAlive() & !P:isAdmin()){
+        if(!P:pos():isInWorld()){
+            P:tele(PlyPos[C,vector])
+        }else{
+            PlyPos[C,vector] = P:pos()
+        }
+    }
+}

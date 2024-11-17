@@ -1,0 +1,431 @@
+[1] = {
+	["children"] = {
+		[1] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+						[1] = {
+							["children"] = {
+								[1] = {
+									["children"] = {
+										[1] = {
+											["children"] = {
+												[1] = {
+													["children"] = {
+													},
+													["self"] = {
+														["Max"] = 120,
+														["InputMultiplier"] = 10,
+														["UniqueID"] = "1514112116",
+														["ClassName"] = "proxy",
+														["Axis"] = "y",
+														["EditorExpand"] = true,
+														["Min"] = 60,
+														["VariableName"] = "Angles",
+													},
+												},
+												[2] = {
+													["children"] = {
+													},
+													["self"] = {
+														["Max"] = -15,
+														["InputMultiplier"] = 10,
+														["UniqueID"] = "1803978415",
+														["Offset"] = 1,
+														["EditorExpand"] = true,
+														["ClassName"] = "proxy",
+														["Min"] = 15,
+														["VariableName"] = "Angles",
+													},
+												},
+												[3] = {
+													["children"] = {
+													},
+													["self"] = {
+														["Event"] = "is_on_ground",
+														["EditorExpand"] = true,
+														["UniqueID"] = "66912082",
+														["ClassName"] = "event",
+													},
+												},
+												[4] = {
+													["children"] = {
+													},
+													["self"] = {
+														["ClassName"] = "model",
+														["DoubleFace"] = true,
+														["UniqueID"] = "3364053635",
+														["Model"] = "https://puu.sh/y4fMn/10621d79f6.obj",
+														["Material"] = "https://puu.sh/y4fQS/ee408bdf1a.png",
+													},
+												},
+											},
+											["self"] = {
+												["Position"] = Vector(0.20000000298023, -0.5, 0.69999998807907),
+												["Name"] = "RightWingOpenDragon      ",
+												["ClassName"] = "model",
+												["DoubleFace"] = true,
+												["UniqueID"] = "1969408089",
+												["Angles"] = Angle(-2.6982531547546, 69.417533874512, 0),
+												["Bone"] = "lrigspine 2",
+												["Model"] = "https://puu.sh/y4fFe/c3cdb54fb1.obj",
+												["Material"] = "https://puu.sh/y4fY5/e9db9297d9.jpg",
+											},
+										},
+									},
+									["self"] = {
+										["UniqueID"] = "3546288924",
+										["ClassName"] = "model",
+										["Position"] = Vector(-5.5971069335938, -1.5237731933594, 0.70586013793945),
+										["Model"] = "models/pac/default.mdl",
+										["Size"] = 0,
+										["Bone"] = "chest",
+										["Name"] = "R-wing",
+										["Angles"] = Angle(0, 180, 0),
+									},
+								},
+								[2] = {
+									["children"] = {
+										[1] = {
+											["children"] = {
+												[1] = {
+													["children"] = {
+													},
+													["self"] = {
+														["Max"] = -120,
+														["InputMultiplier"] = 10,
+														["UniqueID"] = "3435222543",
+														["ClassName"] = "proxy",
+														["Axis"] = "y",
+														["EditorExpand"] = true,
+														["Min"] = -60,
+														["VariableName"] = "Angles",
+													},
+												},
+												[2] = {
+													["children"] = {
+													},
+													["self"] = {
+														["Max"] = 15,
+														["InputMultiplier"] = 10,
+														["UniqueID"] = "1775564593",
+														["Offset"] = 1,
+														["ClassName"] = "proxy",
+														["Min"] = -15,
+														["VariableName"] = "Angles",
+													},
+												},
+												[3] = {
+													["children"] = {
+													},
+													["self"] = {
+														["Event"] = "is_on_ground",
+														["UniqueID"] = "2130660107",
+														["ClassName"] = "event",
+													},
+												},
+												[4] = {
+													["children"] = {
+													},
+													["self"] = {
+														["ClassName"] = "model",
+														["Size"] = -1,
+														["UniqueID"] = "968980743",
+														["Material"] = "https://puu.sh/y4fQS/ee408bdf1a.png",
+														["Model"] = "https://puu.sh/y4fMn/10621d79f6.obj",
+														["DoubleFace"] = true,
+													},
+												},
+											},
+											["self"] = {
+												["Position"] = Vector(1, -2, -1),
+												["Name"] = "LeftWingOpenDragon",
+												["UniqueID"] = "3500427119",
+												["Angles"] = Angle(2.6982531547546, -69.417533874512, 180),
+												["Material"] = "https://puu.sh/y4fY5/e9db9297d9.jpg",
+												["DoubleFace"] = true,
+												["Size"] = -1,
+												["BlurLength"] = 0.9829504783167,
+												["Bone"] = "lrigspine 2",
+												["Model"] = "https://puu.sh/y4fFe/c3cdb54fb1.obj",
+												["ClassName"] = "model",
+											},
+										},
+									},
+									["self"] = {
+										["ClassName"] = "model",
+										["Position"] = Vector(-6.5767822265625, 3.1541137695313, 2.5715637207031),
+										["UniqueID"] = "4014136749",
+										["Model"] = "models/pac/default.mdl",
+										["Bone"] = "chest",
+										["Name"] = "L-wing",
+										["Size"] = 0,
+									},
+								},
+								[3] = {
+									["children"] = {
+									},
+									["self"] = {
+										["Event"] = "is_on_ground",
+										["EditorExpand"] = true,
+										["UniqueID"] = "2697734995",
+										["ClassName"] = "event",
+									},
+								},
+								[4] = {
+									["children"] = {
+									},
+									["self"] = {
+										["ClassName"] = "animation",
+										["UniqueID"] = "3838883300",
+										["SequenceName"] = "swimming_all",
+									},
+								},
+							},
+							["self"] = {
+								["EditorExpand"] = true,
+								["ClassName"] = "group",
+								["UniqueID"] = "4084326035",
+								["Name"] = "fly",
+							},
+						},
+					},
+					["self"] = {
+						["Event"] = "vehicle_model",
+						["EditorExpand"] = true,
+						["UniqueID"] = "2233258863",
+						["ClassName"] = "event",
+					},
+				},
+			},
+			["self"] = {
+				["EditorExpand"] = true,
+				["ClassName"] = "group",
+				["UniqueID"] = "3595064426",
+				["Name"] = "Jump/Noclip",
+			},
+		},
+		[2] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+						[1] = {
+							["children"] = {
+								[1] = {
+									["children"] = {
+									},
+									["self"] = {
+										["Event"] = "is_on_ground",
+										["Invert"] = true,
+										["UniqueID"] = "4193483733",
+										["EditorExpand"] = true,
+										["ClassName"] = "event",
+									},
+								},
+								[2] = {
+									["children"] = {
+									},
+									["self"] = {
+										["ClassName"] = "model",
+										["DoubleFace"] = true,
+										["UniqueID"] = "483871175",
+										["Model"] = "https://puu.sh/y4g7x/66e8fc5e17.obj",
+										["Size"] = -1,
+										["Translucent"] = true,
+										["Material"] = "https://puu.sh/y4fQS/ee408bdf1a.png",
+									},
+								},
+							},
+							["self"] = {
+								["Invert"] = true,
+								["UniqueID"] = "839412225",
+								["Model"] = "https://puu.sh/y4g3u/8bac6eb90f.obj",
+								["Name"] = "LeftWingClosedDragon",
+								["Size"] = -1,
+								["EditorExpand"] = true,
+								["Angles"] = Angle(58.541751861572, -67.420997619629, 94.974494934082),
+								["DoubleFace"] = true,
+								["Position"] = Vector(-3.2870635986328, -1.794677734375, 0.83883666992188),
+								["ClassName"] = "model",
+								["Bone"] = "spine 4",
+								["Translucent"] = true,
+								["Material"] = "https://puu.sh/y4fY5/e9db9297d9.jpg",
+							},
+						},
+						[2] = {
+							["children"] = {
+								[1] = {
+									["children"] = {
+									},
+									["self"] = {
+										["UniqueID"] = "4200418663",
+										["ClassName"] = "event",
+										["Invert"] = true,
+										["Event"] = "is_on_ground",
+									},
+								},
+								[2] = {
+									["children"] = {
+									},
+									["self"] = {
+										["ClassName"] = "model",
+										["DoubleFace"] = true,
+										["UniqueID"] = "3815096464",
+										["Model"] = "https://puu.sh/y4g7x/66e8fc5e17.obj",
+										["Translucent"] = true,
+										["Material"] = "https://puu.sh/y4fQS/ee408bdf1a.png",
+									},
+								},
+							},
+							["self"] = {
+								["Invert"] = true,
+								["UniqueID"] = "900033253",
+								["Name"] = "LeftWingClosedDragon",
+								["Model"] = "https://puu.sh/y4g3u/8bac6eb90f.obj",
+								["EditorExpand"] = true,
+								["Angles"] = Angle(54.573139190674, 114.33620452881, 94.754829406738),
+								["DoubleFace"] = true,
+								["Position"] = Vector(-2.8010215759277, -1.89892578125, -0.49932861328125),
+								["ClassName"] = "model",
+								["Bone"] = "spine 4",
+								["Translucent"] = true,
+								["Material"] = "https://puu.sh/y4fY5/e9db9297d9.jpg",
+							},
+						},
+					},
+					["self"] = {
+						["ClassName"] = "group",
+						["UniqueID"] = "294316036",
+						["EditorExpand"] = true,
+					},
+				},
+				[2] = {
+					["children"] = {
+						[1] = {
+							["children"] = {
+								[1] = {
+									["children"] = {
+									},
+									["self"] = {
+										["Event"] = "vehicle_class",
+										["Invert"] = true,
+										["UniqueID"] = "1020099187",
+										["EditorExpand"] = true,
+										["ClassName"] = "event",
+									},
+								},
+								[2] = {
+									["children"] = {
+									},
+									["self"] = {
+										["ClassName"] = "model",
+										["DoubleFace"] = true,
+										["UniqueID"] = "3815096464",
+										["Model"] = "https://puu.sh/y4g7x/66e8fc5e17.obj",
+										["Size"] = -1,
+										["Translucent"] = true,
+										["Material"] = "https://puu.sh/y4fQS/ee408bdf1a.png",
+									},
+								},
+							},
+							["self"] = {
+								["Invert"] = true,
+								["UniqueID"] = "851019687",
+								["Model"] = "https://puu.sh/y4g3u/8bac6eb90f.obj",
+								["Name"] = "LeftWingClosedDragon",
+								["Size"] = -1,
+								["EditorExpand"] = true,
+								["Angles"] = Angle(47.826850891113, -96.927772521973, 58.738960266113),
+								["DoubleFace"] = true,
+								["Position"] = Vector(-3.2870635986328, -1.794677734375, 0.83883666992188),
+								["ClassName"] = "model",
+								["Bone"] = "spine 4",
+								["Translucent"] = true,
+								["Material"] = "https://puu.sh/y4fY5/e9db9297d9.jpg",
+							},
+						},
+						[2] = {
+							["children"] = {
+								[1] = {
+									["children"] = {
+									},
+									["self"] = {
+										["UniqueID"] = "4193483733",
+										["ClassName"] = "event",
+										["Invert"] = true,
+										["Event"] = "vehicle_class",
+									},
+								},
+								[2] = {
+									["children"] = {
+									},
+									["self"] = {
+										["ClassName"] = "model",
+										["DoubleFace"] = true,
+										["UniqueID"] = "3634653408",
+										["Model"] = "https://puu.sh/y4g7x/66e8fc5e17.obj",
+										["Translucent"] = true,
+										["Material"] = "https://puu.sh/y4fQS/ee408bdf1a.png",
+									},
+								},
+							},
+							["self"] = {
+								["Invert"] = true,
+								["UniqueID"] = "839412225",
+								["Name"] = "LeftWingClosedDragon",
+								["Model"] = "https://puu.sh/y4g3u/8bac6eb90f.obj",
+								["EditorExpand"] = true,
+								["Angles"] = Angle(52.113666534424, 82.640243530273, 70.574295043945),
+								["DoubleFace"] = true,
+								["Position"] = Vector(-2.8766784667969, -1.658935546875, -0.3470458984375),
+								["ClassName"] = "model",
+								["Bone"] = "spine 4",
+								["Translucent"] = true,
+								["Material"] = "https://puu.sh/y4fY5/e9db9297d9.jpg",
+							},
+						},
+					},
+					["self"] = {
+						["EditorExpand"] = true,
+						["ClassName"] = "group",
+						["UniqueID"] = "1667042998",
+						["Name"] = "sit",
+					},
+				},
+			},
+			["self"] = {
+				["EditorExpand"] = true,
+				["ClassName"] = "group",
+				["UniqueID"] = "2910665494",
+				["Name"] = "Sit/ ground",
+			},
+		},
+		[3] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+					},
+					["self"] = {
+						["ClassName"] = "text",
+						["Size"] = 0,
+						["UniqueID"] = "2627633182",
+						["Name"] = "\"animation/model by IceWolf\"",
+						["Text"] = "animation/model fix by IceWolf",
+					},
+				},
+			},
+			["self"] = {
+				["EditorExpand"] = true,
+				["ClassName"] = "group",
+				["UniqueID"] = "1178743864",
+				["Name"] = "Credits",
+			},
+		},
+	},
+	["self"] = {
+		["EditorExpand"] = true,
+		["ClassName"] = "group",
+		["UniqueID"] = "227880923",
+		["Name"] = "Dragon Wings",
+	},
+},

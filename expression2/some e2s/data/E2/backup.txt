@@ -1,0 +1,14 @@
+@name backup
+@inputs RGB:vector R G B Color Screen:wirelink Y X
+@outputs 
+@persist 
+@trigger 
+
+RGB = hsv2rgb((Y*128+X)/(128*128)*360,1,1)
+R = RGB:x()
+G = RGB:y()
+B = RGB:z()
+
+Color = R*256^2 + G*256 + B
+
+Screen[Y*128+X] = Color

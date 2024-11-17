@@ -1,0 +1,10 @@
+@name AngleTargeter prototype
+@inputs TargetPos:vector Head:entity
+@outputs 
+@persist 
+@trigger 
+
+interval(1)
+
+Head:setAng((TargetPos+vec(0,0,60)-Head:pos()):toAngle())
+Head:propGravity(0)

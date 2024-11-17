@@ -1,0 +1,12 @@
+@name SB_Turret
+@inputs 
+@outputs 
+@persist E:entity O
+@trigger 
+interval(1)
+
+
+E = entity()
+
+E:isWeldedTo():applyAngForce(owner():eyeAngles())
+ 

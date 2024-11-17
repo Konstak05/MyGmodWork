@@ -1,0 +1,11 @@
+@name HoloShapeTest
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+if(first())
+{
+    holoCreate(1)
+    holoModel(1, "torus")
+}

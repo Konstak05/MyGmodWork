@@ -1,0 +1,49 @@
+@name Spy Bot System
+@inputs Pod:wirelink E:entity Cam:wirelink
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+
+if(first())
+{
+    holoCreate(1)
+    holoPos(1, E:pos())
+    holoAng(1, E:angles())
+    holoParent(1, E)
+    H = holoEntity(1)
+}
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Space = Pod:number("Space")
+
+if (W)
+{   
+    E:applyForce(E:right()*-350)
+}
+
+if (A)
+{
+    E:applyAngForce(ang(0,-1000,0))
+}
+
+if (S)
+{
+    E:applyForce(E:right()*350)
+}
+
+if (D)
+{
+    E:applyAngForce(ang(0,1000,0))
+}
+
+if (Space)
+{
+    E:applyForce(vec(0,0,20))
+}
+
+Cam:setVector("Direction",E:right()*-5)
+Cam:setVector("Position",E:toWorld(vec(0,-35,-18)))

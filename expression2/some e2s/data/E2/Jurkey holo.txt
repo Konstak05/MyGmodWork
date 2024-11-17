@@ -1,0 +1,48 @@
+@name Turkey Holo
+@persist [Body Neck Head Beak LeftEye RightEye LeftEyeShine RightEyeShine Tail]:entity 
+@persist [LeftWing RightWing LeftLeg RightLeg LeftFoot RightFoot Gobble Bulb]:entity
+
+#By Sodaplayer
+if( first() ) {
+    
+    entity():setAlpha(0)
+    
+    Body = holoCreate( 1, entity():toWorld( vec( 0, 0, 14 ) ), vec( 2, 1.5, 1.5 ), entity():toWorld( ang() ), vec( 184, 138, 0 ), "hqsphere2" )
+    Neck = holoCreate( 2, Body:toWorld( vec( 7, 0, 5 ) ), vec( 0.35, 0.35, 1.2 ), entity():toWorld( ang( -10, 0, 0 ) ), vec( 255, 100, 100 ), "hqcylinder2" )
+    Head = holoCreate( 3, Neck:toWorld( vec( 0.9, 0, 7 ) ), vec( 0.5, 0.5, 0.5 ), entity():toWorld( ang() ), vec( 255, 128, 128 ), "hqicosphere2" )
+    Beak = holoCreate( 4, Head:toWorld( vec( 3.5, 0, -2 ) ), vec( 0.2, 0.2, 0.5 ), entity():toWorld( ang( 140, 0, 0 ) ), vec( 222, 140, 140 ), "hqcone" )
+    LeftEye = holoCreate( 5, Head:toWorld( vec( 2.5, -1, 1 ) ), vec( 0.1, 0.1, 0.1 ), entity():toWorld( ang() ), vec(), "hqsphere2" )
+    RightEye = holoCreate( 6, Head:toWorld( vec( 2.5, 1, 1 ) ), vec( 0.1, 0.1, 0.1 ), entity():toWorld( ang() ), vec(), "hqsphere2" )
+    Tail = holoCreate( 7, Body:toWorld( vec( -12, 0, 4 ) ), vec( 0.5, 2, 1.5 ), entity():toWorld( ang( -20, 0, 0 ) ), vec( 184, 138, 0 ), "hqsphere2" )
+    LeftWing = holoCreate( 8, Body:toWorld( vec( 1, -8.1, 0 ) ), vec( 1.5, 0.2, 1 ), entity():toWorld( ang( 0, 5, -12 ) ), vec( 184, 138, 0 ), "hqsphere2" )
+    RightWing = holoCreate( 9, Body:toWorld( vec( 1, 8.1, 0 ) ), vec( 1.5, 0.2, 1 ), entity():toWorld( ang( 0, -5, 12 ) ), vec( 184, 138, 0 ), "hqsphere2" )
+    LeftLeg = holoCreate( 10, Body:toWorld( vec( 0.9, -3, -7 ) ), vec( 0.1, 0.1, 1 ), entity():toWorld( ang() ), vec( 255, 128, 128 ), "hqcylinder2" )
+    RightLeg = holoCreate( 11, Body:toWorld( vec( 0.9, 3, -7 ) ), vec( 0.1, 0.1, 1 ), entity():toWorld( ang() ), vec( 255, 128, 128 ), "hqcylinder2" )
+    LeftFoot = holoCreate( 12, LeftLeg:toWorld( vec( 0.9, 0, -6 ) ), vec( 0.5, 0.4, 0.1 ), entity():toWorld( ang() ), vec( 255, 128, 128 ), "hqsphere2" )
+    RightFoot = holoCreate( 13, RightLeg:toWorld( vec( 0.9, 0, -6 ) ), vec( 0.5, 0.4, 0.1 ), entity():toWorld( ang() ), vec( 255, 128, 128 ), "hqsphere2" )
+    LeftEyeShine = holoCreate( 14, Head:toWorld( vec( 2.52, -1, 1 ) ), vec( 0.11, 0.11, 0.11 ), entity():toWorld( ang() ), vec(), "hqsphere2" )
+    RightEyeShine = holoCreate( 15, Head:toWorld( vec( 2.52, 1, 1 ) ), vec( 0.11, 0.11, 0.11 ), entity():toWorld( ang() ), vec(), "hqsphere2" )
+    Gobble = holoCreate( 16, Head:toWorld( vec( 2.9, -0.7, -2.7 ) ), vec( 0.07, 0.1, 0.3 ), entity():toWorld( ang( 180, -75, 0 ) ), vec( 222, 128, 128 ), "hqcylinder2" )
+    Bulb = holoCreate( 17, Head:toWorld( vec( 2.77, -0.4, -0.9 ) ), vec( 0.15, 0.15, 0.15 ), entity():toWorld( ang() ), vec( 222, 128, 128 ), "hqicosphere2" )
+    
+    for( I = 1, 17 ) { holoParent( I, entity() ) }
+    
+    holoMaterial( 1, "models/props_foliage/tree_deciduous_01a_trunk" )
+    holoMaterial( 8, "models/props_foliage/tree_deciduous_01a_trunk" )
+    holoMaterial( 9, "models/props_foliage/tree_deciduous_01a_trunk" )
+    holoMaterial( 7, "models/props_foliage/tree_deciduous_01a_trunk" )
+    holoMaterial( 14, "models/props_combine/pipes01" )
+    holoMaterial( 15, "models/props_combine/pipes01" )
+    holoAlpha( 14, 32 )
+    holoAlpha( 15, 32 )
+    
+    timer( "sound", randint( 5000, 10000 ) )
+}
+
+if( clk( "sound" ) ) {
+    
+    timer( "sound", randint( 5000, 10000 ) )
+    soundPlay( 1, 5, "ambient/creatures/pigeon_idle" + randint(4) + ".wav" )
+    soundPitch( 1, 170 )
+    
+}

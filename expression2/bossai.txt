@@ -1,0 +1,12 @@
+@name BossAi
+@inputs TargetPos:vector Head:entity
+@outputs 
+@persist Vec:vector
+@trigger 
+
+interval(1)
+
+Vec=((TargetPos-Head:pos()))*10
+
+Head:applyForce(Vec+$Vec)
+Head:setAng((TargetPos+vec(0,0,35)-Head:pos()):toAngle())

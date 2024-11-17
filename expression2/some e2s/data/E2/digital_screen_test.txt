@@ -1,0 +1,32 @@
+@name Digital Screen Test
+@inputs Screen:wirelink 
+@outputs X Y 
+@persist R G B J:array
+runOnTick(1)
+
+timer("draw",1000)
+
+if(first())
+{
+    Screen:writeArray(0, J)
+    Screen[1048569] = 2
+}
+
+RGB = hsv2rgb((Y*128+X)/(128*128)*360,1,1)
+R = RGB:x()
+G = RGB:y()
+B = RGB:z()
+
+Color = R*256^2 + G*256 + B
+
+Screen[Y*128+X] = Color
+
+if(clk("draw"))
+{
+    Screen:writeArray(0, J)
+   
+}
+
+X = X+1
+J[1,number] = 910
+

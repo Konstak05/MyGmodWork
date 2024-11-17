@@ -1,0 +1,14 @@
+@name holoHat
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+if(first())
+{
+    holoCreate(1)
+    holoPos(1, owner():attachmentPos("head"))
+    holoAng(1, owner():attachmentAng("head"))
+    holoParent(1, owner())
+}
+

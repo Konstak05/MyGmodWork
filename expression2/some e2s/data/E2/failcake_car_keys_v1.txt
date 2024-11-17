@@ -1,0 +1,42 @@
+@name FailCake Car Keys V1
+@inputs Entity:entity Active
+@outputs Kick
+@persist Driver:entity Timer
+if(first()){hint("Made By FailCake",100)}
+    Owner = owner()
+    interval(500)
+    
+Driver=Entity:driver()
+
+if (Driver != Owner & Active == 1 & Driver)
+{
+Entity:hintDriver("SECURITY SISTEM ACTIVATED!",999)
+Entity:hintDriver("THIS IS FAILCAKE CAR!GET OUT!",999)
+hint(Driver:name() + " Has Tried to Steal your Car!",999)
+Kick = 1
+Entity:soundPlay(999,999,"synth/square.wav")
+}else{
+Kick = 0
+if(Kick == 0 & Active == 0){
+Timer += 1
+Screen = Timer
+}
+if(Timer == 5){
+ Entity:soundPlay(998,998,"synth/tri.wav")
+}else{
+soundStop(998)
+}   
+if(Timer > 10 & Active == 0){
+soundStop(999)
+Timer = 0
+}
+}
+
+##PROTECTION SISTEM MUAHAHAHAH##
+
+if(duped()){selfDestructAll()}
+if(duped()){selfDestructAll()}
+
+####################################################################
+## Do not rename the E2 or remove the hint("Made by Failcake",100)##
+####################################################################

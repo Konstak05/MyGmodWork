@@ -1,0 +1,12 @@
+@name Skin Changer (camo)
+
+
+It = owner()
+
+interval(1)
+runOnChat(1)
+
+if (It:lastSaid() == "/camo") {
+    It:setMaterial("models/XQM/CellShadedCamo_diffuse")
+}
+

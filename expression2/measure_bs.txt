@@ -1,0 +1,29 @@
+@name MEASURE BS
+@inputs
+@outputs 
+@persist A Prop:entity
+@trigger 
+@strict
+@model models/sprops/misc/axis_plane.mdl
+
+Prop = entity()
+
+interval(1)
+A = A + 1
+
+if(first()|duped()){
+Prop:setAng(ang(0,0,0))
+
+
+}
+holoCreate(1)
+holoPos(1,Prop:toWorld(vec(0,0,35)))
+holoAng(1,Prop:angles() + ang(A,0,0))
+
+holoCreate(2)
+holoPos(2,Prop:toWorld(vec(0,0,70)))
+holoAng(2,Prop:angles() + ang(0,A,0))
+
+holoCreate(3)
+holoPos(3,Prop:toWorld(vec(0,0,105)))
+holoAng(3,Prop:angles() + ang(0,0,A))

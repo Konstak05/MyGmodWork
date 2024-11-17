@@ -1,0 +1,21 @@
+@name Chair Unfreezer
+@inputs Chair:entity
+@outputs 
+@persist Props:array I
+@trigger 
+
+interval(100)
+
+Props = Chair:getConstraints()
+
+if( Chair:driver() ) {
+
+    for( I = 1, Props:count(), 1 ) {
+
+        Chair:propFreeze( 0 )
+
+        Props[ I, entity ]:propFreeze( 0 )
+
+    }
+
+}

@@ -1,0 +1,395 @@
+@name TinyTardis
+@inputs 
+@outputs  
+@persist PrevGotoPos:vector TTFD TTFI TimeTravelDuration TR TRe TkFd P:entity TkGotoPos:vector GotoPos:vector Target:entity Owner:entity TKQ StartTkFD FD FI LastSavePos:vector
+@trigger 
+
+runOnChat(1)
+interval(10)
+
+if(first()|duped()) {
+    GotoPos=entity():pos()
+    Owner=owner()
+}
+
+Command=Owner:lastSaid()
+if ((chatClk(Owner) | chatClk(Owner)) & Command:left(1)=="!") 
+{
+    Input = Command:explode(" ")
+    Command=Input[1, string]:sub(2,Input[1, string]:length())
+    Argument = Input[2, string]
+    if(Command == "tg")
+    {
+        if(Argument:length()>0&findPlayerByName(Argument):isPlayer()) {
+            Owner=findPlayerByName(Argument)
+            hint("Given tardis to "+findPlayerByName(Argument):name()+"!",2)
+        } else {
+            hint("Player not found!",2)
+        }
+    }
+    if(Command == "tk")
+    {
+        if(Argument:length()>0&findPlayerByName(Argument):isPlayer()) {
+            Target=findPlayerByName(Argument)
+            timer("TkFadeout",50)   
+            TkFd=255 
+            hint("Tardis killing "+findPlayerByName(Argument):name()+"!",2)
+        } else {
+            hint("Player not found!",2)
+        }
+    }
+    if(Command == "tt")
+    {
+        hideChat(1)
+        if(Argument:length()>0) {
+            TimeTravelDuration=Argument:toNumber()
+            timer("TTravelFadeOut",50)
+            TTFD=255
+        }
+    }
+    if(Command == "stk")
+    {
+            Target=noentity()
+    }
+    if(Command == "r")
+    {
+            TRe=255
+            timer("TReturn",50)
+    }
+}
+if(!TimeTravelDuration) {
+if(clk("e")) {
+    stoptimer("e")
+    GotoPos=LastSavePos
+} else {
+    if(Owner:keyPressed("J")) {
+    FD=255
+    timer("Fadeout",50)   
+    LastSavePos=Owner:aimPos()+vec(0,0,0)
+    }
+}
+   
+if(clk("Fadeout")) {
+    FD=FD-7.5
+    holoAlpha(1,FD)
+    holoAlpha(2,FD)
+    holoAlpha(3,FD)
+    holoAlpha(4,FD)
+    holoAlpha(5,FD)
+    holoAlpha(6,FD)
+    holoAlpha(7,FD)
+    holoAlpha(8,FD)
+    holoAlpha(9,FD)
+    holoAlpha(10,FD)
+    holoAlpha(11,FD)
+    holoAlpha(12,FD)
+    holoAlpha(13,FD)
+    holoAlpha(14,FD)
+    holoAlpha(15,FD)
+    holoAlpha(16,FD)
+    holoAlpha(17,FD)
+    holoAlpha(18,FD)
+    holoAlpha(19,FD)
+    holoAlpha(20,FD)
+    holoAlpha(21,FD)
+    if(FD<=0) {
+        stoptimer("FadeOut")
+        timer("e",50)
+        timer("FadeIn",50)
+    } else {
+    timer("Fadeout",50)   
+    }
+}
+if(clk("FadeIn")) {
+    FI=FI+7.5
+    holoAlpha(1,FI)
+    holoAlpha(2,FI)
+    holoAlpha(3,FI)
+    holoAlpha(4,FI)
+    holoAlpha(5,FI)
+    holoAlpha(6,FI)
+    holoAlpha(7,FI)
+    holoAlpha(8,FI)
+    holoAlpha(9,FI)
+    holoAlpha(10,FI)
+    holoAlpha(11,FI)
+    holoAlpha(12,FI)
+    holoAlpha(13,FI)
+    holoAlpha(14,FI)
+    holoAlpha(15,FI)
+    holoAlpha(16,FI)
+    holoAlpha(17,FI)
+    holoAlpha(18,FI)
+    holoAlpha(19,FI)
+    holoAlpha(20,FI)
+    holoAlpha(21,FI)
+    if(FI>=255) {
+        stoptimer("FadeIn")
+        FI=0
+    } else {
+    timer("FadeIn",50)   
+    }
+}
+if(clk("TkFadeout")) {
+    TkFd=TkFd-7.5
+    holoAlpha(1,TkFd)
+    holoAlpha(2,TkFd)
+    holoAlpha(3,TkFd)
+    holoAlpha(4,TkFd)
+    holoAlpha(5,TkFd)
+    holoAlpha(6,TkFd)
+    holoAlpha(7,TkFd)
+    holoAlpha(8,TkFd)
+    holoAlpha(9,TkFd)
+    holoAlpha(10,TkFd)
+    holoAlpha(11,TkFd)
+    holoAlpha(12,TkFd)
+    holoAlpha(13,TkFd)
+    holoAlpha(14,TkFd)
+    holoAlpha(15,TkFd)
+    holoAlpha(16,TkFd)
+    holoAlpha(17,TkFd)
+    holoAlpha(18,TkFd)
+    holoAlpha(19,TkFd)
+    holoAlpha(20,TkFd)
+    holoAlpha(21,TkFd)
+    if(TkFd<=0) {
+        stoptimer("TkFadeout")
+        timer("TK",50)
+        timer("FadeIn",50)
+    } else {
+    timer("TkFadeout",50)   
+    }
+}
+if(clk("TReturn")) {
+    TRe=TRe-7.5
+    holoAlpha(1,TRe)
+    holoAlpha(2,TRe)
+    holoAlpha(3,TRe)
+    holoAlpha(4,TRe)
+    holoAlpha(5,TRe)
+    holoAlpha(6,TRe)
+    holoAlpha(7,TRe)
+    holoAlpha(8,TRe)
+    holoAlpha(9,TRe)
+    holoAlpha(10,TRe)
+    holoAlpha(11,TRe)
+    holoAlpha(12,TRe)
+    holoAlpha(13,TRe)
+    holoAlpha(14,TRe)
+    holoAlpha(15,TRe)
+    holoAlpha(16,TRe)
+    holoAlpha(17,TRe)
+    holoAlpha(18,TRe)
+    holoAlpha(19,TRe)
+    holoAlpha(20,TRe)
+    holoAlpha(21,TRe)
+    if(TRe<=0) {
+        stoptimer("TReturn")
+        timer("FadeIn",50)
+        GotoPos=entity():pos()
+    } else {
+    timer("TReturn",50)   
+    }
+}
+if(clk("TK")) {
+    TKQ=1
+}
+if(Target:isAlive()&TKQ) {
+    TkGotoPos=Target:pos()+vec(0,0,115)
+    GotoPos=TkGotoPos
+    timer("KPlr",1750)
+    TRe=255
+    timer("TReturn",50)
+}
+if(!Target:isAlive()) {
+    stoptimer("TK")
+    TKQ=0   
+}
+if(clk("KPlr")) {
+    P=propSpawn("models/hunter/blocks/cube075x075x025.mdl",TkGotoPos,ang(),0)
+    P:setMass(50000)
+    noCollideAll(P,0)
+    P:setAlpha(0)
+    if(!Target:isAlive()) {
+        stoptimer("KPlr")   
+    } else {
+        stoptimer("KPlr")
+        timer("RProps",1000)
+    }
+}
+if(clk("RProps")) {
+    propDeleteAll()
+    timer("KPlr",1000)
+}
+}
+if(clk("TTravelFadeOut")) {
+    TTFD=TTFD-7.5
+    holoAlpha(1,TTFD)
+    holoAlpha(2,TTFD)
+    holoAlpha(3,TTFD)
+    holoAlpha(4,TTFD)
+    holoAlpha(5,TTFD)
+    holoAlpha(6,TTFD)
+    holoAlpha(7,TTFD)
+    holoAlpha(8,TTFD)
+    holoAlpha(9,TTFD)
+    holoAlpha(10,TTFD)
+    holoAlpha(11,TTFD)
+    holoAlpha(12,TTFD)
+    holoAlpha(13,TTFD)
+    holoAlpha(14,TTFD)
+    holoAlpha(15,TTFD)
+    holoAlpha(16,TTFD)
+    holoAlpha(17,TTFD)
+    holoAlpha(18,TTFD)
+    holoAlpha(19,TTFD)
+    holoAlpha(20,TTFD)
+    holoAlpha(21,TTFD)
+    if(TTFD<=0) {
+        stoptimer("TTravelFadeOut")
+        timer("TTravelFadeIn",TimeTravelDuration*1000)
+    } else {
+    timer("TTravelFadeOut",50)   
+    }
+}
+if(clk("TTravelFadeIn")) {
+    TTFI=TTFI+7.5
+    holoAlpha(1,TTFI)
+    holoAlpha(2,TTFI)
+    holoAlpha(3,TTFI)
+    holoAlpha(4,TTFI)
+    holoAlpha(5,TTFI)
+    holoAlpha(6,TTFI)
+    holoAlpha(7,TTFI)
+    holoAlpha(8,TTFI)
+    holoAlpha(9,TTFI)
+    holoAlpha(10,TTFI)
+    holoAlpha(11,TTFI)
+    holoAlpha(12,TTFI)
+    holoAlpha(13,TTFI)
+    holoAlpha(14,TTFI)
+    holoAlpha(15,TTFI)
+    holoAlpha(16,TTFI)
+    holoAlpha(17,TTFI)
+    holoAlpha(18,TTFI)
+    holoAlpha(19,TTFI)
+    holoAlpha(20,TTFI)
+    holoAlpha(21,TTFI)
+    if(TTFI>=255) {
+        stoptimer("TTravelFadeIn")
+        TTFI=0
+        TimeTravelDuration=0
+    } else {
+    timer("TTravelFadeIn",50)   
+    }
+}
+
+#holograms below
+    holoCreate(1)
+    holoPos(1, GotoPos)
+    holoScale(1,vec(1,1,0.15))
+    holoColor(1,vec(0,0,200))
+    
+    holoCreate(2)
+    holoPos(2, GotoPos+vec(0,0,7))
+    holoScale(2, vec(0.9,0.9,1.25))
+    holoColor(2,vec(0,0,175))
+    
+    holoCreate(3)
+    holoPos(3, GotoPos+vec(0,0,14))
+    holoScale(3, vec(1,1,0.15))
+    holoColor(3,vec(0,0,200))
+    
+    holoCreate(4)
+    holoPos(4, GotoPos+vec(5.25,5.25,7))
+    holoScale(4, vec(0.1,0.1,1.25))
+    holoColor(4,vec(0,0,200))
+    
+    holoCreate(5)
+    holoPos(5, GotoPos+vec(-5.25,5.25,7))
+    holoScale(5, vec(0.1,0.1,1.25))
+    holoColor(5,vec(0,0,200))
+    
+    holoCreate(6)
+    holoPos(6, GotoPos+vec(-5.25,-5.25,7))
+    holoScale(6, vec(0.1,0.1,1.25))
+    holoColor(6,vec(0,0,200))
+    
+    holoCreate(7)
+    holoPos(7, GotoPos+vec(5.25,-5.25,7))
+    holoScale(7, vec(0.1,0.1,1.25))
+    holoColor(7,vec(0,0,200))
+    
+    holoCreate(8)
+    holoPos(8, GotoPos+vec(0,0,15))
+    holoScale(8, vec(0.8,0.8,0.10))
+    holoColor(8,vec(0,0,200))
+    
+    holoCreate(9)
+    holoPos(9, GotoPos+vec(0,0,16))
+    holoModel(9,"cylinder")
+    holoScale(9, vec(0.35,0.35,0.3))
+    holoColor(9,vec(0,0,200))
+    
+    holoCreate(10)
+    holoPos(10, GotoPos+vec(5.25,0,11))
+    holoScale(10, vec(0.1,0.9,0.1))
+    holoColor(10,vec(0,0,200))
+    
+    holoCreate(11)
+    holoPos(11, GotoPos+vec(5.25,0,4))
+    holoScale(11, vec(0.1,0.9,0.1))
+    holoColor(11,vec(0,0,200))
+    
+    holoCreate(12)
+    holoPos(12, GotoPos+vec(5.25,0,7))
+    holoScale(12, vec(0.1,0.9,0.1))
+    holoColor(12,vec(0,0,200))
+    
+    holoCreate(13)
+    holoPos(13, GotoPos+vec(-5.25,0,11))
+    holoScale(13, vec(0.1,0.9,0.1))
+    holoColor(13,vec(0,0,200))
+    
+    holoCreate(14)
+    holoPos(14, GotoPos+vec(-5.25,0,4))
+    holoScale(14, vec(0.1,0.9,0.1))
+    holoColor(14,vec(0,0,200))
+    
+    holoCreate(15)
+    holoPos(15, GotoPos+vec(-5.25,0,7))
+    holoScale(15, vec(0.1,0.9,0.1))
+    holoColor(15,vec(0,0,200))
+    
+    holoCreate(16)
+    holoPos(16, GotoPos+vec(0,5.25,11))
+    holoScale(16, vec(0.9,0.1,0.1))
+    holoColor(16,vec(0,0,200))
+    
+    holoCreate(17)
+    holoPos(17, GotoPos+vec(0,5.25,4))
+    holoScale(17, vec(0.9,0.1,0.1))
+    holoColor(17,vec(0,0,200))
+    
+    holoCreate(18)
+    holoPos(18, GotoPos+vec(0,5.25,7))
+    holoScale(18, vec(0.9,0.1,0.1))
+    holoColor(18,vec(0,0,200))
+    
+    holoCreate(19)
+    holoPos(19, GotoPos+vec(0,-5.25,11))
+    holoScale(19, vec(0.9,0.1,0.1))
+    holoColor(19,vec(0,0,200))
+    
+    holoCreate(20)
+    holoPos(20, GotoPos+vec(0,-5.25,4))
+    holoScale(20, vec(0.9,0.1,0.1))
+    holoColor(20,vec(0,0,200))
+    
+    holoCreate(21)
+    holoPos(21, GotoPos+vec(0,-5.25,7))
+    holoScale(21, vec(0.9,0.1,0.1))
+    holoColor(21,vec(0,0,200))
+    
+    

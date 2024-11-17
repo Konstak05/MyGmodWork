@@ -1,0 +1,12 @@
+@name 
+@inputs 
+@outputs 
+@persist 
+@trigger 
+interval(1)
+
+
+if(owner():keyAttack1())
+{
+    entity():isWeldedTo():applyForce(owner():aimPos()-entity():pos())
+}

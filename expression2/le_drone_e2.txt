@@ -1,0 +1,97 @@
+@name Drone E2
+@inputs CameraController:wirelink ParentProp:entity Forward Backward Left Right Up Down Sprint MoveAngAdd AimAngAdd TiltAngle DroneSpeed SprintSpeedMul
+@inputs CamAngDontChange:angle
+@outputs Par:entity Pos:vector O
+@persist ShipPosition:vector ShipAngle:angle CamCntrl:entity
+@trigger 
+
+runOnTick( 1 )
+
+if( first() || duped() ) {
+    
+    ShipPosition = ParentProp:pos()
+    
+    if( ParentProp:isValid() ) {
+        
+        Par = ParentProp
+        Pos = Par:pos()
+        O = 1
+        
+        CamCntrl:createWire( entity(), "Activated", "O" )
+        CamCntrl:createWire( entity(), "Parent", "Par" )
+        CamCntrl:createWire( entity(), "Position", "Pos" )
+        
+        entity():createWire( CamCntrl, "CamAngDontChange", "CamAng" )
+        
+    }
+    
+}
+
+if( changed( ParentProp ) && ParentProp:isValid() ) {
+    
+    ShipPosition = ParentProp:pos()
+    
+    if( ParentProp:isValid() ) {
+        
+        Par = ParentProp
+        Pos = Par:pos()
+        O = 1
+        
+        CamCntrl:createWire( entity(), "Activated", "O" )
+        CamCntrl:createWire( entity(), "Parent", "Par" )
+        CamCntrl:createWire( entity(), "Position", "Pos" )
+        
+        entity():createWire( CamCntrl, "CamAngDontChange", "CamAng" )
+        
+    }
+    
+}
+
+if( changed( CameraController ) && CameraController != nowirelink() ) {
+    
+    CamCntrl = CameraController:entity()
+    
+    if( ParentProp:isValid() ) {
+        
+        Par = ParentProp
+        Pos = Par:pos()
+        O = 1
+        
+        CamCntrl:createWire( entity(), "Activated", "O" )
+        CamCntrl:createWire( entity(), "Parent", "Par" )
+        CamCntrl:createWire( entity(), "Position", "Pos" )
+        
+        entity():createWire( CamCntrl, "CamAngDontChange", "CamAng" )
+        
+    }
+    
+}
+
+if( tickClk() ) {
+    
+    local Forward = Forward
+    local Backward = Backward
+    local TurnLeft = Left
+    local TurnRight = Right
+    
+    local FlyUp = Up
+    local FlyDown = Down
+    
+    local FB = Forward + -Backward
+    local LR = TurnRight + -TurnLeft
+    local UD = FlyUp + -FlyDown
+    
+    local MoveDirection = vec( LR, FB, UD )
+    
+    local MoveDirectionSpeed = vec( LR, FB, UD ) * ( DroneSpeed + ( Sprint * SprintSpeedMul ) )
+    
+    ShipPosition = toWorld( MoveDirectionSpeed, ang(), ShipPosition, ang( 0, CamAngDontChange:yaw() + MoveAngAdd, 0 ) )
+    local BezPos = bezier( ParentProp:pos(), ParentProp:pos(), ShipPosition, 0.3 )
+    ShipAngle = ang( 0, CamAngDontChange:yaw() + AimAngAdd, 0 )
+    
+    ParentProp:setPos( ShipPosition )
+    ParentProp:setAng( ShipAngle + ang( -FB, 0, -LR  ) * TiltAngle )
+    
+    ParentProp:propFreeze( 1 )
+
+}

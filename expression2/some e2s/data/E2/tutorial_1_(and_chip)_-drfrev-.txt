@@ -1,0 +1,118 @@
+@name Tutorial 1 (And Chip) -<DrFrev>- 
+
+@inputs X Y #all of the Variables that you want to put in
+            #such as the A B C that you see when you wire normally
+            #and you want to put information into the chip.
+            #in this case our inputs are X and Y
+            #they all need to have the first letter capitalized
+            
+@outputs Z  #This is the information comming out of the chip.
+            #This is the result of what we do in the chip.
+            
+@persist    #This is where you put the Variables that stay the
+            #value, or "persist" between if statents (we will 
+            #get to if statments later
+            
+@trigger    #We won't worry about this for now.
+
+#ok the Basic Syntax
+
+#The base of all expression 2 chips is the if statements, 
+# the comparison of the chip that tells the chip what to do
+
+#Lets start with a simple process an And chip, i know we already
+# have one in our wire menu but this will show the basics.
+
+#Okay when we code we want to talk to ourselves... it helps trust
+# me. If people will think you are crazy just talk in your head.
+# we say what we want to happen to ourselves and let our fingers 
+# type it out. What we say to ourselves is sudo code and we just
+# quickly convert it to real code.
+
+#Okay time to code. Now lets begin talking to ourselves...
+
+#Lets say what we want with an and chip...
+# We want it so that "if both X is equal to one and Y is equal
+#  to one then Z equals one" <- Sudo code
+# time to convert very easy. That sentence above is what most of
+# your codeing statements will sound like.
+#CONVERSION#
+#####################################################################
+# "if both X is equal to one and Y is equal to one then Z equals one"
+#####################################################################
+# if = "if"
+# X  = "X"
+# is equal to = "==" #this is what confuses people
+                     #we use two equal signs to test for equal-ness
+                     # so if you are seeing if two things are equal 
+                     # use "=="
+# one = "1"                    
+# and = "&"
+# Y   = "Y"
+# is equal to = "=="
+# one = "1"
+# Z = "Z"
+# equal = "=" #We use one equal sign to set something equal
+              #because we want Z to now equal our number we want 
+              #returned from our chip
+#one = "1"
+
+#now to put that together..
+
+if (X == 1 & Y == 1) {Z = 1}
+#  ^these parenthesis are used to show what we want to test for
+# we want to test that X and Y equal one the test must be enclosed 
+# within the ( and )
+
+if (X == 1 & Y == 1) {Z = 1}
+#                    ^ these curly brackets show what we want to
+#                        happen we want Z to equal one
+#                        you need to enclose what you want to happen
+#                        with  { and }
+
+#Okay not done yet, with only this code after X and Y equal one 
+# Z will equal 1that sounds good but we want it so that if X and 
+# Y both dont equal one then Z is one
+# lets do this to the book so lets make a Truth Table
+
+# X | Y | Z
+# 0 | 0 | 0
+# 0 | 1 | 0
+# 1 | 0 | 0
+# 1 | 1 | 1
+
+# so this truth table shows that the only time we want Z to equal
+#  one is when theyboth equal one. This make it easy for us. All 
+#  we need to do is to tell it no matter what ELSE the varibles 
+#  equal Z won't be one unless they are both one
+
+#what do we do? USE AN ELSE statement
+# and else statement is exactly what is says "if this then do 
+# that else do this"
+# so lets use this in the code
+# else can only be used when following an if. think about it the 
+# sentence would make no sence "else do this" is not a complete 
+# sentence so its not complete code.
+
+if (X == 1 & Y == 1) {Z = 1} else {Z = 0}
+
+# That took a long time to make one line of simple code, but 
+# you should have learned the basics of expression 2 Syntax
+# now that code will work however when coding it is good practice to
+# use a certain way of typing it so it looks like this
+
+if (X == 1 & Y == 1) { # if X and Y equal 1
+    Z = 1              # Z = 1
+}else{                 # else 
+    Z = 0              # Z = 0
+}
+# this gives it a clean look in bigger code that other coders
+# can read so they can help you.
+# every coder has a different method of writing and noone really cares
+# unless its a really bad method or they have no set method and it 
+# keeps changeing. So find a method that works and stick to it
+
+# littly side note Spaces really have no effect on codeing in most
+# places, it becomes a problem when variables and values begin to 
+# touch eachother
+# By, DrFrev

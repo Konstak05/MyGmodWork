@@ -1,0 +1,24 @@
+@name Holo_Test
+@inputs 
+@outputs 
+@persist A
+@trigger 
+A = A > 360 ? 1 : A+1
+X = sin(curtime()*30)*300
+Y = cos(curtime()*30)*300
+runOnTick(1)
+if(first())
+{
+    holoCreate(1)
+    holoModel(1, "sphere")
+    holoScale(1, vec(5,5,5))
+    holoColor(1, vec(60,60,60))
+    holoAlpha(1, 100)
+    holoCreate(2)
+    holoModel(2, "torus")
+    holoScale(2, vec(7,7,7))
+}
+holoPos(1, entity():pos()+vec(X,Y,150))
+holoPos(2, holoEntity(1):pos() + vec(0,0,0))
+holoAng(1, ang(A,A,A))
+holoAng(2, ang(A,A,A))

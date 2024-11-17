@@ -1,0 +1,23 @@
+@name SteamID Finder
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+runOnChat(1)
+
+Command=owner():lastSaid()
+if ((chatClk(owner()) | chatClk(owner())) & Command:left(1)=="!") 
+{
+    Input = Command:explode(" ")
+    Command=Input[1, string]:sub(2,Input[1, string]:length())
+    Argument = Input[2, string]
+    if(Command == "id")
+    {
+        if(Argument:length()>0&findPlayerByName(Argument):isPlayer()) {
+            print(findPlayerByName(Argument):steamID())
+        } else {
+            hint("Player not found!",2)
+        }
+    }
+}

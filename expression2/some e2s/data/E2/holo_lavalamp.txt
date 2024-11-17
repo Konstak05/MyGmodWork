@@ -1,0 +1,139 @@
+@name holo lavalamp
+@persist Timer1 Timer2 Timer3 Timer4 Timer5
+interval(1) 
+
+if (first()) {entity():soundPlay(0,0,"ambient/levels/canals/toxic_slime_loop1.wav")}
+
+holoParent(0,entity())
+holoParent(1,entity())
+holoParent(2,entity())
+
+if (first()) {
+holoCreate(0)
+holoModel(0,"hqcylinder")
+holoMaterial(0,"")
+holoColor(0,vec(200,200,200))
+holoAng(0,ang(180,0,0))
+holoPos(0,entity():pos()+vec(5,0,38))
+holoScale(0,vec(0.1,0.2,6))
+
+holoCreate(1)
+holoModel(1,"hqcylinder2")
+holoMaterial(1,"")
+holoColor(1,vec(255,255,255))
+holoPos(1,entity():pos()+vec(0,0,36))
+holoScale(1,vec(1,1,2.35))
+holoAlpha(1,100)
+
+holoCreate(2)
+holoModel(2,"hqcylinder2")
+holoMaterial(2,"")
+holoColor(2,vec(200,200,200))
+holoPos(2,entity():pos()+vec(0,0,62))
+holoScale(2,vec(1,1,2))
+    
+holoCreate(3)
+holoModel(3,"hqcylinder2")
+holoMaterial(3,"")
+holoColor(3,vec(200,200,200))
+holoAng(3,ang(180,0,0))
+holoPos(3,entity():pos()+vec(-5,0,38))
+holoScale(3,vec(0.1,0.2,6))
+
+holoCreate(4)
+holoModel(4,"hqcylinder2")
+holoMaterial(4,"")
+holoColor(4,vec(200,200,200))
+holoPos(4,entity():pos()+vec(0,0,10))
+holoScale(4,vec(1,1,2))
+
+holoCreate(10)
+holoModel(10,"dome")
+holoMaterial(10,"")
+holoColor(10,vec(255,255,255))
+holoPos(10,entity():pos()+vec(0,0,73.8))
+holoScale(10,vec(1,1,2))
+}
+
+######
+
+Timer1 +=0.1
+Z1=cos(Timer1)*17
+
+if (first()) {
+holoCreate(5)
+holoModel(5,"sphere3")
+holoMaterial(5,"models/shiny")
+holoColor(5,vec(100,200,100))
+holoScale(5,vec(0.17,0.18,0.5))
+}
+holoPos(5,entity():pos()+vec(0,0,36)+vec(0,0,Z1))
+
+
+Timer2 +=0.1
+Z2=cos(Timer2)*15.7
+
+if (first()) {
+    Timer2 +=80
+holoCreate(6)
+holoModel(6,"sphere3")
+holoMaterial(6,"models/shiny")
+holoColor(6,vec(100,200,100))
+holoScale(6,vec(0.1,0.1,0.3))
+}
+holoPos(6,entity():pos()+vec(4,2,36)+vec(0,0,Z2))
+
+
+
+Timer3 +=0.1
+Z3=cos(Timer3)*15.7
+
+if (first()) {
+    Timer3 +=150
+holoCreate(7)
+holoModel(7,"sphere3")
+holoMaterial(7,"models/shiny")
+holoColor(7,vec(100,200,100))
+holoScale(7,vec(0.15,0.1,0.3))
+}
+holoPos(7,entity():pos()+vec(-4,-2,36)+vec(0,0,Z3))
+if (first()) {
+hint("Made by |PQG|",10)}
+
+Timer4 +=0.1
+Z4=cos(Timer4)*17
+
+if (first()) {
+    Timer4 +=300
+holoCreate(8)
+holoModel(8,"sphere3")
+holoMaterial(8,"models/shiny")
+holoColor(8,vec(100,200,100))
+holoScale(8,vec(0.15,0.1,0.2))
+}
+holoPos(8,entity():pos()+vec(-2,3,36)+vec(0,0,Z4))
+
+
+
+Timer5 +=0.1
+Z5=cos(Timer5)*17
+
+if (first()) {
+    Timer5 +=250
+holoCreate(9)
+holoModel(9,"sphere3")
+holoMaterial(9,"models/shiny")
+holoColor(9,vec(100,200,100))
+holoScale(9,vec(0.1,0.2,0.4))
+}
+holoPos(8,entity():pos()+vec(2,-1,36)+vec(0,0,Z5))
+
+if (first()) {
+    Timer2 +=80
+holoCreate(6)
+holoModel(6,"sphere3")
+holoMaterial(6,"models/shiny")
+holoColor(6,vec(100,200,100))
+holoScale(6,vec(0.1,0.1,0.3))
+}
+holoPos(6,entity():pos()+vec(2,2,36)+vec(0,0,Z2))

@@ -1,0 +1,109 @@
+@name Sky walker
+@persist [E Player]:entity A:angle Mode Use Speed
+@model models/hunter/plates/plate2x2.mdl
+#######################
+#    Sky walker by    #
+#     Theo (MaroX)    #
+#######################
+#    Instructions:    #
+#---------------------#
+#  Click E to toggle  #
+#      it on/off      #
+#         ---         #
+#  Hold M2 to go up   #
+#  and crouch to go   #
+#        down         #
+#---------------------#
+#   OBS: Dont jump    #
+# when you are on the #
+#     sky walker      #
+#######################
+if(first())
+{
+    # User config #
+    # How often should the applyForce run? The higher the more ops #
+    Speed = 30 # Default = 30
+    # Player, if no player set it will auto set to owner #
+    Name = ""
+    # 1 = enable the printing, 0 = disable the printing #
+    Print = 0
+    # Sky walkers material #
+    Material = "phoenix_storms/mat/mat_phx_metallic2" # Default = phoenix_storms/mat/mat_phx_metallic2 #
+    # Sky walkers color #
+    Color = vec(0,150,255) # Default = 0,150,255
+    # End of config #
+    E = entity()
+    if(Name)
+    {
+        Player = findPlayerByName(Name)
+    }
+    else
+    {
+        Player = owner()
+    }
+    holoCreate(1,Player:attachmentPos("anim_attachment_head"))
+    holoAlpha(1,0)
+    holoParent(1,Player)
+    E:propFreeze(0)
+    E:propGravity(0)
+    E:setColor(Color)
+    E:setMaterial(Material)
+    Mode = 1
+    if(Print)
+    {
+        printColor(vec(0,150,255),"Sky walker by Theo (MaroX)")
+        printColor(vec(0,150,255),"---")
+        printColor(vec(0,150,255),"Click E to turn it off/on")
+        printColor(vec(0,150,255),"Hold M2 to go up and crouch to go down")
+    }
+}
+interval(1)
+Use = Player:keyUse()
+if(Use & $Use & Mode)
+{
+    Mode = 0
+    holoEntity(1):soundPlay(1,1,"friends/friend_online.wav")
+}
+elseif(!Player:isAlive() | Player:inNoclip() | Use & $Use & !Mode)
+{
+    Mode = 1
+    if(Use)
+    {
+        holoEntity(1):soundPlay(1,1,"friends/friend_join.wav")
+    }
+}
+if(Mode)
+{
+    E:propNotSolid(1)
+    E:setAlpha(0)
+    Z = 5
+}
+else
+{
+    E:propNotSolid(0)
+    E:setAlpha(255)
+    if(Player:isCrouch())
+    {
+        Z = 3
+    }
+    else
+    {
+        Z = 1.6
+    }
+    if(Player:keyAttack2())
+    {
+        Z = 0.5
+    }
+}
+V = Player:pos()-vec(0,0,Z)
+A = ang(0,0,0)
+for(I=1,Speed)
+{
+    E:applyForce(((-E:pos()+V)*60-E:vel())*E:mass())
+}
+TarQ = quat(A+ang(0,90,0))
+CurQ = quat(E)
+Q = TarQ/CurQ
+S = E:toLocal(rotationVector(Q)+E:pos())
+E:applyTorque((150*S - 12*E:angVelVector())*E:inertia())
+

@@ -1,0 +1,44 @@
+@name Turret
+@inputs Plate:entity 
+@outputs Turret
+
+interval(100)
+
+timer("blink",5000)
+
+
+
+if (first())
+{
+    #Eye#
+    holoCreate(1)
+    holoPos(1, Plate:pos() + Plate:forward()*10) 
+    holoAng(1, Plate:angles())
+    holoParent(1, Plate)
+    holoModel(1, "hqicosphere2")
+    
+    #Pupal#
+    holoCreate(2)
+    holoPos(2, holoEntity(1):pos() + holoEntity(1):forward()*5)
+    holoAng(2, holoEntity(1):angles())
+    holoParent(2, Plate)
+    holoModel(2, "hqicosphere2")
+    holoScale(2, vec(0.3,0.3,0.3))
+    holoColor(2, vec(0,0,0))
+}
+
+if  (owner():keyAttack1())
+{
+    Turret = 1
+}else
+{
+    Turret = 0
+}
+
+if(clk("blink"))
+{
+    holoColor(1, vec(0,0,0))
+}else
+{
+    holoColor(1, vec(255,255,255))
+}

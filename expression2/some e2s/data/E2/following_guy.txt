@@ -1,0 +1,90 @@
+@name Following little guy by M0VI3
+@persist Vector:vector Timer
+interval(10)
+Eye = owner():eye()
+Chip=entity()
+Timer=Timer+1*1
+T=Timer
+
+Vector=owner():pos()-(entity():pos()-vec(0,0,120))
+applyForce($Vector*30+Vector)
+
+if(first()) {holoCreate(1)}
+
+holoModel(1,"icosphere3")
+holoPos(1,owner():shootPos()+vec(0,10,15):rotate(Eye:toAngle()))
+holoAng(1,Eye:toAngle())
+holoColor(1,vec(0,7,19))
+holoScale(1, vec(2,2,2))
+
+if(first()) {holoCreate(2)}
+
+holoModel(2,"icosphere3")
+holoPos(2,owner():shootPos()+vec(0,0,50):rotate(Eye:toAngle()))
+holoAng(2,Eye:toAngle())
+holoColor(2,vec(0,7,255))
+holoScale(2, vec(5,5,5))
+
+if(first()) {holoCreate(3)}
+
+holoModel(3,"icosphere3")
+holoPos(3,owner():shootPos()+vec(0,-15,15):rotate(Eye:toAngle()))
+holoAng(3,Eye:toAngle())
+holoColor(3,vec(0,7,19))
+holoScale(3, vec(2,2,2))
+
+if(first()) {holoCreate(4)}
+
+holoModel(4,"icosphere3")
+holoPos(4,owner():shootPos()+vec(20,7,60):rotate(Eye:toAngle()))
+holoAng(4,Eye:toAngle())
+holoColor(4,vec(255,255,255))
+holoScale(4, vec(2,2,2))
+
+if(first()) {holoCreate(5)}
+
+holoModel(5,"icosphere3")
+holoPos(5,owner():shootPos()+vec(20,-8,60):rotate(Eye:toAngle()))
+holoAng(5,Eye:toAngle())
+holoColor(5,vec(255,255,255))
+holoScale(5, vec(2,2,2))
+
+if(first()) {holoCreate(6)}
+
+holoModel(6,"icosphere3")
+holoPos(6,owner():shootPos()+vec(28,-8,60):rotate(Eye:toAngle()))
+holoAng(6,Eye:toAngle())
+holoColor(6,vec(0,0,0))
+holoScale(6, vec(1,1,1))
+
+if(first()) {holoCreate(7)}
+
+holoModel(7,"icosphere3")
+holoPos(7,owner():shootPos()+vec(28,7,60):rotate(Eye:toAngle()))
+holoAng(7,Eye:toAngle())
+holoColor(7,vec(0,0,0))
+holoScale(7, vec(1,1,1))
+
+if(first()) {holoCreate(8)}
+
+holoModel(8,"icosphere3")
+holoPos(8,owner():shootPos()+vec(15,25,40):rotate(Eye:toAngle()))
+holoAng(8,Eye:toAngle())
+holoColor(8,vec(200,9,23))
+holoScale(8, vec(2,1,1))
+
+if(first()) {holoCreate(9)}
+
+holoModel(9,"icosphere3")
+holoPos(9,owner():shootPos()+vec(15,-25,40):rotate(Eye:toAngle()))
+holoAng(9,Eye:toAngle())
+holoColor(9,vec(200,9,23))
+holoScale(9, vec(2,1,1))
+
+if(first()) {holoCreate(10)}
+
+holoModel(10,"icosphere3")
+holoPos(10,owner():shootPos()+vec(28,0,55):rotate(Eye:toAngle()))
+holoAng(10,Eye:toAngle())
+holoColor(10,vec(244,234,38))
+holoScale(10, vec(1,1,1))

@@ -1,0 +1,43 @@
+@name Plankton
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+if(first())
+{
+    #Body#
+    holoCreate(1)
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*6)
+    holoModel(1, "hqsphere")
+    holoScale(1, vec(0.3,0.3,0.6))
+    holoColor(1, vec(0,120,0))
+    
+    #Leg1#
+    holoCreate(2)
+    holoPos(2, holoEntity(2):pos() + holoEntity(2):up()*2 + holoEntity(2):right()*0.6)
+    holoModel(2, "hqsphere")
+    holoScale(2, vec(0.1,0.1,0.3))
+    holoColor(2, vec(0,120,0))
+    holoParent(2, holoEntity(1))
+    
+    #Leg2#
+    holoCreate(3)
+    holoPos(3, holoEntity(3):pos() + holoEntity(3):up()*2 + holoEntity(3):right()*-0.6)
+    holoModel(3, "hqsphere")
+    holoScale(3, vec(0.1,0.1,0.3))
+    holoColor(3, vec(0,120,0))
+    holoParent(3, holoEntity(1))
+    
+    #Arm1#
+    holoCreate(4)
+    holoPos(4, holoEntity(4):pos() + holoEntity(4):up()*5 + holoEntity(4):right()*-0.6)
+    holoModel(4, "hqsphere")
+    holoScale(4, vec(0.2,0.1,0.1))
+    holoColor(4, vec(0,120,0))
+    
+    
+    
+}

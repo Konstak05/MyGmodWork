@@ -1,0 +1,34 @@
+@name Vtol Controller
+@inputs Pod:wirelink
+@outputs LeftHy RightHy Thruster
+
+runOnTick(1)
+
+W = Pod["W",number]
+A = Pod["A",number]
+S = Pod["S",number]
+D = Pod["D",number]
+Space = Pod["Space",number]
+Active = Pod["Active",number]
+
+
+if (W)
+{
+    LeftHy = 80
+    RightHy = 80
+}else{LeftHy = 0 RightHy = 0}
+
+if (Space)
+{
+    Thruster = 100
+}else
+{
+    Thruster = 0
+}
+
+
+if (S)
+{
+    LeftHy = -80
+    RightHy = -80
+}else{LeftHy = 0 RightHy = 0}

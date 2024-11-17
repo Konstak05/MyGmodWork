@@ -1,0 +1,24 @@
+@name basic holo resizer code
+@outputs A S:string
+@inputs Power 
+
+
+if(Power == 0){A=0}
+
+    interval(1)
+    if(Power){
+    if(A <= 200) {timer("add",10)} 
+    if(clk("add")){A+=0.01}
+holoScale(1, vec(A,1,1))}
+if(first()|duped()){
+    
+    holoCreate(1)
+    holoPos(1,entity():pos()+vec(0,0,50))
+    holoModel(1,"cylinger")
+    holoAng(1,ang(0,0,0))
+    holoMaterial(1,"") 
+    holoColor(1, vec(0,0,0))
+
+
+    S=getCode()
+}

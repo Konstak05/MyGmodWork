@@ -1,0 +1,12 @@
+@name Bored E2
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(100)
+
+
+for(I=0,15)
+{
+    propSpawn("models/props_c17/oildrum001_explosive.mdl",vec(0,0,0),1)
+}

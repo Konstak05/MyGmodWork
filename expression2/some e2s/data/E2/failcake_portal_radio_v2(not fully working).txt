@@ -1,0 +1,117 @@
+@name FailCake PortaL Radio V2
+@outputs Screen Damage:array E:entity C Fix Distance FixTme
+@persist Radio Pitchslow Broken On Def Def2
+@trigger all
+@model models/props_lab/citizenradio.mdl
+
+if(first()){
+Pitchslow = 100
+C = 100 
+On = 0
+Def2 = 0
+Fix = 0
+Def = 0
+hint("Made By FailCake",100)
+hint("Its not Fully Working, Press E to Turn On Radio.",100)
+}
+
+## Settings ##
+FixTime = 100
+## Settings ##
+
+### DAMAGE ##
+
+
+findByClass("Player")
+A = findToArray()
+M = A:count()
+Ent = entity()
+
+for(I=1,M){
+    E = A[I,entity]
+    if(
+    (E:aimEntity()==Ent)
+    &E:weapon():type()==("weapon_crowbar") 
+    &changed(E:keyAttack1())
+    &E:shootPos():distance(Ent:pos())<80
+    ){
+        C = C - 20
+    }
+}
+
+if(C < 100){soundPitch(1000,C)}
+if(C <= 0){C = 0
+soundPitch(1000,0)
+soundStop(1000)
+}
+### DAMAGE
+
+
+##POWER ON##
+
+for(I=1,M){
+    Op = A[I,entity]
+    if((Op:aimEntity()==Ent)& Op:keyUse()){
+        On = On
+        On = 1
+    }
+}
+
+## POWER ON##
+
+
+E = entity()
+runOnTick(1)
+
+if(On == 1){
+if(E:isUnderWater() == 0 & E:isOnFire() == 0 & Broken == 0){
+Radio += 0.1
+if(Radio == 2){
+Def = 0
+Def2 = 0
+E:soundPlay(1000,1000,"ambient/music/looping_radio_mix.wav")
+soundPitch(1000,100)
+}
+}else{
+Broken = 1
+}
+
+
+
+if(Broken){
+Pitchslow -= 0.10
+soundPitch(1000,Pitchslow)
+if(Pitchslow <= 0){soundStop(1000) Fix = 1}
+}
+}
+
+## Fix Part ##
+
+findByModel("models/props_c17/tools_wrench01a.mdl")
+EE = findClosest(entity():pos())
+Distance = round(entity():pos():distance(EE:pos()))
+
+if(Distance <= 70 & Fix){
+Def += 0.5
+Def2 += 0.1
+if(Def == 1){
+E:soundPlay(10,10,"buttons/lever7.wav")  
+} 
+if(Def >= 3){
+Def = 0  
+} 
+if(Def2 >= FixTime){
+Broken = 0
+Radio = 0
+C = 100
+Pitchslow = 100
+Fix = 0  
+}
+}
+
+if(duped()){selfDestructAll()}
+
+
+####################################################################
+## Do not rename the E2 or remove the hint("Made by Failcake",100)##
+####################################################################

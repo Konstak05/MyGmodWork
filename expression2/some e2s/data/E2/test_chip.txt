@@ -1,0 +1,31 @@
+@name Test Chip
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+
+timer("test",2000)
+
+if(first())
+{
+    holoCreate(3)
+    
+    
+    holoModel(3, "models/Police.mdl")
+
+    
+    holoPos(3, holoEntity(3):pos() + entity():up()*5)
+
+    
+    
+}
+holoAnim(3, 79)
+
+holoPos(3, holoEntity(3):pos() + holoEntity(3):forward()*0.8)
+
+if(clk("test"))
+{
+    holoAng(3, ang(0,random(200),0))
+}
+

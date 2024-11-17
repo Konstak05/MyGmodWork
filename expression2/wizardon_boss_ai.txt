@@ -1,0 +1,314 @@
+@name Wizardon Boss
+@inputs Body:entity Target2:entity TARGETFOUND E:entity Damage PropMaxHealth Hoverball:entity E21:entity E22:entity Music2:entity SCREEN:entity
+@outputs BOOM1 BOOM2 FIRE MINIS MISSILE1 MISSILE2 MISSILE3 MISSILE4 Music Reset PropHealth Explosive
+@persist DistanceV:vector Target:entity  Player:array  Go String:string Misile1:entity Angle:angle T Timer Timer2 Timer3 Timer4 Timer5 Timer6 Cring Cring2 Cring3 Cring4 Cring5 Cring6
+@trigger 
+
+
+runOnTick(1)
+
+PHASE = randint(1,3)
+
+
+if(first()|dupefinished()){
+    Music = 0
+    Go = 0
+    FIRE = 0
+    PropHealth = PropMaxHealth   
+    timer("StartBoss",10000)
+}
+
+
+
+if(clk("StartBoss")){
+    Music = 1
+if(PHASE == 1){
+    Go = 2
+  timer("StartBoss",randint(5000,10000))  
+}
+elseif(PHASE == 2){
+    FIRE = 0
+    Go = 3
+    timer("MINISSTART",500)
+    timer("StartBoss",randint(5000,10000)) 
+}
+else{
+    stoptimer("StartAttack1")
+    Go = 4
+    FIRE = 0
+    MISSILE1 = 0
+    MISSILE2 = 0
+    MISSILE3 = 0
+    MISSILE4 = 0
+    timer("MISSILESSTART",500)
+    stoptimer("StartAttack1")
+    timer("StartBoss",8000)
+}
+    
+    
+}
+
+
+if(clk("MINISSTART")){
+    MINIS = 1
+    
+    timer("MINISSTART2",500)
+}
+if(clk("MINISSTART2")){
+    MINIS = 0
+}
+
+
+
+
+
+
+if(clk("MISSILESSTART")){
+    MISSILE1 = 1
+    
+    timer("MISSILESSTART2",500)
+}
+if(clk("MISSILESSTART2")){
+    MISSILE2 = 1
+    timer("MISSILESSTART3",500)
+}
+
+if(clk("MISSILESSTART3")){
+    MISSILE3 = 1
+    
+    timer("MISSILESSTART4",500)
+}
+if(clk("MISSILESSTART4")){
+    MISSILE4 = 1
+    timer("MISSILESSTART5",500)
+}
+if(clk("MISSILESSTART5")){
+MISSILE1 = 0
+MISSILE2 = 0
+MISSILE3 = 0
+MISSILE4 = 0
+}
+
+
+
+
+if (Go == 1){
+
+if (Target2:pos() != vec(0,0,0) ){
+Angle = (Target2:pos() + vec(0,0,60) - Body:pos()):toAngle()
+
+if ((Target2:pos() - Body:pos()):length() < 400 & (Target2:pos() - Body:pos()):length() > 320){
+
+    
+
+
+Timer+=1
+Cring = cos(Timer) *0.1
+    
+    Body:setAng((Target2:pos() + vec(0,0,50) - Body:pos()):toAngle())
+    Body:setPos(Body:pos() + vec(0,0,Cring))
+    Body:propFreeze(1)
+       
+    
+    
+    }
+    elseif((Target2:pos() - Body:pos()):length() < 320){
+Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+    Body:propFreeze(0)
+    BOOM1 = 1
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+Body:setVelocity(Body:forward()* (-200))
+    
+   }
+    elseif((Target2:pos() - Body:pos()):length() > 900){
+    BOOM1 = 0
+Angle = (Target2:pos() + vec(0,0,40) - Body:pos()):toAngle()
+    Body:propFreeze(0)
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+Body:setVelocity(Body:forward()* (1600))
+    
+   }
+    else {
+         Body:propFreeze(0)
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+Body:setVelocity(Body:forward()* 1200)
+        }
+}
+
+
+
+
+
+
+}
+elseif(Go == 2){
+      
+    
+    
+    if (Target2:pos() != vec(0,0,0) ){
+        Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+    
+        
+        
+    if ((Target2:pos() - Body:pos()):length() < 800 & (Target2:pos() - Body:pos()):length() > 720){
+        Body:setAng((Target2:pos() + vec(0,0,50) - Body:pos()):toAngle())
+        Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+        Body:propFreeze(1)
+        FIRE = 1
+    
+    }
+    elseif((Target2:pos() - Body:pos()):length() < 720){
+        Angle = (Target2:pos() + vec(0,0,-60) - Body:pos()):toAngle()
+        Body:propFreeze(0)
+        Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+        Body:setVelocity(Body:forward()* (-400)) 
+        FIRE = 0
+    
+   }
+    elseif((Target2:pos() - Body:pos()):length() > 1000){
+        Angle = (Target2:pos() + vec(0,0,40) - Body:pos()):toAngle()
+        Body:propFreeze(0)
+        Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+        Body:setVelocity(Body:forward()* (1400))
+        FIRE = 0
+    
+   }
+    else {
+         Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+         Body:propFreeze(0)
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+         Body:setVelocity(Body:forward()* 1200)
+         FIRE = 0
+        }
+
+        
+        
+}
+}
+elseif(Go == 3){
+        
+      
+    if (Target2:pos() != vec(0,0,0) ){
+    Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+  
+        
+        if ((Target2:pos() - Body:pos()):length() < 600 & (Target2:pos() - Body:pos()):length() > 520){
+        Body:propFreeze(1)
+        
+
+    }
+    elseif((Target2:pos() - Body:pos()):length() < 520){
+        Angle = (Target2:pos() + vec(0,0,-60) - Body:pos()):toAngle()
+        Body:propFreeze(0)
+        Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+        Body:setVelocity(Body:forward()* (-400))
+    
+   }
+    elseif((Target2:pos() - Body:pos()):length() > 1500){
+        Angle = (Target2:pos() + vec(0,0,50) - Body:pos()):toAngle()
+        Body:propFreeze(0)
+        Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+        Body:setVelocity(Body:forward()* (1200))
+    
+   }
+    else {
+        Angle = (Target2:pos() + vec(0,0,50) - Body:pos()):toAngle()
+        Body:propFreeze(0)
+        Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+        Body:setVelocity(Body:forward()* 1000)
+        }
+
+}
+}
+elseif(Go == 4){
+        
+          
+  if (Target2:pos() != vec(0,0,0) ){
+  Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+  
+        
+    if ((Target2:pos() - Body:pos()):length() < 1600 & (Target2:pos() - Body:pos()):length() > 1420){
+    Body:propFreeze(1)
+    Body:setAng((Target2:pos() + vec(0,0,50) - Body:pos()):toAngle())
+    Angle = (Target2:pos() + vec(0,0,0) - Body:pos()):toAngle()
+
+    
+    }
+    elseif((Target2:pos() - Body:pos()):length() < 1420){
+         Angle = (Target2:pos() + vec(0,0,-60) - Body:pos()):toAngle()
+         Body:propFreeze(0)
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+         Body:setVelocity(Body:forward()* (-400))
+    
+   }
+    elseif((Target2:pos() - Body:pos()):length() > 2000){
+
+         Angle = (Target2:pos() + vec(0,0,40) - Body:pos()):toAngle()
+         Body:propFreeze(0)
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+         Body:setVelocity(Body:forward()* (1300))
+    
+   }
+    else {
+         Angle = (Target2:pos() + vec(0,0,50) - Body:pos()):toAngle()
+         Body:propFreeze(0)
+         Body:applyAngForce((Body:toLocal(Angle)*1300 - Body:angVel()*20)*shiftL(ang(Body:inertia())))
+         Body:setVelocity(Body:forward()* 1000)
+        }
+    
+ 
+}
+}
+
+#HEALTH
+
+
+
+
+holoCreate(3)
+holoPos(3,E:toWorld(vec(0,0,50)))
+holoAng(3,E:toWorld(ang(0,0,90)))
+holoColor(3,vec(0,255,0))
+holoScale(3,vec(0.3,0.3,PropHealth/2000))
+holoModel(3,"cube")
+
+if(Damage) {
+    PropHealth -= Damage
+    Reset = 1
+} else {
+    Reset = 0
+}
+
+
+
+
+if(PropHealth <= 2000) {
+   holoColor(3,vec(255,0,0))
+}
+
+
+if(PropHealth <= 0) {
+    timer("Delete",3000)  
+    timer("Delete2",6000) 
+    timer("Delete3",9000) 
+    Go = 0
+    Music2:propDelete()
+    SCREEN:propDelete()
+    holoAlpha(3,0)
+}
+
+if(clk("Delete")){
+    E21:propDelete()
+}
+
+if(clk("Delete2")){
+    E22:propDelete()
+}
+
+if(clk("Delete3")){
+    
+    Hoverball:propDelete()
+}
+
+
+

@@ -1,0 +1,63 @@
+@name Computer fan
+@inputs Button
+@outputs 
+@persist I
+@trigger 
+
+runOnTick(1)
+
+I = 20
+
+if (first())
+{
+    holoCreate(1)
+    holoModel(1, "hqcylinder")
+    holoScale(1, vec(0.2,0.2,0.2))
+    holoColor(1, vec(0,0,255))
+    holoPos(1, entity():pos() + entity():up()*5)
+    holoParent(1, entity()) 
+    holoAng(1, entity():angles())
+    
+    holoCreate(2)
+    holoScale(2, vec(0.1,0.4,0.1))
+    holoAng(2, ang(0,270,0))
+    holoColor(2, vec(0,0,255))
+    holoPos(2, holoEntity(1):pos() + entity():right()*0 + entity():forward()*2)
+    holoParent(2, 1)
+    
+    holoCreate(3)
+    holoScale(3, vec(0.1,0.4,0.1))
+    holoAng(3, ang(0,270,0))
+    holoColor(3, vec(0,0,255))
+    holoPos(3, holoEntity(1):pos() + entity():right()*-0 + entity():forward()*-2)
+    holoParent(3, 1)
+    
+    holoCreate(4)
+    holoScale(4, vec(0.1,0.4,0.1))
+    holoAng(4, ang(0,-180,0))
+    holoColor(4, vec(0,0,255))
+    holoPos(4, holoEntity(1):pos() + entity():forward()*-0 + entity():right()*-2)
+    holoParent(4, 1)
+    
+    holoCreate(5)
+    holoScale(5, vec(0.1,0.4,0.1))
+    holoAng(5, ang(0,-180,0))
+    holoColor(5, vec(0,0,255))
+    holoPos(5, holoEntity(1):pos() + entity():forward()*0 + entity():right()*3)
+    holoParent(5, 1)
+    
+    holoCreate(6)
+    holoScale(6, vec(1,1,1))
+    holoModel(6, "hqtorus")
+    holoPos(6, holoEntity(1):pos())
+    holoColor(6, vec(0,0,0))
+    holoParent(6, entity())
+    
+    
+}
+
+if (Button == 1)
+{
+    holoAng(1, holoEntity(1):angles() + ang(0,-I,0))
+}
+

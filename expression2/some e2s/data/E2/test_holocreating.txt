@@ -1,0 +1,15 @@
+@name Test holoCreating
+@inputs 
+@outputs 
+@persist I
+@trigger 
+
+runOnTick(1)
+
+I += 1
+
+for(I=0,5)
+{
+    C = holoCanCreate()
+    holoCreate(I)
+}

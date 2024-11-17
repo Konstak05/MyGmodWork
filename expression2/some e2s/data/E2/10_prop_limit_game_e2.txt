@@ -1,0 +1,13 @@
+@name 10 Prop limit game e2
+@inputs Button
+@outputs LHy RHy 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+if (Button == 1)
+{
+    LHy = 100
+    RHy = 100
+}else{LHy = 1 RHy = 1}

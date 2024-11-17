@@ -1,0 +1,6 @@
+@name EGP 
+@inputs EGP:wirelink
+
+EGP:egpBox(1, vec2(10,10), vec2(30,30)
+
+

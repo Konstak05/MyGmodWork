@@ -1,0 +1,24 @@
+@name Test train control
+@inputs Pod:wirelink
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+E = entity():isConstrainedTo()
+
+W = Pod["W",number]
+S = Pod["S",number]
+
+if (W)
+{
+    E:applyForce(E:forward()*500)
+}
+
+if (S)
+{
+    E:applyForce(E:forward()*-500)
+}
+
+

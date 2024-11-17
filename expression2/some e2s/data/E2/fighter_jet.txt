@@ -1,0 +1,35 @@
+@name Fighter Jet
+@inputs Pod:wirelink Cam:wirelink
+@persist Body:entity Speed Wing1:entity Cockpit:entity
+
+if(first())
+{
+    Speed = 10
+    Wing1 = holoCreate(2)
+    Body = holoCreate(1)
+    Cockpit = holoCreate(3)
+    holoScale(3, vec(0.8,0.5,0.1))
+    holoColor(3, vec(0,0,0))
+    holoPos(3, holoEntity(1):pos() + entity():up()*5 + entity():forward()*22)
+    holoScale(1, vec(5,1,0.5))
+    holoParent(3, holoEntity(1))
+    holoPos(2, holoEntity(1):pos() + entity():forward()*5)
+    holoScale(2, vec(1,6,0.4))
+    holoParent(2, holoEntity(1))
+    holoMaterial(1, "phoenix_storms/metalfloor_2-3")
+    holoMaterial(2, "phoenix_storms/dome")
+    Body:setTrails(10,0,20,"trails/smoke",vec(255,255,255),255)
+    
+    runOnTick(1)
+}
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Space = Pod:number("Space")
+
+Cam:setVector("Direction",Body:forward())
+Cam:setVector("Position",Body:toWorld(vec(-50,0,10)))
+holoAng(1, Body:toWorld(ang(S-W,0,D-A)))
+holoPos(1, Body:toWorld(vec(Space*Speed,0,0)))
+

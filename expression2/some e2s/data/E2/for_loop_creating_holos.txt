@@ -1,0 +1,29 @@
+@name For loop creating holos
+@inputs 
+@outputs 
+@persist B
+@trigger 
+
+runOnTick(1)
+
+B++
+
+timer("move",1000)
+    
+if(first())
+{
+    
+    for(I=1, 10)
+    {
+        holoCreate(I)
+        holoPos(I, entity():pos() + vec(random(250),random(150),15))
+        holoModel(I, "hqsphere")
+    }
+}
+
+holoScale(I, vec(B,B,B))
+
+if(clk("move"))
+{
+    holoAng(I, holoEntity(I):angles() + ang(0,random(360),0))
+}

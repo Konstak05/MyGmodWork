@@ -1,0 +1,28 @@
+@name basic holo resizer code V2
+@outputs A S:string [Goto Dir At]:vector
+@inputs Power 
+
+
+if(Power == 1){A=1}
+
+    interval(1)
+    if(Power){
+    ##if(A <= 200) {timer("add",10)} 
+    ##if(clk("add")){A+=0.02}
+    Goto=vec(1,1*Power,1)   
+    Dir = clamp(Goto-At,-0.1,0.1)     
+    At+=Dir     
+    S=toString(At)
+holoScale(1,At)}
+if(first()|duped()){
+    
+    holoCreate(1)
+    holoPos(1,entity():pos()+vec(0,0,50))
+    holoModel(1,"cylinger")
+    holoAng(1,ang(0,0,0))
+    holoMaterial(1,"") 
+    holoColor(1, vec(0,0,0))
+
+
+    S=getCode()
+}

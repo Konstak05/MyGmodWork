@@ -1,0 +1,9 @@
+@name Turrent test
+@inputs E:entity 
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+E:applyTorque(owner():pos()*15)

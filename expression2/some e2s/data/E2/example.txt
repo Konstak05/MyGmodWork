@@ -1,0 +1,13 @@
+@name Example
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+
+O = owner():lastSaid():explode(" ")
+
+if (O:string(1)=="go")
+{
+    entity():applyForce(owner():pos()-entity():pos() + vec(0,0,150))
+}

@@ -1,0 +1,22 @@
+@name Ranger test
+@inputs 
+@outputs Hit
+@persist Distance H:entity
+@trigger 
+
+if(first())
+{
+    runOnTick(1)
+    holoPos(1, holoEntity(1):pos() + entity():up()*15)
+    H = holoCreate(1)
+    Distance = 12
+}
+Ro = rangerOffset(Distance,H:pos()-H:forward()*Distance/2,H:forward())
+Hit = Ro:hit()
+if(!Hit)
+{
+    Dir = H:forward()
+}else{
+    Dir = H:right() 
+}
+holoPos(1, H:pos() + Dir)

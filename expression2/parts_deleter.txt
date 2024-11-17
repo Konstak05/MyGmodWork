@@ -1,0 +1,13 @@
+@name Parts deleter
+@inputs Ranger PROP:entity PROP2:entity PROP3:entity PROP4:entity PROP5:entity WALL1:entity WALL2:entity WALL3:entity WALL4:entity
+@outputs 
+@persist 
+@trigger 
+
+if(PROP:isValid()){
+    PROP:propDelete()
+}
+
+if(PROP2:isValid()){
+    PROP2:propDelete()
+}

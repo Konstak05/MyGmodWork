@@ -1,0 +1,55 @@
+@name Holo Building test
+@inputs 
+@outputs 
+@persist W B WA BA
+@trigger 
+interval(10)
+
+if(first())
+{
+    holoCreate(0)#ground
+    holoCreate(6)#white ground
+    holoCreate(7)#grass
+    
+    holoCreate(1)#-|
+    holoCreate(2)#-| mid build
+    holoCreate(3)#-|
+    holoCreate(4)#-|
+    
+    holoScale(0, vec(10,10,1/4))
+    holoScale(6, vec(3,3,1/3))
+    holoScale(7, vec(5,5,1/3.5)) 
+    
+    holoScale(1, vec(2,2,1))
+    holoScale(2, vec(1.5,1.5,0))
+    holoScale(3, vec(1,1,10))
+    holoScale(4, vec(0.5,0.5,12))
+    
+    holoColor(7, vec(0,255,0))
+    
+    W = 100
+    B = 200
+}
+
+if(owner():keyUse()==1)
+{
+    WA = 1
+}else{WA-0}
+
+if(owner():keyAttack2()==1)
+{
+    WA = 1
+}else{BA = 0}
+
+X = random(1,4)
+Y = random(1,4)
+Z = random(0)
+
+if(WA==1)
+{
+    interval(200)
+    holoCreate(W)
+    holoPos(W,owner():aimPos())
+    holoScale(W,vec(X/2,Y/2,Z))
+    W=W+1
+}

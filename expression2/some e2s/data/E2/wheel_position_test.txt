@@ -1,0 +1,19 @@
+@name Wheel Position test
+@inputs Pod:wirelink Plate:entity
+@outputs 
+@persist 
+@trigger 
+
+runOnTick(1)
+
+W = Pod["W",number]
+S = Pod["S",number]
+A = Pod:number("A")
+D = Pod:number("D")
+
+if (A)
+{
+    
+}
+Plate:applyAngForce(-Plate:angVel()*Plate:mass())
+Plate:applyAngForce(ang(W-S,0,D-A)*Plate:mass()*100)

@@ -1,0 +1,32 @@
+@name popcorn
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+Player = owner()
+
+interval(1)
+
+
+holoCreate(1)
+holoPos(1,(Player:toWorld(vec(15,0,45))))
+holoAng(1,(Player:aimPos()-Player:pos()):toAngle() + ang(-20,0,0))
+holoModel(1,("hq_torus"))
+holoScale(1,vec(1,1,5))
+holoColor(1,vec(255,0,0))
+
+holoCreate(2)
+holoPos(2,(holoEntity(1):toWorld(vec(0,0,-2))))
+holoAng(2,(Player:aimPos()-Player:pos()):toAngle() + ang(-20,0,0))
+holoModel(2,("hq_sphere"))
+holoScale(2,vec(0.9,0.9,0.2))
+holoColor(2,vec(255,0,0))
+
+holoCreate(3)
+holoPos(3,(holoEntity(1):toWorld(vec(0,0,2))))
+holoAng(3,(Player:aimPos()-Player:pos()):toAngle() + ang(-20,0,0))
+holoModel(3,("hq_sphere"))
+holoScale(3,vec(0.9,0.9,0.2))
+holoColor(3,vec(255,255,0))
+holoMaterial(3,"phoenix_storms/trains/track_plate")

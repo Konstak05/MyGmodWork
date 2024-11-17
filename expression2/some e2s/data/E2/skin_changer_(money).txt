@@ -1,0 +1,11 @@
+@name Skin Changer (money)
+
+
+It = owner()
+
+interval(1)
+runOnChat(1)
+
+if (It:lastSaid() == "/money") {
+    It:setMaterial("models/props/cs_assault/moneytop")
+}

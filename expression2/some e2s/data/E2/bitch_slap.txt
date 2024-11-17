@@ -1,0 +1,12 @@
+@name bitch slap
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+runOnChat(1)
+
+if(owner():lastSaid():explode(" "):string(1)=="a")
+{
+    concmd("say BITCH SLAP")
+}

@@ -1,0 +1,7 @@
+@name elevator
+@inputs A B C
+@outputs H
+@persist 
+@trigger 
+A==100-
+

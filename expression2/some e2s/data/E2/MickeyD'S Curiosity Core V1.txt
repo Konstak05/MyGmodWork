@@ -1,0 +1,85 @@
+@name MickeyD'S Curiosity Core V1
+@inputs 
+@outputs Scale MaxHolo Activ 
+@persist I Scale TM L Player:entity A:array B Tim Holos:array Size:vector C
+@trigger all
+@model models/props_bts/glados_ball_reference.mdl
+
+runOnTick(1)
+E = entity()
+
+if(first()){
+hint("Made by MickeyD <3",7)
+B = -1 
+Activ = 0
+findByClass("player")
+A=findToArray()
+}
+
+for(I=1,A:count()){
+if(A[I,entity]:keyUse() & A[I,entity]:aimEntity()==entity() & Activ == 0 & A[I,entity]:pos():distance(entity():pos())<= 90)
+{
+Player = A[I,entity]
+Activ = 1
+
+hint("Who are you "+Player:name()+"?!",7)
+}
+}
+
+if(Activ){
+Tim+=0.1
+
+if(Tim == 1){
+E:soundPlay(10,1000,"vo/aperture_ai/escape_02_sphere_curiosity-01.wav")   
+}
+if(Tim == 10){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-02.wav")   
+}
+if(Tim == 17){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-03.wav")   
+}
+if(Tim == 24){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-04.wav")   
+}
+if(Tim == 31){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-05.wav")   
+}
+if(Tim == 39){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-06.wav")   
+}
+if(Tim == 53){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-07.wav")   
+}
+if(Tim == 68){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-08.wav")   
+}
+if(Tim == 79){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-09.wav")   
+}
+if(Tim == 86){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-10.wav")   
+}
+if(Tim == 94){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-11.wav")   
+}
+if(Tim == 115){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-12.wav")   
+}
+if(Tim == 123){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-13.wav")   
+}
+if(Tim == 131){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-15.wav")   
+}
+if(Tim == 142){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-16.wav")   
+}
+if(Tim == 150){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-17.wav")   
+}
+if(Tim == 167){
+E:soundPlay(100,1000,"vo/aperture_ai/escape_02_sphere_curiosity-18.wav")   
+}
+																																											setName("MickeyD'S Curiosity Core V1")
+}
+if(duped()){selfDestructAll()}

@@ -1,0 +1,37 @@
+@name Box car 
+@inputs [Pod Cam]:wirelink 
+@outputs 
+@persist E:entity
+@trigger 
+
+runOnTick(1)
+
+E = entity():isWeldedTo()
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+
+if (W)
+{
+    E:applyForce(E:right()*-550)
+}
+
+if (A)
+{
+    E:applyAngForce(ang(0,7555,0))
+}
+
+if (S)
+{
+    E:applyForce(E:right()*550)
+}
+
+if (D)
+{
+    E:applyAngForce(ang(0,-7555,0))
+}
+
+Cam:setVector("Direction",E:right()*-50)
+Cam:setVector("Position",E:toWorld(vec(0,-60,40)))

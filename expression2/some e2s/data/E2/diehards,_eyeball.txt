@@ -1,0 +1,150 @@
+@name Diehards EyeBall
+@inputs [Pod Cam]:wirelink Seat:entity
+@outputs 
+@persist I B R
+@trigger 
+
+runOnTick(1)
+
+##Timer##
+timer("blink",6000)
+timer("remove",6800)
+
+##Pod
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Shift = Pod:number("Shift")
+Space = Pod:number("Space")
+Active = Pod:number("Active")
+Mouse1 = Pod:number("Mouse1")
+
+##Randoms##
+I = random(255)
+B += 1
+R += 0.1
+
+##Entitys##
+E = holoEntity(1)
+
+if(first())
+{
+    ##Body##
+    holoCreate(1)
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*20)
+    holoScale(1, vec(3,3,3))
+    holoModel(1, "hqicosphere2")
+    holoColor(1, vec(255,255,255))
+    holoMaterial(1, "models/debug/debugwhite")
+    
+    ##Ring around pupal##
+    holoCreate(2)
+    holoPos(2, holoEntity(2):pos() + holoEntity(2):up()*20 + holoEntity(2):forward()*10)
+    holoScale(2, vec(1.5,1.5,1.5))
+    holoColor(2, vec(0,255,0))
+    holoModel(2, "hqicosphere2")
+    holoMaterial(2, "models/debug/debugwhite")
+    holoParent(2, holoEntity(1))
+    holoAng(2, holoEntity(1):angles())
+    
+    ##Pupal##
+    holoCreate(3)
+    holoPos(3, holoEntity(3):pos() + holoEntity(3):up()*20 + holoEntity(3):forward()*18)
+    holoScale(3, vec(0.3,0.3,0.3))
+    holoColor(3, vec(0,0,0))
+    holoModel(3, "hqicosphere2")
+    holoMaterial(3, "models/debug/debugwhite")
+    holoParent(3, holoEntity(1))
+    holoAng(3, holoEntity(1):angles())
+    
+
+}
+
+
+if (clk("blink"))
+{
+    holoColor(1, vec(0,0,0))
+    holoColor(2, vec(0,0,0))
+    holoColor(3, vec(0,0,0))
+}
+
+if (clk("remove"))
+{
+    holoColor(1, vec(255,255,255))
+    holoColor(2, vec(0,255,0))
+    holoColor(3, vec(0,0,0))
+}
+
+if (W)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*2)
+}
+
+if (S)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-2)
+}
+
+if (A)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*-2)
+}
+
+if (D)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*2)
+}
+
+if (Active)
+{
+    holoAng(1, owner():eyeAngles())
+}else{holoAng(1, holoEntity(1):angles() + ang(0,cos(B)*-1,sin(B)*1))}
+
+if (Shift & W)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*7)
+}
+
+if (Shift & A)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*-7)
+}
+
+if (Shift & D)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*7)
+}
+
+if (Shift & S)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-7)
+}
+
+if (Space)
+{
+    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*2)
+}
+
+if (Mouse1)
+{
+    holoCreate(4)
+    holoPos(4, holoEntity(3):pos() + holoEntity(3):forward()*300)
+    holoAng(4, holoEntity(3):angles())
+    holoScale(4, vec(100,0.5,0.5))
+    holoColor(4, vec(255,100,0))
+    holoParent(4, holoEntity(1))
+}else
+{
+    holoDelete(4)
+}
+
+if (R == 0.4)
+{
+    R = 0.1
+}
+
+Cam:setVector("Direction",E:forward()*50)
+Cam:setVector("Position",E:toWorld(vec(-50,0,25)))
+Cam:setAngle("Angles",E:angles())
+

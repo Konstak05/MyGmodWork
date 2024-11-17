@@ -1,0 +1,13 @@
+@name test
+@inputs 
+@outputs 
+@persist 
+@trigger 
+interval(1)
+
+if(first())
+{
+    holoCreate(1)
+}
+holoAng(1, entity():toWorld(ang(1,1,1)))
+holoPos(1, entity():pos())

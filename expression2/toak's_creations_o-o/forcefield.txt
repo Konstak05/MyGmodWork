@@ -1,0 +1,27 @@
+@name ForceField
+@inputs RecallBlock:entity ForceField:entity Body:entity FF E1:entity E2:entity E3:entity E4:entity E5:entity E6:entity E7:entity
+@outputs 
+@persist 
+@trigger 
+
+if(first()|dupefinished()) {
+    ForceField:setMass(50000)
+    ForceField:setMaterial("Models/effects/comball_sphere")
+    noCollideAll(ForceField, 0)
+noCollide(E1,ForceField)
+noCollide(E2,ForceField)
+noCollide(E3,ForceField)
+noCollide(E4,ForceField)
+noCollide(E5,ForceField)
+noCollide(E6,ForceField)
+noCollide(E7,ForceField)
+}
+
+interval(1)
+if(!FF) {
+ForceField:setPos(RecallBlock:pos())
+}
+if(FF) {
+ForceField:setPos(Body:pos())
+ForceField:propFreeze(1)
+}

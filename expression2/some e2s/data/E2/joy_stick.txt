@@ -1,0 +1,10 @@
+@name Joy stick 
+@inputs E:entity
+@outputs Up Down Left Right
+
+runOnTick(1)
+
+if (Up <= 25)
+{
+    E:applyForce(E:right()*-20)
+}

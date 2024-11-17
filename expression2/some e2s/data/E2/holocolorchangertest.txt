@@ -1,0 +1,21 @@
+@name HoloColorchangerTest
+@inputs 
+@outputs 
+@persist Degrees
+@trigger 
+runOnTick(1)
+
+if(first())
+{
+    holoCreate(1)
+    holoParent(1, entity())
+    holoMaterial(1, "models/debug/debugwhite")
+}
+holoColor(1, hsv2rgb(Degrees,1,1))
+
+Degrees += 5
+
+if(Degrees == 360)
+{
+    Degrees = 0
+}

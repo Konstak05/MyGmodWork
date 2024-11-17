@@ -1,0 +1,19 @@
+@name 
+@inputs 
+@outputs Light2 Light 
+@persist 
+@trigger 
+interval(50)
+
+timer("light2",200)
+timer("light",100)
+
+if(clk("light"))
+{
+    Light = 255
+}
+
+if(clk("light2"))
+{
+    Light2 <= 255
+}

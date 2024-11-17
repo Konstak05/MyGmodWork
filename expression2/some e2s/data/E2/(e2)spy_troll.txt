@@ -1,0 +1,97 @@
+[Info]
+Type:AdvDupe File
+Creator:"Diehard"
+Date:12/07/10
+Description:"none"
+Entities:5
+Constraints:13
+[More Information]
+FileVersion:0.84
+AdvDupeVersion:1.85
+AdvDupeToolVersion:1.9
+AdvDupeSharedVersion:1.72
+SerialiserVersion:1.4
+WireVersion:2329 (EXPORTED)
+Time:05:02 PM
+Head:188
+HoldAngle:0,72.6823,0
+HoldPos:5.16748,-14.2592,-19.1591
+StartPos:-8072.36,-778.585,-13312
+[Save]
+Entities:18F5EE50{;}18F55100{N:0=T:18F602F0;}18F61BB0{T:18F5DE00;T:18F54920;}18E766F0{;}18E76FC0{Y:1=A:74.1564,90.4722,180;Y:2=V:-9.40527,2.20557,34.5127;Y:3=B:f;}18E7A800{S:"a"=N:255;S:"b"=N:0;S:"g"=N:0;S:"r"=N:255;}18E80B90{S:"a"=N:255;S:"b"=N:0;S:"g"=N:0;S:"r"=N:255;}18F51E90{Y:4=T:18F55100;Y:1=A:81.0303,90.4722,180;Y:2=V:-7.63135,-0.611389,45.2725;Y:15=Y:65;Y:30=T:18F60E00;Y:6=Y:66;Y:37=N:0;}18E745C0{;}18E7B130{;}18E76C00{Y:62=B:t;Y:1=A:74.1564,90.4722,180;Y:2=V:-9.40527,2.20557,34.5127;Y:37=N:0;Y:4=T:18E76AE0;Y:6=Y:63;Y:15=Y:40;Y:30=T:18E7B580;}18E7EEE0{Y:38=N:0;Y:1=A:72.6824,90.4722,180;Y:2=V:-2.88916,3.03693,31.9482;Y:37=N:0;Y:4=T:18E7B700;Y:6=Y:39;Y:15=Y:40;Y:30=T:18E77CE0;}H18F55400{N:187=T:18E80200;N:247=T:18E7EEE0;N:188=T:18F59CF0;N:279=T:18E76C00;N:230=T:18F51E90;}18F5EBB0{Y:28=T:18F5EE50;Y:42=B:t;S:"pod"=N:188;}18F60E00{Y:29=T:18F5EBB0;}18F5A9E0{Y:1=A:7.95425e-010,-7.23231e-007,0.000128026;Y:2=V:-5.16748,14.2592,19.1592;Y:3=B:t;}18E80200{Y:4=T:18E79AE0;Y:6=Y:5;Y:1=A:360,0,0;Y:7=T:18F61BB0;Y:11=T:18F57BC0;Y:13=Y:12;Y:2=V:-31.1211,19.8461,0.25;Y:15=Y:14;Y:17=Y:16;Y:30=T:18E83EF0;Y:36=T:18F5E340;Y:37=N:0;}18E75D60{Y:8=T:18E79990;S:"Pod"=T:18E773B0;S:"Cam"=T:18E7E100;}18F5FF30{N:0=T:18F5A9E0;}18E764B0{Y:1=A:72.6824,90.4722,180;Y:2=V:-2.88916,3.03693,31.9482;Y:3=B:f;}18E78940{Y:1=A:1.00179e-005,0,360;Y:2=V:-31.1211,19.8461,0.25;Y:3=B:t;}18E77C50{Y:64=N:188;}18E76AE0{N:0=T:18E76FC0;}18E7B580{Y:29=T:18E77C50;}18F56ED0{Y:50=Y:49;Y:51=S:"0";}18F5DE00{;}18E83EF0{Y:29=T:18E80A40;}18F5E340{S:"A"=N:0;S:"S"=N:0;S:"D"=N:0;S:"I"=N:975;S:"W"=N:0;Y:31=N:0;Y:32=N:0;Y:33=N:0;Y:34=N:56.973632007813;Y:35=N:0;}18F52E20{Y:45=Y:44;Y:46=T:18F56660;Y:48=Y:47;Y:52=T:18F56ED0;Y:6=Y:43;Y:54=Y:53;Y:56=Y:55;Y:15=Y:57;}18E77CE0{Y:29=T:18E7B460;}18F54F50{;}18F54920{;}18F5CF90{Y:61=T:18F54F50;}18F56660{;}18E80A40{Y:28=T:18E75D60;}18E7AE00{Y:41=T:18E804A0;}18E767B0{S:"a"=N:255;S:"b"=N:0;S:"g"=N:0;S:"r"=N:255;}18E7B460{Y:28=T:18E7AE00;Y:42=B:t;S:"pod"=N:188;}18E78670{;}18E7E100{Y:18=T:18E78670;S:"Src"=N:247;Y:20=Y:27;Y:21=V:-1.47,0.62,7.78;Y:22=T:18E7A800;Y:24=Y:23;Y:25=V:0.44,-1.07,0.73;Y:26=N:0;}18F602F0{Y:1=A:81.0303,90.4722,180;Y:2=V:-7.63135,-0.611389,45.2725;Y:3=B:f;}18F5A470{Y:8;S:"Pod";S:"Cam";}18E79990{Y:18=T:18E7B130;S:"Src"=N:279;Y:20=Y:19;Y:21=V:-1.86,1.76,7.26;Y:22=T:18E80B90;Y:24=Y:23;Y:25=V:2.37,-3.03,0.55;Y:26=N:0;}18E79AE0{N:0=T:18E78940;}18E7B700{N:0=T:18E764B0;}18E7C4E0{S:"a"=N:255;S:"b"=N:0;S:"g"=N:0;S:"r"=N:255;}18E804A0{Y:18=T:18E745C0;S:"Src"=N:230;Y:20=Y:31;Y:21=V:-1.93,0.23,2.33;Y:22=T:18E767B0;Y:24=Y:23;Y:25=V:-2.8,-0.7,5.85;Y:26=N:0;}18F57BC0{T:18F5A470;T:18F575F0;}18F59CF0{Y:4=T:18F5FF30;Y:6=Y:43;Y:58=T:18F52E20;Y:60=Y:59;Y:2=V:-5.16748,14.2592,19.1592;Y:15=Y:57;Y:30=T:18F5CF90;Y:1=A:7.95425e-010,-7.23231e-007,0.000128026;Y:37=N:0;}18E773B0{Y:18=T:18E766F0;S:"Src"=N:230;Y:20=Y:27;Y:21=V:-2.26,-0.62,2.19;Y:22=T:18E7C4E0;Y:24=Y:23;Y:25=V:0.45,1.48,0.73;Y:26=N:0;}18F575F0{Y:9;Y:10;Y:10;}
+Constraints:18E78A00{Y:67=N:279;Y:68=N:0;}18E7C630{Y:67=N:247;Y:68=N:0;}18E7D980{Y:67=N:230;Y:68=N:0;}18E7B400{Y:19=T:18E78040;Y:70=Y:69;}18E80620{T:18E7D980;T:18E78A00;}18E77CB0{Y:67=N:187;Y:68=N:0;}18E76720{Y:19=T:18E78CA0;Y:70=Y:69;}18E7D530{Y:19=T:18E80620;Y:70=Y:69;}18E7B430{Y:19=T:18E778C0;Y:70=Y:69;}18E7A8F0{Y:67=N:230;Y:68=N:0;}18F5D7D0{Y:67=N:188;Y:68=N:0;}H18C962D0{T:18E7B400;T:18E7D530;T:18E78CD0;T:18E75F70;T:18F53360;T:18E80B30;T:18E76720;T:18E767E0;T:18E7A530;T:18E7B430;T:18E75910;T:18E7ED00;T:18F619A0;}18E7B910{T:18E7C630;T:18E80110;}18F5C540{Y:67=N:230;Y:68=N:0;}18F52730{Y:67=N:187;Y:68=N:0;}18E75F70{Y:62=B:t;Y:71=N:0;Y:19=T:18E81D00;Y:72=B:t;Y:70=Y:73;}18E7A530{Y:19=T:18E7FB40;Y:70=Y:69;}18E817C0{Y:67=N:230;Y:68=N:0;}18E7B2B0{Y:67=N:188;Y:68=N:0;}18F58400{T:18F52730;T:18F5C540;}18F619A0{Y:19=T:18F58400;Y:70=Y:69;}18E7B7C0{Y:67=N:279;Y:68=N:0;}18E81D00{T:18E7A290;T:18E7C570;}18E778C0{T:18E79C00;T:18E7CCC0;}18F54380{T:18F53C30;T:18F5D7D0;}18E80B30{Y:19=T:18E7B910;Y:70=Y:69;}18E75EB0{Y:67=N:187;Y:68=N:0;}18F53C30{Y:67=N:230;Y:68=N:0;}18E75580{T:18E7B7C0;T:18E7B2B0;}18E78040{T:18E817C0;T:18E77DA0;}18E7A290{Y:67=N:279;Y:68=N:0;}18E75910{Y:62=B:t;Y:71=N:0;Y:19=T:18E7FF60;Y:72=B:t;Y:70=Y:73;}18E7ED00{Y:19=T:18E75580;Y:70=Y:69;}18E77020{T:18E77CB0;T:18E82B40;}18F53360{Y:62=B:t;Y:71=N:0;Y:19=T:18F54380;Y:72=B:t;Y:70=Y:73;}18E7C570{Y:67=N:188;Y:68=N:0;}18E78CA0{T:18E77AD0;T:18E7AFE0;}18E7A7A0{Y:67=N:279;Y:68=N:0;}18E7FF60{T:18E779B0;T:18E82960;}18E7FB40{T:18E75EB0;T:18E7A7A0;}18E767E0{Y:19=T:18E81490;Y:70=Y:69;}18E779B0{Y:67=N:247;Y:68=N:0;}18E82960{Y:67=N:188;Y:68=N:0;}18E80110{Y:67=N:188;Y:68=N:0;}18E7CCC0{Y:67=N:247;Y:68=N:0;}18E79C00{Y:67=N:187;Y:68=N:0;}18E78CD0{Y:19=T:18E77020;Y:70=Y:69;}18E80410{Y:67=N:247;Y:68=N:0;}18E77AD0{Y:67=N:279;Y:68=N:0;}18E77DA0{Y:67=N:188;Y:68=N:0;}18E81490{T:18E7A8F0;T:18E80410;}18E7AFE0{Y:67=N:247;Y:68=N:0;}18E82B40{Y:67=N:188;Y:68=N:0;}
+[Dict]
+1:"LocalAngle"
+2:"LocalPos"
+3:"Frozen"
+4:"PhysicsObjects"
+5:"gmod_wire_expression2"
+6:"Class"
+7:"_outputs"
+8:"Seat"
+9:"ENTITY"
+10:"WIRELINK"
+11:"_inputs"
+12:"Diehard's Holo-Controle"
+13:"_name"
+14:"models/beer/wiremod/gate_e2.mdl"
+15:"Model"
+16:"@name Diehard's Holo-Controle€@inputs [Pod Cam]:wirelink Seat:entity€@outputs €@persist I Test€@trigger €€runOnTick(1)€€I += 1€€Test = random(255)€€timer(£blink£,5000)€timer(£remove£,5500)€€W = Pod:number(£W£)€A = Pod:number(£A£)€S = Pod:number(£S£)€D = Pod:number(£D£)€€Down = Pod:number(£Alt£)€Space = Pod:number(£Space£)€Shift = Pod:number(£Shift£)€Active = Pod:number(£Active£)€€E = holoEntity(1)€if (first())€{€    ## Body ##€    holoCreate(1)€    holoMaterial(1, £models/debug/debugwhite£)€    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*10)€    holoColor(1, hsv2rgb(Test,random(255),random(255)))€    holoEntity(1):setTrails(10,0,2,£trails/laser£,vec(random(255),random(255),random(255)),255)€    €    ##Eye 1##€    holoCreate(2)€    holoMaterial(2, £models/debug/debugwhite£)€    holoPos(2, holoEntity(2):pos() + holoEntity(2):forward()*5 + holoEntity(2):up()*12)€    holoScale(2, vec(0.5,0.5,0.5))€    holoModel(2, £hqsphere£)€    holoParent(2, holoEntity(1))€    €    ##Eye in Eye1##€    holoCreate(3)€    holoMaterial(3, £models/debug/debugwhite£)€    holoPos(3, holoEntity(3):pos() + holoEntity(3):forward()*7.2 + holoEntity(3):up()*12)€    holoScale(3, vec(0.2,0.2,0.2))€    holoModel(3, £hqsphere£)€    holoColor(3, vec(0,0,0))€    holoParent(3, holoEntity(1))€    €    ##Mouth##€    holoCreate(4)€    holoMaterial(4, £models/debug/debugwhite£)€    holoPos(4, holoEntity(4):pos() + holoEntity(4):forward()*6 + holoEntity(4):up()*6)€    holoScale(4, vec(0.1,0.4,0.1))€    holoModel(4, £hqsphere£)€    holoColor(4, vec(0,0,0))€    holoParent(4, holoEntity(1))€    €    ##Eye Brow##€    holoCreate(5)€    holoMaterial(5, £models/debug/debugwhite£)€    holoPos(5, holoEntity(5):pos() + holoEntity(5):forward()*6 + holoEntity(5):up()*15)€    holoScale(5, vec(0.1,0.7,0.1))€    holoModel(5, £hqsphere£)€    holoColor(5, vec(0,0,0))€    holoParent(5, holoEntity(1))€    €    €    €    €}€€if(clk(£blink£))€{€    holoCreate(6)€    holoPos(6, holoEntity(2):pos())€    holoScale(6, vec(0.6,0.6,0.60))€    holoColor(6, vec(0,0,0))€    holoModel(6, £hqsphere£)€    holoParent(6, holoEntity(1))€}€€if(clk(£remove£))€{€    holoDelete(6)€}€€if (W)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*2)€}€€if (Shift & W)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*6)€}€€if (S)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-2)€}€€if (A)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*-2)€}€€if (D)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*2)€}€€if (Space)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*2)€}€€if (Shift & S)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*-5)€}€€if (Shift & A)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*-5)€}€€if (Shift & D)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):right()*5)€}€€if (Down)€{€    holoPos(1, holoEntity(1):pos() + holoEntity(1):up()*-2)€}€€if (Active)€{€    holoAng(1, Seat:driver():eyeAngles())€}else{holoAng(1, holoEntity(1):angles() + ang(0,sin(I)*1,0))} €€€€Cam:setVector(£Direction£,E:forward()*10)€Cam:setVector(£Position£,E:toWorld(vec(-20,0,10)))€Cam:setAngle(£Angle£,E:angles())€€"
+17:"_original"
+18:"Path"
+19:"Entity"
+20:"SrcId"
+21:"SrcPos"
+22:"Color"
+23:"arrowire/arrowire2"
+24:"Material"
+25:"StartPos"
+26:"Width"
+27:"link"
+28:"Wires"
+29:"WireDupeInfo"
+30:"EntityMods"
+31:"Active"
+32:"Space"
+33:"Shift"
+34:"Test"
+35:"Down"
+36:"_vars"
+37:"Skin"
+38:"Static"
+39:"gmod_wire_cameracontroller"
+40:"models/jaanus/wiretool/wiretool_siren.mdl"
+41:"Activated"
+42:"extended"
+43:"prop_vehicle_prisoner_pod"
+44:"Half-Life 2"
+45:"Category"
+46:"Members"
+47:"Jeep Seat"
+48:"Name"
+49:"scripts/vehicles/prisoner_pod.txt"
+50:"vehiclescript"
+51:"limitview"
+52:"KeyValues"
+53:"VALVe"
+54:"Author"
+55:"A Seat from VALVe's Jeep"
+56:"Information"
+57:"models/nova/jeep_seat.mdl"
+58:"VehicleTable"
+59:"Seat_Jeep"
+60:"VehicleName"
+61:"VehicleMemDupe"
+62:"nocollide"
+63:"gmod_wire_emarker"
+64:"mark"
+65:"models/jaanus/wiretool/wiretool_range.mdl"
+66:"gmod_wire_adv_pod"
+67:"Index"
+68:"Bone"
+69:"NoCollide"
+70:"Type"
+71:"forcelimit"
+72:"deleteonbreak"
+73:"Weld"
+Saved:174

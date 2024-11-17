@@ -1,0 +1,32 @@
+@name Movement
+@inputs 
+@outputs 
+@persist
+@trigger 
+
+interval(1)
+
+timer("move",2500)
+
+if(first())
+{
+    for(I=1,5)
+    {  
+        holoCreate(I)
+    }
+}
+holoPos(1, holoEntity(1):pos() + holoEntity(1):forward()*0.1)
+holoPos(2, holoEntity(2):pos() + holoEntity(2):forward()*0.1)
+holoPos(3, holoEntity(3):pos() + holoEntity(1):forward()*0.1)
+holoPos(4, holoEntity(4):pos() + holoEntity(2):forward()*0.1)
+holoPos(5, holoEntity(5):pos() + holoEntity(1):forward()*0.1)
+
+
+if(clk("move"))
+{
+    holoAng(1, holoEntity(1):angles() + ang(0,random(0,90),0))
+    holoAng(2, holoEntity(2):angles() + ang(0,random(0,120),0))
+    holoAng(3, holoEntity(3):angles() + ang(0,random(0,130),0))
+    holoAng(4, holoEntity(4):angles() + ang(0,random(0,150),0))
+    holoAng(5, holoEntity(5):angles() + ang(0,random(0,140),0))
+} 

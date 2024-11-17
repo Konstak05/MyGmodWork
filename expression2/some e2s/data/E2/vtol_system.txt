@@ -1,0 +1,23 @@
+@name Vtol System
+@inputs Pod:wirelink
+@outputs HY HY2 Thruster Thruster2
+@persist 
+@trigger 
+
+runOnTick(1)
+
+Space = Pod["Space",number]
+W = Pod["W",number]
+S = Pod["S",number]
+
+if (Space)
+{
+    Thruster = 10
+    Thruster2 = 9
+}else{Thruster = 0 Thruster2 = 0}
+
+if (W)
+{
+    HY = 50
+    HY2 = -50
+}else{ HY = 0 HY2 = 0 }

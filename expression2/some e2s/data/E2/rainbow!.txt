@@ -1,0 +1,16 @@
+@name Rainbow!
+@inputs 
+@outputs 
+@persist Go
+@trigger 
+runOnTick(1)
+
+owner():aimEntity():setColor(hsv2rgb(Go,1,1))
+owner():aimEntity():setMaterial("models/debug/debugwhite")
+
+Go += 100
+
+if(Go == 360)
+{
+    Go = 0
+}

@@ -1,0 +1,35 @@
+@name Holograph
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+interval(1)
+if(first()){
+    holoCreate(1)
+    holoModel(1,("cube"))
+    holoMaterial(1,("models/shiny/shinywhite"))
+    holoScale(1,vec(10,10,13))
+    holoColor(1,vec(0,0,0))
+    holoAng(1,ang(0,0,0))
+    
+    holoCreate(2)
+    holoModel(2,("cube"))
+    holoMaterial(2,("models/shiny/shinywhite"))
+    holoScale(2,vec(4,4,6))
+    holoColor(2,vec(0,0,0))
+    holoAng(2,ang(0,0,0))
+    
+    holoCreate(3)
+    holoModel(3,("cube"))
+    holoMaterial(3,("models/shiny/shinywhite"))
+    holoScale(3,vec(2,2,2))
+    holoColor(3,vec(0,0,0))
+    holoAng(3,ang(0,0,0))
+}
+holoPos(1,owner():shootPos())
+holoParent(1,owner())
+holoPos(2,owner():shootPos())
+holoParent(2,owner())
+holoPos(3,owner():shootPos())
+holoParent(3,owner())

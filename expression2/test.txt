@@ -1,0 +1,13 @@
+@name test?
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+if playerDisconnectClk()
+  sendMessage("test");
+else
+  sendMessage("no");
+
+
+;

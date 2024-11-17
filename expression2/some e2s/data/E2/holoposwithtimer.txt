@@ -1,0 +1,22 @@
+@name 
+@inputs 
+@outputs 
+@persist I
+@trigger 
+interval(1)
+
+I = I+1
+
+timer("test",100)
+
+if(first())
+{
+    holoCreate(1)
+    holoColor(1, vec(255,0,0))
+    holoModel(1, "cone")
+}
+
+if(clk("test"))
+{
+    holoPos(1, entity():pos() + entity():up()*I)
+}

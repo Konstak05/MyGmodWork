@@ -1,0 +1,54 @@
+@name Car System
+@inputs Pod:wirelink Cam:wirelink E:entity
+@outputs Weld1 Weld2
+@persist 
+@trigger 
+runOnTick(1)
+
+W = Pod:number("W")
+A = Pod:number("A")
+S = Pod:number("S")
+D = Pod:number("D")
+Space = Pod:number("Space")
+Mouse1 = Pod:number("Mouse1")
+Mouse2 = Pod:number("Mouse2")
+
+H = holoEntity(1)
+
+if(first())
+{
+    holoCreate(1)
+    holoPos(1, E:pos())
+    holoAng(1, E:angles())
+    holoParent(1, E)
+}
+
+
+if (W)
+{
+    E:applyForce(E:right()*350) ##Forward speed
+    E:soundPlay(0,0,"thrusters/16bit/mh1.wav")
+    soundPitch(0,100 + E:vel():length()/10)
+}else{E:soundPlay(0,0,"")}
+
+if (A)
+{
+    E:applyAngForce(ang(0,3000,0)) ##Left Turning Speed
+}
+
+if (S)
+{
+    E:applyForce(E:right()*-350) ##Backwards speed
+    E:soundPlay(1,1,"thrusters/16bit/mh1.wav")
+    soundPitch(1,100 + E:vel():length()/2)
+}else{E:soundPlay(1,1,"")}
+
+if (D)
+{
+    E:applyAngForce(ang(0,-3000,0)) ##Right turning speed
+}
+
+Cam:setVector("Direction",E:right()*5)
+Cam:setVector("Position",E:toWorld(vec(0,25,20)))
+Cam:setAngle("Angles",E:angles())
+

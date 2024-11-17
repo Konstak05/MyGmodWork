@@ -1,0 +1,10 @@
+@name Anything chip
+@inputs E1:entity
+@outputs 
+@persist I
+@trigger 
+runOnTick(1)
+
+I += 0.1
+
+E1:applyForce(entity():forward()*I)

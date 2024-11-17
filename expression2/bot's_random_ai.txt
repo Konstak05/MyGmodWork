@@ -1,0 +1,114 @@
+@name bot's random AI
+@inputs Prop1:entity 
+@outputs Thruster1 Thruster2 Thruster3 Thruster4 Nexttarget Walk Throughwalls Fire Explosive
+@persist Props:array 
+
+interval(500)
+
+Props = Prop1:getConstraints()
+    
+Randomizer1 = (randint(1,10))
+Randomizer2 = (randint(1,10))
+Randomizer3 = (randint(1,10))
+Randomizer4 = (randint(1,10))
+Nexttarget1 = (randint(1,20))
+Throughwalls1 = (randint(1,10))
+TimerForWalk = (randint(5000,15000))
+Lighter = (randint(1,200))
+Explosive1 = (randint(1,890))
+
+
+if(Randomizer1 == 5){
+   Thruster1 = 1
+   Thruster2 = 0
+   Thruster3 = 0
+   Thruster4 = 0
+}
+else{
+  Thruster1 = 0
+}
+
+if(Randomizer2 == 5){
+   Thruster1 = 0
+   Thruster2 = 1
+   Thruster3 = 0
+   Thruster4 = 0
+}
+else{
+   Thruster2 = 0
+}
+
+if(Randomizer3 == 1){  
+   Thruster1 = 0
+   Thruster2 = 0
+   Thruster3 = 1
+   Thruster4 = 0
+}
+else{
+   Thruster3 = 0
+}
+
+if(Randomizer4 == 1){
+   Thruster1 = 0
+   Thruster2 = 0
+   Thruster3 = 0
+   Thruster4 = 1
+}
+else{
+   Thruster4 = 0 
+}
+
+if(Nexttarget1 == 1){
+   
+   Nexttarget = 1
+   Walk = 4
+}
+else{
+  Nexttarget = 0
+}
+
+timer("moving",TimerForWalk)
+
+if (clk("moving")) { 
+    
+Walk1 = (randint(3,25))
+
+if(Walk1 == 6){
+  Walk = 1
+  Thruster2 = 0
+}
+else{
+  Walk = 0
+}
+}
+
+
+#throughwallsifstuck
+
+if (Throughwalls1 == 1){
+  Throughwalls = 1
+  Thruster1 = 1
+}
+else{ 
+  Throughwalls = 0
+}
+
+#firelmao
+
+if (Lighter == 5) {
+    Fire = 1
+}
+else{
+    Fire = 0
+}
+
+if (Explosive1 == 1){
+    
+  Explosve = 1
+
+}
+else{
+    
+  Explosive = 0
+    
+}

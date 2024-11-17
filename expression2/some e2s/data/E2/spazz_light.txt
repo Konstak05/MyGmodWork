@@ -1,0 +1,8 @@
+@name spazz light
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+
+entity():isWeldedTo():setColor(vec(random(255),random(255),random(255)))

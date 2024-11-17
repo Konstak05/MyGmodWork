@@ -1,0 +1,126 @@
+@name Car Hydraulic controller
+@inputs Pod:wirelink 
+@outputs LeftHy RightHy Weld1 Weld2 Light1:vector Light2:vector
+@persist I Speed
+
+runOnTick(1)
+
+E = entity():isConstrainedTo()
+
+
+##Controls##
+W = Pod["W",number]
+A = Pod["A",number]
+S = Pod["S",number]
+D = Pod["D",number]
+
+##Other##
+Space = Pod["Space",number]
+Active = Pod["Active",number]
+Mouse1 = Pod["Mouse1",number]
+Mouse2 = Pod["Mouse2",number]
+Shift = Pod["Shift",number]
+
+if (first())
+{
+    if (Mouse1)
+    {
+        E:soundPlay(1,1,"ambient/alarms/razortrain_horn1.wav")
+    }
+}
+
+I += 10
+
+timer("off",5000)
+timer("blink",3500)
+
+if (W)
+{
+    E:applyForce(E:right()*100)
+}
+
+if (A)
+{
+    LeftHy = -20
+    RightHy = 20
+}
+
+if (D)
+{
+    LeftHy = 20
+    RightHy = -20
+}
+
+if(!A&!D){LeftHy = 32.4}
+if(!A&!D){RightHy = 32.4}
+
+if (S)
+{
+    E:applyForce(E:right()*-100)
+    Light = vec(0,0,0)
+}
+
+if (Space)
+{
+    Weld1 == 1
+    Weld2 == 1
+    Light = vec(255,0,0)
+}
+
+if (Active)
+{
+    Weld1 = 0
+    Weld2 = 0
+    E:soundPlay(0,0,"  vehicles/airboat/fan_motor_fullthrottle_loop1.wav")
+    soundPitch(0, E:vel():length()/5)
+    
+}else
+{
+    Weld1 = 1
+    Weld2 = 1
+    
+    
+}
+
+if (A)
+{
+    Light1 = vec(I,I,0)
+    
+    if(Light1 == vec(255,255,0))
+    {
+        Light1 = vec(0,0,0)
+    }
+}else
+{
+    Light1 = vec(0,0,0)
+}
+
+if (D)
+{
+    Light2 = vec(I,I,0)
+    
+    if(Light2 == vec(255,255,0))
+    {
+        Light2 = vec(0,0,0)
+    }
+}else
+{
+    Light2 = vec(0,0,0)
+}
+
+if (Shift & W)
+{
+    E:applyForce(E:right()*1000)
+}
+
+if (Shift & S)
+{
+    E:applyForce(E:right()*-1000)
+}
+
+
+if (Speed == 50)
+{
+    Speed += 0.1
+}
+
